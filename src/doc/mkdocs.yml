@@ -1,0 +1,75 @@
+site_name: Deager documentation
+
+site_description: Deager is a library that allows Dagger singletons to be created before being injected.
+site_author: Nicklas Ansman
+site_url: https://github.com/ansman/deager
+
+repo_name: deager
+repo_url: https://github.com/ansman/deager
+edit_uri: edit/main/src/doc/docs/
+
+copyright: 'Copyright &copy; 2022 Nicklas Ansman'
+
+plugins:
+  - markdownextradata
+
+theme:
+  name: 'material'
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  social:
+    - type: 'github'
+      link: 'https://github.com/ansman/deager'
+  features:
+    - navigation.tracking
+    - navigation.top
+
+extra:
+  version:
+    provider: mike
+
+  analytics:
+    provider: google
+    property: G-GRS0F8KL20
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Usage: usage.md
+  - About:
+      - Release Notes: https://github.com/ansman/deager/releases
+      - How It Works: about/how-it-works.md
+      - License: about/license.md

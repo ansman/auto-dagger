@@ -1,0 +1,80 @@
+[versions]
+kotlin = "1.7.20"
+compileTesting = "1.4.9"
+autoService = "1.0.1"
+incap = "0.3"
+dagger = "2.44.1"
+ksp = "1.7.20-1.0.7"
+android-minSdk = "14"
+android-compileSdk = "33"
+androidx-test = "1.5.0"
+
+[plugins]
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.12.1"
+mkdocs = "ru.vyarus.mkdocs:3.0.0"
+
+[libraries]
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlin" }
+dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "kotlin" }
+dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "kotlin" }
+
+okio = "com.squareup.okio:okio:3.2.0"
+
+android-gradlePlugin = "com.android.tools.build:gradle:7.3.0"
+androidx-startup = "androidx.startup:startup-runtime:1.1.1"
+androidx-test = { module = "androidx.test:core-ktx", version.ref = "androidx-test" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
+androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
+
+auto-common = "com.google.auto:auto-common:1.2.1"
+auto-service = { module = "com.google.auto.service:auto-service", version.ref = "autoService" }
+auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoService" }
+
+javapoet = "com.squareup:javapoet:1.13.0"
+
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+dagger-hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "dagger" }
+dagger-hilt-gradlePlugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
+dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
+
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp"}
+
+incap = { module = "net.ltgt.gradle.incap:incap", version.ref = "incap" }
+incap-compiler = { module = "net.ltgt.gradle.incap:incap-processor", version.ref = "incap" }
+
+compileTesting = { module ="com.github.tschuchortdev:kotlin-compile-testing", version.ref = "compileTesting" }
+compileTesting-ksp = { module ="com.github.tschuchortdev:kotlin-compile-testing-ksp", version.ref = "compileTesting" }
+
+juniper = "org.junit.jupiter:junit-jupiter:5.9.1"
+junit = "junit:junit:4.13"
+
+assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
+
+robolectric = "org.robolectric:robolectric:4.9"
+
+testLogger = "com.adarshr:gradle-test-logger-plugin:3.2.0"
+
+[bundles]
+compileTesting = ["compileTesting", "compileTesting-ksp"]
+jvmTesting = [
+    "kotlin-test",
+    "juniper",
+    "assertk",
+]
+androidTesting = [
+    "kotlin-test",
+    "junit",
+    "assertk",
+    "androidx-test",
+    "androidx-test-runner",
+    "androidx-test-rules",
+]
