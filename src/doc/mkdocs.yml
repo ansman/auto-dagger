@@ -8,7 +8,7 @@ repo_name: deager
 repo_url: https://github.com/ansman/deager
 edit_uri: edit/main/src/doc/docs/
 
-copyright: 'Copyright &copy; 2022 Nicklas Ansman'
+copyright: 'Copyright &copy; 2022-2023 Nicklas Ansman'
 
 plugins:
   - markdownextradata
