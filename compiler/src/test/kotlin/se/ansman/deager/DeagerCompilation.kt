@@ -29,6 +29,8 @@ abstract class DeagerCompilation(protected val workingDir: File) {
         val exitCode: KotlinCompilation.ExitCode get() = result.exitCode
         val messages: String get() = result.messages
 
+        val filesGeneratedByAnnotationProcessor: Sequence<File> get() = result.filesGeneratedByAnnotationProcessor
+
         fun assertIsSuccessful() {
             assertEquals(KotlinCompilation.ExitCode.OK, exitCode, messages)
         }
@@ -38,12 +40,13 @@ abstract class DeagerCompilation(protected val workingDir: File) {
             assertThat(messages).contains(message)
         }
 
+
         fun findGeneratedFile(name: String): File? =
-            result.filesGeneratedByAnnotationProcessor.find { it.name == name }
+            filesGeneratedByAnnotationProcessor.find { it.name == name }
 
         fun readGeneratedFile(name: String): String =
             requireNotNull(findGeneratedFile(name)) {
-                "No file was generated with name $name. Generated files: ${result.filesGeneratedByAnnotationProcessor.joinToString { it.name }}"
+                "No file was generated with name $name. Generated files: ${filesGeneratedByAnnotationProcessor.joinToString { it.name }}"
             }.readText().trim()
 
         fun loadClass(className: String): Class<*> = result.classLoader.loadClass(className)

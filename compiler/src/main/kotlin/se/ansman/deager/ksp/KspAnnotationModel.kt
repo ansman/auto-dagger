@@ -1,27 +1,27 @@
 package se.ansman.deager.ksp
 
 import com.google.devtools.ksp.isDefault
-import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSName
 import com.google.devtools.ksp.symbol.KSType
 import com.google.devtools.ksp.symbol.KSTypeAlias
-import com.squareup.javapoet.AnnotationSpec
-import com.squareup.javapoet.ClassName
-import com.squareup.javapoet.CodeBlock
+import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ksp.toClassName
 import se.ansman.deager.applyEach
 import se.ansman.deager.models.AnnotationModel
+import java.util.Locale
+import kotlin.reflect.KClass
 
-class KspAnnotationModel(private val annotation: KSAnnotation, private val resolver: Resolver) : AnnotationModel {
+class KspAnnotationModel(private val annotation: KSAnnotation) : AnnotationModel<AnnotationSpec> {
     override val declaredAnnotations: List<KspAnnotationModel> by lazy {
-        annotation.annotationType.resolve().declaration.annotations.map { KspAnnotationModel(it, resolver) }.toList()
+        annotation.annotationType.resolve().declaration.annotations.map(::KspAnnotationModel).toList()
     }
 
-    override fun isOfType(className: ClassName): Boolean =
-        annotation.shortName.asString() == className.simpleName() &&
-                className == annotation.annotationType.resolve().declaration.toClassName(resolver)
+    override fun isOfType(type: KClass<*>): Boolean =
+        annotation.shortName.asString() == type.simpleName &&
+                type.asClassName() == annotation.annotationType.resolve().toClassName()
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getValue(name: String): T? =
@@ -29,59 +29,59 @@ class KspAnnotationModel(private val annotation: KSAnnotation, private val resol
             ?.takeUnless { it.isDefault() }
             ?.value as T?
 
-    override fun toAnnotationSpec(): AnnotationSpec = annotation.toAnnotationSpec(resolver)
+    override fun toAnnotationSpec(): AnnotationSpec = annotation.toAnnotationSpec()
 }
 
-private fun KSAnnotation.toAnnotationSpec(resolver: Resolver): AnnotationSpec =
+private fun KSAnnotation.toAnnotationSpec(): AnnotationSpec =
     AnnotationSpec
-        .builder(annotationType.resolve().unwrapTypeAlias().declaration.toClassName(resolver))
+        .builder(annotationType.resolve().unwrapTypeAlias().toClassName())
         .applyEach(arguments) { argument ->
-            addMember(argument.name!!.getShortName(), CodeBlock.builder().addAnnotationValue(argument.value!!, resolver).build())
+            if (argument.isDefault()) {
+                return@applyEach
+            }
+            addMember(CodeBlock.builder()
+                .add("%N = ", argument.name!!.getShortName())
+                .addAnnotationValue(argument.value!!)
+                .build())
         }
         .build()
 
 private fun KSType.unwrapTypeAlias(): KSType = (declaration as? KSTypeAlias)?.type?.resolve() ?: this
 
-private fun CodeBlock.Builder.addAnnotationValue(value: Any, resolver: Resolver): CodeBlock.Builder =
+private fun CodeBlock.Builder.addAnnotationValue(value: Any): CodeBlock.Builder =
     when (value) {
         is List<*> -> {
-            add("{")
+            add("[")
             value.forEachIndexed { index, innerValue ->
                 if (index > 0) add(", ")
-                addAnnotationValue(innerValue!!, resolver)
+                addAnnotationValue(innerValue!!)
             }
-            add("}")
+            add("]")
         }
         is KSType -> {
             val unwrapped = value.unwrapTypeAlias()
             if ((unwrapped.declaration as KSClassDeclaration).classKind == ClassKind.ENUM_ENTRY) {
                 val parent = unwrapped.declaration.parentDeclaration as KSClassDeclaration
                 val entry = unwrapped.declaration.simpleName.getShortName()
-                add("\$T.\$L", parent.toClassName(resolver), entry)
+                add("%T.%L", parent.toClassName(), entry)
             } else {
-                add("\$T.class", unwrapped.declaration.toClassName(resolver))
+                add("%T::class", unwrapped.toClassName())
             }
         }
-        is KSName ->
-            add(
-                "\$T.\$L",
-                ClassName.bestGuess(value.getQualifier()),
-                value.getShortName(),
-            )
-        is KSAnnotation -> add("\$L", value.toAnnotationSpec(resolver))
+        is KSName -> add("%T.%L", ClassName.bestGuess(value.getQualifier()), value.getShortName())
+        is KSAnnotation -> add("%L", value.toAnnotationSpec())
         else -> add(memberForValue(value))
     }
 
 private fun memberForValue(value: Any) = when (value) {
-    is Class<*> -> CodeBlock.of("\$T.class", value)
-    is Enum<*> -> CodeBlock.of("\$T.\$L", value.javaClass, value.name)
-    is String -> CodeBlock.of("\$S", value)
-    is Char -> CodeBlock.of("'\$L'", value.literalWithoutSingleQuotes())
-    is Float -> CodeBlock.of("\$Lf", value)
-    else -> CodeBlock.of("\$L", value)
+    is Class<*> -> CodeBlock.of("%T::class", value)
+    is Enum<*> -> CodeBlock.of("%T.%L", value.javaClass, value.name)
+    is String -> CodeBlock.of("%S", value)
+    is Char -> CodeBlock.of("'%L'", value.literalWithoutSingleQuotes())
+    is Float -> CodeBlock.of("%Lf", value)
+    else -> CodeBlock.of("%L", value)
 }
 
-// see https://docs.oracle.com/javase/specs/jls/se7/html/jls-3.html#jls-3.10.6
 private fun Char.literalWithoutSingleQuotes(): String =
     when (this) {
         '\b' -> "\\b" /* \u0008: backspace (BS) */
@@ -89,8 +89,7 @@ private fun Char.literalWithoutSingleQuotes(): String =
         '\n' -> "\\n" /* \u000a: linefeed (LF) */
         '\u000c' -> "\\u000c" /* \u000c: form feed (FF) */
         '\r' -> "\\r" /* \u000d: carriage return (CR) */
-        '\"' -> "\"" /* \u0022: double quote (") */
         '\'' -> "\\'" /* \u0027: single quote (') */
         '\\' -> "\\\\" /* \u005c: backslash (\) */
-        else -> if (Character.isISOControl(this)) String.format("\\u%04x", code) else toString()
+        else -> if (isISOControl()) String.format(Locale.ROOT, "\\u%04x", code) else toString()
     }

@@ -1,4 +1,4 @@
-package se.ansman.deager.android
+package se.ansman.deager.tests
 
 import assertk.assertThat
 import assertk.assertions.isTrue

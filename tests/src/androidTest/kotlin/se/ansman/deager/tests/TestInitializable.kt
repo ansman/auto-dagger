@@ -1,4 +1,4 @@
-package se.ansman.deager.android
+package se.ansman.deager.tests
 
 import se.ansman.deager.Eager
 import se.ansman.deager.Initializable

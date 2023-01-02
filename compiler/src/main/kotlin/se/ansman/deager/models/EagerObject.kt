@@ -1,7 +1,5 @@
 package se.ansman.deager.models
 
-import com.squareup.javapoet.ClassName
-import com.squareup.javapoet.TypeName
 import dagger.Binds
 import se.ansman.deager.Eager
 import se.ansman.deager.Errors
@@ -9,33 +7,34 @@ import se.ansman.deager.Initializable
 import javax.inject.Qualifier
 import javax.inject.Scope
 import javax.inject.Singleton
+import kotlin.reflect.KClass
 
-data class EagerObject(
+data class EagerObject<out TypeName, out AnnotationSpec>(
     val targetType: TypeName,
     val priority: Int?,
     val method: Method,
-    val qualifiers: Set<AnnotationModel> = emptySet(),
+    val qualifiers: Set<AnnotationModel<AnnotationSpec>> = emptySet(),
 ) {
     companion object {
-        internal val eager = ClassName.get(Eager::class.java)
-        internal val singleton = ClassName.get(Singleton::class.java)
-        internal val scope = ClassName.get(Scope::class.java)
-        internal val binds = ClassName.get(Binds::class.java)
-        internal val qualifier = ClassName.get(Qualifier::class.java)
-        internal val initializable = ClassName.get(Initializable::class.java)
+        internal val eager = Eager::class
+        internal val singleton = Singleton::class
+        internal val scope = Scope::class
+        internal val binds = Binds::class
+        internal val qualifier = Qualifier::class
+        internal val initializable = Initializable::class
 
-        internal inline fun <M : Any, T : Any> fromMethod(
+        internal inline fun <M : Any, T : Any, TypeName, AnnotationSpec> fromMethod(
             method: M,
             getName: M.() -> String,
             getReturnType: M.() -> T,
             getReceiver: M.() -> T?,
             getArguments: M.() -> Sequence<T>,
             toTypeName: T.() -> TypeName,
-            implements: T.(ClassName) -> Boolean,
-            getAnnotations: M.() -> Sequence<AnnotationModel>,
-            getTypeAnnotations: T.() -> Sequence<AnnotationModel>,
+            implements: T.(KClass<*>) -> Boolean,
+            getAnnotations: M.() -> Sequence<AnnotationModel<AnnotationSpec>>,
+            getTypeAnnotations: T.() -> Sequence<AnnotationModel<AnnotationSpec>>,
             error: (String, M) -> Throwable,
-        ): EagerObject {
+        ): EagerObject<TypeName, AnnotationSpec> {
             val returnType = method.getReturnType()
             val methodAnnotation = method.getAnnotations().toList()
             val annotations = methodAnnotation
@@ -72,13 +71,14 @@ data class EagerObject(
             )
         }
 
-        internal inline fun <E : Any> fromType(
+        internal inline fun <E : Any, ClassName, AnnotationSpec> fromType(
             element: E,
-            getAnnotations: E.() -> Sequence<AnnotationModel>,
+            getAnnotations: E.() -> Sequence<AnnotationModel<AnnotationSpec>>,
             toClassName: E.() -> ClassName,
-            implements: E.(ClassName) -> Boolean,
+            simpleName: ClassName.() -> String,
+            implements: E.(KClass<*>) -> Boolean,
             error: (String, E) -> Throwable,
-        ): EagerObject {
+        ): EagerObject<ClassName, AnnotationSpec> {
             val annotations = element.getAnnotations().toList()
             val scopes = annotations.filter { a -> a.declaredAnnotations.any { it.isOfType(scope) } }
             if (scopes.isEmpty()) {
@@ -94,9 +94,9 @@ data class EagerObject(
                 targetType = targetType,
                 priority = annotations.first { it.isOfType(eager) }.getValue("priority"),
                 method = if (isInitializable) {
-                    Method.Binding.fromType(targetType)
+                    Method.Binding.fromType(targetType.simpleName())
                 } else {
-                    Method.Provider.fromType(targetType)
+                    Method.Provider.fromType(targetType.simpleName())
                 }
             )
         }
@@ -107,13 +107,13 @@ data class EagerObject(
 
         data class Binding(override val name: String) : Method() {
             companion object {
-                fun fromType(type: ClassName) = Binding("bind${type.simpleName()}AsInitializable")
+                fun fromType(className: String) = Binding("bind${className}AsInitializable")
             }
         }
 
         data class Provider(override val name: String) : Method() {
             companion object {
-                fun fromType(type: ClassName) = Provider("provide${type.simpleName()}AsInitializable")
+                fun fromType(className: String) = Provider("provide${className}AsInitializable")
             }
         }
     }

@@ -1,5 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.adarshr.gradle.testlogger.TestLoggerExtension
+import com.adarshr.gradle.testlogger.theme.ThemeType
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -7,18 +9,26 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val libs = the<LibrariesForLibs>()
 
-pluginManager.apply("com.adarshr.test-logger")
+val isRunningInIDE = (System.getProperty("idea.active")?.toBoolean() ?: false) ||
+        (System.getProperty("idea.sync.active")?.toBoolean() ?: false)
+
+if (!isRunningInIDE) {
+    pluginManager.apply("com.adarshr.test-logger")
+    extensions.configure<TestLoggerExtension> {
+        theme = ThemeType.STANDARD_PARALLEL
+    }
+}
 
 version = properties.getValue("version") as String
 
 tasks.withType<JavaCompile> {
     sourceCompatibility = "1.8"
-    targetCompatibility = "1.8"
+    targetCompatibility = "11"
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
         allWarningsAsErrors = true
     }
 }
@@ -44,6 +54,10 @@ pluginManager.withPlugin("com.android.library") {
             unitTests {
                 isIncludeAndroidResources = true
             }
+        }
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_11
         }
     }
 

@@ -1,5 +1,7 @@
 package se.ansman.deager
 
+import assertk.assertThat
+import assertk.assertions.containsExactlyInAnyOrder
 import com.tschuchort.compiletesting.SourceFile
 import org.junit.jupiter.api.function.Executable
 import kotlin.test.assertEquals
@@ -13,19 +15,21 @@ class DeagerTestCase(
     override fun execute() {
         val result = compilation.compile(sources)
         result.assertIsSuccessful()
-        for ((path, contents) in expectedFiles) {
-            val actual = result.readGeneratedFile(path)
+        for ((fileName, contents) in expectedFiles) {
+            val actual = result.readGeneratedFile(fileName)
             assertEquals(contents, actual)
             try {
                 result.loadClass(buildString {
                     append("se.ansman.")
                     append(testName.replace('-', '.'))
                     append(".")
-                    append(path.substringBeforeLast("."))
+                    append(fileName.substringBeforeLast("."))
                 })
             } catch (e: Exception) {
-                throw AssertionError("Failed to load class $path", e)
+                throw AssertionError("Failed to load class $fileName", e)
             }
         }
+        assertThat(result.filesGeneratedByAnnotationProcessor.map { it.name }.toList())
+            .containsExactlyInAnyOrder(*expectedFiles.keys.toTypedArray())
     }
 }

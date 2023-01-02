@@ -1,7 +1,7 @@
 package se.ansman.deager
 
-import com.squareup.javapoet.ClassName
+import kotlin.reflect.KClass
 
 interface TypeLookup<T : Any> {
-    fun getTypeForName(className: ClassName): T
+    fun getTypeForClass(klass: KClass<*>): T
 }

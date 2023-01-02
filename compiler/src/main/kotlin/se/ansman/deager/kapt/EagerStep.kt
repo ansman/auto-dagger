@@ -6,13 +6,14 @@ import com.google.auto.common.MoreTypes
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.ImmutableSetMultimap
 import com.google.common.collect.Multimap
+import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
 import dagger.Module
 import se.ansman.deager.Eager
 import se.ansman.deager.Errors
 import se.ansman.deager.models.EagerObject
-import se.ansman.deager.renderers.EagerObjectModuleRenderer
+import se.ansman.deager.renderers.EagerObjectModuleJavaRenderer
 import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
@@ -34,19 +35,20 @@ class EagerStep(
                 when (element.kind) {
                     ElementKind.CLASS -> {
                         val type = MoreElements.asType(element)
-                            val model = EagerObject.fromType(
+                        val model = EagerObject.fromType(
                             element = type,
                             getAnnotations = { annotationMirrors.map(::KaptAnnotationModel).asSequence() },
                             toClassName = ClassName::get,
+                            simpleName = ClassName::simpleName,
                             implements = {
                                 processingEnv.typeUtils.isAssignable(
                                     asType(),
-                                    typeLookup.getTypeForName(it)
+                                    typeLookup.getTypeForClass(it)
                                 )
                             },
                             error = ::KaptProcessingError
                         )
-                        val renderer = EagerObjectModuleRenderer(model)
+                        val renderer = EagerObjectModuleJavaRenderer(model)
                         val file = renderer.render {
                             addOriginatingElement(element)
                         }
@@ -70,11 +72,14 @@ class EagerStep(
                                     implements = {
                                         processingEnv.typeUtils.isAssignable(
                                             this,
-                                            typeLookup.getTypeForName(it)
+                                            typeLookup.getTypeForClass(it)
                                         )
                                     },
                                     getAnnotations = { annotationMirrors.map(::KaptAnnotationModel).asSequence() },
-                                    getTypeAnnotations = { MoreTypes.asTypeElement(this).annotationMirrors.map(::KaptAnnotationModel).asSequence() },
+                                    getTypeAnnotations = {
+                                        MoreTypes.asTypeElement(this).annotationMirrors.map(::KaptAnnotationModel)
+                                            .asSequence()
+                                    },
                                     error = ::KaptProcessingError
                                 ),
                                 originatingElement = element,
@@ -95,7 +100,7 @@ class EagerStep(
         }
 
         for ((module, providers) in eagerObjectsByModule.asMap()) {
-            val renderer = EagerObjectModuleRenderer(module, providers.map { it.eagerObject })
+            val renderer = EagerObjectModuleJavaRenderer(module, providers.map { it.eagerObject })
             val file = renderer.render {
                 for (provider in providers) {
                     addOriginatingElement(provider.originatingElement)
@@ -108,7 +113,7 @@ class EagerStep(
     }
 
     private data class EagerProvider(
-        val eagerObject: EagerObject,
+        val eagerObject: EagerObject<TypeName, AnnotationSpec>,
         val originatingElement: Element,
     )
 }

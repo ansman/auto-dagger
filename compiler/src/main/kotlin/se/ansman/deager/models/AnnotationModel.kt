@@ -1,11 +1,10 @@
 package se.ansman.deager.models
 
-import com.squareup.javapoet.AnnotationSpec
-import com.squareup.javapoet.ClassName
+import kotlin.reflect.KClass
 
-interface AnnotationModel {
-    val declaredAnnotations: List<AnnotationModel>
-    fun isOfType(className: ClassName): Boolean
+interface AnnotationModel<out AnnotationSpec> {
+    val declaredAnnotations: List<AnnotationModel<AnnotationSpec>>
+    fun isOfType(type: KClass<*>): Boolean
     fun <T : Any> getValue(name: String): T?
     fun toAnnotationSpec(): AnnotationSpec
 }

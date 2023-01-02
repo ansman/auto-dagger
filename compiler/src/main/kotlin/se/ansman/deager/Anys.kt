@@ -5,3 +5,9 @@ fun <T, E> T.applyEach(iterable: Iterable<E>, block: T.(E) -> Unit): T = apply {
         block(element)
     }
 }
+
+fun <T> T.applyIf(predicate: Boolean, block: T.() -> Unit): T = apply {
+    if (predicate) {
+        block()
+    }
+}

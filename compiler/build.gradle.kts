@@ -7,6 +7,7 @@ plugins {
 
 dependencies {
     implementation(libs.javapoet)
+    implementation(libs.bundles.kotlinpoet)
     implementation(libs.dagger)
     implementation(libs.dagger.hilt.core)
     implementation(libs.dagger.hilt.compiler)

@@ -5,8 +5,9 @@ import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import se.ansman.deager.models.AnnotationModel
 import javax.lang.model.element.AnnotationMirror
+import kotlin.reflect.KClass
 
-class KaptAnnotationModel(private val mirror: AnnotationMirror) : AnnotationModel {
+class KaptAnnotationModel(private val mirror: AnnotationMirror) : AnnotationModel<AnnotationSpec> {
     private val className by lazy {
         mirror.annotationType.asElement().asType()
             .let(MoreTypes::asTypeElement)
@@ -16,9 +17,9 @@ class KaptAnnotationModel(private val mirror: AnnotationMirror) : AnnotationMode
         mirror.annotationType.asElement().annotationMirrors.map(::KaptAnnotationModel)
     }
 
-    override fun isOfType(className: ClassName): Boolean =
-        mirror.annotationType.asElement().simpleName.contentEquals(className.simpleName()) &&
-                className == this.className
+    override fun isOfType(type: KClass<*>): Boolean =
+        mirror.annotationType.asElement().simpleName.contentEquals(type.simpleName) &&
+                ClassName.get(type.java) == className
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getValue(name: String): T? =

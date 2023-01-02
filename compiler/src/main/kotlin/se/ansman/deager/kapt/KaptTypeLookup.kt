@@ -1,17 +1,20 @@
 package se.ansman.deager.kapt
 
-import com.squareup.javapoet.ClassName
 import se.ansman.deager.TypeLookup
 import javax.lang.model.type.TypeMirror
 import javax.lang.model.util.Elements
+import kotlin.reflect.KClass
 
 class KaptTypeLookup(private val elementUtils: Elements) : TypeLookup<TypeMirror> {
-    private val cache = mutableMapOf<ClassName, TypeMirror>()
+    private val cache = mutableMapOf<KClass<*>, TypeMirror>()
 
-    override fun getTypeForName(className: ClassName): TypeMirror =
-        cache.getOrPut(className) {
-            requireNotNull(elementUtils.getTypeElement(className.canonicalName())?.asType()) {
-                "Could not find element with name $className"
+    override fun getTypeForClass(klass: KClass<*>): TypeMirror =
+        cache.getOrPut(klass) {
+            val name = requireNotNull(klass.qualifiedName) {
+                "Cannot get type mirror for anonymous or local class $klass"
+            }
+            requireNotNull(elementUtils.getTypeElement(name)?.asType()) {
+                "Could not find element with name $klass"
             }
         }
 }

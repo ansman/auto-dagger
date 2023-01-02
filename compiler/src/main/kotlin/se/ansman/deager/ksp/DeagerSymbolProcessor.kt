@@ -17,20 +17,22 @@ import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.symbol.KSPropertyGetter
 import com.google.devtools.ksp.symbol.KSType
-import com.squareup.javapoet.ClassName
-import com.squareup.javapoet.JavaFile
+import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ksp.toClassName
+import com.squareup.kotlinpoet.ksp.toTypeName
 import dagger.Module
 import se.ansman.deager.Eager
 import se.ansman.deager.Errors
 import se.ansman.deager.models.EagerObject
-import se.ansman.deager.renderers.EagerObjectModuleRenderer
+import se.ansman.deager.renderers.EagerObjectModuleKotlinRenderer
+import se.ansman.deager.renderers.KotlinEagerObject
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 
 class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment) : SymbolProcessor {
     override fun process(resolver: Resolver): List<KSAnnotated> {
         val typeLookup = KspTypeLookup(resolver)
-        val objectsByModule = HashMultimap.create<ClassName, EagerObject>()
+        val objectsByModule = HashMultimap.create<ClassName, KotlinEagerObject>()
         val deferred = mutableListOf<KSAnnotated>()
         for (symbol in resolver.getSymbolsWithAnnotation(Eager::class.java.name)) {
             try {
@@ -42,7 +44,7 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
             }
         }
         for ((module, eagerObjects) in objectsByModule.asMap()) {
-            val renderer = EagerObjectModuleRenderer(module, eagerObjects)
+            val renderer = EagerObjectModuleKotlinRenderer(module, eagerObjects)
             environment.codeGenerator.write(renderer.render())
         }
 
@@ -53,19 +55,20 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
         resolver: Resolver,
         typeLookup: KspTypeLookup,
         symbol: KSAnnotated,
-        output: Multimap<ClassName, EagerObject>
+        output: Multimap<ClassName, KotlinEagerObject>
     ): Boolean {
         return when (symbol) {
             is KSClassDeclaration -> {
                 val model = EagerObject.fromType(
                     element = symbol,
-                    getAnnotations = { annotations.map { KspAnnotationModel(it, resolver) } },
-                    toClassName = { toClassName(resolver) },
-                    implements = { typeLookup.getTypeForName(it).isAssignableFrom(asStarProjectedType()) },
+                    getAnnotations = { annotations.map(::KspAnnotationModel) },
+                    toClassName = { toClassName() },
+                    simpleName = ClassName::simpleName,
+                    implements = { typeLookup.getTypeForClass(it).isAssignableFrom(asStarProjectedType()) },
                     error = ::KspProcessingError,
                 )
 
-                val renderer = EagerObjectModuleRenderer(model)
+                val renderer = EagerObjectModuleKotlinRenderer(model)
                 val file = renderer.render()
                 environment.codeGenerator.write(file)
                 true
@@ -80,7 +83,6 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
                     receiver = { symbol.extensionReceiver?.resolve() },
                     arguments = { emptySequence() },
                     annotations = symbol.annotations + (symbol.getter?.annotations ?: emptySequence()),
-                    resolver = resolver,
                     typeLookup = typeLookup,
                     output = output
                 )
@@ -95,7 +97,6 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
                     receiver = { symbol.extensionReceiver?.resolve() },
                     arguments = { symbol.parameters.asSequence().map { it.type.resolve() } },
                     annotations = symbol.annotations,
-                    resolver = resolver,
                     typeLookup = typeLookup,
                     output = output
                 )
@@ -117,9 +118,8 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
         receiver: () -> KSType?,
         arguments: () -> Sequence<KSType>,
         annotations: Sequence<KSAnnotation>,
-        resolver: Resolver,
         typeLookup: KspTypeLookup,
-        output: Multimap<ClassName, EagerObject>,
+        output: Multimap<ClassName, KotlinEagerObject>,
     ) {
         if (module !is KSClassDeclaration) {
             throw KspProcessingError(Errors.methodInNonModule, symbol)
@@ -135,22 +135,21 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
             getReturnType = { returnType },
             getReceiver = { receiver() },
             getArguments = { arguments() },
-            toTypeName = { toTypeName(resolver) },
-            implements = { typeLookup.getTypeForName(it).isAssignableFrom(this) },
-            getAnnotations = { annotations.map { KspAnnotationModel(it, resolver) } },
-            getTypeAnnotations = { this.annotations.map { KspAnnotationModel(it, resolver) } },
+            toTypeName = { toTypeName() },
+            implements = { typeLookup.getTypeForClass(it).isAssignableFrom(this) },
+            getAnnotations = { annotations.map(::KspAnnotationModel) },
+            getTypeAnnotations = { declaration.annotations.map(::KspAnnotationModel) },
             error = ::KspProcessingError
         )
-        output.put(module.toClassName(resolver), model)
+        output.put(module.toClassName(), model)
     }
 
-    private fun CodeGenerator.write(file: JavaFile) {
+    private fun CodeGenerator.write(file: FileSpec) {
         this
             .createNewFile(
                 dependencies = Dependencies(aggregating = false),
                 packageName = file.packageName,
-                fileName = file.typeSpec.name,
-                extensionName = "java"
+                fileName = file.name,
             )
             .let { OutputStreamWriter(it, Charsets.UTF_8) }
             .let(::BufferedWriter)

@@ -7,6 +7,7 @@ import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.MethodSpec
 import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.ParameterizedTypeName
+import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import dagger.Binds
 import dagger.Lazy
@@ -21,18 +22,20 @@ import se.ansman.deager.asClassName
 import se.ansman.deager.models.EagerObject
 import javax.lang.model.element.Modifier
 
-class EagerObjectModuleRenderer private constructor(
+typealias JavaEagerObject = EagerObject<TypeName, AnnotationSpec>
+
+class EagerObjectModuleJavaRenderer private constructor(
     private val moduleName: ClassName,
     private val originatingElement: ClassName,
-    private val eagerObjects: List<EagerObject>
+    private val eagerObjects: List<JavaEagerObject>
 ) {
-    constructor(module: ClassName, eagerObjects: Iterable<EagerObject>) : this(
+    constructor(module: ClassName, eagerObjects: Iterable<JavaEagerObject>) : this(
         moduleName = module.peerClass(module.simpleNames().joinToString(separator = "", prefix = "Eager")),
         originatingElement = module.topLevelClassName(),
         eagerObjects = eagerObjects.toList()
     )
 
-    constructor(eagerObject: EagerObject) : this(
+    constructor(eagerObject: JavaEagerObject) : this(
         moduleName = eagerObject.moduleName(),
         originatingElement = eagerObject.targetType.asClassName().topLevelClassName(),
         eagerObjects = listOf(eagerObject)
@@ -116,7 +119,7 @@ class EagerObjectModuleRenderer private constructor(
     }
 }
 
-private fun EagerObject.moduleName(): ClassName =
+private fun JavaEagerObject.moduleName(): ClassName =
     ClassName.get(
         targetType.asClassName().packageName(),
         targetType.asClassName().simpleNames().joinToString(prefix = "Eager", postfix = "Module", separator = "")

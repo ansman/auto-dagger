@@ -12,27 +12,16 @@ class KspCompilation(workingDir: File) : DeagerCompilation(workingDir) {
     override fun compile(
         sources: List<SourceFile>,
         configuration: KotlinCompilation.() -> Unit
-    ): Result {
-        val firstRound = KotlinCompilation().apply {
-            configuration()
-            this.sources = sources
-            symbolProcessorProviders = listOf(DeagerSymbolProcessorProvider())
-            kspWithCompilation = true
-        }
-        val firstResult = firstRound.compileFixed()
-        if (firstResult.exitCode != KotlinCompilation.ExitCode.OK) {
-            return Result(firstResult)
-        }
-        val secondRound = KotlinCompilation().apply {
-            configuration()
-            workingDir = firstRound.workingDir
-            this.sources = workingDir.resolve("sources").listSourceFiles()
-                .plus(firstResult.filesGeneratedByAnnotationProcessor)
-                .map(SourceFile::fromPath)
-                .toList()
-        }
-        return Result(secondRound.compileFixed())
-    }
+    ): Result =
+        KotlinCompilation()
+            .apply {
+                configuration()
+                this.sources = sources
+                symbolProcessorProviders = listOf(DeagerSymbolProcessorProvider())
+                kspWithCompilation = true
+            }
+            .compileFixed()
+            .let(::Result)
 
     private fun KotlinCompilation.compileFixed(): KotlinCompilation.Result {
         val result = compile()

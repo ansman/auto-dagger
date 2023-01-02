@@ -1,6 +1,7 @@
 package se.ansman.deager
 
-import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode
 
-@Disabled("KSP is not ready yet")
+@Execution(ExecutionMode.SAME_THREAD)
 class KspTest : BaseTest("ksp", ::KspCompilation)
