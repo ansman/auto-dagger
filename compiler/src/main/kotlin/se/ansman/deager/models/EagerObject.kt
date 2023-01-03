@@ -31,8 +31,8 @@ data class EagerObject<out TypeName, out AnnotationSpec>(
             getArguments: M.() -> Sequence<T>,
             toTypeName: T.() -> TypeName,
             implements: T.(KClass<*>) -> Boolean,
-            getAnnotations: M.() -> Sequence<AnnotationModel<AnnotationSpec>>,
-            getTypeAnnotations: T.() -> Sequence<AnnotationModel<AnnotationSpec>>,
+            getAnnotations: M.() -> List<AnnotationModel<AnnotationSpec>>,
+            getTypeAnnotations: T.() -> List<AnnotationModel<AnnotationSpec>>,
             error: (String, M) -> Throwable,
         ): EagerObject<TypeName, AnnotationSpec> {
             val returnType = method.getReturnType()
@@ -41,7 +41,7 @@ data class EagerObject<out TypeName, out AnnotationSpec>(
                 .plus(if (methodAnnotation.any { it.isOfType(binds) }) {
                     method.getReceiver()?.getTypeAnnotations()
                         ?: method.getArguments().firstOrNull()?.getTypeAnnotations()
-                        ?: emptySequence()
+                        ?: emptyList()
                 } else {
                     returnType.getTypeAnnotations()
                 }.toList())
@@ -73,13 +73,13 @@ data class EagerObject<out TypeName, out AnnotationSpec>(
 
         internal inline fun <E : Any, ClassName, AnnotationSpec> fromType(
             element: E,
-            getAnnotations: E.() -> Sequence<AnnotationModel<AnnotationSpec>>,
+            getAnnotations: E.() -> List<AnnotationModel<AnnotationSpec>>,
             toClassName: E.() -> ClassName,
             simpleName: ClassName.() -> String,
             implements: E.(KClass<*>) -> Boolean,
             error: (String, E) -> Throwable,
         ): EagerObject<ClassName, AnnotationSpec> {
-            val annotations = element.getAnnotations().toList()
+            val annotations = element.getAnnotations()
             val scopes = annotations.filter { a -> a.declaredAnnotations.any { it.isOfType(scope) } }
             if (scopes.isEmpty()) {
                 throw error(Errors.unscopedType, element)

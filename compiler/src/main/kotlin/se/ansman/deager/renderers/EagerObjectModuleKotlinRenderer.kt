@@ -16,9 +16,6 @@ import dagger.Binds
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.codegen.OriginatingElement
-import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import se.ansman.deager.Initializable
 import se.ansman.deager.applyIf
@@ -29,18 +26,15 @@ typealias KotlinEagerObject = EagerObject<TypeName, AnnotationSpec>
 
 class EagerObjectModuleKotlinRenderer private constructor(
     private val moduleName: ClassName,
-    private val originatingElement: ClassName,
     private val eagerObjects: List<KotlinEagerObject>
 ) {
     constructor(module: ClassName, eagerObjects: Iterable<KotlinEagerObject>) : this(
         moduleName = module.peerClass(module.simpleNames.joinToString(separator = "", prefix = "Eager")),
-        originatingElement = module.topLevelClassName(),
         eagerObjects = eagerObjects.toList()
     )
 
     constructor(eagerObject: KotlinEagerObject) : this(
         moduleName = eagerObject.moduleName(),
-        originatingElement = eagerObject.targetType.asClassName().topLevelClassName(),
         eagerObjects = listOf(eagerObject)
     )
 
@@ -111,16 +105,6 @@ class EagerObjectModuleKotlinRenderer private constructor(
                 .addFunctions(providers)
         }
             .addAnnotation(Module::class)
-            .addAnnotation(
-                AnnotationSpec.builder(InstallIn::class)
-                    .addMember("%T::class", SingletonComponent::class)
-                    .build()
-            )
-            .addAnnotation(
-                AnnotationSpec.builder(OriginatingElement::class)
-                    .addMember("topLevelClass = %T::class", originatingElement)
-                    .build()
-            )
             .apply(modifier)
             .build()
 

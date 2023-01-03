@@ -37,7 +37,7 @@ class EagerStep(
                         val type = MoreElements.asType(element)
                         val model = EagerObject.fromType(
                             element = type,
-                            getAnnotations = { annotationMirrors.map(::KaptAnnotationModel).asSequence() },
+                            getAnnotations = { annotationMirrors.map(::KaptAnnotationModel) },
                             toClassName = ClassName::get,
                             simpleName = ClassName::simpleName,
                             implements = {
@@ -75,10 +75,9 @@ class EagerStep(
                                             typeLookup.getTypeForClass(it)
                                         )
                                     },
-                                    getAnnotations = { annotationMirrors.map(::KaptAnnotationModel).asSequence() },
+                                    getAnnotations = { annotationMirrors.map(::KaptAnnotationModel) },
                                     getTypeAnnotations = {
                                         MoreTypes.asTypeElement(this).annotationMirrors.map(::KaptAnnotationModel)
-                                            .asSequence()
                                     },
                                     error = ::KaptProcessingError
                                 ),

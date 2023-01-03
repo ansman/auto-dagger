@@ -3,15 +3,20 @@ package se.ansman.deager
 import assertk.assertThat
 import assertk.assertions.contains
 import com.tschuchort.compiletesting.KotlinCompilation
-import com.tschuchort.compiletesting.SourceFile
+import org.intellij.lang.annotations.Language
 import java.io.File
 import java.io.OutputStream
 import kotlin.test.assertEquals
 
 abstract class DeagerCompilation(protected val workingDir: File) {
-    fun compile(vararg sources: SourceFile): Result = compile(sources.asList())
+    fun compile(@Language("kotlin") vararg sources: String): Result =
+        compile(sources.mapIndexed { i, contents ->
+            TestSourceFile.Inline.kotlin(contents, "Test$i.kt")
+        })
 
-    fun compile(sources: List<SourceFile>): Result =
+    fun compile(vararg sources: TestSourceFile): Result = compile(sources.asList())
+
+    fun compile(sources: List<TestSourceFile>): Result =
         compile(sources) {
             workingDir = this@DeagerCompilation.workingDir
             inheritClassPath = true
@@ -19,7 +24,7 @@ abstract class DeagerCompilation(protected val workingDir: File) {
         }
 
     protected abstract fun compile(
-        sources: List<SourceFile>,
+        sources: List<TestSourceFile>,
         configuration: KotlinCompilation.() -> Unit
     ): Result
 
@@ -46,7 +51,7 @@ abstract class DeagerCompilation(protected val workingDir: File) {
 
         fun readGeneratedFile(name: String): String =
             requireNotNull(findGeneratedFile(name)) {
-                "No file was generated with name $name. Generated files: ${filesGeneratedByAnnotationProcessor.joinToString { it.name }}"
+                "No file was generated with name $name. Generated files: ${filesGeneratedByAnnotationProcessor.joinToString { it.name }}\n$messages".trim()
             }.readText().trim()
 
         fun loadClass(className: String): Class<*> = result.classLoader.loadClass(className)

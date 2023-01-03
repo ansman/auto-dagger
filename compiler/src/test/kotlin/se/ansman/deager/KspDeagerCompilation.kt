@@ -1,22 +1,21 @@
 package se.ansman.deager
 
 import com.tschuchort.compiletesting.KotlinCompilation
-import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.kspWithCompilation
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import se.ansman.deager.ksp.DeagerSymbolProcessorProvider
 import java.io.File
 
-class KspCompilation(workingDir: File) : DeagerCompilation(workingDir) {
+class KspDeagerCompilation(workingDir: File) : DeagerCompilation(workingDir) {
 
     override fun compile(
-        sources: List<SourceFile>,
+        sources: List<TestSourceFile>,
         configuration: KotlinCompilation.() -> Unit
     ): Result =
         KotlinCompilation()
             .apply {
                 configuration()
-                this.sources = sources
+                this.sources = sources.map { it.toSourceFile() }
                 symbolProcessorProviders = listOf(DeagerSymbolProcessorProvider())
                 kspWithCompilation = true
             }

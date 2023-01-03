@@ -21,6 +21,9 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ksp.toClassName
 import com.squareup.kotlinpoet.ksp.toTypeName
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.codegen.OriginatingElement
+import dagger.hilt.components.SingletonComponent
 import se.ansman.deager.Eager
 import se.ansman.deager.Errors
 import se.ansman.deager.models.EagerObject
@@ -45,7 +48,7 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
         }
         for ((module, eagerObjects) in objectsByModule.asMap()) {
             val renderer = EagerObjectModuleKotlinRenderer(module, eagerObjects)
-            environment.codeGenerator.write(renderer.render())
+            environment.codeGenerator.write(renderer.render { addHiltAnnotations(module) })
         }
 
         return deferred
@@ -61,7 +64,7 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
             is KSClassDeclaration -> {
                 val model = EagerObject.fromType(
                     element = symbol,
-                    getAnnotations = { annotations.map(::KspAnnotationModel) },
+                    getAnnotations = { annotations.map(::KspAnnotationModel).toList() },
                     toClassName = { toClassName() },
                     simpleName = ClassName::simpleName,
                     implements = { typeLookup.getTypeForClass(it).isAssignableFrom(asStarProjectedType()) },
@@ -69,7 +72,7 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
                 )
 
                 val renderer = EagerObjectModuleKotlinRenderer(model)
-                val file = renderer.render()
+                val file = renderer.render { addHiltAnnotations(model.targetType) }
                 environment.codeGenerator.write(file)
                 true
             }
@@ -109,6 +112,19 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
         }
     }
 
+    private fun TypeSpec.Builder.addHiltAnnotations(targetType: ClassName) {
+        addAnnotations(
+            listOf(
+                AnnotationSpec.builder(InstallIn::class)
+                    .addMember("%T::class", SingletonComponent::class)
+                    .build(),
+                AnnotationSpec.builder(OriginatingElement::class)
+                    .addMember("topLevelClass = %T::class", targetType.topLevelClassName())
+                    .build()
+            )
+        )
+    }
+
     @OptIn(KspExperimental::class)
     private fun processMethod(
         symbol: KSAnnotated,
@@ -137,8 +153,8 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
             getArguments = { arguments() },
             toTypeName = { toTypeName() },
             implements = { typeLookup.getTypeForClass(it).isAssignableFrom(this) },
-            getAnnotations = { annotations.map(::KspAnnotationModel) },
-            getTypeAnnotations = { declaration.annotations.map(::KspAnnotationModel) },
+            getAnnotations = { annotations.map(::KspAnnotationModel).toList() },
+            getTypeAnnotations = { declaration.annotations.map(::KspAnnotationModel).toList() },
             error = ::KspProcessingError
         )
         output.put(module.toClassName(), model)

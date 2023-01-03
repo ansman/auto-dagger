@@ -1,3 +1,3 @@
 package se.ansman.deager
 
-class KaptTest : BaseTest("kapt", ::KaptCompilation)
+class KaptTest : BaseTest("kapt", ::KaptDeagerCompilation)

@@ -2,14 +2,13 @@ package se.ansman.deager
 
 import assertk.assertThat
 import assertk.assertions.containsExactlyInAnyOrder
-import com.tschuchort.compiletesting.SourceFile
 import org.junit.jupiter.api.function.Executable
 import kotlin.test.assertEquals
 
 class DeagerTestCase(
     private val testName: String,
     private val compilation: DeagerCompilation,
-    private val sources: List<SourceFile>,
+    private val sources: List<TestSourceFile>,
     private val expectedFiles: Map<String, String>,
 ) : Executable {
     override fun execute() {
@@ -32,4 +31,6 @@ class DeagerTestCase(
         assertThat(result.filesGeneratedByAnnotationProcessor.map { it.name }.toList())
             .containsExactlyInAnyOrder(*expectedFiles.keys.toTypedArray())
     }
+
+    override fun toString(): String = "DeagerTestCase($testName)"
 }
