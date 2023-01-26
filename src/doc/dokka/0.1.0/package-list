@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:core
+se.ansman.deager
+module:android
+se.ansman.deager.android
