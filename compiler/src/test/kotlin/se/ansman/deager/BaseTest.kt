@@ -82,4 +82,56 @@ abstract class BaseTest(
             )
             .assertFailedWithMessage(Errors.wrongScope)
     }
+
+    @Test
+    fun `the annotated method must be a provider or a binding`(@TempDir tempDirectory: File) {
+        compilation(tempDirectory)
+            .compile(
+                """
+                    package se.ansman
+            
+                    @dagger.Module
+                    object SomeModule {
+                        @se.ansman.deager.Eager
+                        @javax.inject.Singleton
+                        fun provideString(): String = "string"
+                    }
+                """
+            )
+            .assertFailedWithMessage(Errors.invalidAnnotatedMethod)
+    }
+
+    @Test
+    fun `the annotated method must not be top level`(@TempDir tempDirectory: File) {
+        compilation(tempDirectory)
+            .compile(
+                """
+                    package se.ansman
+            
+                    @dagger.Provides
+                    @se.ansman.deager.Eager
+                    @javax.inject.Singleton
+                    fun provideString(): String = "string"
+                """
+            )
+            .assertFailedWithMessage(Errors.methodInNonModule)
+    }
+
+    @Test
+    fun `the annotated method must not be in a module`(@TempDir tempDirectory: File) {
+        compilation(tempDirectory)
+            .compile(
+                """
+                    package se.ansman
+            
+                    object SomeModule {
+                        @dagger.Provides
+                        @se.ansman.deager.Eager
+                        @javax.inject.Singleton
+                        fun provideString(): String = "string"
+                    }
+                """
+            )
+            .assertFailedWithMessage(Errors.methodInNonModule)
+    }
 }
