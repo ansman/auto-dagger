@@ -6,7 +6,7 @@
 6. `git add .`
 7. `git commit -am "Prepare for release X.Y.Z"`
 8. `./publish.sh`.
-9. Close and release on [Sonatype](https://oss.sonatype.org/#stagingRepositories).
+9. Close and release on [Sonatype](https://s01.oss.sonatype.org/#stagingRepositories).
 10. `git push origin main`
 11. Release on GitHub:
      1. Create a new release [here](https://github.com/ansman/deager/releases/new).
