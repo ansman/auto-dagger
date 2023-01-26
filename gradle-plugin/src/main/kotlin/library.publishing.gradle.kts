@@ -58,7 +58,7 @@ val publishing: PublishingExtension = extensions.getByType()
 with(publishing) {
     repositories.maven {
         name = "mavenCentral"
-        setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+        setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
         credentials {
             username = providers.gradleProperty("sonatype.username")
                 .orElse(providers.environmentVariable("SONATYPE_USERNAME"))
@@ -71,7 +71,7 @@ with(publishing) {
 
     repositories.maven {
         name = "sonatypeSnapshots"
-        setUrl("https://oss.sonatype.org/content/repositories/snapshots/")
+        setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
         credentials {
             username = providers.gradleProperty("sonatype.username")
                 .orElse(providers.environmentVariable("SONATYPE_USERNAME"))
