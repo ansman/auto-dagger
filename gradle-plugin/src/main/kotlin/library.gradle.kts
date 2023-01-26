@@ -35,7 +35,6 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
-
 }
 
 pluginManager.withPlugin("com.android.library") {
@@ -91,5 +90,14 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
     }
     dependencies {
         "testImplementation"(libs.bundles.jvmTesting)
+    }
+}
+
+pluginManager.withPlugin("java") {
+    extensions.configure<JavaPluginExtension> {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(19))
+            vendor.set(JvmVendorSpec.AZUL)
+        }
     }
 }
