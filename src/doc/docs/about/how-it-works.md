@@ -14,7 +14,7 @@ This is an example of such a component:
 public final class EagerSomeThingComponent {
     private EagerSomeThingComponent() {}
     
-    // If the object implement Initializable then @BindsIntoSet is used instead
+    // If the object implements Initializable, then @Binds is used instead of @Provides
     @Provides
     @IntoSet
     public static Initializable provideSomeThingAsInitializable(Lazy<SomeThing> lazySomeThing) {
@@ -25,11 +25,12 @@ public final class EagerSomeThingComponent {
 
 ## `EagerInitializer`
 `EagerInitializer` is the container for all `Initializable` that should be eagerly initialized. It's provided into the
-`@Singleton` component and accepts a set of all the initializables.
+`@Singleton` component, and accepts a set of all the initializables.
 
-When calling `initialize` it will call `initialize` on each object in turn.
+Calling `EagerInitializer.initialize` calls `initialize` on each object in turn.
 
-Any exceptions are rethrown, but only after all objects have been initialized.
+Any exceptions are rethrown, but only after all objects have been initialized. If multiple objects throw, then 
+subsequent exceptions are added as suppressed exceptions.
 
 ## `DeagerInitializer`
 `DeagerInitializer` is the [AndroidX Startup](https://developer.android.com/topic/libraries/app-startup) initializer 

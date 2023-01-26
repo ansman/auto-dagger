@@ -2,7 +2,7 @@ Deager
 ===
 Deager allows you to annotated `@Singleton` scoped objects and have the be eagerly initializable. 
 
-This is done by using Hilt and AndroidX Startup (Android only).
+This is done using Hilt and AndroidX Startup.
 
 To read more please refer to the [documentation](https://deager.ansman.se/).
 
@@ -25,6 +25,28 @@ dependencies {
     kapt("se.ansman.deager:compiler:1.0.0-alpha01")
 }
 ```
+
+Basic usage
+```kotlin
+@Eager
+@Singleton
+class SomeRepository @Inject constructor() {
+    init {
+        // This will be executed at application startup, even if nobody injects it.
+    }
+}
+
+@Eager
+@Singleton
+class InitializableRepository @Inject constructor() : Initializable {
+    override fun initialize() {
+        // This will be executed at application startup, even if nobody injects it.
+    }
+}
+
+```
+
+For the full documentation see
 
 License
 ---

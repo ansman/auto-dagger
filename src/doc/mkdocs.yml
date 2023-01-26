@@ -69,6 +69,7 @@ nav:
   - Home: index.md
   - Getting Started: getting-started.md
   - Usage: usage.md
+  - Limitations: limitations.md
   - About:
       - Release Notes: https://github.com/ansman/deager/releases
       - How It Works: about/how-it-works.md
