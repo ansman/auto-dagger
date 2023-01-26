@@ -1,10 +1,11 @@
 [versions]
-kotlin = "1.7.20"
+kotlin = "1.8.0"
+dokka = "1.7.20"
 compileTesting = "1.4.9"
 autoService = "1.0.1"
 incap = "0.3"
 dagger = "2.44.1"
-ksp = "1.7.20-1.0.7"
+ksp = "1.8.0-1.0.8"
 android-minSdk = "14"
 android-compileSdk = "33"
 androidx-test = "1.5.0"
@@ -13,7 +14,7 @@ kotlinpoet = "1.12.0"
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.12.1"
 mkdocs = "ru.vyarus.mkdocs:3.0.0"
 
@@ -21,9 +22,9 @@ mkdocs = "ru.vyarus.mkdocs:3.0.0"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
-dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "kotlin" }
-dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "kotlin" }
-dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "kotlin" }
+dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
+dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 
 okio = "com.squareup.okio:okio:3.2.0"
 
