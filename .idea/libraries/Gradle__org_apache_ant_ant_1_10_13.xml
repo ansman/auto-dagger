@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.ant:ant:1.10.13" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.ant" artifactId="ant" version="1.10.13" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.ant/ant/1.10.13/85fd5990a27ddafe8af3f7a6d7132d2c29a22a7c/ant-1.10.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.ant/ant/1.10.13/3ba8fec9222973c2d6c89edc913a518ebfdc8f22/ant-1.10.13-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

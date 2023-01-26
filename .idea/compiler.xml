@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="19">
+      <module name="auto-dagger.android.testing.main" target="11" />
+      <module name="auto-dagger.android.testing.test" target="11" />
+      <module name="auto-dagger.androidx.room.main" target="11" />
+      <module name="auto-dagger.androidx.room.test" target="11" />
+      <module name="auto-dagger.compiler.common.main" target="11" />
+      <module name="auto-dagger.compiler.common.test" target="11" />
+      <module name="auto-dagger.compiler.common.test-utils.main" target="11" />
+      <module name="auto-dagger.compiler.common.test-utils.test" target="11" />
+      <module name="auto-dagger.compiler.common.testFixtures" target="11" />
+      <module name="auto-dagger.compiler.main" target="11" />
+      <module name="auto-dagger.compiler.test" target="11" />
+      <module name="auto-dagger.compiler.testFixtures" target="11" />
+      <module name="auto-dagger.core.main" target="11" />
+      <module name="auto-dagger.core.test" target="11" />
+      <module name="auto-dagger.retrofit.compiler.main" target="11" />
+      <module name="auto-dagger.retrofit.compiler.test" target="11" />
+      <module name="auto-dagger.retrofit.main" target="11" />
+      <module name="auto-dagger.retrofit.test" target="11" />
+      <module name="deager.compiler.main" target="11" />
+      <module name="deager.compiler.test" target="11" />
+      <module name="deager.core.main" target="11" />
+      <module name="deager.core.test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

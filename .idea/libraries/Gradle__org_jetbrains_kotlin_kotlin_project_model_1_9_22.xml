@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-project-model:1.9.22" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-project-model" version="1.9.22" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-project-model/1.9.22/8b00ec83de75c7ba587891f63ae2719b720aca5/kotlin-project-model-1.9.22.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-project-model/1.9.22/a5a0130c42d75a36fca5ddb13d31421ba4f3f3e9/kotlin-project-model-1.9.22-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

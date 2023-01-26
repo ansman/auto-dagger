@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-android-extensions:1.9.22" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-android-extensions" version="1.9.22" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.9.22/6a2bb8c1f0fb8d9c74462e5766cbbbd6b64f3a4/kotlin-android-extensions-1.9.22.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.9.22/5226f510f284083c37a76bb9bf1f6431e878384e/kotlin-android-extensions-1.9.22-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

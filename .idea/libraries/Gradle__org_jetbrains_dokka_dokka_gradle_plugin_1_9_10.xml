@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.dokka:dokka-gradle-plugin:1.9.10" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.dokka" artifactId="dokka-gradle-plugin" version="1.9.10" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/dokka-gradle-plugin/1.9.10/7bd09735e2f72bf3055d645d3c346fdee6b7f61f/dokka-gradle-plugin-1.9.10.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/dokka-gradle-plugin/1.9.10/d0c4c7bbd4d318ce6dc0333d819d0179aa4ff62/dokka-gradle-plugin-1.9.10-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

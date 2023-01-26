@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.analytics-library:shared:31.2.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.analytics-library" artifactId="shared" version="31.2.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/shared/31.2.0/1ee49c37374d86a840c49b82adb94ac33733ee06/shared-31.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/shared/31.2.0/7630353c8e9a9d86e9494fe4757f469a0d0b97ff/shared-31.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

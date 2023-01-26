@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.fasterxml.jackson.core:jackson-core:2.12.7" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.fasterxml.jackson.core" artifactId="jackson-core" version="2.12.7" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.12.7/4669a54b799c105572aa8de2a1ae0fe64a17745/jackson-core-2.12.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.12.7/a01ca4bf900f1d5657c2ca16bb5c35e85c90b98b/jackson-core-2.12.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

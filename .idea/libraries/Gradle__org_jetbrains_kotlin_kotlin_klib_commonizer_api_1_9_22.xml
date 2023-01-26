@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-klib-commonizer-api:1.9.22" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-klib-commonizer-api" version="1.9.22" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-klib-commonizer-api/1.9.22/ecccaac16d10e24b3cf569aced956fc75907ca07/kotlin-klib-commonizer-api-1.9.22.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-klib-commonizer-api/1.9.22/e9d38e525b341b1088e8ef720490f04fd940adc4/kotlin-klib-commonizer-api-1.9.22-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

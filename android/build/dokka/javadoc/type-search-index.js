@@ -1,0 +1,1 @@
+var typeSearchIndex = [{"p":"se.ansman.dagger.auto.android","l":"AutoDaggerStartupInitializer","url":"se/ansman/dagger/auto/android/AutoDaggerStartupInitializer.html"}, {"l":"All classes","url":"allclasses.html"}]

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>se.ansman.dagger.auto</groupId>
+  <artifactId>compiler-common</artifactId>
+  <version>1.0.0</version>
+  <name>Auto Dagger Compiler, Common</name>
+  <description>Automatic Dagger setup using Hilt</description>
+  <url>https://github.com/ansman/auto-dagger</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>https://github.com/ansman/auto-dagger/blob/1.0.0/LICENSE.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>ansman</id>
+      <name>Nicklas Ansman</name>
+      <email>nicklas@ansman.se</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/ansman/auto-dagger.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/ansman/auto-dagger.git</developerConnection>
+    <url>https://github.com/ansman/auto-dagger</url>
+  </scm>
+  <dependencies/>
+</project>

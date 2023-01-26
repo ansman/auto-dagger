@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: commons-io:commons-io:2.11.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="commons-io" artifactId="commons-io" version="2.11.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.11.0/a2503f302b11ebde7ebc3df41daebe0e4eea3689/commons-io-2.11.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.11.0/2ef0187124bbfc7aed3038d4ffdd2241e8992937/commons-io-2.11.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

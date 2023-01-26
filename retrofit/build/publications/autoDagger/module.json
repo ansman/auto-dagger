@@ -1,0 +1,89 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "se.ansman.dagger.auto",
+    "module": "retrofit",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "retrofit-1.0.0.jar",
+          "url": "retrofit-1.0.0.jar",
+          "size": 1770,
+          "sha512": "c7a396d3ee7f99886b8be98d0eb7343ae111688ae94622a25417433d6fd5a41863d8f355fa6b068594709517e7c9f46326b95716f0776319b5c7439fe3c0eaec",
+          "sha256": "e792b09195c3aefe92c5c4a13cbf9ca01a25052786f201208ea6713a9553bb64",
+          "sha1": "3d81819f5bd1ba30d51fdf8ba8546cbbf045abdb",
+          "md5": "7b19400619369e953949fb9b738d85fc"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.dagger",
+          "module": "hilt-core",
+          "version": {
+            "requires": "2.50"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "retrofit-1.0.0.jar",
+          "url": "retrofit-1.0.0.jar",
+          "size": 1770,
+          "sha512": "c7a396d3ee7f99886b8be98d0eb7343ae111688ae94622a25417433d6fd5a41863d8f355fa6b068594709517e7c9f46326b95716f0776319b5c7439fe3c0eaec",
+          "sha256": "e792b09195c3aefe92c5c4a13cbf9ca01a25052786f201208ea6713a9553bb64",
+          "sha1": "3d81819f5bd1ba30d51fdf8ba8546cbbf045abdb",
+          "md5": "7b19400619369e953949fb9b738d85fc"
+        }
+      ]
+    }
+  ]
+}

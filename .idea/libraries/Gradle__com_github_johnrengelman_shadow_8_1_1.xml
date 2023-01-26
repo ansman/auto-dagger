@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.johnrengelman:shadow:8.1.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.johnrengelman" artifactId="shadow" version="8.1.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.johnrengelman/shadow/8.1.1/558cee65c3a1b0ac40ecc91ef1f50a14fb7498b9/shadow-8.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.johnrengelman/shadow/8.1.1/3a656f2bf83210ea20aec58cb6a52c0d4dbd1718/shadow-8.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

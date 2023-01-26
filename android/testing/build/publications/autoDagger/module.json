@@ -1,0 +1,103 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "se.ansman.dagger.auto",
+    "module": "android-testing",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "se.ansman.dagger.auto",
+          "module": "core",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "android-testing-1.0.0.jar",
+          "url": "android-testing-1.0.0.jar",
+          "size": 1891,
+          "sha512": "7db608d11973199da440630b926e7411d99f63b14d4d19aabe21bb28c6f74cee295ceb29aca4bbe8b7fcef8b62197e7a8e254e418a52bade3826669919491bf5",
+          "sha256": "02050c6577d30d974a83a06776628a1ea3a39b55875a5eed305d96ad45d8f338",
+          "sha1": "745343abd46e789e7fe439f4e7ce5df0dd54939c",
+          "md5": "00d6be2fa84da6b10d1516d85f89c655"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.dagger",
+          "module": "hilt-core",
+          "version": {
+            "requires": "2.50"
+          }
+        },
+        {
+          "group": "se.ansman.dagger.auto",
+          "module": "core",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "android-testing-1.0.0.jar",
+          "url": "android-testing-1.0.0.jar",
+          "size": 1891,
+          "sha512": "7db608d11973199da440630b926e7411d99f63b14d4d19aabe21bb28c6f74cee295ceb29aca4bbe8b7fcef8b62197e7a8e254e418a52bade3826669919491bf5",
+          "sha256": "02050c6577d30d974a83a06776628a1ea3a39b55875a5eed305d96ad45d8f338",
+          "sha1": "745343abd46e789e7fe439f4e7ce5df0dd54939c",
+          "md5": "00d6be2fa84da6b10d1516d85f89c655"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>se.ansman.dagger.auto</groupId>
+  <artifactId>android</artifactId>
+  <version>1.0.0</version>
+  <packaging>aar</packaging>
+  <name>Auto Dagger Android</name>
+  <description>Automatic Dagger setup using Hilt</description>
+  <url>https://github.com/ansman/auto-dagger</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>https://github.com/ansman/auto-dagger/blob/1.0.0/LICENSE.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>ansman</id>
+      <name>Nicklas Ansman</name>
+      <email>nicklas@ansman.se</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/ansman/auto-dagger.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/ansman/auto-dagger.git</developerConnection>
+    <url>https://github.com/ansman/auto-dagger</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>se.ansman.dagger.auto</groupId>
+      <artifactId>core</artifactId>
+      <version>1.0.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>1.9.22</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.dagger</groupId>
+      <artifactId>dagger</artifactId>
+      <version>2.50</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.dagger</groupId>
+      <artifactId>hilt-android</artifactId>
+      <version>2.50</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>androidx.startup</groupId>
+      <artifactId>startup-runtime</artifactId>
+      <version>1.1.1</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>

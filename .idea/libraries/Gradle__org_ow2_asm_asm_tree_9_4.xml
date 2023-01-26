@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.ow2.asm:asm-tree:9.4" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.ow2.asm" artifactId="asm-tree" version="9.4" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/9.4/a99175a17d7fdc18cbcbd0e8ea6a5d276844190a/asm-tree-9.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/9.4/88ef8527722d37849cca788dc90ebd44e7084226/asm-tree-9.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

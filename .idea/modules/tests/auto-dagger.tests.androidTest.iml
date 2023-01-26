@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":tests:androidTest" external.linked.project.path="$MODULE_DIR$/../../../tests" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.type="sourceSet" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet external-system-id="GRADLE" type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="javaDebug" />
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../tests/src/androidTest/res;file://$MODULE_DIR$/../../../tests/src/androidTestJava/res;file://$MODULE_DIR$/../../../tests/src/androidTestDebug/res;file://$MODULE_DIR$/../../../tests/src/androidTestJavaDebug/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
+      </configuration>
+    </facet>
+    <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JVM 11" allPlatforms="JVM [11]" useProjectSettings="false">
+        <additionalVisibleModuleNames>:tests:main</additionalVisibleModuleNames>
+        <compilerSettings>
+          <option name="additionalArguments" value="-Werror -Xcontext-receivers" />
+        </compilerSettings>
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="allowNoSourceFiles" arg="true" />
+            <flagArg name="noReflect" arg="true" />
+            <flagArg name="noStdlib" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="destination" arg="$MODULE_DIR$/../../../tests/build/tmp/kotlin-classes/javaDebugAndroidTest" />
+            <stringArg name="jvmTarget" arg="11" />
+            <stringArg name="moduleName" arg="tests_javaDebugAndroidTest" />
+            <stringArg name="apiVersion" arg="1.9" />
+            <stringArg name="languageVersion" arg="1.9" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.devtools.ksp/symbol-processing/1.9.22-1.0.16/70b84dfb906092d3995f07ab28b24390f7547ae3/symbol-processing-1.9.22-1.0.16.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.devtools.ksp/symbol-processing-api/1.9.22-1.0.16/ca56365e65965a5b9b4a6da4597221e22604ff34/symbol-processing-api-1.9.22-1.0.16.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.9.0/e000bd084353d84c9e888f6fb341dc1f5b79d948/kotlin-stdlib-jdk8-1.9.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.9.0/f320478990d05e0cfaadd74f9619fd6027adbf37/kotlin-stdlib-jdk7-1.9.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.22/d6c44cd08d8f3f9bece8101216dbe6553365c6e3/kotlin-stdlib-1.9.22.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
+    <output-test url="file://$MODULE_DIR$/../../../tests/build/intermediates/javac/javaDebugAndroidTest/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../tests/build/generated/ap_generated_sources/javaDebugAndroidTest/out" />
+    <content url="file://$MODULE_DIR$/../../../tests/build/generated/ksp/javaDebugAndroidTest/java" />
+    <content url="file://$MODULE_DIR$/../../../tests/build/generated/ksp/javaDebugAndroidTest/kotlin" />
+    <content url="file://$MODULE_DIR$/../../../tests/build/generated/source/kapt/javaDebugAndroidTest" />
+    <content url="file://$MODULE_DIR$/../../../tests/build/generated/source/kaptKotlin/javaDebugAndroidTest" />
+    <content url="file://$MODULE_DIR$/../../../tests/src/androidTest" />
+    <content url="file://$MODULE_DIR$/../../../tests/src/androidTestDebug" />
+    <content url="file://$MODULE_DIR$/../../../tests/src/androidTestJava" />
+    <content url="file://$MODULE_DIR$/../../../tests/src/androidTestJavaDebug" />
+    <orderEntry type="jdk" jdkName="Android API 34, extension level 7 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="auto-dagger.android.main" scope="TEST" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: kaptGeneratedClasses">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../tests/build/tmp/kapt3/classes/javaDebugAndroidTest" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="auto-dagger.core.main" scope="TEST" />
+    <orderEntry type="module" module-name="auto-dagger.androidx.viewmodel.main" scope="TEST" />
+    <orderEntry type="module" module-name="auto-dagger.androidx.room.main" scope="TEST" />
+    <orderEntry type="module" module-name="auto-dagger.retrofit.main" scope="TEST" />
+    <orderEntry type="module" module-name="auto-dagger.android.testing.main" scope="TEST" />
+    <orderEntry type="module" module-name="auto-dagger.tests.main" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:core-ktx:1.5.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:core:1.5.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:monitor:1.6.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:annotation:1.0.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation-experimental:1.3.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.tracing:tracing:1.0.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.services:storage:1.4.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:runner:1.5.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:rules:1.5.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.dagger:hilt-android:2.50@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.dagger:dagger-lint-aar:2.50@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.activity:activity:1.5.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.core:core:1.8.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.6.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.versionedparcelable:versionedparcelable:1.1.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-viewmodel:2.6.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.core:core-ktx:1.2.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.6.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.savedstate:savedstate:1.2.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.fragment:fragment:1.5.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.loader:loader:1.0.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-livedata:2.6.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.arch.core:core-runtime:2.1.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.viewpager:viewpager:1.0.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.customview:customview:1.0.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.room:room-ktx:2.6.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.room:room-runtime:2.6.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.sqlite:sqlite:2.4.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.sqlite:sqlite-framework:2.4.0@aar" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: org.jetbrains.kotlin:kotlin-test:1.9.22">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test/1.9.22/7ca26b94d39b7b166e3bb08046873bfe98a452ad/kotlin-test-1.9.22.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test/1.9.22/7ca26b94d39b7b166e3bb08046873bfe98a452ad/kotlin-test-1.9.22.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test/1.9.22/7ca26b94d39b7b166e3bb08046873bfe98a452ad/kotlin-test-1.9.22.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.9.22" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains:annotations:23.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.13.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.willowtreeapps.assertk:assertk-jvm:0.28.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation:1.3.0" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: com.google.code.findbugs:jsr305:3.0.2">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/7cb5b4e91eb0741882c8fefb2fd0338eff9857c/jsr305-3.0.2-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/b19b5927c2c25b6c70f093767041e641ae0b1b35/jsr305-3.0.2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-common:2.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.guava:listenablefuture:1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.concurrent:concurrent-futures:1.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-test-junit:1.9.22" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.retrofit2:converter-moshi:2.9.0" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: com.squareup.retrofit2:retrofit:2.9.0">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.9.0/d8fdfbd5da952141a665a403348b74538efc05ff/retrofit-2.9.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.9.0/920d425bcf21e948cf071783e9a0badbfd880fac/retrofit-2.9.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.9.0/409e80ce46c84ef7e74b6934032a73b8421eebe5/retrofit-2.9.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: com.squareup.okhttp3:okhttp:3.14.9">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.14.9/3e6d101343c7ea687cd593e4990f73b25c878383/okhttp-3.14.9.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.14.9/b1818d3d87c70e43c103d125a7555965b2bcb98d/okhttp-3.14.9-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.14.9/5ad877a6749b53b7b177e7b328ebf59ce06b75af/okhttp-3.14.9-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.okio:okio:1.17.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup.moshi:moshi:1.8.0" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: com.google.dagger:dagger:2.50">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.50/78bcb2574731955ce15196c79c27b8c171a7af09/dagger-2.50.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.50/b229e8d5ad42d3d9058d0cc5df9a6d0e4d55e4e2/dagger-2.50-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.50/b1938baa30a4525a555b0120a5da4aa194e69127/dagger-2.50-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: javax.inject:javax.inject:1">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/70ec961c25111ed9015d1af77772d96383c2d238/javax.inject-1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/a00123f261762a7c5e0ec916a2c7c8298d29c400/javax.inject-1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library name="Gradle: com.google.dagger:hilt-core:2.50">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/hilt-core/2.50/476f7135e5fec8d1d80ad36a3cf5bf0074e1a503/hilt-core-2.50.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/hilt-core/2.50/416099c503c1b8531f1e7c371cc48dcea7b1d68/hilt-core-2.50-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/hilt-core/2.50/4a07583d2d512e9aa366098bde02f419ca65685b/hilt-core-2.50-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.arch.core:core-common:2.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.collection:collection:1.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.room:room-common:2.6.1" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="auto-dagger.tests.main" />
+</module>

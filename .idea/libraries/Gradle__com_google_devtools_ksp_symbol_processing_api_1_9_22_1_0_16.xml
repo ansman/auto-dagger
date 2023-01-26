@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.devtools.ksp:symbol-processing-api:1.9.22-1.0.16" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.google.devtools.ksp" artifactId="symbol-processing-api" version="1.9.22-1.0.16" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.devtools.ksp/symbol-processing-api/1.9.22-1.0.16/ca56365e65965a5b9b4a6da4597221e22604ff34/symbol-processing-api-1.9.22-1.0.16.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.devtools.ksp/symbol-processing-api/1.9.22-1.0.16/7b93625b6b3bab2e0d13527aa4fe7a7bad983445/symbol-processing-api-1.9.22-1.0.16-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

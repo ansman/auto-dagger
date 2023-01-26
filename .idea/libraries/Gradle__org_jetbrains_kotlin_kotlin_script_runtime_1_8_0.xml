@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-script-runtime:1.8.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-script-runtime" version="1.8.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.8.0/b2f7e760d283cb339974851c222a4c1d48f2d3d/kotlin-script-runtime-1.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.8.0/abc7ecfd92ea677825899180807736acdfbb89b6/kotlin-script-runtime-1.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.auto:auto-common:1.2.2" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.google.auto" artifactId="auto-common" version="1.2.2" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto/auto-common/1.2.2/9d38f10e22411681cf1d1ee3727e002af19f2c9e/auto-common-1.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.auto/auto-common/1.2.2/935b28e0ea2b557673c80c4d451c4c0fa3bdcd0e/auto-common-1.2.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

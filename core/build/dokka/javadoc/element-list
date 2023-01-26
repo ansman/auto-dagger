@@ -1,0 +1,7 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:se.ansman.dagger.auto/AutoInitialize.Companion///PointingToDeclaration/se/ansman/dagger/auto/AutoInitialize.Companion.html
+$dokka.location:se.ansman.dagger.auto/BindGenericAs.Default///PointingToDeclaration/se/ansman/dagger/auto/BindGenericAs.Default.html
+$dokka.location:se.ansman.dagger.auto/Initializable.Companion///PointingToDeclaration/se/ansman/dagger/auto/Initializable.Companion.html
+se.ansman.dagger.auto
+

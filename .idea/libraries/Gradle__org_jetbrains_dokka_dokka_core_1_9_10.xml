@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.dokka:dokka-core:1.9.10" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.dokka" artifactId="dokka-core" version="1.9.10" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/dokka-core/1.9.10/27d25e594723dcad15427bc00014770bc7cd4de7/dokka-core-1.9.10.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/dokka-core/1.9.10/d3615fce2aafaab262f86fb2b308398314fcfc06/dokka-core-1.9.10-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

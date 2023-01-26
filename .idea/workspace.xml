@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3075d202-f35a-4c93-bea8-57b524fb73c3" name="Changes" comment="{ }">
+      <change afterPath="$PROJECT_DIR$/1.0.0/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/_data/gradle.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/about/how-it-works/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/about/license/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/images/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/bundle.b78d2936.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/bundle.b78d2936.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.ar.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.da.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.de.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.du.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.es.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.fi.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.fr.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.hi.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.hu.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.it.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.ja.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.jp.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.ko.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.multi.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.nl.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.no.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.pt.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.ro.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.ru.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.stemmer.support.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.sv.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.ta.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.th.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.tr.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.vi.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/min/lunr.zh.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/tinyseg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/lunr/wordcut.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/workers/search.208ed371.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/javascripts/workers/search.208ed371.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/stylesheets/main.402914a4.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/stylesheets/main.402914a4.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/stylesheets/palette.a0c5b2b5.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/assets/stylesheets/palette.a0c5b2b5.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/getting-started/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/integrations/androidx/room/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/integrations/androidx/viewmodel/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/integrations/retrofit/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/limitations/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/search/search_index.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/sitemap.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/sitemap.xml.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/stylesheets/extra.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/usage/auto-bind/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/usage/auto-initialize/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1.0.0/usage/replaces/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/-auto-dagger-startup-initializer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/dependencies.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/se.ansman.dagger.auto.android/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/testing/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/testing/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/testing/se.ansman.dagger.auto.android.testing/-replaces/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/testing/se.ansman.dagger.auto.android.testing/-replaces/type.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/android/testing/se.ansman.dagger.auto.android.testing/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/room/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/room/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/room/se.ansman.dagger.auto.androidx.room/-auto-provide-daos/in-component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/room/se.ansman.dagger.auto.androidx.room/-auto-provide-daos/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/room/se.ansman.dagger.auto.androidx.room/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/viewmodel/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/viewmodel/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-auto-dagger-view-model-coroutine-scope-component/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-auto-dagger-view-model-coroutine-scope-component/provide-view-model-scope.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-view-model-specific/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind-into-map/as-types.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind-into-map/bind-generic-as.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind-into-map/in-component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind-into-map/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind-into-set/as-types.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind-into-set/bind-generic-as.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind-into-set/in-component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind-into-set/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind/as-types.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind/in-component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-bind/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-dagger-initializer/-auto-dagger-initializer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-dagger-initializer/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-dagger-initializer/initialize.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-dagger-initializer/is-initialized.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-initialize/-companion/default-priority.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-initialize/-companion/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-initialize/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-auto-initialize/priority.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/-default/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/-default/value.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/-exact-type-and-wildcard/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/-exact-type/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/-wildcard/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/entries.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/value-of.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-bind-generic-as/values.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-initializable/-companion/as-initializable.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-initializable/-companion/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-initializable/-companion/with-priority.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-initializable/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/-initializable/initialize.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/core/se.ansman.dagger.auto/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/anchor-copy-button.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/arrow_down.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/burger.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/copy-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/copy-successful-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/footer-go-to-link.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/go-to-top-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/logo-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/abstract-class-kotlin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/abstract-class.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/annotation-kotlin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/annotation.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/class-kotlin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/class.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/enum-kotlin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/enum.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/exception-class.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/field-value.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/field-variable.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/function.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/interface-kotlin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/interface.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/object.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/nav-icons/typealias-kotlin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/images/theme-toggle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/not-found-version.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/package-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/retrofit/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/retrofit/navigation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/retrofit/se.ansman.dagger.auto.retrofit/-auto-provide-service/in-component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/retrofit/se.ansman.dagger.auto.retrofit/-auto-provide-service/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/retrofit/se.ansman.dagger.auto.retrofit/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/scripts/clipboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/scripts/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/scripts/navigation-loader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/scripts/pages.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/scripts/platform-content-handler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/scripts/prism.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/scripts/sourceset_dependencies.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/scripts/symbol-parameters-wrapper_deferred.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/styles/font-jb-sans-auto.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/styles/logo-styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/styles/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/styles/multimodule.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/styles/prism.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/styles/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dokka/older/1.0.0/version.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/-auto-dagger-startup-initializer.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/-auto-dagger-startup-initializer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/dependencies.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/dependencies.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/-auto-dagger-startup-initializer/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/se.ansman.dagger.auto.android/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/testing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/testing/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/testing/se.ansman.dagger.auto.android.testing/-replaces/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/testing/se.ansman.dagger.auto.android.testing/-replaces/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/testing/se.ansman.dagger.auto.android.testing/-replaces/type.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/testing/se.ansman.dagger.auto.android.testing/-replaces/type.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/android/testing/se.ansman.dagger.auto.android.testing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/android/testing/se.ansman.dagger.auto.android.testing/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/room/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/room/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/room/se.ansman.dagger.auto.androidx.room/-auto-provide-daos/in-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/room/se.ansman.dagger.auto.androidx.room/-auto-provide-daos/in-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/room/se.ansman.dagger.auto.androidx.room/-auto-provide-daos/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/room/se.ansman.dagger.auto.androidx.room/-auto-provide-daos/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/room/se.ansman.dagger.auto.androidx.room/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/room/se.ansman.dagger.auto.androidx.room/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/viewmodel/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/viewmodel/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-auto-dagger-view-model-coroutine-scope-component/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-auto-dagger-view-model-coroutine-scope-component/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-auto-dagger-view-model-coroutine-scope-component/provide-view-model-scope.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-auto-dagger-view-model-coroutine-scope-component/provide-view-model-scope.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-view-model-specific/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/-view-model-specific/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/androidx/viewmodel/se.ansman.dagger.auto.androidx.viewmodel/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-map/as-types.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-map/as-types.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-map/bind-generic-as.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-map/bind-generic-as.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-map/in-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-map/in-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-map/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-map/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-set/as-types.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-set/as-types.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-set/bind-generic-as.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-set/bind-generic-as.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-set/in-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-set/in-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-set/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind-into-set/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind/as-types.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind/as-types.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind/in-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind/in-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-bind/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-dagger-initializer/-auto-dagger-initializer.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-dagger-initializer/-auto-dagger-initializer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-dagger-initializer/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-dagger-initializer/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-dagger-initializer/initialize.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-dagger-initializer/initialize.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-dagger-initializer/is-initialized.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-dagger-initializer/is-initialized.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-initialize/-companion/default-priority.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-initialize/-companion/default-priority.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-initialize/-companion/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-initialize/-companion/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-initialize/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-initialize/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-initialize/priority.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-auto-initialize/priority.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-default/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-default/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-default/value.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-default/value.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-exact-type-and-wildcard/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-exact-type-and-wildcard/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-exact-type/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-exact-type/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-wildcard/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/-wildcard/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/entries.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/entries.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/value-of.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/value-of.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/values.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-bind-generic-as/values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/-companion/as-initializable.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/-companion/as-initializable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/-companion/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/-companion/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/-companion/with-priority.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/-companion/with-priority.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/initialize.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/-initializable/initialize.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/core/se.ansman.dagger.auto/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/retrofit/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/retrofit/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/retrofit/se.ansman.dagger.auto.retrofit/-auto-provide-service/in-component.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/retrofit/se.ansman.dagger.auto.retrofit/-auto-provide-service/in-component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/retrofit/se.ansman.dagger.auto.retrofit/-auto-provide-service/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/retrofit/se.ansman.dagger.auto.retrofit/-auto-provide-service/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/retrofit/se.ansman.dagger.auto.retrofit/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/retrofit/se.ansman.dagger.auto.retrofit/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dokka/version.json" beforeDir="false" afterPath="$PROJECT_DIR$/dokka/version.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest/_data/gradle.yml" beforeDir="false" afterPath="$PROJECT_DIR$/latest/_data/gradle.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest/getting-started/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/latest/getting-started/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest/integrations/androidx/room/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/latest/integrations/androidx/room/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest/integrations/androidx/viewmodel/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/latest/integrations/androidx/viewmodel/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest/integrations/retrofit/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/latest/integrations/retrofit/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest/search/search_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/latest/search/search_index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/latest/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/latest/sitemap.xml.gz" beforeDir="false" afterPath="$PROJECT_DIR$/latest/sitemap.xml.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versions.json" beforeDir="false" afterPath="$PROJECT_DIR$/versions.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/nicklas/.android/avd/Pixel_4_API_26.avd]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Kotlin Enum" />
+        <option value="AnnotationType" />
+        <option value="JUnit5 Test Class" />
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Object" />
+        <option value="Kotlin Annotation" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="chore/update-dependencies" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.devtools.ksp/symbol-processing-api/1.9.20-1.0.14/362a1acc874336affc45175b247c7533d378cd0a/symbol-processing-api-1.9.20-1.0.14-sources.jar!/com/google/devtools/ksp/processing/Resolver.kt" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.devtools.ksp/symbol-processing/1.8.0-1.0.8/7e14516b4488057d6e131714c1aa1b216ce7bf2/symbol-processing-1.8.0-1.0.8-sources.jar!/com/google/devtools/ksp/processing/impl/ResolverImpl.kt" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.9.20/d87f85590c15e3d8bc04e915a95fab9e133be17b/kotlin-compiler-embeddable-1.9.20-sources.jar!/org/jetbrains/kotlin/compiler/plugin/ExperimentalCompilerApi.kt" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="KotlinCodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2KqDFqzlMMzsUGyxXL6bF3EnlO8" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "PROJECT_COMPLICATED_NOTIFICATION_LAST_HIDDEN_VERSION": "2022.2",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/Users/nicklas/Repositories/personal/auto-dagger/retrofit/src/test/kotlin/se/ansman/dagger/auto",
+    "last_opened_file_path": "/Users/nicklas/Repositories/personal/auto-dagger",
+    "memory.settings.postsync.do.not.ask.for.project": "true",
+    "memory.settings.postsync.last.time.stamp": "1681216624823",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "kotlin"
+    ]
+  }
+}]]></component>
+  <component name="PsdUISettings">
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/compiler/src/test/resources/tests/auto_bind" />
+      <recent name="$PROJECT_DIR$/androidx/room/src/test/resources/tests" />
+      <recent name="$PROJECT_DIR$/retrofit/src/test" />
+      <recent name="$PROJECT_DIR$/android/types" />
+      <recent name="$PROJECT_DIR$/tests/src/main/kotlin/se/ansman/dagger/auto/androidx/room" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/compiler/src/main/kotlin/se/ansman/dagger/auto/compiler/androidx/room/renderer" />
+      <recent name="$PROJECT_DIR$/src/doc/docs/integrations" />
+      <recent name="$PROJECT_DIR$/compiler/common/test-utils/src/main/kotlin/se/ansman/dagger/auto/compiler/common/testutils" />
+      <recent name="$PROJECT_DIR$/compiler/common/test-utils/src/main" />
+      <recent name="$PROJECT_DIR$/compiler/common" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="se.ansman.dagger.auto.kapt" />
+      <recent name="se.ansman.dagger.auto.models.factories" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="se.ansman.dagger.auto.androidx.room" />
+      <recent name="androidx.room" />
+      <recent name="se.ansman.dagger.auto.compiler" />
+      <recent name="se.ansman.dagger.auto.androidx.viewmodel" />
+      <recent name="se.ansman.dagger.auto.compiler.replaces" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="dagger.hilt.testing" />
+      <recent name="AnnotatedConstructs" />
+    </key>
+    <key name="KotlinExtractInterfaceDialog.RECENT_KEYS">
+      <recent name="se.ansman.dagger.auto.processors" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="co.ansman.dagger.auto.androidx.viewmodel" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="se.ansman.dagger.auto.androidx.room" />
+      <recent name="co.ansman.dagger.auto.androidx.room" />
+      <recent name="se.ansman.dagger.auto.compiler.androidx.room" />
+      <recent name="se.ansman.dagger.auto.compiler" />
+      <recent name="tests.retrofit.view_model_scoped" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="dagger.hilt.android.scopes" />
+      <recent name="dagger.hilt.android.components" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.AutoBindTest">
+    <configuration name="tests" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="auto-dagger.tests.main" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AndroidXRoomResourceTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":androidx:room:test" />
+            <option value="--tests" />
+            <option value="&quot;se.ansman.dagger.auto.androidx.room.AndroidXRoomResourceTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AutoBindTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":compiler:test" />
+            <option value="--tests" />
+            <option value="&quot;se.ansman.dagger.auto.compiler.AutoBindTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AutoDaggerResourceTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":compiler:test" />
+            <option value="--tests" />
+            <option value="&quot;se.ansman.dagger.auto.compiler.AutoDaggerResourceTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'auto-dagger.compiler.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":compiler:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'se.ansman.dagger.auto.retrofit'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":retrofit:test" />
+            <option value="--tests" />
+            <option value="&quot;se.ansman.dagger.auto.retrofit.*&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="auto-dagger [check]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="check" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Android App.tests" />
+      <item itemvalue="Gradle.auto-dagger [check]" />
+      <item itemvalue="Gradle.AutoBindTest" />
+      <item itemvalue="Gradle.AutoDaggerResourceTests" />
+      <item itemvalue="Gradle.AndroidXRoomResourceTests" />
+      <item itemvalue="Gradle.Tests in 'auto-dagger.compiler.test'" />
+      <item itemvalue="Gradle.Tests in 'se.ansman.dagger.auto.retrofit'" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.AutoBindTest" />
+        <item itemvalue="Gradle.AutoDaggerResourceTests" />
+        <item itemvalue="Gradle.Tests in 'auto-dagger.compiler.test'" />
+        <item itemvalue="Gradle.AndroidXRoomResourceTests" />
+        <item itemvalue="Gradle.Tests in 'se.ansman.dagger.auto.retrofit'" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3075d202-f35a-4c93-bea8-57b524fb73c3" name="Changes" comment="" />
+      <created>1674693118151</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1674693118151</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Update the initial version to 0.1.0">
+      <created>1674693585291</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1674693585291</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fix publishing">
+      <created>1674694662187</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1674694662187</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Document `bindGenericAs`">
+      <created>1683676166043</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683676166043</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update the initial version to 0.1.0" />
+    <MESSAGE value="Fix publishing" />
+    <MESSAGE value="Document `bindGenericAs`" />
+    <option name="LAST_COMMIT_MESSAGE" value="Document `bindGenericAs`" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.startup/startup-runtime/1.1.1/714974d4ab4858eab9395d3b048002108b62cf0a/startup-runtime-1.1.1-sources.jar!/androidx/startup/AppInitializer.java</url>
+          <line>217</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$USER_HOME$/.gradle/wrapper/dists/gradle-7.6.1-all/942lu1p9i6mhoyzmt401s4g74/gradle-7.6.1/src/platform-base/org/gradle/language/base/internal/tasks/StaleOutputCleaner.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

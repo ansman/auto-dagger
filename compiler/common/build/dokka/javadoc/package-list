@@ -1,0 +1,26 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:se.ansman.dagger.auto.compiler.common.processing/ClassDeclaration.Kind///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/processing/ClassDeclaration.Kind.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltJavaModuleBuilder.Companion///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltJavaModuleBuilder.Companion.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltKotlinModuleBuilder.Companion///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltKotlinModuleBuilder.Companion.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.DaggerType///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.DaggerType.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.Factory///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.Factory.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.Installation.InstallIn///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.Installation.InstallIn.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.Installation.TestInstallIn///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.Installation.TestInstallIn.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.Installation///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.Installation.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.Lazy///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.Lazy.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.Parameter///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.Parameter.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.Provider///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.Provider.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.ProviderMode.IntoMap///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.ProviderMode.IntoMap.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.ProviderMode.IntoSet///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.ProviderMode.IntoSet.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.ProviderMode.Single///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.ProviderMode.Single.html
+$dokka.location:se.ansman.dagger.auto.compiler.common.rendering/HiltModuleBuilder.ProviderMode///PointingToDeclaration/se/ansman/dagger/auto/compiler/common/rendering/HiltModuleBuilder.ProviderMode.html
+se.ansman.dagger.auto.compiler.common
+se.ansman.dagger.auto.compiler.common.kapt
+se.ansman.dagger.auto.compiler.common.kapt.processing
+se.ansman.dagger.auto.compiler.common.ksp
+se.ansman.dagger.auto.compiler.common.ksp.processing
+se.ansman.dagger.auto.compiler.common.models
+se.ansman.dagger.auto.compiler.common.processing
+se.ansman.dagger.auto.compiler.common.rendering
+

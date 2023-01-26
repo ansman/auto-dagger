@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.utp:android-test-plugin-host-emulator-control-proto:31.2.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.utp" artifactId="android-test-plugin-host-emulator-control-proto" version="31.2.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.utp/android-test-plugin-host-emulator-control-proto/31.2.0/11cb514e23daa4b9e3b8bd395014aa58ada6bcec/android-test-plugin-host-emulator-control-proto-31.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.utp/android-test-plugin-host-emulator-control-proto/31.2.0/c90cb0016543c40b47e8003bfdaaeb4b1d85b1b2/android-test-plugin-host-emulator-control-proto-31.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

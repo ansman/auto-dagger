@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-daemon-embeddable:1.8.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-daemon-embeddable" version="1.8.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-embeddable/1.8.0/d255216c551685dc3a7e852b53617f5f01aaaa5c/kotlin-daemon-embeddable-1.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-embeddable/1.8.0/dd019d44bb5da07840b23a995e9010d47fee8ac2/kotlin-daemon-embeddable-1.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

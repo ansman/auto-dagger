@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.utp:android-test-plugin-host-apk-installer-proto:31.2.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.utp" artifactId="android-test-plugin-host-apk-installer-proto" version="31.2.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.utp/android-test-plugin-host-apk-installer-proto/31.2.0/c14a7d0b4e1166a2035b26be175fcd52ce167844/android-test-plugin-host-apk-installer-proto-31.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.utp/android-test-plugin-host-apk-installer-proto/31.2.0/8e75d4680681af14e24f1c7eefa04e598078853f/android-test-plugin-host-apk-installer-proto-31.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

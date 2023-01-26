@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.build.jetifier:jetifier-core:1.0.0-beta10" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.build.jetifier" artifactId="jetifier-core" version="1.0.0-beta10" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build.jetifier/jetifier-core/1.0.0-beta10/6e621022a9c95af12a7004d6b55805bbd1126837/jetifier-core-1.0.0-beta10.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build.jetifier/jetifier-core/1.0.0-beta10/a848cd57e8f313f9f111429e2aaa3490e38635af/jetifier-core-1.0.0-beta10-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

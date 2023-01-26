@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.intellij.deps:trove4j:1.0.20200330" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.intellij.deps" artifactId="trove4j" version="1.0.20200330" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20200330/3afb14d5f9ceb459d724e907a21145e8ff394f02/trove4j-1.0.20200330.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20200330/5fc2da70caaebed24734161c6c33648a15396917/trove4j-1.0.20200330-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

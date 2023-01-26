@@ -1,0 +1,32 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:se.ansman.dagger.auto.compiler.androidx.room.models/AndroidXRoomDatabaseModule.Dao.Accessor.Function///PointingToDeclaration/se/ansman/dagger/auto/compiler/androidx/room/models/AndroidXRoomDatabaseModule.Dao.Accessor.Function.html
+$dokka.location:se.ansman.dagger.auto.compiler.androidx.room.models/AndroidXRoomDatabaseModule.Dao.Accessor.Property///PointingToDeclaration/se/ansman/dagger/auto/compiler/androidx/room/models/AndroidXRoomDatabaseModule.Dao.Accessor.Property.html
+$dokka.location:se.ansman.dagger.auto.compiler.androidx.room.models/AndroidXRoomDatabaseModule.Dao.Accessor///PointingToDeclaration/se/ansman/dagger/auto/compiler/androidx/room/models/AndroidXRoomDatabaseModule.Dao.Accessor.html
+$dokka.location:se.ansman.dagger.auto.compiler.androidx.room.models/AndroidXRoomDatabaseModule.Dao///PointingToDeclaration/se/ansman/dagger/auto/compiler/androidx/room/models/AndroidXRoomDatabaseModule.Dao.html
+$dokka.location:se.ansman.dagger.auto.compiler.autobind/AutoBindProcessor.ModuleKey///PointingToDeclaration/se/ansman/dagger/auto/compiler/autobind/AutoBindProcessor.ModuleKey.html
+$dokka.location:se.ansman.dagger.auto.compiler/Errors.AndroidX.Room///PointingToDeclaration/se/ansman/dagger/auto/compiler/Errors.AndroidX.Room.html
+$dokka.location:se.ansman.dagger.auto.compiler/Errors.AndroidX///PointingToDeclaration/se/ansman/dagger/auto/compiler/Errors.AndroidX.html
+$dokka.location:se.ansman.dagger.auto.compiler/Errors.AutoBind.BindGenericAsDefault///PointingToDeclaration/se/ansman/dagger/auto/compiler/Errors.AutoBind.BindGenericAsDefault.html
+$dokka.location:se.ansman.dagger.auto.compiler/Errors.AutoBind///PointingToDeclaration/se/ansman/dagger/auto/compiler/Errors.AutoBind.html
+$dokka.location:se.ansman.dagger.auto.compiler/Errors.AutoInitialize///PointingToDeclaration/se/ansman/dagger/auto/compiler/Errors.AutoInitialize.html
+$dokka.location:se.ansman.dagger.auto.compiler/Errors.Replaces///PointingToDeclaration/se/ansman/dagger/auto/compiler/Errors.Replaces.html
+$dokka.location:se.ansman.dagger.auto.compiler/Errors.Retrofit///PointingToDeclaration/se/ansman/dagger/auto/compiler/Errors.Retrofit.html
+se.ansman.dagger.auto.compiler
+se.ansman.dagger.auto.compiler.androidx.room
+se.ansman.dagger.auto.compiler.androidx.room.models
+se.ansman.dagger.auto.compiler.androidx.room.renderer
+se.ansman.dagger.auto.compiler.autobind
+se.ansman.dagger.auto.compiler.autobind.models
+se.ansman.dagger.auto.compiler.autobind.renderer
+se.ansman.dagger.auto.compiler.autoinitialize
+se.ansman.dagger.auto.compiler.autoinitialize.models
+se.ansman.dagger.auto.compiler.autoinitialize.renderer
+se.ansman.dagger.auto.compiler.kapt
+se.ansman.dagger.auto.compiler.ksp
+se.ansman.dagger.auto.compiler.replaces
+se.ansman.dagger.auto.compiler.retrofit
+se.ansman.dagger.auto.compiler.retrofit.models
+se.ansman.dagger.auto.compiler.retrofit.renderer
+se.ansman.dagger.auto.compiler.utils
+

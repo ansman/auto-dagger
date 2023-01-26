@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.vafer:jdependency:2.8.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.vafer" artifactId="jdependency" version="2.8.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.vafer/jdependency/2.8.0/d909a0212c7e986264550ab7a1ad09a1db643601/jdependency-2.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.vafer/jdependency/2.8.0/1a7c1be79971a650360bc440291af412a114159d/jdependency-2.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

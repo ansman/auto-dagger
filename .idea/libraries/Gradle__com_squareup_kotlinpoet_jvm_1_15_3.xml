@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup:kotlinpoet-jvm:1.15.3" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.squareup" artifactId="kotlinpoet-jvm" version="1.15.3" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/kotlinpoet-jvm/1.15.3/568b997b1ceeb54aa48e816b2f850dfb10f82f6d/kotlinpoet-jvm-1.15.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/kotlinpoet-jvm/1.15.3/18f64310510dc3a7a422ab04fc856db64c2c18a0/kotlinpoet-jvm-1.15.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

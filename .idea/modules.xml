@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/auto-dagger.iml" filepath="$PROJECT_DIR$/.idea/modules/auto-dagger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/auto-dagger.android.iml" filepath="$PROJECT_DIR$/.idea/modules/android/auto-dagger.android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/auto-dagger.android.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/android/auto-dagger.android.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/auto-dagger.android.main.iml" filepath="$PROJECT_DIR$/.idea/modules/android/auto-dagger.android.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/testing/auto-dagger.android.testing.iml" filepath="$PROJECT_DIR$/.idea/modules/android/testing/auto-dagger.android.testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/testing/auto-dagger.android.testing.main.iml" filepath="$PROJECT_DIR$/.idea/modules/android/testing/auto-dagger.android.testing.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/testing/auto-dagger.android.testing.test.iml" filepath="$PROJECT_DIR$/.idea/modules/android/testing/auto-dagger.android.testing.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android/auto-dagger.android.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/android/auto-dagger.android.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidx/auto-dagger.androidx.iml" filepath="$PROJECT_DIR$/.idea/modules/androidx/auto-dagger.androidx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidx/room/auto-dagger.androidx.room.iml" filepath="$PROJECT_DIR$/.idea/modules/androidx/room/auto-dagger.androidx.room.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidx/room/auto-dagger.androidx.room.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidx/room/auto-dagger.androidx.room.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidx/room/auto-dagger.androidx.room.test.iml" filepath="$PROJECT_DIR$/.idea/modules/androidx/room/auto-dagger.androidx.room.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidx/viewmodel/auto-dagger.androidx.viewmodel.iml" filepath="$PROJECT_DIR$/.idea/modules/androidx/viewmodel/auto-dagger.androidx.viewmodel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidx/viewmodel/auto-dagger.androidx.viewmodel.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidx/viewmodel/auto-dagger.androidx.viewmodel.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidx/viewmodel/auto-dagger.androidx.viewmodel.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidx/viewmodel/auto-dagger.androidx.viewmodel.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidx/viewmodel/auto-dagger.androidx.viewmodel.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidx/viewmodel/auto-dagger.androidx.viewmodel.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/auto-dagger.compiler.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/auto-dagger.compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/common/auto-dagger.compiler.common.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/common/auto-dagger.compiler.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/common/auto-dagger.compiler.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/common/auto-dagger.compiler.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/common/auto-dagger.compiler.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/common/auto-dagger.compiler.common.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/common/test-utils/auto-dagger.compiler.common.test-utils.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/common/test-utils/auto-dagger.compiler.common.test-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/common/test-utils/auto-dagger.compiler.common.test-utils.main.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/common/test-utils/auto-dagger.compiler.common.test-utils.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/common/test-utils/auto-dagger.compiler.common.test-utils.test.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/common/test-utils/auto-dagger.compiler.common.test-utils.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/auto-dagger.compiler.main.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/auto-dagger.compiler.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/auto-dagger.compiler.test.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/auto-dagger.compiler.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compiler/auto-dagger.compiler.testFixtures.iml" filepath="$PROJECT_DIR$/.idea/modules/compiler/auto-dagger.compiler.testFixtures.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/auto-dagger.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/auto-dagger.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/auto-dagger.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/auto-dagger.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/auto-dagger.core.test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/auto-dagger.core.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/retrofit/auto-dagger.retrofit.iml" filepath="$PROJECT_DIR$/.idea/modules/retrofit/auto-dagger.retrofit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/retrofit/auto-dagger.retrofit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/retrofit/auto-dagger.retrofit.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/retrofit/auto-dagger.retrofit.test.iml" filepath="$PROJECT_DIR$/.idea/modules/retrofit/auto-dagger.retrofit.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tests/auto-dagger.tests.iml" filepath="$PROJECT_DIR$/.idea/modules/tests/auto-dagger.tests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tests/auto-dagger.tests.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/tests/auto-dagger.tests.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tests/auto-dagger.tests.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tests/auto-dagger.tests.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tests/auto-dagger.tests.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/tests/auto-dagger.tests.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/gradle-plugin/gradle-plugin.test.iml" />
+    </modules>
+  </component>
+</project>

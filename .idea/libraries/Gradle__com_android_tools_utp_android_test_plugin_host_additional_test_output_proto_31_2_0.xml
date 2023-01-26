@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.utp:android-test-plugin-host-additional-test-output-proto:31.2.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.utp" artifactId="android-test-plugin-host-additional-test-output-proto" version="31.2.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.utp/android-test-plugin-host-additional-test-output-proto/31.2.0/94f0a14f0c6cceff5a0374a2d4e0e50bac122899/android-test-plugin-host-additional-test-output-proto-31.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.utp/android-test-plugin-host-additional-test-output-proto/31.2.0/18343e599b683b10ab4e381cf3e034b63d0c135/android-test-plugin-host-additional-test-output-proto-31.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

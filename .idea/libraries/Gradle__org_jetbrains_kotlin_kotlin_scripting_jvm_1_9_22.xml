@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-scripting-jvm:1.9.22" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-scripting-jvm" version="1.9.22" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.9.22/79c7960eb58c43865829cb2f420cf8806f59f8b1/kotlin-scripting-jvm-1.9.22.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.9.22/9dcd0643430351d675080e65b30e2fdb60118d4d/kotlin-scripting-jvm-1.9.22-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

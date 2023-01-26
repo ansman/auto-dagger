@@ -1,0 +1,104 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "se.ansman.dagger.auto",
+    "module": "androidx-viewmodel",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "se.ansman.dagger.auto",
+          "module": "core",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "androidx-viewmodel-1.0.0.aar",
+          "url": "androidx-viewmodel-1.0.0.aar",
+          "size": 5435,
+          "sha512": "128e8019ada4173b525d4eb1aec7df11180e234390ff091fd9a387f7460954531103326fc317276519017e17856feb1215cd061f70ac8d3e066effe762420332",
+          "sha256": "533b986a62f09f1f5c8cfc5bde70ef80d33b82eec3b64437dd7530a2a25defd1",
+          "sha1": "652665da4fb3dd0177b2adf7b53a8bd4823b0fce",
+          "md5": "bd8ffe6e81e77e921bf5e60149317185"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.dagger",
+          "module": "hilt-android",
+          "version": {
+            "requires": "2.50"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-viewmodel",
+          "version": {
+            "requires": "2.6.2"
+          }
+        },
+        {
+          "group": "se.ansman.dagger.auto",
+          "module": "core",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "androidx-viewmodel-1.0.0.aar",
+          "url": "androidx-viewmodel-1.0.0.aar",
+          "size": 5435,
+          "sha512": "128e8019ada4173b525d4eb1aec7df11180e234390ff091fd9a387f7460954531103326fc317276519017e17856feb1215cd061f70ac8d3e066effe762420332",
+          "sha256": "533b986a62f09f1f5c8cfc5bde70ef80d33b82eec3b64437dd7530a2a25defd1",
+          "sha1": "652665da4fb3dd0177b2adf7b53a8bd4823b0fce",
+          "md5": "bd8ffe6e81e77e921bf5e60149317185"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.checkerframework:checker-qual:3.33.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.checkerframework" artifactId="checker-qual" version="3.33.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/3.33.0/de2b60b62da487644fc11f734e73c8b0b431238f/checker-qual-3.33.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/3.33.0/ee4ecf6c55e3f2b05b839aa05c70f1298437ebe9/checker-qual-3.33.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

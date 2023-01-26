@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.adarshr:gradle-test-logger-plugin:4.0.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.adarshr" artifactId="gradle-test-logger-plugin" version="4.0.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.adarshr/gradle-test-logger-plugin/4.0.0/9b3ee6759e40da1db7c0d868f7b4d9cc32de7b51/gradle-test-logger-plugin-4.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.adarshr/gradle-test-logger-plugin/4.0.0/8b8b0b174e2e483037125e1dd9913b8b97246aba/gradle-test-logger-plugin-4.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

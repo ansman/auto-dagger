@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.robolectric:resources:4.11.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.robolectric" artifactId="resources" version="4.11.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/resources/4.11.1/21e05203a923c9cfee41583dbe33bef361a8a210/resources-4.11.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

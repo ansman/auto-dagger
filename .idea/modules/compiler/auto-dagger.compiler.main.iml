@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":compiler:main" external.linked.project.path="$MODULE_DIR$/../../../compiler" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="auto-dagger" external.system.module.type="sourceSet" external.system.module.version="0.12.0" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JVM 11" allPlatforms="JVM [11]" useProjectSettings="false">
+        <compilerSettings>
+          <option name="additionalArguments" value="-Werror -Xcontext-receivers" />
+        </compilerSettings>
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="allowNoSourceFiles" arg="true" />
+            <flagArg name="noReflect" arg="true" />
+            <flagArg name="noStdlib" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="destination" arg="$MODULE_DIR$/../../../compiler/build/classes/kotlin/main" />
+            <stringArg name="jvmTarget" arg="11" />
+            <stringArg name="moduleName" arg="compiler" />
+            <stringArg name="apiVersion" arg="1.9" />
+            <stringArg name="languageVersion" arg="1.9" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.9.22/79c7960eb58c43865829cb2f420cf8806f59f8b1/kotlin-scripting-jvm-1.9.22.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/1.9.22/afe984c6e35d6ac356dbdeb79926474ea68ca7d1/kotlin-scripting-common-1.9.22.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.22/d6c44cd08d8f3f9bece8101216dbe6553365c6e3/kotlin-stdlib-1.9.22.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.9.22/f8139a46fc677ec9badc49ae954392f4f5e7e7c7/kotlin-script-runtime-1.9.22.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
+    <output url="file://$MODULE_DIR$/../../../compiler/build/classes/kotlin/main" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../compiler/build/generated/source/kapt/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../compiler/build/generated/source/kapt/main" isTestSource="false" generated="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../compiler/build/generated/source/kaptKotlin/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../compiler/build/generated/source/kaptKotlin/main" isTestSource="false" generated="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../compiler/src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../compiler/src/main/kotlin" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Gradle: kaptGeneratedClasses">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../compiler/build/tmp/kapt3/classes/main" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: com.google.auto:auto-common:1.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup:kotlinpoet-ksp:1.15.3" level="project" />
+    <orderEntry type="module" module-name="auto-dagger.android.testing.main" />
+    <orderEntry type="module" module-name="auto-dagger.core.main" />
+    <orderEntry type="module" module-name="auto-dagger.retrofit.main" />
+    <orderEntry type="module" module-name="auto-dagger.androidx.room.main" />
+    <orderEntry type="library" name="Gradle: com.google.devtools.ksp:symbol-processing-api:1.9.22-1.0.16" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.9.22" level="project" />
+    <orderEntry type="module" module-name="auto-dagger.compiler.common.main" />
+    <orderEntry type="module-library">
+      <library name="Gradle: ">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../compiler/common/build/libs/compiler-common-0.12.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: com.squareup:javapoet:1.13.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.dagger:hilt-core:2.50" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.dagger:dagger:2.50" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.auto.service:auto-service-annotations:1.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: net.ltgt.gradle.incap:incap:1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:guava:32.0.1-jre" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup:kotlinpoet-jvm:1.15.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" name="Gradle: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:failureaccess:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
+    <orderEntry type="library" name="Gradle: org.checkerframework:checker-qual:3.33.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.18.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.j2objc:j2objc-annotations:2.8" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.9.21" level="project" />
+  </component>
+</module>

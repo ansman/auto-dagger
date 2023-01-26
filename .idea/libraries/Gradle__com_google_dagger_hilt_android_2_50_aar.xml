@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.dagger:hilt-android:2.50@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/50f714a718dd6aa22a0883e0e71dd062/transformed/hilt-android-2.50/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/50f714a718dd6aa22a0883e0e71dd062/transformed/hilt-android-2.50/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/hilt-android/2.50/e82deaccaf26c835f133fb931d23f945970b1c7d/hilt-android-2.50-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.dagger/hilt-android/2.50/2bcf88184f4a2cc624b6abf85320b1757b4dce11/hilt-android-2.50-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

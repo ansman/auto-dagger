@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jdom:jdom2:2.0.6.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jdom" artifactId="jdom2" version="2.0.6.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jdom/jdom2/2.0.6.1/dc15dff8f701b227ee523eeb7a17f77c10eafe2f/jdom2-2.0.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jdom/jdom2/2.0.6.1/2493435437502ccc285afeb63b4f3d7a3a942afd/jdom2-2.0.6.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

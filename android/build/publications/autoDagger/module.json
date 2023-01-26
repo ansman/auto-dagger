@@ -1,0 +1,111 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "se.ansman.dagger.auto",
+    "module": "android",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "se.ansman.dagger.auto",
+          "module": "core",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "android-1.0.0.aar",
+          "url": "android-1.0.0.aar",
+          "size": 4875,
+          "sha512": "9c00867ef937282cd4ad863c11a113ebdd3c37093edad5eff82fe03f6f88923fe7f96647414a189d7ba1c558b4097154dfa90f2ba190dfef42ca90193c5e50dd",
+          "sha256": "bca9450ea7feff531aa50d530372959757dd2378c91c3c27b8410a985664a9ce",
+          "sha1": "8cb728d18607ce4ecf0fa9507bfe402c6b18a5ae",
+          "md5": "e37616a1d5e4047bec56324ab269b613"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.50"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "hilt-android",
+          "version": {
+            "requires": "2.50"
+          }
+        },
+        {
+          "group": "androidx.startup",
+          "module": "startup-runtime",
+          "version": {
+            "requires": "1.1.1"
+          }
+        },
+        {
+          "group": "se.ansman.dagger.auto",
+          "module": "core",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "android-1.0.0.aar",
+          "url": "android-1.0.0.aar",
+          "size": 4875,
+          "sha512": "9c00867ef937282cd4ad863c11a113ebdd3c37093edad5eff82fe03f6f88923fe7f96647414a189d7ba1c558b4097154dfa90f2ba190dfef42ca90193c5e50dd",
+          "sha256": "bca9450ea7feff531aa50d530372959757dd2378c91c3c27b8410a985664a9ce",
+          "sha1": "8cb728d18607ce4ecf0fa9507bfe402c6b18a5ae",
+          "md5": "e37616a1d5e4047bec56324ab269b613"
+        }
+      ]
+    }
+  ]
+}

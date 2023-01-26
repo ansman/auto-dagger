@@ -1,0 +1,96 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "se.ansman.dagger.auto",
+    "module": "core",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "core-1.0.0.jar",
+          "url": "core-1.0.0.jar",
+          "size": 24501,
+          "sha512": "cee115fe91cb811fa2803a3f68625f75945ae974fe47cd6a0cd73c5716caa64ae9af3d8b4747c0492b1703e9e45415a89e67c78af81b9d9dd1f5c509dfab9b09",
+          "sha256": "6c131560f3e5906436e282395bf2a596eae9526bde851b11be15d2824b3c5493",
+          "sha1": "b24e6247c206b0ebfecfa8b7c25b8faa57153ddb",
+          "md5": "f9d47c0a5a6829e7eaf7699c787d45e2"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.dagger",
+          "module": "dagger",
+          "version": {
+            "requires": "2.50"
+          }
+        },
+        {
+          "group": "com.google.dagger",
+          "module": "hilt-core",
+          "version": {
+            "requires": "2.50"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "core-1.0.0.jar",
+          "url": "core-1.0.0.jar",
+          "size": 24501,
+          "sha512": "cee115fe91cb811fa2803a3f68625f75945ae974fe47cd6a0cd73c5716caa64ae9af3d8b4747c0492b1703e9e45415a89e67c78af81b9d9dd1f5c509dfab9b09",
+          "sha256": "6c131560f3e5906436e282395bf2a596eae9526bde851b11be15d2824b3c5493",
+          "sha1": "b24e6247c206b0ebfecfa8b7c25b8faa57153ddb",
+          "md5": "f9d47c0a5a6829e7eaf7699c787d45e2"
+        }
+      ]
+    }
+  ]
+}

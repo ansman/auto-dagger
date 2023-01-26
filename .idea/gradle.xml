@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/gradle-plugin" name="gradle-plugin">
+                <projects>
+                  <project path="$PROJECT_DIR$/gradle-plugin" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="zulu-19" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/android" />
+            <option value="$PROJECT_DIR$/android/testing" />
+            <option value="$PROJECT_DIR$/androidx" />
+            <option value="$PROJECT_DIR$/androidx/room" />
+            <option value="$PROJECT_DIR$/androidx/viewmodel" />
+            <option value="$PROJECT_DIR$/compiler" />
+            <option value="$PROJECT_DIR$/compiler/common" />
+            <option value="$PROJECT_DIR$/compiler/common/test-utils" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/gradle-plugin" />
+            <option value="$PROJECT_DIR$/retrofit" />
+            <option value="$PROJECT_DIR$/tests" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="false" />
+      </GradleProjectSettings>
+    </option>
+    <option name="parallelModelFetch" value="true" />
+  </component>
+</project>

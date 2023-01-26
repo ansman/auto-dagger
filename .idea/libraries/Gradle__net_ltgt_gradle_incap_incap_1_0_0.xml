@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: net.ltgt.gradle.incap:incap:1.0.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="net.ltgt.gradle.incap" artifactId="incap" version="1.0.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.ltgt.gradle.incap/incap/1.0.0/4d765e5b0e3ee542b57ccffbb9c147c280290207/incap-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.ltgt.gradle.incap/incap/1.0.0/755d6db40b7ca7710a0fb739728f55c6aa991225/incap-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

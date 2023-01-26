@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.build.jetifier" artifactId="jetifier-processor" version="1.0.0-beta10" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build.jetifier/jetifier-processor/1.0.0-beta10/946c39eb0c052ff4f60a8939648a8b99af20d604/jetifier-processor-1.0.0-beta10.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build.jetifier/jetifier-processor/1.0.0-beta10/54b89fdd8cd8258bbaed0ec043738a2a049b133a/jetifier-processor-1.0.0-beta10-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

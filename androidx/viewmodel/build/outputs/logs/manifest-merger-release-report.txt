@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml:2:13-83
+INJECTED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml:2:13-83
+	package
+		INJECTED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml
+	xmlns:android
+		ADDED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml:2:23-81
+uses-sdk
+INJECTED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml reason: use-sdk injection requested
+INJECTED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml
+INJECTED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml
+	android:targetSdkVersion
+		INJECTED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml
+	android:minSdkVersion
+		INJECTED from /Users/nicklas/Repositories/personal/auto-dagger/androidx/viewmodel/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest8121771341180611564.xml

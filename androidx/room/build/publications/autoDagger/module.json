@@ -1,0 +1,89 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "se.ansman.dagger.auto",
+    "module": "androidx-room",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "androidx-room-1.0.0.jar",
+          "url": "androidx-room-1.0.0.jar",
+          "size": 1939,
+          "sha512": "0d3c3d5b47b8b77138ec8b101ee275cab1bbd006e2ff1e20d21d45f0b40f66a5d8521f3c9841a2f15fc071417d67632af6338e361cbec450d5ec6daf8fdd7813",
+          "sha256": "1860a28a62fb498d6c2f840abe5049d7564ccbcd15e44a020cf6ba5117185889",
+          "sha1": "e0ec61443200188d7e8dbdbee08a56f77b4e6068",
+          "md5": "aedd9cbdf4223699a36f1456580279f1"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.dagger",
+          "module": "hilt-core",
+          "version": {
+            "requires": "2.50"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "1.9.22"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "androidx-room-1.0.0.jar",
+          "url": "androidx-room-1.0.0.jar",
+          "size": 1939,
+          "sha512": "0d3c3d5b47b8b77138ec8b101ee275cab1bbd006e2ff1e20d21d45f0b40f66a5d8521f3c9841a2f15fc071417d67632af6338e361cbec450d5ec6daf8fdd7813",
+          "sha256": "1860a28a62fb498d6c2f840abe5049d7564ccbcd15e44a020cf6ba5117185889",
+          "sha1": "e0ec61443200188d7e8dbdbee08a56f77b4e6068",
+          "md5": "aedd9cbdf4223699a36f1456580279f1"
+        }
+      ]
+    }
+  ]
+}

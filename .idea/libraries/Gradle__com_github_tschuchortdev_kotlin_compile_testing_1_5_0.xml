@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.tschuchortdev:kotlin-compile-testing:1.5.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.github.tschuchortdev" artifactId="kotlin-compile-testing" version="1.5.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.tschuchortdev/kotlin-compile-testing/1.5.0/caaaf0a415b4069943b5b9b81903d6ad60d067a9/kotlin-compile-testing-1.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.tschuchortdev/kotlin-compile-testing/1.5.0/447d5f956301afb630779dda3127260fd36332ad/kotlin-compile-testing-1.5.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.build:apksig:8.2.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.build" artifactId="apksig" version="8.2.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/8.2.0/9125e1bb9607abb6d2d582f6b551360b0258658a/apksig-8.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/apksig/8.2.0/cbd874c0689f5f683400efc5d03464de1ca6ba9c/apksig-8.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

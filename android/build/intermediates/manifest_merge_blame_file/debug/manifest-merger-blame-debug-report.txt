@@ -1,0 +1,29 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    xmlns:tools="http://schemas.android.com/tools"
+4    package="se.ansman.dagger.auto.android" >
+5
+6    <uses-sdk android:minSdkVersion="14" />
+7
+8    <application>
+8-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:5:5-15:19
+9        <provider
+9-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:6:9-14:20
+10            android:name="androidx.startup.InitializationProvider"
+10-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:7:17-71
+11            android:authorities="${applicationId}.androidx-startup"
+11-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:8:17-72
+12            android:exported="false"
+12-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:9:17-41
+13            tools:node="merge" >
+13-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:10:17-35
+14            <meta-data
+14-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:11:13-13:56
+15                android:name="se.ansman.dagger.auto.android.AutoDaggerStartupInitializer"
+15-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:12:21-94
+16                android:value="androidx.startup" />
+16-->/Users/nicklas/Repositories/personal/auto-dagger/android/src/main/AndroidManifest.xml:13:21-53
+17        </provider>
+18    </application>
+19
+20</manifest>
