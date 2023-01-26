@@ -112,6 +112,7 @@ val versionCurrentDocs by tasks.registering(DokkaMultiModuleTask::class) {
 }
 
 tasks.dokkaHtmlMultiModule {
+    removeChildTasks(subprojects - dokkaProjects)
     pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
         version = providers.gradleProperty("version").get()
         olderVersionsDir = olderVersionsFolder
