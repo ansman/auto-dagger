@@ -13,16 +13,16 @@ Setup
 ```groovy
 dependencies {
     // Include this in java or android modules
-    implementation("se.ansman.deager:core:1.0.0-alpha01")
+    implementation("se.ansman.deager:core:0.1.0")
     
     // Include this only in android modules
-    implementation("se.ansman.deager:android:1.0.0-alpha01")
+    implementation("se.ansman.deager:android:0.1.0")
     
     // If using Java
-    annotationProcessor("se.ansman.deager:compiler:1.0.0-alpha01")
+    annotationProcessor("se.ansman.deager:compiler:0.1.0")
     
     // If using Kotlin
-    kapt("se.ansman.deager:compiler:1.0.0-alpha01")
+    kapt("se.ansman.deager:compiler:0.1.0")
 }
 ```
 
