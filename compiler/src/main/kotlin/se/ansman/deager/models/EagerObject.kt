@@ -1,6 +1,8 @@
 package se.ansman.deager.models
 
 import dagger.Binds
+import dagger.Module
+import dagger.Provides
 import se.ansman.deager.Eager
 import se.ansman.deager.Errors
 import se.ansman.deager.Initializable
@@ -12,39 +14,56 @@ import kotlin.reflect.KClass
 data class EagerObject<out TypeName, out AnnotationSpec>(
     val targetType: TypeName,
     val priority: Int?,
+    val isPublic: Boolean,
     val method: Method,
     val qualifiers: Set<AnnotationModel<AnnotationSpec>> = emptySet(),
 ) {
     companion object {
         internal val eager = Eager::class
         internal val singleton = Singleton::class
-        internal val scope = Scope::class
+        private val scope = Scope::class
+        internal val provides = Provides::class
         internal val binds = Binds::class
-        internal val qualifier = Qualifier::class
+        private val qualifier = Qualifier::class
+        private val module = Module::class
         internal val initializable = Initializable::class
 
-        internal inline fun <M : Any, T : Any, TypeName, AnnotationSpec> fromMethod(
-            method: M,
-            getName: M.() -> String,
-            getReturnType: M.() -> T,
-            getReceiver: M.() -> T?,
-            getArguments: M.() -> Sequence<T>,
-            toTypeName: T.() -> TypeName,
-            implements: T.(KClass<*>) -> Boolean,
-            getAnnotations: M.() -> List<AnnotationModel<AnnotationSpec>>,
-            getTypeAnnotations: T.() -> List<AnnotationModel<AnnotationSpec>>,
-            error: (String, M) -> Throwable,
+        internal fun <Method : Any, Type : Any, TypeDeclaration : Any, TypeName, AnnotationSpec> fromMethod(
+            method: Method,
+            getName: Method.() -> String,
+            getReturnType: Method.() -> Type,
+            getReceiver: Method.() -> Type?,
+            getArguments: Method.() -> Sequence<Type>,
+            getEnclosingType: Method.() -> TypeDeclaration?,
+            getDeclaration: Type.() -> TypeDeclaration,
+            getParentType: TypeDeclaration.() -> TypeDeclaration?,
+            isMethodPublic: Method.() -> Boolean,
+            isTypePublic: TypeDeclaration.() -> Boolean,
+            isCompanionObject: TypeDeclaration.() -> Boolean,
+            toTypeName: Type.() -> TypeName,
+            implements: Type.(KClass<*>) -> Boolean,
+            getAnnotations: Method.() -> List<AnnotationModel<AnnotationSpec>>,
+            getTypeAnnotations: TypeDeclaration.() -> List<AnnotationModel<AnnotationSpec>>,
+            error: (String, Method) -> Throwable,
         ): EagerObject<TypeName, AnnotationSpec> {
             val returnType = method.getReturnType()
             val methodAnnotation = method.getAnnotations().toList()
+            val isProvider = methodAnnotation.any { it.isOfType(provides) }
+            val isBinding = methodAnnotation.any { it.isOfType(binds) }
+            if (!isProvider && !isBinding) {
+                throw error(Errors.invalidAnnotatedMethod, method)
+            }
+
             val annotations = methodAnnotation
-                .plus(if (methodAnnotation.any { it.isOfType(binds) }) {
-                    method.getReceiver()?.getTypeAnnotations()
-                        ?: method.getArguments().firstOrNull()?.getTypeAnnotations()
-                        ?: emptyList()
-                } else {
-                    returnType.getTypeAnnotations()
-                }.toList())
+                .plus(
+                    if (isBinding) {
+                        method.getReceiver()?.getDeclaration()?.getTypeAnnotations()
+                            ?: method.getArguments().firstOrNull()?.getDeclaration()?.getTypeAnnotations()
+                            ?: emptyList()
+                    } else {
+                        returnType.getDeclaration().getTypeAnnotations()
+                    }.toList()
+                )
             val scopes = annotations.filter { a -> a.declaredAnnotations.any { it.isOfType(scope) } }
             val qualifiers = annotations.filterTo(mutableSetOf()) { a ->
                 a.declaredAnnotations.any { it.isOfType(qualifier) }
@@ -55,6 +74,20 @@ data class EagerObject<out TypeName, out AnnotationSpec>(
             if (scopes.none { it.isOfType(singleton) }) {
                 throw error(Errors.unscopedType, method)
             }
+            val enclosingType = method.getEnclosingType()
+                ?: throw error(Errors.methodInNonModule, method)
+
+            val module = if (enclosingType.isCompanionObject()) {
+                enclosingType.getParentType()
+                    ?: throw error("Internal error! Could not find enclosing type for $enclosingType", method)
+            } else {
+                enclosingType
+            }
+            if (module.getTypeAnnotations().none { it.isOfType(EagerObject.module) }) {
+                throw error(Errors.methodInNonModule, method)
+            }
+
+            fun TypeDeclaration.isPublic(): Boolean = isTypePublic() && (getParentType()?.isPublic() ?: true)
 
             val isInitializable = returnType.implements(initializable)
             val targetType = returnType.toTypeName()
@@ -62,37 +95,43 @@ data class EagerObject<out TypeName, out AnnotationSpec>(
             return EagerObject(
                 targetType = targetType,
                 priority = annotations.first { it.isOfType(eager) }.getValue("priority"),
+                isPublic = method.isMethodPublic() && enclosingType.isPublic(),
                 method = if (isInitializable) {
-                    Method.Binding(name)
+                    EagerObject.Method.Binding(name)
                 } else {
-                    Method.Provider(name)
+                    EagerObject.Method.Provider(name)
                 },
                 qualifiers = qualifiers
             )
         }
 
-        internal inline fun <E : Any, ClassName, AnnotationSpec> fromType(
-            element: E,
-            getAnnotations: E.() -> List<AnnotationModel<AnnotationSpec>>,
-            toClassName: E.() -> ClassName,
+        internal fun <T : Any, ClassName, AnnotationSpec> fromType(
+            type: T,
+            getAnnotations: T.() -> List<AnnotationModel<AnnotationSpec>>,
+            getParentType: T.() -> T?,
+            isTypePublic: T.() -> Boolean,
+            toClassName: T.() -> ClassName,
             simpleName: ClassName.() -> String,
-            implements: E.(KClass<*>) -> Boolean,
-            error: (String, E) -> Throwable,
+            implements: T.(KClass<*>) -> Boolean,
+            error: (String, T) -> Throwable,
         ): EagerObject<ClassName, AnnotationSpec> {
-            val annotations = element.getAnnotations()
+            val annotations = type.getAnnotations()
             val scopes = annotations.filter { a -> a.declaredAnnotations.any { it.isOfType(scope) } }
             if (scopes.isEmpty()) {
-                throw error(Errors.unscopedType, element)
+                throw error(Errors.unscopedType, type)
             }
             if (scopes.none { it.isOfType(singleton) }) {
-                throw error(Errors.unscopedType, element)
+                throw error(Errors.unscopedType, type)
             }
 
-            val isInitializable = element.implements(initializable)
-            val targetType = element.toClassName()
+            fun T.isPublic(): Boolean = isTypePublic() && (getParentType()?.isPublic() ?: true)
+
+            val isInitializable = type.implements(initializable)
+            val targetType = type.toClassName()
             return EagerObject(
                 targetType = targetType,
                 priority = annotations.first { it.isOfType(eager) }.getValue("priority"),
+                isPublic = type.isPublic(),
                 method = if (isInitializable) {
                     Method.Binding.fromType(targetType.simpleName())
                 } else {

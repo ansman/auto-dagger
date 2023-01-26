@@ -3,7 +3,7 @@ package se.ansman.deager.ksp
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
 import com.google.devtools.ksp.KspExperimental
-import com.google.devtools.ksp.isAnnotationPresent
+import com.google.devtools.ksp.getVisibility
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.Resolver
@@ -17,10 +17,10 @@ import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.symbol.KSPropertyGetter
 import com.google.devtools.ksp.symbol.KSType
+import com.google.devtools.ksp.symbol.Visibility
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ksp.toClassName
 import com.squareup.kotlinpoet.ksp.toTypeName
-import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.codegen.OriginatingElement
 import dagger.hilt.components.SingletonComponent
@@ -63,8 +63,10 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
         return when (symbol) {
             is KSClassDeclaration -> {
                 val model = EagerObject.fromType(
-                    element = symbol,
+                    type = symbol,
                     getAnnotations = { annotations.map(::KspAnnotationModel).toList() },
+                    getParentType = { parentDeclaration as? KSClassDeclaration },
+                    isTypePublic = { getVisibility() == Visibility.PUBLIC },
                     toClassName = { toClassName() },
                     simpleName = ClassName::simpleName,
                     implements = { typeLookup.getTypeForClass(it).isAssignableFrom(asStarProjectedType()) },
@@ -81,8 +83,9 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
                 processMethod(
                     symbol = symbol,
                     name = "get${symbol.simpleName.asString().replaceFirstChar(Char::uppercaseChar)}",
-                    module = symbol.parentDeclaration,
+                    parent = symbol.parentDeclaration,
                     returnType = symbol.getter?.returnType?.resolve() ?: return false,
+                    visibility = symbol.getVisibility(),
                     receiver = { symbol.extensionReceiver?.resolve() },
                     arguments = { emptySequence() },
                     annotations = symbol.annotations + (symbol.getter?.annotations ?: emptySequence()),
@@ -95,8 +98,9 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
                 processMethod(
                     symbol = symbol,
                     name = symbol.simpleName.asString(),
-                    module = symbol.parentDeclaration,
+                    parent = symbol.parentDeclaration,
                     returnType = symbol.returnType?.resolve() ?: return false,
+                    visibility = symbol.getVisibility(),
                     receiver = { symbol.extensionReceiver?.resolve() },
                     arguments = { symbol.parameters.asSequence().map { it.type.resolve() } },
                     annotations = symbol.annotations,
@@ -129,35 +133,37 @@ class DeagerSymbolProcessor(private val environment: SymbolProcessorEnvironment)
     private fun processMethod(
         symbol: KSAnnotated,
         name: String,
-        module: KSDeclaration?,
+        parent: KSDeclaration?,
         returnType: KSType,
+        visibility: Visibility,
         receiver: () -> KSType?,
         arguments: () -> Sequence<KSType>,
         annotations: Sequence<KSAnnotation>,
         typeLookup: KspTypeLookup,
         output: Multimap<ClassName, KotlinEagerObject>,
     ) {
-        if (module !is KSClassDeclaration) {
+        if (parent !is KSClassDeclaration) {
             throw KspProcessingError(Errors.methodInNonModule, symbol)
         }
-
-        if (!module.isAnnotationPresent(Module::class)) {
-            throw KspProcessingError(Errors.methodInNonModule, module)
-        }
-
         val model = EagerObject.fromMethod(
             method = symbol,
             getName = { name },
             getReturnType = { returnType },
             getReceiver = { receiver() },
             getArguments = { arguments() },
+            getEnclosingType = { parent },
+            getDeclaration = { declaration },
+            getParentType = { parentDeclaration },
+            isMethodPublic = { visibility == Visibility.PUBLIC },
+            isTypePublic = { getVisibility() == Visibility.PUBLIC },
+            isCompanionObject = { this is KSClassDeclaration && isCompanionObject },
             toTypeName = { toTypeName() },
             implements = { typeLookup.getTypeForClass(it).isAssignableFrom(this) },
             getAnnotations = { annotations.map(::KspAnnotationModel).toList() },
-            getTypeAnnotations = { declaration.annotations.map(::KspAnnotationModel).toList() },
+            getTypeAnnotations = { this.annotations.map(::KspAnnotationModel).toList() },
             error = ::KspProcessingError
         )
-        output.put(module.toClassName(), model)
+        output.put(parent.toClassName(), model)
     }
 
     private fun CodeGenerator.write(file: FileSpec) {

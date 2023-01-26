@@ -105,6 +105,7 @@ class EagerObjectModuleKotlinRenderer private constructor(
                 .addFunctions(providers)
         }
             .addAnnotation(Module::class)
+            .addModifiers(if (eagerObjects.all { it.isPublic }) KModifier.PUBLIC else KModifier.INTERNAL)
             .apply(modifier)
             .build()
 

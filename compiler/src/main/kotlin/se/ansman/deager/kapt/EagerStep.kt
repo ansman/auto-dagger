@@ -9,15 +9,15 @@ import com.google.common.collect.Multimap
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
-import dagger.Module
 import se.ansman.deager.Eager
-import se.ansman.deager.Errors
 import se.ansman.deager.models.EagerObject
 import se.ansman.deager.renderers.EagerObjectModuleJavaRenderer
 import javax.annotation.processing.ProcessingEnvironment
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
 import javax.lang.model.element.ExecutableElement
+import javax.lang.model.element.Modifier
+import javax.lang.model.element.TypeElement
 import javax.lang.model.element.VariableElement
 import javax.tools.Diagnostic
 
@@ -36,8 +36,10 @@ class EagerStep(
                     ElementKind.CLASS -> {
                         val type = MoreElements.asType(element)
                         val model = EagerObject.fromType(
-                            element = type,
+                            type = type,
                             getAnnotations = { annotationMirrors.map(::KaptAnnotationModel) },
+                            getParentType = { parentElement },
+                            isTypePublic = { Modifier.PUBLIC in modifiers },
                             toClassName = ClassName::get,
                             simpleName = ClassName::simpleName,
                             implements = {
@@ -55,12 +57,8 @@ class EagerStep(
                         file.writeTo(processingEnv.filer)
                     }
                     ElementKind.METHOD -> {
-                        val module = MoreElements.asType(element.enclosingElement)
-                        if (!module.hasAnnotation<Module>()) {
-                            throw KaptProcessingError(Errors.methodInNonModule, module)
-                        }
                         eagerObjectsByModule.put(
-                            ClassName.get(module),
+                            ClassName.get(MoreElements.asType(element.enclosingElement)),
                             EagerProvider(
                                 eagerObject = EagerObject.fromMethod(
                                     method = MoreElements.asExecutable(element),
@@ -68,6 +66,12 @@ class EagerStep(
                                     getReturnType = ExecutableElement::getReturnType,
                                     getReceiver = { null },
                                     getArguments = { parameters.asSequence().map(VariableElement::asType) },
+                                    getEnclosingType = { MoreElements.asType(enclosingElement) },
+                                    getDeclaration = MoreTypes::asTypeElement,
+                                    getParentType =  { parentElement },
+                                    isMethodPublic = { Modifier.PUBLIC in modifiers },
+                                    isTypePublic = { Modifier.PUBLIC in modifiers },
+                                    isCompanionObject = { false },
                                     toTypeName = TypeName::get,
                                     implements = {
                                         processingEnv.typeUtils.isAssignable(
@@ -76,9 +80,7 @@ class EagerStep(
                                         )
                                     },
                                     getAnnotations = { annotationMirrors.map(::KaptAnnotationModel) },
-                                    getTypeAnnotations = {
-                                        MoreTypes.asTypeElement(this).annotationMirrors.map(::KaptAnnotationModel)
-                                    },
+                                    getTypeAnnotations = { annotationMirrors.map(::KaptAnnotationModel) },
                                     error = ::KaptProcessingError
                                 ),
                                 originatingElement = element,
@@ -115,4 +117,11 @@ class EagerStep(
         val eagerObject: EagerObject<TypeName, AnnotationSpec>,
         val originatingElement: Element,
     )
+
 }
+
+@Suppress("UnstableApiUsage")
+private val TypeElement.parentElement
+    get() = enclosingElement
+        .takeIf(MoreElements::isType)
+        ?.let(MoreElements::asType)
