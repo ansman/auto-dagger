@@ -10,8 +10,7 @@ import javax.lang.model.SourceVersion
 
 @AutoService(Processor::class)
 @IncrementalAnnotationProcessor(IncrementalAnnotationProcessorType.ISOLATING)
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
 class DeagerAnnotationProcessor : BasicAnnotationProcessor() {
-    override fun steps(): Iterable<Step> =
-        listOf(EagerStep(processingEnv))
+    override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
+    override fun steps(): Iterable<Step> = listOf(EagerStep(processingEnv))
 }
