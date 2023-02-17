@@ -13,4 +13,8 @@ import javax.lang.model.SourceVersion
 class DeagerAnnotationProcessor : BasicAnnotationProcessor() {
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
     override fun steps(): Iterable<Step> = listOf(EagerStep(processingEnv))
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
