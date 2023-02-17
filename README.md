@@ -1,4 +1,4 @@
-Deager
+Deager [![Build Gradle](https://github.com/ansman/deager/actions/workflows/gradle.yml/badge.svg)](https://github.com/ansman/deager/actions/workflows/gradle.yml) [![Maven Central](https://img.shields.io/maven-central/v/se.ansman.deager/core.svg)](https://central.sonatype.dev/namespace/se.ansman.deager)
 ===
 Deager allows you to annotated `@Singleton` scoped objects and have the be eagerly initializable. 
 
