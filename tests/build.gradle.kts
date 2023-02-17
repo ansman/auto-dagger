@@ -1,4 +1,5 @@
 import com.google.devtools.ksp.gradle.KspTask
+import com.google.devtools.ksp.gradle.KspTaskJvm
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 import org.jetbrains.kotlin.gradle.tasks.Kapt
 
@@ -42,14 +43,16 @@ android.sourceSets.configureEach {
     idea.module.sourceDirs.add(buildDir.resolve("generated/ksp/$name/kotlin"))
 }
 
+// This is needed because Dagger/Hilt doesn't support KSP yet so for our generated code to be
+// seen we need to make the output from KSP an input to KAPT
 afterEvaluate {
     tasks.withType<Kapt> {
-        val ksp = tasks.findByName(name.replace("kapt", "ksp")) as KspTask?
+        val ksp = tasks.findByName(name.replace("kapt", "ksp")) as KspTaskJvm?
             ?: return@withType
         kaptExternalClasspath.from(ksp.destination)
     }
     tasks.withType<KaptGenerateStubsTask> {
-        val ksp = tasks.findByName(name.replace("kaptGenerateStubs", "ksp")) as KspTask?
+        val ksp = tasks.findByName(name.replace("kaptGenerateStubs", "ksp")) as KspTaskJvm?
             ?: return@withType
         kaptClasspath.from(ksp.destination)
     }

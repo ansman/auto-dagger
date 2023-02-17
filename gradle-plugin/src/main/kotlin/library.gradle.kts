@@ -22,7 +22,7 @@ if (!isRunningInIDE) {
 version = properties.getValue("version") as String
 
 tasks.withType<JavaCompile> {
-    sourceCompatibility = "1.8"
+    sourceCompatibility = "11"
     targetCompatibility = "11"
 }
 
@@ -55,7 +55,7 @@ pluginManager.withPlugin("com.android.library") {
             }
         }
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_1_8
+            sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
         }
     }
@@ -93,7 +93,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
     }
 }
 
-pluginManager.withPlugin("java") {
+plugins.withType<JavaBasePlugin> {
     extensions.configure<JavaPluginExtension> {
         toolchain {
             languageVersion.set(JavaLanguageVersion.of(19))
