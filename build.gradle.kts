@@ -4,17 +4,17 @@ import org.jetbrains.dokka.versioning.VersioningPlugin
 
 plugins {
     `version-catalog`
+    kotlin("jvm") version libs.versions.kotlin.get() apply false
     alias(libs.plugins.dagger.hilt) apply false
-    alias(libs.plugins.dokka)
+    id("org.jetbrains.dokka") version libs.versions.dokka.get()
     alias(libs.plugins.binaryCompatibilityValidator)
     alias(libs.plugins.mkdocs)
 }
 
 buildscript {
     dependencies {
-        classpath(libs.kotlin.jvm.gradle)
         classpath(libs.android.gradlePlugin)
-        classpath(libs.dagger.hilt.gradlePlugin)
+        classpath(libs.dokka.gradlePlugin)
         classpath(libs.dokka.versioningPlugin)
     }
 }
@@ -88,7 +88,7 @@ python {
 }
 
 tasks.register("check") {
-    dependsOn(gradle.includedBuilds.map { it.task(":check") })
+    dependsOn(*gradle.includedBuilds.map { it.task(":check") }.toTypedArray())
     dependsOn(tasks.mkdocsBuild)
 }
 

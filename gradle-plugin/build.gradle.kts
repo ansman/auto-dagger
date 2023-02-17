@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version embeddedKotlinVersion
+    kotlin("jvm") version libs.versions.kotlin.get()
     `kotlin-dsl`
     `version-catalog`
 }
