@@ -1,8 +1,9 @@
 # Usage
-Simply annotate any `@Singleton` scoped object, provider or binding with `@Eager` to make it be eagerly initialized.
+Simply annotate any `@Singleton` scoped object, provider or binding with `@AutoInitialize` to make it be automatically 
+initialized when your application launches.
 
 ```kotlin
-@Eager
+@AutoInitialize
 @Singleton
 class SomeRepository @Inject constructor() {
     init {
@@ -13,10 +14,10 @@ class SomeRepository @Inject constructor() {
 
 ## Initializable
 It's often considered bad practice to have side effects in a constructor/initializer block. If this is a concern your
-object can implement the `Initializable` interface. Deager will then call `initialize` when it's time to initialize.
+object can implement the `Initializable` interface. Auto Dagger will then call `initialize` when it's time to initialize.
 
 ```kotlin
-@Eager
+@AutoInitialize
 @Singleton
 class SomeRepository @Inject constructor() : Initializable {
     override fun initialize() {
@@ -33,7 +34,7 @@ makes the object be initialized after objects with the default priority and sett
 initializes it before.
 
 ```kotlin
-@Eager(priority = 4711)
+@AutoInitialize(priority = 4711)
 @Singleton
 class ImportantRepository @Inject constructor() {
     override fun initialize() {
@@ -43,21 +44,22 @@ class ImportantRepository @Inject constructor() {
 ```
 
 ## AndroidX Startup
-Deager uses [AndroidX Startup](https://developer.android.com/topic/libraries/app-startup) to initialize objects eagerly.
+Auto Dagger uses [AndroidX Startup](https://developer.android.com/topic/libraries/app-startup) to initialize objects 
+at startup.
 
 If you prefer to not use this you can just depend on the `core` artifact which won't pull in AndroidX Startup.
 
-To initialize the objects manually, use `EagerInitializer`.
+To initialize the objects manually, use `AutoDaggerInitializable`.
 
 ```kotlin
 @HiltAndroidApp
 class TheApp : Application() {
     @Inject
-    lateinit var eagerInitializer: EagerInitializer
+    lateinit var initializer: AutoDaggerInitializable
     
     override fun onCreate() {
         super.onCreate()
-        eagerInitializer.initialize()
+        initializer.initialize()
     }
 }
 ```

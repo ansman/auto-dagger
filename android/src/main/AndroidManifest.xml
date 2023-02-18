@@ -9,7 +9,7 @@
                 android:exported="false"
                 tools:node="merge">
             <meta-data
-                    android:name="se.ansman.deager.android.DeagerInitializer"
+                    android:name="se.ansman.dagger.auto.android.AutoDaggerStartupInitializer"
                     android:value="androidx.startup" />
         </provider>
     </application>

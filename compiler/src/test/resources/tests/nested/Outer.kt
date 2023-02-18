@@ -4,12 +4,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import se.ansman.deager.Eager
+import se.ansman.dagger.auto.AutoInitialize
 import javax.inject.Inject
 import javax.inject.Singleton
 
 object Outer {
-    @Eager
+    @AutoInitialize
     @Singleton
     class SomeThing @Inject constructor()
 
@@ -17,7 +17,7 @@ object Outer {
     @InstallIn(SingletonComponent::class)
     object InnerModule {
         @Provides
-        @Eager
+        @AutoInitialize
         @Singleton
         fun provideString(): String = "foo"
     }

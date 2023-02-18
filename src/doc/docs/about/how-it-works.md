@@ -1,8 +1,8 @@
 # How it works
 
-## `@Eager`
-When you annotate an object, binding or provider with `@Eager`, Deager will generate a component which is installed into
-the `SingletonComponent` using Hilt.
+## `@AutoInitialize`
+When you annotate an object, binding or provider with `@AutoInitialize`, Auto Dagger will generate a component which is installed
+into the `SingletonComponent` using Hilt.
 
 This is an example of such a component:
 ```java
@@ -11,8 +11,8 @@ This is an example of such a component:
 @OriginatingElement(
     topLevelClass = SomeThing.class
 )
-public final class EagerSomeThingComponent {
-    private EagerSomeThingComponent() {}
+public final class AutoInitializeSomeThingComponent {
+    private AutoInitializeSomeThingComponent() {}
     
     // If the object implements Initializable, then @Binds is used instead of @Provides
     @Provides
@@ -23,18 +23,18 @@ public final class EagerSomeThingComponent {
 }
 ```
 
-## `EagerInitializer`
-`EagerInitializer` is the container for all `Initializable` that should be eagerly initialized. It's provided into the
-`@Singleton` component, and accepts a set of all the initializables.
+## `AutoDaggerInitializable`
+`AutoDaggerInitializable` is the container for all `Initializable` that should be initialized at startup. It's provided
+into the `@Singleton` component, and accepts a set of all the initializables.
 
-Calling `EagerInitializer.initialize` calls `initialize` on each object in turn.
+Calling `AutoDaggerInitializable.initialize` calls `initialize` on each object in turn.
 
 Any exceptions are rethrown, but only after all objects have been initialized. If multiple objects throw, then 
 subsequent exceptions are added as suppressed exceptions.
 
-## `DeagerInitializer`
-`DeagerInitializer` is the [AndroidX Startup](https://developer.android.com/topic/libraries/app-startup) initializer 
-that performs the eager initialization at startup.
+## `AutoDaggerStartupInitializer`
+`AutoDaggerStartupInitializer` is the [AndroidX Startup](https://developer.android.com/topic/libraries/app-startup)
+initializer that performs the initialization at startup.
 
 ## Why does it generate Java?
 Given that the library is written in Kotlin, why are the generated files Java files and not Kotlin files?
@@ -44,4 +44,4 @@ needs to generate Java stubs for the generated files before continuing with the 
 
 By generating Java files the stub generation can be skipped.
 
-Deager has support for KSP so when Dagger supports it, Deager will start generating Kotlin files. 
+Auto Dagger has support for KSP so when Dagger/Hilt supports it, Auto Dagger will start generating Kotlin files. 

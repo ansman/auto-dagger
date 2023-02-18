@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import se.ansman.deager.Eager
+import se.ansman.dagger.auto.AutoInitialize
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,6 +17,6 @@ internal class RealThing @Inject constructor() : Thing
 @InstallIn(SingletonComponent::class)
 internal interface BindingModule {
     @Binds
-    @Eager
+    @AutoInitialize
     fun bindThing(thing: RealThing): Thing
 }

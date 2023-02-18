@@ -9,7 +9,7 @@
 9. Close and release on [Sonatype](https://s01.oss.sonatype.org/#stagingRepositories).
 10. `git push origin main`
 11. Release on GitHub:
-     1. Create a new release [here](https://github.com/ansman/deager/releases/new).
+     1. Create a new release [here](https://github.com/ansman/auto-dagger/releases/new).
      2. Use the automatic changelog. Update if needed.
      3. Ensure you pick the "Prepare for release X.Y.Z" as the target commit.
 12. `git pull origin main --tags`

@@ -1,11 +1,11 @@
 package se.ansman.initializable
 
-import se.ansman.deager.Eager
-import se.ansman.deager.Initializable
+import se.ansman.dagger.auto.AutoInitialize
+import se.ansman.dagger.auto.Initializable
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Eager
+@AutoInitialize
 @Singleton
 class InitializableThing @Inject constructor() : Initializable {
     override fun initialize() {}

@@ -4,9 +4,9 @@ import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.internal.tasks.userinput.UserInputHandler
 import org.gradle.configurationcache.extensions.serviceOf
 import org.jetbrains.dokka.gradle.DokkaTask
-import se.ansman.deager.gradle.cachedProvider
-import se.ansman.deager.gradle.execWithOutput
-import se.ansman.deager.gradle.getOrPut
+import se.ansman.dagger.auto.gradle.cachedProvider
+import se.ansman.dagger.auto.gradle.execWithOutput
+import se.ansman.dagger.auto.gradle.getOrPut
 import java.util.Locale
 
 plugins {
@@ -24,7 +24,7 @@ val gitCommit = cachedProvider {
     }.trim()
 }
 
-fun repo(path: String = "") = "https://github.com/ansman/deager$path"
+fun repo(path: String = "") = "https://github.com/ansman/auto-dagger$path"
 
 val remoteSource: Provider<String> = gitCommit.map { repo("/blob/$it") }
 
@@ -92,15 +92,15 @@ val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
 }
 
-val publication = publishing.publications.register<MavenPublication>("deager") {
+val publication = publishing.publications.register<MavenPublication>("autoDagger") {
     groupId = rootProject.group as String
     artifactId = project.path.removePrefix(":").replace(':', '-')
     version = providers.gradleProperty("version").get()
     artifact(sourcesJar)
     artifact(javadocJar)
     pom {
-        name.set("Deager ${project.name}")
-        description.set("Eager Singletons with Dagger")
+        name.set("Auto Dagger ${project.name}")
+        description.set("Automatic setup with Dagger")
         url.set(repo())
         licenses {
             license {
@@ -116,8 +116,8 @@ val publication = publishing.publications.register<MavenPublication>("deager") {
                 email.set("nicklas@ansman.se")
             }
             scm {
-                connection.set("scm:git:git://github.com/ansman/deager.git")
-                developerConnection.set("scm:git:ssh://git@github.com/ansman/deager.git")
+                connection.set("scm:git:git://github.com/ansman/auto-dagger.git")
+                developerConnection.set("scm:git:ssh://git@github.com/ansman/auto-dagger.git")
                 url.set(repo())
             }
         }

@@ -2,7 +2,7 @@ package se.ansman.provider.qualified
 
 import dagger.Module
 import dagger.Provides
-import se.ansman.deager.Eager
+import se.ansman.dagger.auto.AutoInitialize
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -12,7 +12,7 @@ class QualifiedProvidedThing
 object QualifiedProviderModule {
     val thing
         @Provides
-        @Eager
+        @AutoInitialize
         @Named("someName")
         @Singleton
         get() = QualifiedProvidedThing()

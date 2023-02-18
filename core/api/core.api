@@ -1,45 +1,49 @@
-public final class se/ansman/deager/DeagerModule_PrimeInitializablesFactory : dagger/internal/Factory {
+public final class se/ansman/dagger/auto/AutoDaggerInitializer : se/ansman/dagger/auto/Initializable {
+	public fun <init> (Ljava/util/Set;)V
+	public fun initialize ()V
+	public final fun isInitialized ()Z
+}
+
+public final class se/ansman/dagger/auto/AutoDaggerInitializer_Factory : dagger/internal/Factory {
+	public fun <init> (Ljavax/inject/Provider;)V
+	public static fun create (Ljavax/inject/Provider;)Lse/ansman/dagger/auto/AutoDaggerInitializer_Factory;
+	public synthetic fun get ()Ljava/lang/Object;
+	public fun get ()Lse/ansman/dagger/auto/AutoDaggerInitializer;
+	public static fun newInstance (Ljava/util/Set;)Lse/ansman/dagger/auto/AutoDaggerInitializer;
+}
+
+public final class se/ansman/dagger/auto/AutoDaggerModule_PrimeInitializablesFactory : dagger/internal/Factory {
 	public fun <init> ()V
-	public static fun create ()Lse/ansman/deager/DeagerModule_PrimeInitializablesFactory;
+	public static fun create ()Lse/ansman/dagger/auto/AutoDaggerModule_PrimeInitializablesFactory;
 	public synthetic fun get ()Ljava/lang/Object;
 	public fun get ()Ljava/util/Set;
 	public static fun primeInitializables ()Ljava/util/Set;
 }
 
-public abstract interface annotation class se/ansman/deager/Eager : java/lang/annotation/Annotation {
-	public static final field Companion Lse/ansman/deager/Eager$Companion;
+public abstract interface annotation class se/ansman/dagger/auto/AutoInitialize : java/lang/annotation/Annotation {
+	public static final field Companion Lse/ansman/dagger/auto/AutoInitialize$Companion;
 	public static final field defaultPriority I
 	public abstract fun priority ()I
 }
 
-public final class se/ansman/deager/Eager$Companion {
+public final class se/ansman/dagger/auto/AutoInitialize$Companion {
 	public static final field defaultPriority I
 }
 
-public final class se/ansman/deager/EagerInitializer {
-	public fun <init> (Ljava/util/Set;)V
-	public final fun initialize ()V
-	public final fun isInitialized ()Z
+public final class se/ansman/dagger/auto/HiltWrapper_AutoDaggerModule {
+	public fun <init> ()V
 }
 
-public final class se/ansman/deager/EagerInitializer_Factory : dagger/internal/Factory {
-	public fun <init> (Ljavax/inject/Provider;)V
-	public static fun create (Ljavax/inject/Provider;)Lse/ansman/deager/EagerInitializer_Factory;
-	public synthetic fun get ()Ljava/lang/Object;
-	public fun get ()Lse/ansman/deager/EagerInitializer;
-	public static fun newInstance (Ljava/util/Set;)Lse/ansman/deager/EagerInitializer;
-}
-
-public abstract interface class se/ansman/deager/Initializable {
-	public static final field Companion Lse/ansman/deager/Initializable$Companion;
-	public static fun fromLazy (Ldagger/Lazy;)Lse/ansman/deager/Initializable;
-	public static fun fromLazy (Ldagger/Lazy;I)Lse/ansman/deager/Initializable;
+public abstract interface class se/ansman/dagger/auto/Initializable {
+	public static final field Companion Lse/ansman/dagger/auto/Initializable$Companion;
+	public static fun fromLazy (Ldagger/Lazy;)Lse/ansman/dagger/auto/Initializable;
+	public static fun fromLazy (Ldagger/Lazy;I)Lse/ansman/dagger/auto/Initializable;
 	public abstract fun initialize ()V
 }
 
-public final class se/ansman/deager/Initializable$Companion {
-	public final fun fromLazy (Ldagger/Lazy;)Lse/ansman/deager/Initializable;
-	public final fun fromLazy (Ldagger/Lazy;I)Lse/ansman/deager/Initializable;
-	public static synthetic fun fromLazy$default (Lse/ansman/deager/Initializable$Companion;Ldagger/Lazy;IILjava/lang/Object;)Lse/ansman/deager/Initializable;
+public final class se/ansman/dagger/auto/Initializable$Companion {
+	public final fun fromLazy (Ldagger/Lazy;)Lse/ansman/dagger/auto/Initializable;
+	public final fun fromLazy (Ldagger/Lazy;I)Lse/ansman/dagger/auto/Initializable;
+	public static synthetic fun fromLazy$default (Lse/ansman/dagger/auto/Initializable$Companion;Ldagger/Lazy;IILjava/lang/Object;)Lse/ansman/dagger/auto/Initializable;
 }
 
