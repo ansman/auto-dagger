@@ -12,9 +12,7 @@ import se.ansman.dagger.auto.Initializable
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = InitializableThing::class)
-public abstract class AutoInitializeInitializableThingModule {
-  private constructor()
-
+public abstract class AutoInitializeInitializableThingModule private constructor() {
   @Binds
   @IntoSet
   public abstract fun InitializableThing.bindInitializableThingAsInitializable(): Initializable
