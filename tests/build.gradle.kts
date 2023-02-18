@@ -59,7 +59,7 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation(projects.core)
+    implementation(projects.android)
     implementation(libs.dagger.hilt.android)
     "kaptJava"(projects.compiler)
     "kspKotlin"(projects.compiler)
@@ -68,14 +68,8 @@ dependencies {
 
     // Unit test
     testImplementation(libs.dagger.hilt.android.testing)
+    // Compile Only is used here to ensure it's included by the android module
+    testCompileOnly(libs.androidx.startup)
     kaptTest(libs.dagger.compiler)
     kaptTest(libs.dagger.hilt.compiler)
-
-    // Android test
-    androidTestImplementation(projects.android)
-    androidTestImplementation(libs.dagger.hilt.android.testing)
-    kaptAndroidTest(libs.dagger.compiler)
-    kaptAndroidTest(libs.dagger.hilt.compiler)
-    "kaptAndroidTestJava"(projects.compiler)
-    "kspAndroidTestKotlin"(projects.compiler)
 }
