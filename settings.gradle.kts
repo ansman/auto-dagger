@@ -25,7 +25,7 @@ dependencyResolutionManagement {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 includeBuild("gradle-plugin")
 
-rootProject.name = "deager"
+rootProject.name = "auto-dagger"
 
 include(":core")
 include(":android")

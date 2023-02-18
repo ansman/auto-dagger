@@ -1,34 +1,37 @@
-Deager [![Build Gradle](https://github.com/ansman/deager/actions/workflows/gradle.yml/badge.svg)](https://github.com/ansman/deager/actions/workflows/gradle.yml) [![Maven Central](https://img.shields.io/maven-central/v/se.ansman.deager/core.svg)](https://central.sonatype.dev/namespace/se.ansman.deager)
+Auto Dagger [![Build Gradle](https://github.com/ansman/auto-dagger/actions/workflows/gradle.yml/badge.svg)](https://github.com/ansman/auto-dagger/actions/workflows/gradle.yml) [![Maven Central](https://img.shields.io/maven-central/v/se.ansman.dagger.auto/core.svg)](https://central.sonatype.dev/namespace/se.ansman.dagger.auto)
 ===
-Deager allows you to annotated `@Singleton` scoped objects and have the be eagerly initializable. 
+Auto Dagger allows you to automate some setup with Dagger and Hilt.
+
+For example you can annotate `@Singleton` scoped objects with `@AutoInitialize` and have the be initialized during app
+launch. 
 
 This is done using Hilt and AndroidX Startup.
 
-To read more please refer to the [documentation](https://deager.ansman.se/).
+To read more please refer to the [documentation](https://auto-dagger.ansman.se/).
 
-For the changelog see the [releases page](https://github.com/ansman/deager/releases).
+For the changelog see the [releases page](https://github.com/ansman/auto-dagger/releases).
 
 Setup
 ---
 ```groovy
 dependencies {
     // Include this in java or android modules
-    implementation("se.ansman.deager:core:0.1.0")
+    implementation("se.ansman.dagger.auto:core:0.1.0")
     
     // Include this only in android modules
-    implementation("se.ansman.deager:android:0.1.0")
+    implementation("se.ansman.dagger.auto:android:0.1.0")
     
     // If using Java
-    annotationProcessor("se.ansman.deager:compiler:0.1.0")
+    annotationProcessor("se.ansman.dagger.auto:compiler:0.1.0")
     
     // If using Kotlin
-    kapt("se.ansman.deager:compiler:0.1.0")
+    kapt("se.ansman.dagger.auto:compiler:0.1.0")
 }
 ```
 
 Basic usage
 ```kotlin
-@Eager
+@AutoInitialize
 @Singleton
 class SomeRepository @Inject constructor() {
     init {
@@ -36,7 +39,7 @@ class SomeRepository @Inject constructor() {
     }
 }
 
-@Eager
+@AutoInitialize
 @Singleton
 class InitializableRepository @Inject constructor() : Initializable {
     override fun initialize() {

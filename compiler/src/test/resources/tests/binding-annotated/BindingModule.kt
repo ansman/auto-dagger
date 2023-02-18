@@ -2,7 +2,7 @@ package se.ansman.binding.annotated
 
 import dagger.Binds
 import dagger.Module
-import se.ansman.deager.Eager
+import se.ansman.dagger.auto.AutoInitialize
 import javax.inject.Singleton
 
 interface Thing
@@ -12,7 +12,7 @@ class RealThing : Thing
 @Module
 interface BindingModule {
     @Binds
-    @Eager
+    @AutoInitialize
     @Singleton
     fun RealThing.bindThing(): Thing
 }

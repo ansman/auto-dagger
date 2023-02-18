@@ -1,15 +1,15 @@
 # Getting Started
 
 ## Installation
-[![Maven Central](https://img.shields.io/maven-central/v/ansman/deager.svg)](https://maven-badges.herokuapp.com/maven-central/ansman/deager)
+[![Maven Central](https://img.shields.io/maven-central/v/ansman/auto-dagger.svg)](https://maven-badges.herokuapp.com/maven-central/ansman/auto-dagger)
 
 ### Kotlin Modules
 When using a plain Kotlin module you just need to add two dependencies:
 ```kotlin
 dependencies {
     // This assumes you've already added Hilt and Dagger as dependencies
-    implementation("se.ansman.deager:core:{{gradle.version}}")
-    kapt("se.ansman.deager:compiler:{{gradle.version}}")
+    implementation("se.ansman.dagger.auto:core:{{gradle.version}}")
+    kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
 }
 ```
 
@@ -18,7 +18,7 @@ If your module is an Android module you should instead add the `android` depende
 ```kotlin
 dependencies {
     // This assumes you've already added Hilt and Dagger as dependencies
-    implementation("se.ansman.deager:android:{{gradle.version}}")
-    kapt("se.ansman.deager:compiler:{{gradle.version}}")
+    implementation("se.ansman.dagger.auto:android:{{gradle.version}}")
+    kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
 }
 ```

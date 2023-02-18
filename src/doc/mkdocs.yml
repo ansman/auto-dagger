@@ -1,11 +1,11 @@
-site_name: Deager documentation
+site_name: Auto Dagger documentation
 
-site_description: Deager is a library that allows Dagger singletons to be created before being injected.
+site_description: Auto Dagger allows automating setup when using Dagger and Hilt
 site_author: Nicklas Ansman
-site_url: https://github.com/ansman/deager
+site_url: https://github.com/ansman/auto-dagger
 
-repo_name: deager
-repo_url: https://github.com/ansman/deager
+repo_name: auto-dagger
+repo_url: https://github.com/ansman/auto-dagger
 edit_uri: edit/main/src/doc/docs/
 
 copyright: 'Copyright &copy; 2022-2023 Nicklas Ansman'
@@ -28,7 +28,7 @@ theme:
         name: Switch to light mode
   social:
     - type: 'github'
-      link: 'https://github.com/ansman/deager'
+      link: 'https://github.com/ansman/auto-dagger'
   features:
     - navigation.tracking
     - navigation.top
@@ -71,6 +71,6 @@ nav:
   - Usage: usage.md
   - Limitations: limitations.md
   - About:
-      - Release Notes: https://github.com/ansman/deager/releases
+      - Release Notes: https://github.com/ansman/auto-dagger/releases
       - How It Works: about/how-it-works.md
       - License: about/license.md

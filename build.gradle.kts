@@ -19,7 +19,7 @@ buildscript {
     }
 }
 
-group = "se.ansman.deager"
+group = "se.ansman.dagger.auto"
 val version: String = providers.gradleProperty("version").get()
     .also(::setVersion)
 
@@ -34,8 +34,8 @@ apiValidation {
         "dagger.hilt"
     ))
     ignoredClasses.addAll(setOf(
-        "se.ansman.deager.HiltWrapper_DeagerModule",
-        "se.ansman.deager.android.HiltWrapper_DeagerInitializerEntryPoint",
+        "se.ansman.dagger.auto.HiltWrapper_AutoDaggerInitializeModule",
+        "se.ansman.dagger.auto.android.HiltWrapper_AutoDaggerInitializerEntryPoint",
     ))
     ignoredProjects.addAll(
         subprojects.asSequence()

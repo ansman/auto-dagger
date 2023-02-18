@@ -16,4 +16,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-You can find the full license at [ansman/deager](https://github.com/ansman/deager/blob/main/LICENSE.txt).
+You can find the full license at [ansman/auto-dagger](https://github.com/ansman/auto-dagger/blob/main/LICENSE.txt).

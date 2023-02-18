@@ -1,0 +1,123 @@
+package se.ansman.dagger.auto.renderers
+
+import com.squareup.kotlinpoet.AnnotationSpec
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.CodeBlock
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.MemberName.Companion.member
+import com.squareup.kotlinpoet.ParameterSpec
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.TypeName
+import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.asTypeName
+import dagger.Binds
+import dagger.Lazy
+import dagger.Module
+import dagger.Provides
+import dagger.multibindings.IntoSet
+import se.ansman.dagger.auto.Initializable
+import se.ansman.dagger.auto.applyIf
+import se.ansman.dagger.auto.asClassName
+import se.ansman.dagger.auto.models.AutoInitializeObject
+
+typealias KotlinAutoInitializeObject = AutoInitializeObject<TypeName, AnnotationSpec>
+
+class KotlinAutoInitializeObjectRenderer private constructor(
+    private val moduleName: ClassName,
+    private val initializeObjects: List<KotlinAutoInitializeObject>
+) {
+    constructor(module: ClassName, initializeObjects: Iterable<KotlinAutoInitializeObject>) : this(
+        moduleName = module.peerClass(module.simpleNames.joinToString(separator = "", prefix = "AutoInitialize")),
+        initializeObjects = initializeObjects.toList()
+    )
+
+    constructor(initializeObject: KotlinAutoInitializeObject) : this(
+        moduleName = initializeObject.moduleName(),
+        initializeObjects = listOf(initializeObject)
+    )
+
+    fun render(modifier: TypeSpec.Builder.() -> Unit = {}): FileSpec {
+        val bindings = mutableListOf<FunSpec>()
+        val providers = mutableListOf<FunSpec>()
+
+        for (initializeObject in initializeObjects) {
+            val qualifiers = initializeObject.qualifiers.map { it.toAnnotationSpec() }
+            val methodSpec = FunSpec.builder(initializeObject.method.name)
+                .returns(Initializable::class)
+            val parameterName = initializeObject.targetType
+                .asClassName()
+                .simpleName
+                .replaceFirstChar(Char::lowercaseChar)
+            when (initializeObject.method) {
+                is AutoInitializeObject.Method.Binding -> {
+                    bindings += methodSpec
+                        .addModifiers(KModifier.ABSTRACT)
+                        .addAnnotation(Binds::class)
+                        .addAnnotation(IntoSet::class)
+                        .receiver(initializeObject.targetType)
+                        .addAnnotations(qualifiers.map {
+                            it.toBuilder().useSiteTarget(AnnotationSpec.UseSiteTarget.RECEIVER).build()
+                        })
+                        .build()
+                }
+                is AutoInitializeObject.Method.Provider -> {
+                    val parameter = ParameterSpec
+                        .builder(parameterName, Lazy::class.asTypeName().parameterizedBy(initializeObject.targetType))
+                        .addAnnotations(qualifiers)
+                        .build()
+                    providers += methodSpec
+                        .addAnnotation(Provides::class)
+                        .addAnnotation(IntoSet::class)
+                        .addParameter(parameter)
+                        .addStatement(
+                            "return %N.%M(%L)",
+                            parameter,
+                            Initializable.Companion::class.member("asInitializable"),
+                            if (initializeObject.priority == null) {
+                                CodeBlock.of("")
+                            } else {
+                                CodeBlock.of("priority = %L", initializeObject.priority)
+                            }
+                        )
+                        .build()
+                }
+            }
+        }
+
+        val typeSpec = if (bindings.isNotEmpty()) {
+            TypeSpec.classBuilder(moduleName)
+                .addModifiers(KModifier.ABSTRACT)
+                .addFunction(FunSpec.constructorBuilder()
+                    .addModifiers(KModifier.PRIVATE)
+                    .build())
+                .addFunctions(bindings)
+                .applyIf(providers.isNotEmpty()) {
+                    addType(
+                        TypeSpec.companionObjectBuilder()
+                            .addFunctions(providers)
+                            .build()
+                    )
+                }
+        } else {
+            TypeSpec.objectBuilder(moduleName)
+                .addFunctions(providers)
+        }
+            .addAnnotation(Module::class)
+            .addModifiers(if (initializeObjects.all { it.isPublic }) KModifier.PUBLIC else KModifier.INTERNAL)
+            .apply(modifier)
+            .build()
+
+        return FileSpec.builder(moduleName.packageName, moduleName.simpleName)
+            .addFileComment("Code generated by Auto Dagger. Do not edit.")
+            .addType(typeSpec)
+            .build()
+    }
+}
+
+private fun AutoInitializeObject<TypeName, *>.moduleName(): ClassName =
+    ClassName(
+        targetType.asClassName().packageName,
+        targetType.asClassName().simpleNames.joinToString(prefix = "AutoInitialize", postfix = "Module", separator = "")
+    )
