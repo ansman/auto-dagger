@@ -89,7 +89,7 @@ class KotlinAutoInitializeObjectRenderer private constructor(
         val typeSpec = if (bindings.isNotEmpty()) {
             TypeSpec.classBuilder(moduleName)
                 .addModifiers(KModifier.ABSTRACT)
-                .addFunction(FunSpec.constructorBuilder()
+                .primaryConstructor(FunSpec.constructorBuilder()
                     .addModifiers(KModifier.PRIVATE)
                     .build())
                 .addFunctions(bindings)
