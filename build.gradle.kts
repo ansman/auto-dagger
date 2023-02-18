@@ -1,6 +1,7 @@
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
+import org.jetbrains.kotlin.gradle.report.BuildScanExtensionHolder
 
 plugins {
     `version-catalog`
@@ -117,4 +118,9 @@ tasks.dokkaHtmlMultiModule {
         version = providers.gradleProperty("version").get()
         olderVersionsDir = olderVersionsFolder
     }
+}
+
+extensions.findByName("buildScan")?.withGroovyBuilder {
+    setProperty("termsOfServiceUrl", "https://gradle.com/terms-of-service")
+    setProperty("termsOfServiceAgree", "yes")
 }
