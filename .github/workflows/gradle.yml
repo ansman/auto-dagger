@@ -22,11 +22,16 @@ jobs:
         distribution: 'zulu'
         java-version: '19'
 
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
+    - name: Cache Python
+      uses: actions/cache@v3
+      with:
+        key: ${{ runner.os }}-python-${{ env.cache-name }}-${{ hashFiles('libs.versions.toml', 'build.gradle.kts') }}
+        path: .gradle/python
 
     - name: Run Checks
-      run: ./gradlew check --continue --stacktrace --scan
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: check --continue --stacktrace --scan
 
   deploy-snapshot:
     runs-on: ubuntu-latest
@@ -40,11 +45,10 @@ jobs:
         distribution: 'zulu'
         java-version: '19'
 
-    - name: Setup Gradle
+    - name: Deploy Snapshot
       uses: gradle/gradle-build-action@v2
-
-    - name: Deploy snapshot
-      run: ./gradlew publishAllPublicationsToSonatypeSnapshotsRepository --stacktrace
+      with:
+        arguments: publishAllPublicationsToSonatypeSnapshotsRepository --stacktrace
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
