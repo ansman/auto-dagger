@@ -33,15 +33,18 @@ abstract class AutoDaggerCompilation(protected val workingDir: File) {
     inner class Result(private val result: KotlinCompilation.Result) {
         val exitCode: KotlinCompilation.ExitCode get() = result.exitCode
         val messages: String get() = result.messages
+        private val errorMessage = filesGeneratedByAnnotationProcessor.joinToString(prefix = "$messages\n\n", separator = "\n\n") {
+            "${it.name}:\n${it.readText()}"
+        }
 
         val filesGeneratedByAnnotationProcessor: Sequence<File> get() = result.filesGeneratedByAnnotationProcessor
 
         fun assertIsSuccessful() {
-            assertEquals(KotlinCompilation.ExitCode.OK, exitCode, messages)
+            assertEquals(KotlinCompilation.ExitCode.OK, exitCode, errorMessage)
         }
 
         fun assertFailedWithMessage(message: String) {
-            assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, exitCode, messages)
+            assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, exitCode, errorMessage)
             assertThat(messages).contains(message)
         }
 
@@ -51,7 +54,7 @@ abstract class AutoDaggerCompilation(protected val workingDir: File) {
 
         fun readGeneratedFile(name: String): String =
             requireNotNull(findGeneratedFile(name)) {
-                "No file was generated with name $name. Generated files: ${filesGeneratedByAnnotationProcessor.joinToString { it.name }}\n$messages".trim()
+                "No file was generated with name $name. Generated files: ${filesGeneratedByAnnotationProcessor.joinToString { it.name }}\n$errorMessage".trim()
             }.readText().trim()
 
         fun loadClass(className: String): Class<*> = result.classLoader.loadClass(className)

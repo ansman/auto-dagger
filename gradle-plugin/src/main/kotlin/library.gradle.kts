@@ -30,6 +30,9 @@ tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "11"
         allWarningsAsErrors = true
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-Xcontext-receivers"
+        )
     }
 }
 

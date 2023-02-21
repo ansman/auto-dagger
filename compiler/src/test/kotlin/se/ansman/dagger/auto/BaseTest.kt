@@ -35,13 +35,14 @@ abstract class BaseTest(
                         testName = name,
                         compilation = compilation(tempDirectory.resolve(name).apply { mkdirsOrThrow() }),
                         sources = Files.list(test)
+                            .asSequence()
                             .filter { it.isRegularFile() }
                             .map(Path::toFile)
                             .map(TestSourceFile::File)
                             .toList(),
                         expectedFiles = Files.list(expectedDirectory)
                             .asSequence()
-                            .associateBy({ it.fileName.toString() }, { it.readText() })
+                            .associateBy({ it.fileName.toString().removeSuffix(".txt") }, { it.readText() })
                     )
                 )
             }
