@@ -11,5 +11,6 @@ import javax.lang.model.SourceVersion
 @IncrementalAnnotationProcessor(IncrementalAnnotationProcessorType.ISOLATING)
 class AutoDaggerAnnotationProcessor : BasicAnnotationProcessor() {
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
-    override fun steps(): Iterable<Step> = listOf(AutoInitializeStep(processingEnv))
+    override fun steps(): Iterable<Step> =
+        listOf(AutoInitializeStep(processingEnv))
 }

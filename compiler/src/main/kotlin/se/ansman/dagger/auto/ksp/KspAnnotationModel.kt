@@ -7,46 +7,40 @@ import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSName
 import com.google.devtools.ksp.symbol.KSType
 import com.google.devtools.ksp.symbol.KSTypeAlias
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.AnnotationSpec
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.ksp.toClassName
-import se.ansman.dagger.auto.applyEach
-import se.ansman.dagger.auto.models.AnnotationModel
+import se.ansman.dagger.auto.applyEachIndexed
 import java.util.Locale
-import kotlin.reflect.KClass
 
-class KspAnnotationModel(private val annotation: KSAnnotation) : AnnotationModel<AnnotationSpec> {
-    override val declaredAnnotations: List<KspAnnotationModel> by lazy {
-        annotation.annotationType.resolve().declaration.annotations.map(::KspAnnotationModel).toList()
-    }
-
-    override fun isOfType(type: KClass<*>): Boolean =
-        annotation.shortName.asString() == type.simpleName &&
-                type.asClassName() == annotation.annotationType.resolve().toClassName()
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : Any> getValue(name: String): T? =
-        annotation.arguments.find { it.name?.asString() == name }
-            ?.takeUnless { it.isDefault() }
-            ?.value as T?
-
-    override fun toAnnotationSpec(): AnnotationSpec = annotation.toAnnotationSpec()
-}
-
-private fun KSAnnotation.toAnnotationSpec(): AnnotationSpec =
+/**
+ * A version of `toAnnotationSpec` that fixes char arguments.
+ *
+ * Can be removed in favor for `toAnnotationSpec` after 1.12
+ */
+fun KSAnnotation.toAnnotationSpecFixed(): AnnotationSpec =
     AnnotationSpec
         .builder(annotationType.resolve().unwrapTypeAlias().toClassName())
-        .applyEach(arguments) { argument ->
+        .applyEachIndexed(arguments) { i, argument ->
             if (argument.isDefault()) {
-                return@applyEach
+                return@applyEachIndexed
             }
-            addMember(CodeBlock.builder()
-                .add("%N = ", argument.name!!.getShortName())
-                .addAnnotationValue(argument.value!!)
-                .build())
+            addMember(
+                CodeBlock.builder()
+                    .apply {
+                        val name = argument.name!!.getShortName()
+                        if (i > 0 || name != "value") {
+                            add("%N = ", name)
+                        }
+                    }
+                    .addAnnotationValue(argument.value!!)
+                    .build()
+            )
         }
         .build()
 
-private fun KSType.unwrapTypeAlias(): KSType = (declaration as? KSTypeAlias)?.type?.resolve() ?: this
+fun KSType.unwrapTypeAlias(): KSType = (declaration as? KSTypeAlias)?.type?.resolve() ?: this
 
 private fun CodeBlock.Builder.addAnnotationValue(value: Any): CodeBlock.Builder =
     when (value) {
@@ -58,6 +52,7 @@ private fun CodeBlock.Builder.addAnnotationValue(value: Any): CodeBlock.Builder 
             }
             add("]")
         }
+
         is KSType -> {
             val unwrapped = value.unwrapTypeAlias()
             if ((unwrapped.declaration as KSClassDeclaration).classKind == ClassKind.ENUM_ENTRY) {
@@ -68,8 +63,9 @@ private fun CodeBlock.Builder.addAnnotationValue(value: Any): CodeBlock.Builder 
                 add("%T::class", unwrapped.toClassName())
             }
         }
+
         is KSName -> add("%T.%L", ClassName.bestGuess(value.getQualifier()), value.getShortName())
-        is KSAnnotation -> add("%L", value.toAnnotationSpec())
+        is KSAnnotation -> add("%L", value.toAnnotationSpecFixed())
         else -> add(memberForValue(value))
     }
 
