@@ -12,8 +12,8 @@ import dagger.hilt.components.SingletonComponent;
 @OriginatingElement(
     topLevelClass = RealRepository.class
 )
-public abstract class AutoBindRealRepositorySingletonComponentModule {
-  private AutoBindRealRepositorySingletonComponentModule() {
+public abstract class AutoBindRealRepositorySingletonModule {
+  private AutoBindRealRepositorySingletonModule() {
   }
 
   @Binds

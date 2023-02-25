@@ -10,7 +10,7 @@ import dagger.hilt.codegen.OriginatingElement
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = RealFragmentHelper::class)
-public abstract class AutoBindRealFragmentHelperFragmentComponentModule private constructor() {
+public abstract class AutoBindRealFragmentHelperFragmentModule private constructor() {
   @Binds
   public abstract fun RealFragmentHelper.bindRealFragmentHelperAsFragmentHelper(): FragmentHelper
 }

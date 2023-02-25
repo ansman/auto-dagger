@@ -12,8 +12,8 @@ import dagger.hilt.codegen.OriginatingElement;
 @OriginatingElement(
     topLevelClass = RealFragmentHelper.class
 )
-public abstract class AutoBindRealFragmentHelperFragmentComponentModule {
-  private AutoBindRealFragmentHelperFragmentComponentModule() {
+public abstract class AutoBindRealFragmentHelperFragmentModule {
+  private AutoBindRealFragmentHelperFragmentModule() {
   }
 
   @Binds
