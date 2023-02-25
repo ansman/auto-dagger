@@ -14,8 +14,8 @@ import dagger.multibindings.IntoSet;
 @OriginatingElement(
     topLevelClass = RealType.class
 )
-public abstract class AutoBindRealTypeSingletonComponentModule {
-  private AutoBindRealTypeSingletonComponentModule() {
+public abstract class AutoBindRealTypeSingletonModule {
+  private AutoBindRealTypeSingletonModule() {
   }
 
   @Binds

@@ -1,6 +1,7 @@
 package se.ansman.dagger.auto.renderers
 
 import se.ansman.dagger.auto.applyEach
+import se.ansman.dagger.auto.deleteSuffix
 import se.ansman.dagger.auto.models.AutoBindObject
 import se.ansman.dagger.auto.processing.RenderEngine
 import se.ansman.dagger.auto.processing.rootPeerClass
@@ -41,6 +42,7 @@ abstract class AutoBindModuleRenderer<Node, TypeName, ClassName : TypeName, Anno
                 append("AutoBind")
                 simpleNames(sourceType).joinTo(this, "")
                 simpleNames(targetComponent).joinTo(this, "")
+                deleteSuffix("Component")
                 append("Module")
             })
         }
