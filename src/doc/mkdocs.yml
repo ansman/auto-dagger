@@ -1,6 +1,6 @@
-site_name: Auto Dagger documentation
+site_name: Auto Dagger
 
-site_description: Auto Dagger allows automating setup when using Dagger and Hilt
+site_description: Automatic Dagger setup using Hilt
 site_author: Nicklas Ansman
 site_url: https://github.com/ansman/auto-dagger
 
