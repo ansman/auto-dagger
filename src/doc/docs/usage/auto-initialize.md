@@ -1,4 +1,4 @@
-# Usage
+# `@AutoInitialize` Usage 
 Simply annotate any `@Singleton` scoped object, provider or binding with `@AutoInitialize` to make it be automatically 
 initialized when your application launches.
 
@@ -49,13 +49,13 @@ at startup.
 
 If you prefer to not use this you can just depend on the `core` artifact which won't pull in AndroidX Startup.
 
-To initialize the objects manually, use `AutoDaggerInitializable`.
+To initialize the objects manually, use `AutoDaggerInitializer`.
 
 ```kotlin
 @HiltAndroidApp
 class TheApp : Application() {
     @Inject
-    lateinit var initializer: AutoDaggerInitializable
+    lateinit var initializer: AutoDaggerInitializer
     
     override fun onCreate() {
         super.onCreate()
