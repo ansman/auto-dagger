@@ -156,8 +156,10 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
             ?.takeUnless { it.isEmpty() }
             ?.mapTo(mutableSetOf()) { it.className }
             ?: return supertypes.map { it.toTypeName() }.toList().also {
-                if (it.isEmpty()) {
-                    environment.logError(Errors.AutoBind.noSuperTypes, this)
+                when (it.size) {
+                    0 -> environment.logError(Errors.AutoBind.noSuperTypes, this)
+                    1 -> { /* OK */ }
+                    else -> environment.logError(Errors.AutoBind.multipleSuperTypes, this)
                 }
             }
 
