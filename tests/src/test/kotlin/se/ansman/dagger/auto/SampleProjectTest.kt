@@ -3,6 +3,7 @@ package se.ansman.dagger.auto
 import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import assertk.assertions.isSameAs
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
@@ -13,6 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import java.io.Closeable
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -25,6 +27,18 @@ class SampleProjectTest {
 
     @Inject
     lateinit var initializableProvider: Provider<AutoDaggerInitializer>
+
+    @Inject
+    lateinit var repository: Provider<Repository>
+
+    @Inject
+    lateinit var closeable: Provider<Closeable>
+
+    @Inject
+    lateinit var closeables: Provider<Set<@JvmSuppressWildcards Closeable>>
+
+    @Inject
+    lateinit var bindingKeys: Provider<Map<String, @JvmSuppressWildcards Closeable>>
 
     @Before
     fun setup() {
@@ -97,5 +111,14 @@ class SampleProjectTest {
 
         initializer.initialize()
         assertThat(QualifiedThing.Companion::createCount).isEqualTo(1)
+    }
+
+    @Test
+    fun `auto bind works`() {
+        assertAll {
+            assertThat(closeable.get()).isSameAs(repository.get())
+            assertThat(closeables.get()).isEqualTo(setOf(repository.get()))
+            assertThat(bindingKeys.get()).isEqualTo(mapOf("test" to repository.get()))
+        }
     }
 }

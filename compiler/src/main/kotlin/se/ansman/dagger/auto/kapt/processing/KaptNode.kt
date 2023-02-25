@@ -9,9 +9,9 @@ import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 
 sealed class KaptNode : Node<Element, TypeName, ClassName, AnnotationSpec> {
-    abstract val processing: KaptProcessing
+    abstract val resolver: KaptResolver
     override val annotations: List<KaptAnnotationModel> by lazy(LazyThreadSafetyMode.NONE) {
-        node.annotationMirrors.map(::KaptAnnotationModel)
+        node.annotationMirrors.map { (KaptAnnotationModel(it, resolver)) }
     }
 
     override val isPublic: Boolean
@@ -22,6 +22,6 @@ sealed class KaptNode : Node<Element, TypeName, ClassName, AnnotationSpec> {
         node.enclosingElement
             ?.takeIf { it.kind.isClass || it.kind.isInterface }
             ?.let(MoreElements::asType)
-            ?.let { KaptClassDeclaration(it, processing) }
+            ?.let { KaptClassDeclaration(it, resolver) }
     }
 }

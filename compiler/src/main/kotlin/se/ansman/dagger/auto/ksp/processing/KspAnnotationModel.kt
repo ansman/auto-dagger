@@ -2,6 +2,9 @@ package se.ansman.dagger.auto.ksp.processing
 
 import com.google.devtools.ksp.isDefault
 import com.google.devtools.ksp.symbol.KSAnnotation
+import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.google.devtools.ksp.symbol.KSType
+import com.google.devtools.ksp.symbol.KSValueArgument
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.asClassName
@@ -10,7 +13,10 @@ import se.ansman.dagger.auto.ksp.toAnnotationSpecFixed
 import se.ansman.dagger.auto.processing.AnnotationModel
 import kotlin.reflect.KClass
 
-class KspAnnotationModel(private val annotation: KSAnnotation) : AnnotationModel<ClassName, AnnotationSpec> {
+class KspAnnotationModel(
+    private val annotation: KSAnnotation,
+    private val resolver: KspResolver,
+) : AnnotationModel<ClassName, AnnotationSpec> {
     private val className by lazy(LazyThreadSafetyMode.NONE) {
         annotation.annotationType.resolve().toClassName()
     }
@@ -19,7 +25,7 @@ class KspAnnotationModel(private val annotation: KSAnnotation) : AnnotationModel
         get() = className.canonicalName
 
     override val declaredAnnotations: List<KspAnnotationModel> by lazy(LazyThreadSafetyMode.NONE) {
-        annotation.annotationType.resolve().declaration.annotations.map(::KspAnnotationModel).toList()
+        annotation.annotationType.resolve().declaration.annotations.map { KspAnnotationModel(it, resolver) }.toList()
     }
 
     override fun isOfType(type: KClass<out Annotation>): Boolean =
@@ -32,7 +38,26 @@ class KspAnnotationModel(private val annotation: KSAnnotation) : AnnotationModel
     override fun <T : Any> getValue(name: String): T? =
         annotation.arguments.find { it.name?.asString() == name }
             ?.takeUnless { it.isDefault() }
-            ?.value as T?
+            ?.convertedValue as T?
 
     override fun toAnnotationSpec(): AnnotationSpec = annotation.toAnnotationSpecFixed()
+
+    private val KSValueArgument.convertedValue: Any?
+        get() {
+            fun Any.convert(): Any = when (this) {
+                is Boolean,
+                is Byte,
+                is Char,
+                is Short,
+                is Int,
+                is Long,
+                is Float,
+                is Double,
+                is String -> this
+                is List<*> -> map { it!!.convert() }
+                is KSType -> KspClassDeclaration(declaration as KSClassDeclaration, resolver)
+                else -> throw UnsupportedOperationException("Annotation value of type $javaClass isn't supported")
+            }
+            return value?.convert()
+        }
 }

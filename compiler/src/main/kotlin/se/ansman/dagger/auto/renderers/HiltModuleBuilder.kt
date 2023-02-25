@@ -28,11 +28,11 @@ interface HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeB
 
     fun build(): SourceFile
 
-    sealed class Parameter<TypeName, AnnotationSpec> {
+    sealed class Parameter<out TypeName, AnnotationSpec> {
         abstract val qualifiers: Set<AnnotationSpec>
     }
 
-    data class Lazy<TypeName, AnnotationSpec>(
+    data class Lazy<out TypeName, AnnotationSpec>(
         val type: Parameter<TypeName, AnnotationSpec>,
     ) : Parameter<TypeName, AnnotationSpec>() {
         override val qualifiers: Set<AnnotationSpec> get() = type.qualifiers
@@ -43,7 +43,7 @@ interface HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeB
         ) : this(DaggerType(type, qualifiers))
     }
 
-    data class Provider<TypeName, AnnotationSpec>(
+    data class Provider<out TypeName, AnnotationSpec>(
         val type: Parameter<TypeName, AnnotationSpec>,
     ) : Parameter<TypeName, AnnotationSpec>() {
         override val qualifiers: Set<AnnotationSpec> get() = type.qualifiers
@@ -54,7 +54,7 @@ interface HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeB
         ) : this(DaggerType(type, qualifiers))
     }
 
-    data class DaggerType<TypeName, AnnotationSpec>(
+    data class DaggerType<out TypeName, AnnotationSpec>(
         val type: TypeName,
         override val qualifiers: Set<AnnotationSpec> = emptySet(),
     ) : Parameter<TypeName, AnnotationSpec>()

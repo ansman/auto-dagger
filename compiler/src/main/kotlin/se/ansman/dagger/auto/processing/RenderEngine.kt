@@ -5,14 +5,15 @@ import kotlin.reflect.KClass
 interface RenderEngine<TypeName, ClassName : TypeName, AnnotationSpec> {
     fun className(packageName: String, simpleName: String): ClassName
     fun className(qualifiedName: String): ClassName
+    fun className(type: KClass<*>): ClassName
 
-    val ClassName.simpleName: String
-    val ClassName.simpleNames: List<String>
-    val ClassName.packageName: String
-    val ClassName.topLevelClassName: ClassName
-    fun ClassName.peerClass(name: String): ClassName
+    fun simpleName(className: ClassName): String
+    fun simpleNames(className: ClassName): List<String>
+    fun packageName(className: ClassName): String
+    fun topLevelClassName(className: ClassName): ClassName
 
-    val TypeName.rawType: ClassName
-
-    fun KClass<*>.toClassName(): ClassName
+    fun rawType(typeName: TypeName): ClassName
 }
+
+fun <ClassName> RenderEngine<*, ClassName, *>.rootPeerClass(className: ClassName, name: String): ClassName =
+    className(packageName(className), name)

@@ -11,13 +11,15 @@ import kotlin.reflect.KClass
 
 data class KaptType(
     val mirror: TypeMirror,
-    val processing: KaptProcessing,
+    val resolver: KaptResolver,
 ) : Type<Element, TypeName, ClassName, AnnotationSpec> {
     override val declaration: KaptClassDeclaration by lazy(LazyThreadSafetyMode.NONE) {
-        KaptClassDeclaration(MoreTypes.asTypeElement(mirror), processing)
+        KaptClassDeclaration(MoreTypes.asTypeElement(mirror), resolver)
     }
 
     override fun toTypeName(): TypeName = TypeName.get(mirror)
-    override fun isAssignableTo(type: KClass<*>): Boolean =
-        processing.environment.typeUtils.isAssignable(mirror, processing.typeLookup[type].asType())
+    override fun isAssignableTo(type: ClassName): Boolean = isAssignableTo(type.canonicalName())
+    override fun isAssignableTo(type: KClass<*>): Boolean = isAssignableTo(type.qualifiedName!!)
+    private fun isAssignableTo(type: String): Boolean =
+        resolver.environment.environment.typeUtils.isAssignable(mirror, resolver.typeLookup[type].asType().mirror)
 }

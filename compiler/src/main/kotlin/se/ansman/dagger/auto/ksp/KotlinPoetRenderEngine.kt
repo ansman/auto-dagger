@@ -12,36 +12,24 @@ import com.squareup.kotlinpoet.asClassName
 import se.ansman.dagger.auto.processing.RenderEngine
 import kotlin.reflect.KClass
 
-@Suppress("EXTENSION_SHADOWED_BY_MEMBER")
 object KotlinPoetRenderEngine : RenderEngine<TypeName, ClassName, AnnotationSpec> {
     override fun className(packageName: String, simpleName: String): ClassName = ClassName(packageName, simpleName)
-
     override fun className(qualifiedName: String): ClassName = ClassName.bestGuess(qualifiedName)
+    override fun className(type: KClass<*>): ClassName = type.asClassName()
 
-    override fun KClass<*>.toClassName(): ClassName = asClassName()
+    override fun topLevelClassName(className: ClassName): ClassName = className.topLevelClassName()
+    override fun packageName(className: ClassName): String = className.packageName
+    override fun simpleNames(className: ClassName): List<String> = className.simpleNames
+    override fun simpleName(className: ClassName): String = className.simpleName
 
-    override val TypeName.rawType: ClassName
-        get() = when (this) {
-            is ClassName -> this
-            is ParameterizedTypeName -> rawType
+    override fun rawType(typeName: TypeName): ClassName =
+        when (typeName) {
+            is ClassName -> typeName
+            is ParameterizedTypeName -> typeName.rawType
             Dynamic,
             is LambdaTypeName,
             is TypeVariableName,
-            is WildcardTypeName -> throw IllegalArgumentException("Type $javaClass isn't supported")
+            is WildcardTypeName,
+            -> throw IllegalArgumentException("Type ${typeName.javaClass} isn't supported")
         }
-
-    override fun ClassName.peerClass(name: String): ClassName = peerClass(name)
-
-    override val ClassName.topLevelClassName: ClassName
-        get() = topLevelClassName()
-
-    override val ClassName.packageName: String
-        get() = packageName
-
-    override val ClassName.simpleNames: List<String>
-        get() = simpleNames
-
-    override val ClassName.simpleName: String
-        get() = simpleName
-
 }

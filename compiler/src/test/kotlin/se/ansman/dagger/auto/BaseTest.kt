@@ -1,7 +1,11 @@
 package se.ansman.dagger.auto
 
 import org.jetbrains.kotlin.incremental.mkdirsOrThrow
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.DynamicContainer
+import org.junit.jupiter.api.DynamicNode
 import org.junit.jupiter.api.DynamicTest
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.io.TempDir
@@ -20,8 +24,21 @@ abstract class BaseTest(
     private val compilation: (tempDirectory: File) -> AutoDaggerCompilation
 ) {
     @TestFactory
-    open fun `tests from resources`(@TempDir tempDirectory: File): Collection<DynamicTest> =
+    fun resources(@TempDir tempDirectory: File): Iterable<DynamicNode> =
         Files.list(ClassLoader.getSystemResource("tests").toURI().toPath())
+            .asSequence()
+            .map { type ->
+                val typeName = type.fileName.toString()
+                DynamicContainer.dynamicContainer(
+                    typeName,
+                    testsFromResources(tempDirectory.resolve(typeName), typeName)
+                )
+            }
+            .ifEmpty { error("No tests found") }
+            .asIterable()
+
+    private fun testsFromResources(tempDirectory: File, type: String): Iterable<DynamicTest> =
+        Files.list(ClassLoader.getSystemResource("tests/$type").toURI().toPath())
             .asSequence()
             .mapNotNull { test ->
                 val name = test.fileName.toString()
@@ -46,30 +63,33 @@ abstract class BaseTest(
                     )
                 )
             }
-            .toList()
-            .also { check(it.isNotEmpty()) { "No tests found" } }
+            .ifEmpty { error("No tests found") }
+            .asIterable()
 
-    @Test
-    fun `the annotated class must be scoped`(@TempDir tempDirectory: File) {
-        compilation(tempDirectory)
-            .compile(
-                """
+    @Nested
+    @DisplayName("Auto Initialize")
+    inner class AutoInitializeTestCase {
+        @Test
+        fun `the annotated class must be scoped`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
                     package se.ansman
         
                     object Outer {
                       @se.ansman.dagger.auto.AutoInitialize(priority = 4711)
                       class SomeThing @javax.inject.Inject constructor()
                     }
-                """
-            )
-            .assertFailedWithMessage(Errors.unscopedType)
-    }
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoInitialize.unscopedType)
+        }
 
-    @Test
-    fun `the annotated class can only be scoped with @Singleton`(@TempDir tempDirectory: File) {
-        compilation(tempDirectory)
-            .compile(
-                """
+        @Test
+        fun `the annotated class can only be scoped with @Singleton`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
                     package se.ansman
                     
                     @javax.inject.Scope
@@ -78,16 +98,16 @@ abstract class BaseTest(
                     @se.ansman.dagger.auto.AutoInitialize
                     @SomeScope
                     class SomeThing @javax.inject.Inject constructor()
-                """
-            )
-            .assertFailedWithMessage(Errors.wrongScope)
-    }
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoInitialize.wrongScope)
+        }
 
-    @Test
-    fun `the annotated method must be a provider or a binding`(@TempDir tempDirectory: File) {
-        compilation(tempDirectory)
-            .compile(
-                """
+        @Test
+        fun `the annotated method must be a provider or a binding`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
                     package se.ansman
             
                     @dagger.Module
@@ -96,32 +116,32 @@ abstract class BaseTest(
                         @javax.inject.Singleton
                         fun provideString(): String = "string"
                     }
-                """
-            )
-            .assertFailedWithMessage(Errors.invalidAnnotatedMethod)
-    }
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoInitialize.invalidAnnotatedMethod)
+        }
 
-    @Test
-    fun `the annotated method must not be top level`(@TempDir tempDirectory: File) {
-        compilation(tempDirectory)
-            .compile(
-                """
+        @Test
+        fun `the annotated method must not be top level`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
                     package se.ansman
             
                     @dagger.Provides
                     @se.ansman.dagger.auto.AutoInitialize
                     @javax.inject.Singleton
                     fun provideString(): String = "string"
-                """
-            )
-            .assertFailedWithMessage(Errors.methodInNonModule)
-    }
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoInitialize.methodInNonModule)
+        }
 
-    @Test
-    fun `the annotated method must not be in a module`(@TempDir tempDirectory: File) {
-        compilation(tempDirectory)
-            .compile(
-                """
+        @Test
+        fun `the annotated method must not be in a module`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
                     package se.ansman
             
                     object SomeModule {
@@ -130,8 +150,83 @@ abstract class BaseTest(
                         @javax.inject.Singleton
                         fun provideString(): String = "string"
                     }
-                """
-            )
-            .assertFailedWithMessage(Errors.methodInNonModule)
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoInitialize.methodInNonModule)
+        }
+    }
+
+    @Nested
+    @DisplayName("Auto Bind")
+    inner class AutoBindTestCase {
+        @Test
+        fun `supertype must not be generic`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.AutoBind
+                    class SomeThing<T> : Runnable
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.genericType)
+        }
+        
+        @Test
+        fun `no supertypes`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.AutoBind
+                    class SomeThing
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.noSuperTypes)
+        }
+
+        @Test
+        fun `invalid asTypes`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.AutoBind(asTypes = [Runnable::class])
+                    class SomeThing
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.missingBoundType("java.lang.Runnable"))
+        }
+
+        @Test
+        fun `indirect supertype`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.AutoBind(asTypes = [AutoCloseable::class])
+                    class SomeThing : java.io.Closeable
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.missingDirectSuperType("java.lang.AutoCloseable"))
+        }
+
+        @Test
+        fun `missing binding key`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.AutoBindIntoMap
+                    class SomeThing : java.io.Closeable
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.missingBindingKey)
+        }
     }
 }

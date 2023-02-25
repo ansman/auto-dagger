@@ -4,24 +4,21 @@ import com.google.auto.common.MoreElements
 import com.google.common.collect.ImmutableSetMultimap
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
-import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.TypeName
 import se.ansman.dagger.auto.TypeLookup
-import se.ansman.dagger.auto.kapt.JavaPoetRenderEngine
-import se.ansman.dagger.auto.processing.AutoDaggerProcessing
-import se.ansman.dagger.auto.processing.RenderEngine
-import javax.annotation.processing.ProcessingEnvironment
+import se.ansman.dagger.auto.processing.AutoDaggerResolver
+import se.ansman.dagger.auto.processing.ClassDeclaration
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
-import javax.tools.Diagnostic
 import kotlin.reflect.KClass
 
-class KaptProcessing(
-    val environment: ProcessingEnvironment,
+class KaptResolver(
+    val environment: KaptEnvironment,
     private val annotatedElements: ImmutableSetMultimap<String, Element>,
-) : AutoDaggerProcessing<Element, TypeName, ClassName, AnnotationSpec, JavaFile> {
-    override val renderEngine: RenderEngine<TypeName, ClassName, AnnotationSpec> get() = JavaPoetRenderEngine
-    val typeLookup = TypeLookup(environment.elementUtils::getTypeElement)
+) : AutoDaggerResolver<Element, TypeName, ClassName, AnnotationSpec> {
+    override val typeLookup = TypeLookup { className ->
+        KaptClassDeclaration(environment.typeLookup[className], this)
+    }
 
     @Suppress("UnstableApiUsage")
     override fun nodesAnnotatedWith(annotation: KClass<out Annotation>): Sequence<KaptNode> =
@@ -34,17 +31,12 @@ class KaptProcessing(
                     KaptFunction(MoreElements.asExecutable(element), this)
 
                 else -> {
-                    logError("Unknown element kind ${element.kind}", element)
+                    environment.logError("Unknown element kind ${element.kind}", element)
                     null
                 }
             }
         }
 
-    override fun logError(message: String, node: Element) {
-        environment.messager.printMessage(Diagnostic.Kind.ERROR, "Auto Dagger: $message", node)
-    }
-
-    override fun write(file: JavaFile) {
-        file.writeTo(environment.filer)
-    }
+    override fun lookupType(className: ClassName): ClassDeclaration<Element, TypeName, ClassName, AnnotationSpec> =
+        typeLookup[className.canonicalName()]
 }

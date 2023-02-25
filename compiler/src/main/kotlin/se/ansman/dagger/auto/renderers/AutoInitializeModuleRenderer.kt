@@ -4,9 +4,10 @@ import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.Initializable
 import se.ansman.dagger.auto.models.AutoInitializeModule
 import se.ansman.dagger.auto.models.AutoInitializeObject
-import kotlin.reflect.KClass
+import se.ansman.dagger.auto.processing.RenderEngine
 
 abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>(
+    private val renderEngine: RenderEngine<TypeName, ClassName, AnnotationSpec>,
     private val createBuilder: (
         moduleName: ClassName,
         installInComponent: ClassName,
@@ -15,7 +16,7 @@ abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName
 ) : Renderer<AutoInitializeModule<Node, TypeName, ClassName, AnnotationSpec>, SourceFile> {
 
     final override fun render(input: AutoInitializeModule<Node, TypeName, ClassName, AnnotationSpec>): SourceFile =
-        createBuilder(input.moduleName, createClassName(singletonComponent), input.topLevelClassName)
+        createBuilder(input.moduleName, renderEngine.className(singletonComponent), input.topLevelClassName)
             .apply {
                 for (obj in input.objects) {
                     when (obj.method) {
@@ -24,7 +25,7 @@ abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName
                                 name = obj.method.name,
                                 parameters = listOf(HiltModuleBuilder.Lazy(obj.targetType, obj.qualifiers)),
                                 mode = HiltModuleBuilder.ProviderMode.IntoSet,
-                                returnType = HiltModuleBuilder.DaggerType(createClassName(initializable)),
+                                returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),
                                 isPublic = obj.isPublic,
                                 originatingElement = obj.originatingElement,
                             ) { (parameter) -> obj.createProviderCode(parameter) }
@@ -34,7 +35,7 @@ abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName
                             name = obj.method.name,
                             sourceType = HiltModuleBuilder.DaggerType(obj.targetType, obj.qualifiers),
                             mode = HiltModuleBuilder.ProviderMode.IntoSet,
-                            returnType = HiltModuleBuilder.DaggerType(createClassName(initializable)),
+                            returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),
                             isPublic = obj.isPublic,
                             originatingElement = obj.originatingElement
                         )
@@ -45,7 +46,6 @@ abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName
             .build()
 
     abstract fun AutoInitializeObject<Node, TypeName, AnnotationSpec>.createProviderCode(parameter: ParameterSpec): CodeBlock
-    abstract fun createClassName(type: KClass<*>): ClassName
 
     companion object {
         private val singletonComponent = SingletonComponent::class

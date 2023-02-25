@@ -8,10 +8,10 @@ import com.squareup.kotlinpoet.TypeName
 import se.ansman.dagger.auto.processing.Node
 
 sealed class KspNode : Node<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
-    protected abstract val processing: KspProcessing
+    abstract val resolver: KspResolver
 
     override val annotations: List<KspAnnotationModel> by lazy(LazyThreadSafetyMode.NONE) {
-        node.annotations.map(::KspAnnotationModel).toList()
+        node.annotations.map { KspAnnotationModel(it, resolver) }.toList()
     }
 
     override val isPublic: Boolean

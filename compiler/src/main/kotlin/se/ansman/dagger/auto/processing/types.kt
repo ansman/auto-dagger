@@ -17,6 +17,7 @@ interface Type<N, TypeName, ClassName : TypeName, AnnotationSpec> {
     val declaration: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>
     fun toTypeName(): TypeName
     fun isAssignableTo(type: KClass<*>): Boolean
+    fun isAssignableTo(type: ClassName): Boolean
 }
 
 interface Property<N, TypeName, ClassName : TypeName, AnnotationSpec> : Node<N, TypeName, ClassName, AnnotationSpec> {
@@ -35,11 +36,12 @@ interface Function<N, TypeName, ClassName : TypeName, AnnotationSpec> : Node<N, 
 }
 
 interface ClassDeclaration<N, TypeName, ClassName : TypeName, AnnotationSpec> : Node<N, TypeName, ClassName, AnnotationSpec> {
-    val supertypes: Sequence<Type<N, TypeName, ClassName, AnnotationSpec>>
+    val className: ClassName
+    val supertypes: List<Type<N, TypeName, ClassName, AnnotationSpec>>
     val isCompanionObject: Boolean
+    val isGeneric: Boolean
     val superclass: Type<N, TypeName, ClassName, AnnotationSpec>?
     override val enclosingType: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>?
-    fun toClassName(): ClassName
     fun asType(): Type<N, TypeName, ClassName, AnnotationSpec>
 }
 

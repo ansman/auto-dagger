@@ -12,14 +12,18 @@ import kotlin.reflect.KClass
 
 data class KspType(
     val node: KSType,
-    val processing: KspProcessing,
+    private val resolver: KspResolver,
 ) : Type<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
     override val declaration: KspClassDeclaration by lazy(LazyThreadSafetyMode.NONE) {
-        KspClassDeclaration(node.unwrapTypeAlias().declaration as KSClassDeclaration, processing)
+        KspClassDeclaration(node.unwrapTypeAlias().declaration as KSClassDeclaration, resolver)
     }
 
     override fun toTypeName(): TypeName = node.toTypeName()
 
-    override fun isAssignableTo(type: KClass<*>): Boolean =
-        processing.typeLookup[type].asStarProjectedType().isAssignableFrom(node)
+    override fun isAssignableTo(type: KClass<*>): Boolean = isAssignableTo(type.qualifiedName!!)
+
+    override fun isAssignableTo(type: ClassName): Boolean = isAssignableTo(type.canonicalName)
+
+    private fun isAssignableTo(type: String): Boolean =
+        resolver.typeLookup[type].node.asStarProjectedType().isAssignableFrom(node)
 }

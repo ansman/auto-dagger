@@ -1,3 +1,18 @@
+public abstract interface annotation class se/ansman/dagger/auto/AutoBind : java/lang/annotation/Annotation {
+	public abstract fun asTypes ()[Ljava/lang/Class;
+	public abstract fun inComponent ()Ljava/lang/Class;
+}
+
+public abstract interface annotation class se/ansman/dagger/auto/AutoBindIntoMap : java/lang/annotation/Annotation {
+	public abstract fun asTypes ()[Ljava/lang/Class;
+	public abstract fun inComponent ()Ljava/lang/Class;
+}
+
+public abstract interface annotation class se/ansman/dagger/auto/AutoBindIntoSet : java/lang/annotation/Annotation {
+	public abstract fun asTypes ()[Ljava/lang/Class;
+	public abstract fun inComponent ()Ljava/lang/Class;
+}
+
 public final class se/ansman/dagger/auto/AutoDaggerInitializer : se/ansman/dagger/auto/Initializable {
 	public fun <init> (Ljava/util/Set;)V
 	public fun initialize ()V

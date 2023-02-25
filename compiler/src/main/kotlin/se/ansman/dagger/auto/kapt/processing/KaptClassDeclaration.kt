@@ -10,26 +10,28 @@ import javax.lang.model.type.TypeKind
 
 data class KaptClassDeclaration(
     override val node: TypeElement,
-    override val processing: KaptProcessing,
+    override val resolver: KaptResolver,
 ) : KaptNode(), ClassDeclaration<Element, TypeName, ClassName, AnnotationSpec> {
-    override val supertypes: Sequence<KaptType>
-        get() = sequence {
-            superclass?.let { yield(it) }
-            for (typeMirror in node.interfaces) {
-                yield(KaptType(typeMirror, processing))
-            }
+    override val className: ClassName by lazy(LazyThreadSafetyMode.NONE) { ClassName.get(node) }
+
+    override val supertypes: List<KaptType> by lazy(LazyThreadSafetyMode.NONE) {
+        buildList {
+            superclass?.let { add(it) }
+            node.interfaces.mapTo(this) { KaptType(it, resolver) }
         }
+    }
 
     override val isCompanionObject: Boolean
         // We cannot determine this in Kapt
         get() = false
 
+    override val isGeneric: Boolean
+        get() = node.typeParameters.isNotEmpty()
+
     override val superclass: KaptType? by lazy(LazyThreadSafetyMode.NONE) {
         node.superclass
-            .takeUnless { it.kind == TypeKind.NONE }
-            ?.let { KaptType(it, processing) }
+            .takeUnless { it.kind == TypeKind.NONE || it.isObject }
+            ?.let { KaptType(it, resolver) }
     }
-
-    override fun toClassName(): ClassName = ClassName.get(node)
-    override fun asType(): KaptType = KaptType(node.asType(), processing)
+    override fun asType(): KaptType = KaptType(node.asType(), resolver)
 }
