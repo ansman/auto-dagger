@@ -7,6 +7,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
 import se.ansman.dagger.auto.gradle.getOrPut
+import java.util.Locale
 
 plugins {
     id("maven-publish")
@@ -98,7 +99,7 @@ val publication = publishing.publications.register<MavenPublication>("autoDagger
     artifact(sourcesJar)
     artifact(javadocJar)
     pom {
-        name.set("Auto Dagger ${project.name.replaceFirstChar(Char::uppercaseChar)}")
+        name.set("Auto Dagger ${project.name.capitalize(Locale.ROOT)}")
         description.set("Automatic Dagger setup using Hilt")
         url.set(repo())
         licenses {
@@ -128,7 +129,7 @@ if (findProperty("signArtifacts")?.toString()?.toBoolean() == true) {
     signing {
         sign(publication.get())
         gradle.taskGraph.whenReady {
-            if (hasTask(tasks.getByName("sign${publication.name.replaceFirstChar(Char::uppercaseChar)}Publication"))) {
+            if (hasTask(tasks.getByName("sign${publication.name.capitalize(Locale.ROOT)}Publication"))) {
                 rootProject.ext.getOrPut("signing.gnupg.passphrase") {
                     serviceOf<UserInputHandler>()
                         .askQuestion("Signing key passphrase: ", "")
