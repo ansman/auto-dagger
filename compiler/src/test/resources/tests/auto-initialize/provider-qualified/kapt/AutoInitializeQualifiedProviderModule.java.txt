@@ -22,7 +22,7 @@ public abstract class AutoInitializeQualifiedProviderModule {
 
   @Provides
   @IntoSet
-  public static Initializable getThingAsInitializable(
+  public static Initializable provideQualifiedProvidedThingAsInitializable(
       @Named("someName") Lazy<QualifiedProvidedThing> lazyQualifiedProvidedThing) {
     return Initializable.fromLazy(lazyQualifiedProvidedThing);
   }

@@ -21,7 +21,7 @@ public abstract class AutoInitializeBindingModule {
 
   @Provides
   @IntoSet
-  public static Initializable bindThingAsInitializable(Lazy<Thing> lazyThing) {
+  public static Initializable provideThingAsInitializable(Lazy<Thing> lazyThing) {
     return Initializable.fromLazy(lazyThing);
   }
 }

@@ -8,7 +8,6 @@ import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeName
 import se.ansman.dagger.auto.Initializable
 import se.ansman.dagger.auto.kapt.JavaPoetRenderEngine
-import se.ansman.dagger.auto.models.AutoInitializeObject
 import javax.lang.model.element.Element
 
 object JavaAutoInitializeModuleRenderer :
@@ -17,9 +16,7 @@ object JavaAutoInitializeModuleRenderer :
         ::HiltJavaModuleBuilder
     ) {
 
-    override fun AutoInitializeObject<Element, TypeName, AnnotationSpec>.createProviderCode(
-        parameter: ParameterSpec,
-    ): CodeBlock =
+    override fun createInitializableFromLazy(parameter: ParameterSpec, priority: Int?): CodeBlock =
         CodeBlock.of(
             "return \$T.fromLazy(\$N\$L)",
             Initializable::class.java,
@@ -29,5 +26,13 @@ object JavaAutoInitializeModuleRenderer :
             } else {
                 CodeBlock.of(", /* priority */ \$L", priority)
             }
+        )
+
+    override fun wrapInitializable(parameter: ParameterSpec, priority: Int): CodeBlock =
+        CodeBlock.of(
+            "return \$T.withPriority(\$N, /* priority */ \$L)",
+            Initializable::class.java,
+            parameter,
+            priority
         )
 }

@@ -47,7 +47,6 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
                 }
 
                 is Function<N, TypeName, ClassName, AnnotationSpec> -> node.processMethod(
-                    methodName = node.name,
                     receiver = node.receiver,
                     returnType = node.returnType,
                     arguments = node.arguments,
@@ -55,7 +54,6 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
                 )
 
                 is Property<N, TypeName, ClassName, AnnotationSpec> -> node.processMethod(
-                    methodName = "get${node.name.replaceFirstChar(Char::uppercaseChar)}",
                     receiver = node.receiver,
                     returnType = node.type,
                     arguments = emptySequence(),
@@ -90,17 +88,12 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
             return null
         }
 
-        val isInitializable = asType().isAssignableTo(Initializable::class)
         val targetType = className
         val obj = AutoInitializeObject(
             targetType = targetType,
             priority = getAnnotation(AutoInitialize::class)!!.getValue("priority"),
             isPublic = isFullyPublic,
-            method = if (isInitializable) {
-                AutoInitializeObject.Method.Binding.fromType(environment.renderEngine.simpleName(targetType))
-            } else {
-                AutoInitializeObject.Method.Provider.fromType(environment.renderEngine.simpleName(targetType))
-            },
+            isInitializable = asType().isAssignableTo(Initializable::class),
             originatingElement = node,
             qualifiers = getQualifiers()
         )
@@ -112,7 +105,6 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
     }
 
     private fun Node<N, TypeName, ClassName, AnnotationSpec>.processMethod(
-        methodName: String,
         receiver: Type<N, TypeName, ClassName, AnnotationSpec>?,
         returnType: Type<N, TypeName, ClassName, AnnotationSpec>,
         arguments: Sequence<Type<N, TypeName, ClassName, AnnotationSpec>>,
@@ -149,18 +141,11 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
             return
         }
 
-        val isInitializable = returnType.isAssignableTo(Initializable::class)
-        val targetType = returnType.toTypeName()
-        val name = "${methodName}AsInitializable"
         val obj = AutoInitializeObject(
-            targetType = targetType,
+            targetType = returnType.toTypeName(),
             priority = getAnnotation(AutoInitialize::class)!!.getValue("priority"),
             isPublic = isFullyPublic,
-            method = if (isInitializable) {
-                AutoInitializeObject.Method.Binding(name)
-            } else {
-                AutoInitializeObject.Method.Provider(name)
-            },
+            isInitializable = returnType.isAssignableTo(Initializable::class),
             originatingElement = node,
             qualifiers = annotations.filterQualifiers().toSet()
         )

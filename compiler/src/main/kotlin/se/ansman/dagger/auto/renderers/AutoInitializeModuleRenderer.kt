@@ -3,7 +3,6 @@ package se.ansman.dagger.auto.renderers
 import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.Initializable
 import se.ansman.dagger.auto.models.AutoInitializeModule
-import se.ansman.dagger.auto.models.AutoInitializeObject
 import se.ansman.dagger.auto.processing.RenderEngine
 
 abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>(
@@ -11,41 +10,48 @@ abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName
     private val createBuilder: (
         moduleName: ClassName,
         installInComponent: ClassName,
-        originatingTopLevelClassName: ClassName
-    ) -> HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
+        originatingTopLevelClassName: ClassName,
+    ) -> HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>,
 ) : Renderer<AutoInitializeModule<Node, TypeName, ClassName, AnnotationSpec>, SourceFile> {
 
     final override fun render(input: AutoInitializeModule<Node, TypeName, ClassName, AnnotationSpec>): SourceFile =
         createBuilder(input.moduleName, renderEngine.className(singletonComponent), input.topLevelClassName)
             .apply {
                 for (obj in input.objects) {
-                    when (obj.method) {
-                        is AutoInitializeObject.Method.Provider -> {
-                            addProvider(
-                                name = obj.method.name,
-                                parameters = listOf(HiltModuleBuilder.Lazy(obj.targetType, obj.qualifiers)),
-                                mode = HiltModuleBuilder.ProviderMode.IntoSet,
-                                returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),
-                                isPublic = obj.isPublic,
-                                originatingElement = obj.originatingElement,
-                            ) { (parameter) -> obj.createProviderCode(parameter) }
-                        }
-
-                        is AutoInitializeObject.Method.Binding -> addBinding(
-                            name = obj.method.name,
+                    when {
+                        obj.isInitializable && obj.priority == null -> addBinding(
+                            name = "bind${renderEngine.simpleName(renderEngine.rawType(obj.targetType))}AsInitializable",
                             sourceType = HiltModuleBuilder.DaggerType(obj.targetType, obj.qualifiers),
                             mode = HiltModuleBuilder.ProviderMode.IntoSet,
                             returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),
                             isPublic = obj.isPublic,
                             originatingElement = obj.originatingElement
                         )
+
+                        obj.isInitializable && obj.priority != null -> addProvider(
+                            name = "provide${renderEngine.simpleName(renderEngine.rawType(obj.targetType))}AsInitializable",
+                            parameters = listOf(HiltModuleBuilder.DaggerType(obj.targetType, obj.qualifiers)),
+                            mode = HiltModuleBuilder.ProviderMode.IntoSet,
+                            returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),
+                            isPublic = obj.isPublic,
+                            originatingElement = obj.originatingElement,
+                        ) { (parameter) -> wrapInitializable(parameter, obj.priority) }
+
+                        else -> addProvider(
+                            name = "provide${renderEngine.simpleName(renderEngine.rawType(obj.targetType))}AsInitializable",
+                            parameters = listOf(HiltModuleBuilder.Lazy(obj.targetType, obj.qualifiers)),
+                            mode = HiltModuleBuilder.ProviderMode.IntoSet,
+                            returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),
+                            isPublic = obj.isPublic,
+                            originatingElement = obj.originatingElement,
+                        ) { (parameter) -> createInitializableFromLazy(parameter, obj.priority) }
                     }
                 }
-
             }
             .build()
 
-    abstract fun AutoInitializeObject<Node, TypeName, AnnotationSpec>.createProviderCode(parameter: ParameterSpec): CodeBlock
+    abstract fun createInitializableFromLazy(parameter: ParameterSpec, priority: Int?): CodeBlock
+    abstract fun wrapInitializable(parameter: ParameterSpec, priority: Int): CodeBlock
 
     companion object {
         private val singletonComponent = SingletonComponent::class
