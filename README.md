@@ -1,11 +1,11 @@
 Auto Dagger [![Build Gradle](https://github.com/ansman/auto-dagger/actions/workflows/gradle.yml/badge.svg)](https://github.com/ansman/auto-dagger/actions/workflows/gradle.yml) [![Maven Central](https://img.shields.io/maven-central/v/se.ansman.dagger.auto/core.svg)](https://central.sonatype.dev/namespace/se.ansman.dagger.auto)
 ===
-Auto Dagger allows you to automate some setup with Dagger and Hilt.
+Auto Dagger allows you to automate some Dagger setup using Hilt.
 
 For example you can annotate `@Singleton` scoped objects with `@AutoInitialize` and have the be initialized during app
-launch. 
+launch and you can use the `@AutoBind` annotation to automatically bind objects.
 
-This is done using Hilt and AndroidX Startup.
+Automatic initialization is done using AndroidX Startup.
 
 To read more please refer to the [documentation](https://auto-dagger.ansman.se/).
 
@@ -31,9 +31,12 @@ dependencies {
 
 Basic usage
 ```kotlin
-@AutoInitialize
+interface Repository
+
+@AutoInitialize // Automatically create the repo during startup
+@AutoBind // Automatically bind RealRepository as Repository
 @Singleton
-class SomeRepository @Inject constructor() {
+class RealRepository @Inject constructor() : Repository {
     init {
         // This will be executed at application startup, even if nobody injects it.
     }
@@ -49,7 +52,7 @@ class InitializableRepository @Inject constructor() : Initializable {
 
 ```
 
-For the full documentation see
+For the full documentation see https://auto-dagger.ansman.se/
 
 License
 ---

@@ -1,24 +1,54 @@
 # How it works
 
-## `@AutoInitialize`
-When you annotate an object, binding or provider with `@AutoInitialize`, Auto Dagger will generate a component which is installed
-into the `SingletonComponent` using Hilt.
+## `@AutoBind`
+When you annotate an object with `@AutoBind`, Auto Dagger will generate a component which is installed
+into the inferred (or explicitly provided) component using Hilt.
 
-This is an example of such a component:
+Given this class:
+```kotlin
+interface Repository
+
+@AutoBind
+@Singleton
+class RealRepository @Inject constructor() : Repository
+```
+
+Auto Dagger will generate this module:
 ```java
 @Module
 @InstallIn(SingletonComponent.class)
-@OriginatingElement(
-    topLevelClass = SomeThing.class
-)
-public final class AutoInitializeSomeThingComponent {
-    private AutoInitializeSomeThingComponent() {}
+@OriginatingElement(topLevelClass = RealRepository.class)
+public abstract class AutoBindRealRepositorySingletonModule {
+    private AutoBindRealRepositorySingletonModule() {}
+
+    @Binds
+    public abstract Repository bindRealRepositoryAsRepository(RealRepository realRepository);
+}
+```
+
+## `@AutoInitialize`
+When you annotate an object, binding or provider with `@AutoInitialize`, Auto Dagger will generate a module which is
+installed into the `SingletonComponent` using Hilt.
+
+Given this class:
+```kotlin
+@AutoInitialize
+@Singleton
+class Repository @Inject constructor()
+```
+
+Auto Dagger will generate this module:
+```java
+@Module
+@InstallIn(SingletonComponent.class)
+@OriginatingElement(topLevelClass = Repository.class)
+public final class AutoInitializeRepositoryModule {
+    private AutoInitializeRepositoryModule() {}
     
-    // If the object implements Initializable, then @Binds is used instead of @Provides
     @Provides
     @IntoSet
-    public static Initializable provideSomeThingAsInitializable(Lazy<SomeThing> lazySomeThing) {
-        return Initializable.fromLazy(lazySomeThing);
+    public static Initializable provideRepositoryAsInitializable(Lazy<Repository> lazyRepository) {
+        return Initializable.fromLazy(lazyRepository);
     }
 }
 ```
