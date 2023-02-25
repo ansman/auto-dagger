@@ -32,6 +32,8 @@ theme:
   features:
     - navigation.tracking
     - navigation.top
+    - navigation.instant
+    - navigation.expand
 
 extra:
   version:
@@ -68,7 +70,9 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Usage: usage.md
+  - Usage:
+      - '@AutoInitialize': usage/auto-initialize.md
+      - '@AutoBind': usage/auto-bind.md
   - Limitations: limitations.md
   - About:
       - Release Notes: https://github.com/ansman/auto-dagger/releases

@@ -1,10 +1,10 @@
 # Getting Started
 
 ## Installation
-[![Maven Central](https://img.shields.io/maven-central/v/ansman/auto-dagger.svg)](https://maven-badges.herokuapp.com/maven-central/ansman/auto-dagger)
+[![Maven Central](https://img.shields.io/maven-central/v/se.ansman.dagger.auto/core.svg)](https://central.sonatype.com/search?smo=true&q=se.ansman.dagger.auto)
 
 ### Kotlin Modules
-When using a plain Kotlin module you just need to add two dependencies:
+For pure Kotlin modules you just need to add two dependencies:
 ```kotlin
 dependencies {
     // This assumes you've already added Hilt and Dagger as dependencies
@@ -14,7 +14,7 @@ dependencies {
 ```
 
 ### Android Modules
-If your module is an Android module you should instead add the `android` dependency:
+If your module is an Android module you should add the `android` dependency instead of `core`:
 ```kotlin
 dependencies {
     // This assumes you've already added Hilt and Dagger as dependencies
