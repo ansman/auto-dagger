@@ -167,7 +167,9 @@ abstract class BaseTest(
                     package se.ansman
         
                     @se.ansman.dagger.auto.AutoBind
-                    class SomeThing<T> : Runnable
+                    class SomeThing<T> : Runnable {
+                      override fun run(){}
+                    }
                     """
                 )
                 .assertFailedWithMessage(Errors.AutoBind.genericType)
@@ -227,6 +229,20 @@ abstract class BaseTest(
                     """
                 )
                 .assertFailedWithMessage(Errors.AutoBind.missingBindingKey)
+        }
+
+        @Test
+        fun `multiple supertypes`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.AutoBindIntoSet
+                    class SomeThing : java.io.Closeable, Runnable
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.multipleSuperTypes)
         }
     }
 }
