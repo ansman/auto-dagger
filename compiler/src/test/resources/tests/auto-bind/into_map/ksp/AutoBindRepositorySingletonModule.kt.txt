@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.codegen.OriginatingElement
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
+import dagger.multibindings.StringKey
 import java.io.Closeable
 
 @Module
@@ -15,6 +16,6 @@ import java.io.Closeable
 public abstract class AutoBindRepositorySingletonModule private constructor() {
   @Binds
   @IntoMap
-  @BindingKey(name = "test")
+  @StringKey("test")
   public abstract fun Repository.bindRepositoryAsCloseableIntoMap(): Closeable
 }

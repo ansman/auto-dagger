@@ -1,19 +1,15 @@
 package se.ansman.dagger.auto
 
-import dagger.MapKey
+import dagger.multibindings.StringKey
 import java.io.Closeable
 import javax.inject.Inject
 import javax.inject.Singleton
-
-@Retention(AnnotationRetention.RUNTIME)
-@MapKey
-annotation class BindingKey(val name: String)
 
 @AutoInitialize
 @AutoBind
 @AutoBindIntoSet
 @AutoBindIntoMap
-@BindingKey("test")
+@StringKey("test")
 @Singleton
 class Repository @Inject constructor() : Closeable {
     init {

@@ -8,6 +8,7 @@ import dagger.hilt.codegen.OriginatingElement;
 import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoMap;
 import dagger.multibindings.IntoSet;
+import dagger.multibindings.StringKey;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -27,8 +28,6 @@ public abstract class AutoBindRealTypeSingletonModule {
 
   @Binds
   @IntoMap
-  @BindingKey(
-      name = "test"
-  )
+  @StringKey("test")
   public abstract Type3 bindRealTypeAsType3IntoMap(RealType realType);
 }

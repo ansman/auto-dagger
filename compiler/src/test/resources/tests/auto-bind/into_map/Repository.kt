@@ -1,16 +1,13 @@
 package se.ansman.into_map
 
-import dagger.MapKey
+import dagger.multibindings.StringKey
 import se.ansman.dagger.auto.AutoBindIntoMap
 import java.io.Closeable
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@MapKey
-annotation class BindingKey(val name: String)
-
 @AutoBindIntoMap
-@BindingKey("test")
+@StringKey("test")
 @Singleton
 class Repository @Inject constructor() : Closeable {
     override fun close() {}

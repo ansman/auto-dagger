@@ -8,24 +8,36 @@ interface Repository
 @AutoBind
 @Singleton
 class RealRepository @Inject constructor() : Repository
+
+// Generates the equivalent to:
+@Binds
+abstract fun RealRepository.bindRealRepositoryAsRepository(): Repository
 ```
 
 ## Multibindings
 If you need to bind a object into a set or map you can use `@AutoBindIntoSet` or `@AutoBindIntoMap` respectively.
 
 ```kotlin
-@MapKey
-annotation class BindingKey(val name: String)
-
-@BindingKey("ExternalResourceCloseable")
-@AutoBindIntoSet // Binds ExternalResource as Closeable using @IntoSet
-@AutoBindIntoMap // Binds ExternalResource as Closeable using @IntoMap with `BindingKey` as the map key
+// Binds ExternalResource as Closeable using @IntoSet
+@AutoBindIntoSet
+// Binds ExternalResource as Closeable using @IntoMap with
+// `StringKey` as the map key
+@AutoBindIntoMap
+@StringKey("ExternalResourceCloseable")
 @Singleton
 class ExternalResource @Inject constructor() : Closeable {
-    override fun close() {
-        
-    }
+    override fun close() {}
 }
+
+// Generates the equivalent to:
+@Binds
+@IntoSet
+abstract fun ExternalResource.bindExternalResourceAsCloseableIntoSet(): Closeable
+
+@Binds
+@IntoMap
+@StringKey("ExternalResourceCloseable")
+abstract fun ExternalResource.bindExternalResourceAsCloseableIntoMap(): Closeable
 ```
 
 ## Component
@@ -48,9 +60,7 @@ If you are are using custom scopes or want to change which component the binding
 ```kotlin
 @AutoBind(inComponent = SomeComponent::class)
 class ExternalResource @Inject constructor() : Closeable {
-    override fun close() {
-        
-    }
+    override fun close() {}
 }
 ```
 
@@ -60,9 +70,8 @@ parameter:
 ```kotlin
 @AutoBind(asTypes = [Closeable::class])
 class ExternalResource @Inject constructor() : Runnable, Closeable {
-    override fun run() {
-        
-    }
+    override fun run() {}
+    override fun close() {}
 }
 ```
 
