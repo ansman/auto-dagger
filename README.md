@@ -16,16 +16,16 @@ Setup
 ```groovy
 dependencies {
     // Include this in java or android modules
-    implementation("se.ansman.dagger.auto:core:0.1.0")
+    implementation("se.ansman.dagger.auto:core:0.2.0")
     
     // Include this only in android modules
-    implementation("se.ansman.dagger.auto:android:0.1.0")
+    implementation("se.ansman.dagger.auto:android:0.2.0")
     
     // If using Java
-    annotationProcessor("se.ansman.dagger.auto:compiler:0.1.0")
+    annotationProcessor("se.ansman.dagger.auto:compiler:0.2.0")
     
     // If using Kotlin
-    kapt("se.ansman.dagger.auto:compiler:0.1.0")
+    kapt("se.ansman.dagger.auto:compiler:0.2.0")
 }
 ```
 
