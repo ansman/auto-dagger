@@ -54,11 +54,13 @@ public abstract interface class se/ansman/dagger/auto/Initializable {
 	public static fun fromLazy (Ldagger/Lazy;)Lse/ansman/dagger/auto/Initializable;
 	public static fun fromLazy (Ldagger/Lazy;I)Lse/ansman/dagger/auto/Initializable;
 	public abstract fun initialize ()V
+	public static fun withPriority (Lse/ansman/dagger/auto/Initializable;I)Lse/ansman/dagger/auto/Initializable;
 }
 
 public final class se/ansman/dagger/auto/Initializable$Companion {
 	public final fun fromLazy (Ldagger/Lazy;)Lse/ansman/dagger/auto/Initializable;
 	public final fun fromLazy (Ldagger/Lazy;I)Lse/ansman/dagger/auto/Initializable;
 	public static synthetic fun fromLazy$default (Lse/ansman/dagger/auto/Initializable$Companion;Ldagger/Lazy;IILjava/lang/Object;)Lse/ansman/dagger/auto/Initializable;
+	public final fun withPriority (Lse/ansman/dagger/auto/Initializable;I)Lse/ansman/dagger/auto/Initializable;
 }
 

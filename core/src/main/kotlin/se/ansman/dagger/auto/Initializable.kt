@@ -21,5 +21,13 @@ public interface Initializable {
                 // As a fallback if the lazy value is also initializable.
                 (get() as? Initializable)?.initialize()
             }
+
+        /** Returns a new [Initializable] with the given [priority]. */
+        @JvmStatic
+        public fun Initializable.withPriority(priority: Int): Initializable =
+            OrderedInitializable(
+                priority = priority,
+                initializable = (this as? OrderedInitializable)?.initializable ?: this
+            )
     }
 }

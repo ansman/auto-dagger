@@ -18,6 +18,6 @@ import se.ansman.dagger.auto.Initializable.Companion.asInitializable
 public object AutoInitializeBindingModule {
   @Provides
   @IntoSet
-  public fun getThingAsInitializable(@Named("someName") lazyThing: Lazy<Thing>): Initializable =
+  public fun provideThingAsInitializable(@Named("someName") lazyThing: Lazy<Thing>): Initializable =
       lazyThing.asInitializable()
 }
