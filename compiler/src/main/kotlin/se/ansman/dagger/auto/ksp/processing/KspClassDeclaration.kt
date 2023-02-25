@@ -12,25 +12,39 @@ import se.ansman.dagger.auto.processing.Type
 
 data class KspClassDeclaration(
     override val node: KSClassDeclaration,
-    override val processing: KspProcessing,
+    override val resolver: KspResolver,
 ) : KspNode(), ClassDeclaration<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
-    override val supertypes: Sequence<KspType> by lazy(LazyThreadSafetyMode.NONE) {
-        node.superTypes.map { KspType(it.resolve(), processing) }.toList().asSequence()
+    override val className: ClassName by lazy(LazyThreadSafetyMode.NONE) {
+        node.toClassName()
+    }
+
+    override val supertypes: List<KspType> by lazy(LazyThreadSafetyMode.NONE) {
+        node.superTypes
+            .mapNotNull {
+                val type = it.resolve()
+                if (type == resolver.resolver.builtIns.anyType) {
+                    null
+                } else {
+                    KspType(type, resolver)
+                }
+            }
+            .toList()
     }
 
     override val enclosingType: KspClassDeclaration? by lazy(LazyThreadSafetyMode.NONE) {
         (node.parentDeclaration as KSClassDeclaration?)?.let {
-            KspClassDeclaration(it, processing)
+            KspClassDeclaration(it, resolver)
         }
     }
 
     override val isCompanionObject: Boolean
         get() = node.isCompanionObject
 
+    override val isGeneric: Boolean
+        get() = node.typeParameters.isNotEmpty()
+
     override val superclass: Type<KSDeclaration, TypeName, ClassName, AnnotationSpec>?
         get() = supertypes.find { it.declaration.node.classKind == ClassKind.CLASS }
 
-    override fun toClassName(): ClassName = node.toClassName()
-
-    override fun asType(): KspType = KspType(node.asStarProjectedType(), processing)
+    override fun asType(): KspType = KspType(node.asStarProjectedType(), resolver)
 }

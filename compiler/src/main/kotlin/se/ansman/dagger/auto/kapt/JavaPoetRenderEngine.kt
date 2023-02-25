@@ -10,21 +10,17 @@ import kotlin.reflect.KClass
 object JavaPoetRenderEngine : RenderEngine<TypeName, ClassName, AnnotationSpec> {
     override fun className(packageName: String, simpleName: String): ClassName = ClassName.get(packageName, simpleName)
     override fun className(qualifiedName: String): ClassName = ClassName.bestGuess(qualifiedName)
+    override fun className(type: KClass<*>): ClassName = ClassName.get(type.java)
 
-    override val ClassName.simpleName: String get() = simpleName()
-    override val ClassName.simpleNames: List<String> get() = simpleNames()
-    override val ClassName.packageName: String get() = packageName()
-    override val ClassName.topLevelClassName: ClassName get() = topLevelClassName()
+    override fun simpleName(className: ClassName): String = className.simpleName()
+    override fun simpleNames(className: ClassName): List<String> = className.simpleNames()
+    override fun packageName(className: ClassName): String = className.packageName()
+    override fun topLevelClassName(className: ClassName): ClassName = className.topLevelClassName()
 
-    @Suppress("EXTENSION_SHADOWED_BY_MEMBER")
-    override fun ClassName.peerClass(name: String): ClassName = peerClass(name)
-
-    override val TypeName.rawType: ClassName
-        get() = when (this) {
-            is ClassName -> this
-            is ParameterizedTypeName -> rawType
-            else -> error("Cannot get raw type for $this (of type $javaClass)")
+    override fun rawType(typeName: TypeName): ClassName =
+        when (typeName) {
+            is ClassName -> typeName
+            is ParameterizedTypeName -> typeName.rawType
+            else -> error("Cannot get raw type for $typeName (of type ${typeName.javaClass})")
         }
-
-    override fun KClass<*>.toClassName(): ClassName = ClassName.get(java)
 }

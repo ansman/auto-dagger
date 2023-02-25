@@ -10,28 +10,28 @@ import se.ansman.dagger.auto.processing.Function
 
 data class KspFunction(
     override val node: KSFunctionDeclaration,
-    override val processing: KspProcessing,
+    override val resolver: KspResolver,
 ) : KspNode(), Function<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
     override val enclosingType: KspClassDeclaration? by lazy(LazyThreadSafetyMode.NONE) {
         (node.parentDeclaration as KSClassDeclaration?)?.let {
-            KspClassDeclaration(it, processing)
+            KspClassDeclaration(it, resolver)
         }
     }
 
     override val arguments: Sequence<KspType> by lazy(LazyThreadSafetyMode.NONE) {
-        node.parameters.map { KspType(it.type.resolve(), processing) }.asSequence()
+        node.parameters.map { KspType(it.type.resolve(), resolver) }.asSequence()
     }
     override val name: String
         get() = node.simpleName.asString()
 
     override val receiver: KspType? by lazy(LazyThreadSafetyMode.NONE) {
-        node.extensionReceiver?.resolve()?.let { KspType(it, processing) }
+        node.extensionReceiver?.resolve()?.let { KspType(it, resolver) }
     }
 
     override val returnType: KspType by lazy(LazyThreadSafetyMode.NONE) {
-        node.returnType?.resolve()?.let { KspType(it, processing) } ?: run {
-            processing.logError("Could not determine return type", node)
-            KspType(processing.resolver.builtIns.nothingType, processing)
+        node.returnType?.resolve()?.let { KspType(it, resolver) } ?: run {
+            resolver.environment.logError("Could not determine return type", node)
+            KspType(resolver.resolver.builtIns.nothingType, resolver)
         }
     }
 }

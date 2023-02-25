@@ -9,10 +9,10 @@ import javax.lang.model.element.ExecutableElement
 
 data class KaptFunction(
     override val node: ExecutableElement,
-    override val processing: KaptProcessing,
+    override val resolver: KaptResolver,
 ) : KaptNode(), Function<Element, TypeName, ClassName, AnnotationSpec> {
     override val arguments: Sequence<KaptType>
-        get() = node.parameters.asSequence().map { KaptType(it.asType(), processing) }
+        get() = node.parameters.asSequence().map { KaptType(it.asType(), resolver) }
 
     override val name: String
         get() = node.simpleName.toString()
@@ -22,5 +22,5 @@ data class KaptFunction(
         get() = null
 
     override val returnType: KaptType
-        get() = KaptType(node.returnType, processing)
+        get() = KaptType(node.returnType, resolver)
 }

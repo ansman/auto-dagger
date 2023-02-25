@@ -11,7 +11,8 @@ import se.ansman.dagger.auto.Initializable
 import se.ansman.dagger.auto.models.AutoInitializeModule
 import se.ansman.dagger.auto.models.AutoInitializeObject
 import se.ansman.dagger.auto.processing.AnnotationModel
-import se.ansman.dagger.auto.processing.AutoDaggerProcessing
+import se.ansman.dagger.auto.processing.AutoDaggerEnvironment
+import se.ansman.dagger.auto.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.processing.ClassDeclaration
 import se.ansman.dagger.auto.processing.Function
 import se.ansman.dagger.auto.processing.Node
@@ -29,19 +30,20 @@ import javax.inject.Singleton
 import kotlin.reflect.KClass
 
 class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F>(
-    private val processing: AutoDaggerProcessing<N, TypeName, ClassName, AnnotationSpec, F>,
+    private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
     private val renderer: Renderer<AutoInitializeModule<N, TypeName, ClassName, AnnotationSpec>, F>,
-) : Processor {
+) : Processor<N, TypeName, ClassName, AnnotationSpec> {
     override val annotations: Set<KClass<out Annotation>> = setOf(AutoInitialize::class)
-    override fun process() {
+
+    override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
         val initializableObjectsByModule =
             HashMultimap.create<ClassName, AutoInitializeObject<N, TypeName, AnnotationSpec>>()
-        for (node in processing.nodesAnnotatedWith(AutoInitialize::class)) {
+        for (node in resolver.nodesAnnotatedWith(AutoInitialize::class)) {
             when (node) {
                 is ClassDeclaration<N, TypeName, ClassName, AnnotationSpec> -> {
                     val obj = node.process() ?: continue
                     val file = renderer.render(obj)
-                    processing.write(file)
+                    environment.write(file)
                 }
 
                 is Function<N, TypeName, ClassName, AnnotationSpec> -> node.processMethod(
@@ -65,49 +67,49 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
         }
 
         for ((moduleName, providers) in initializableObjectsByModule.asMap()) {
-            val module = with(processing.renderEngine) {
+            val module = with(environment.renderEngine) {
                 AutoInitializeModule(
-                    moduleName = moduleName.peerClass(
-                        moduleName.simpleNames.joinToString(
+                    moduleName = className(
+                        packageName(moduleName),
+                        simpleNames(moduleName).joinToString(
                             separator = "",
                             prefix = "AutoInitialize"
                         )
                     ),
                     objects = providers.toList(),
-                    topLevelClassName = moduleName.topLevelClassName,
+                    topLevelClassName = topLevelClassName(moduleName),
                 )
             }
             val file = renderer.render(module)
-            processing.write(file)
+            environment.write(file)
         }
     }
 
-    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.process(): AutoInitializeModule<N, TypeName, ClassName, AnnotationSpec>? =
-        with(processing.renderEngine) {
-            if (!validateScopes()) {
-                return null
-            }
-
-            val isInitializable = asType().isAssignableTo(Initializable::class)
-            val targetType = toClassName()
-            val obj = AutoInitializeObject(
-                targetType = targetType,
-                priority = getAnnotation(AutoInitialize::class)!!.getValue("priority"),
-                isPublic = isFullyPublic,
-                method = if (isInitializable) {
-                    AutoInitializeObject.Method.Binding.fromType(targetType.simpleName)
-                } else {
-                    AutoInitializeObject.Method.Provider.fromType(targetType.simpleName)
-                },
-                originatingElement = node,
-                qualifiers = getQualifiers()
-            )
-            return AutoInitializeModule(
-                moduleName = obj.moduleName,
-                objects = listOf(obj),
-                topLevelClassName = targetType.topLevelClassName
-            )
+    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.process(): AutoInitializeModule<N, TypeName, ClassName, AnnotationSpec>? {
+        if (!validateScopes()) {
+            return null
         }
+
+        val isInitializable = asType().isAssignableTo(Initializable::class)
+        val targetType = className
+        val obj = AutoInitializeObject(
+            targetType = targetType,
+            priority = getAnnotation(AutoInitialize::class)!!.getValue("priority"),
+            isPublic = isFullyPublic,
+            method = if (isInitializable) {
+                AutoInitializeObject.Method.Binding.fromType(environment.renderEngine.simpleName(targetType))
+            } else {
+                AutoInitializeObject.Method.Provider.fromType(environment.renderEngine.simpleName(targetType))
+            },
+            originatingElement = node,
+            qualifiers = getQualifiers()
+        )
+        return AutoInitializeModule(
+            moduleName = obj.moduleName,
+            objects = listOf(obj),
+            topLevelClassName = environment.renderEngine.topLevelClassName(targetType)
+        )
+    }
 
     private fun Node<N, TypeName, ClassName, AnnotationSpec>.processMethod(
         methodName: String,
@@ -120,18 +122,18 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
         val module = enclosingType
             ?.let { if (it.isCompanionObject) it.enclosingType else it }
             ?: run {
-                processing.logError(Errors.methodInNonModule, this@processMethod)
+                environment.logError(Errors.AutoInitialize.methodInNonModule, this@processMethod)
                 return
             }
 
         if (!module.isAnnotatedWith(Module::class)) {
-            processing.logError(Errors.methodInNonModule, node)
+            environment.logError(Errors.AutoInitialize.methodInNonModule, node)
         }
 
         val isProvider = annotations.any { it.isOfType(Provides::class) }
         val isBinding = annotations.any { it.isOfType(Binds::class) }
         if (!isProvider && !isBinding) {
-            processing.logError(Errors.invalidAnnotatedMethod, this)
+            environment.logError(Errors.AutoInitialize.invalidAnnotatedMethod, this)
             return
         }
 
@@ -162,18 +164,18 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
             originatingElement = node,
             qualifiers = annotations.filterQualifiers().toSet()
         )
-        output.put(module.toClassName(), obj)
+        output.put(module.className, obj)
     }
 
     private fun List<AnnotationModel<*, *>>.validateScopes(node: N): Boolean {
         val scopes = filter { it.isAnnotatedWith(Scope::class) }
 
         if (scopes.isEmpty()) {
-            processing.logError(Errors.unscopedType, node)
+            environment.logError(Errors.AutoInitialize.unscopedType, node)
             return false
         }
         if (scopes.none { it.isOfType(Singleton::class) }) {
-            processing.logError(Errors.unscopedType, node)
+            environment.logError(Errors.AutoInitialize.unscopedType, node)
             return false
         }
         return true
@@ -182,10 +184,10 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
     private fun Node<N, *, *, *>.validateScopes(): Boolean = annotations.validateScopes(node)
 
     private val AutoInitializeObject<*, TypeName, *>.moduleName: ClassName
-        get() = with(processing.renderEngine) {
+        get() = with(environment.renderEngine) {
             className(
-                targetType.rawType.packageName,
-                targetType.rawType.simpleNames.joinToString(
+                packageName(rawType(targetType)),
+                simpleNames(rawType(targetType)).joinToString(
                     prefix = "AutoInitialize",
                     postfix = "Module",
                     separator = ""

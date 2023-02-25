@@ -7,12 +7,15 @@ import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.ParameterSpec
 import com.squareup.javapoet.TypeName
 import se.ansman.dagger.auto.Initializable
+import se.ansman.dagger.auto.kapt.JavaPoetRenderEngine
 import se.ansman.dagger.auto.models.AutoInitializeObject
 import javax.lang.model.element.Element
-import kotlin.reflect.KClass
 
 object JavaAutoInitializeModuleRenderer :
-    AutoInitializeModuleRenderer<Element, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile>(::HiltJavaModuleBuilder) {
+    AutoInitializeModuleRenderer<Element, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile>(
+        JavaPoetRenderEngine,
+        ::HiltJavaModuleBuilder
+    ) {
 
     override fun AutoInitializeObject<Element, TypeName, AnnotationSpec>.createProviderCode(
         parameter: ParameterSpec,
@@ -27,6 +30,4 @@ object JavaAutoInitializeModuleRenderer :
                 CodeBlock.of(", /* priority */ \$L", priority)
             }
         )
-
-    override fun createClassName(type: KClass<*>): ClassName = ClassName.get(type.java)
 }
