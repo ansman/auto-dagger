@@ -8,7 +8,8 @@ import se.ansman.dagger.auto.compiler.ksp.processing.KspEnvironment
 import se.ansman.dagger.auto.compiler.ksp.processing.KspResolver
 import se.ansman.dagger.auto.compiler.processors.AutoBindProcessor
 import se.ansman.dagger.auto.compiler.processors.AutoInitializeProcessor
-import se.ansman.dagger.auto.compiler.renderers.KotlinAutoBindModuleRenderer
+import se.ansman.dagger.auto.compiler.processors.ReplacesProcessor
+import se.ansman.dagger.auto.compiler.renderers.KotlinAutoBindObjectModuleRenderer
 import se.ansman.dagger.auto.compiler.renderers.KotlinAutoInitializeObjectRenderer
 
 class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : SymbolProcessor {
@@ -20,7 +21,11 @@ class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : Symbo
         ),
         AutoBindProcessor(
             environment = this.environment,
-            renderer = KotlinAutoBindModuleRenderer
+            renderer = KotlinAutoBindObjectModuleRenderer
+        ),
+        ReplacesProcessor(
+            environment = this.environment,
+            renderer = KotlinAutoBindObjectModuleRenderer
         ),
     )
 

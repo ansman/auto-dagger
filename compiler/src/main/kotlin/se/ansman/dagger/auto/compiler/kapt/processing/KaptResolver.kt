@@ -13,7 +13,7 @@ import javax.lang.model.element.ElementKind
 import kotlin.reflect.KClass
 
 class KaptResolver(
-    val environment: KaptEnvironment,
+    override val environment: KaptEnvironment,
     private val annotatedElements: ImmutableSetMultimap<String, Element>,
 ) : AutoDaggerResolver<Element, TypeName, ClassName, AnnotationSpec> {
     override val typeLookup = TypeLookup { className ->
@@ -31,7 +31,7 @@ class KaptResolver(
                     KaptFunction(MoreElements.asExecutable(element), this)
 
                 else -> {
-                    environment.logError("Unknown element kind ${element.kind}", element)
+                    environment.logger.error("Unknown element kind ${element.kind}", element)
                     null
                 }
             }

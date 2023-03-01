@@ -13,7 +13,7 @@ import javax.lang.model.element.Element
 object JavaAutoInitializeModuleRenderer :
     AutoInitializeModuleRenderer<Element, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile>(
         JavaPoetRenderEngine,
-        ::HiltJavaModuleBuilder
+        HiltJavaModuleBuilder.Factory
     ) {
 
     override fun createInitializableFromLazy(parameter: ParameterSpec, priority: Int?): CodeBlock =

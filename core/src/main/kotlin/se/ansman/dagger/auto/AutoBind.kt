@@ -73,7 +73,7 @@ import kotlin.reflect.KClass
  * @see AutoBindIntoMap
  */
 @Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.BINARY)
 public annotation class AutoBind(
     val inComponent: KClass<*> = Nothing::class,
     val asTypes: Array<KClass<*>> = [],

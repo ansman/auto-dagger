@@ -3,6 +3,8 @@ package se.ansman.dagger.auto
 import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import assertk.assertions.isFalse
+import assertk.assertions.isInstanceOf
 import assertk.assertions.isSameAs
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -32,6 +34,9 @@ class SampleProjectTest {
     lateinit var repository: Provider<Repository>
 
     @Inject
+    lateinit var replaceableRepository: Provider<ReplaceableRepository>
+
+    @Inject
     lateinit var closeable: Provider<Closeable>
 
     @Inject
@@ -51,6 +56,7 @@ class SampleProjectTest {
         InitializableRepository.createCount = 0
         InitializableRepository.initCount = 0
         QualifiedThing.createCount = 0
+        RealReplaceableRepository.isInitialized = false
     }
 
     @Test
@@ -120,5 +126,16 @@ class SampleProjectTest {
             assertThat(closeables.get()).isEqualTo(setOf(repository.get()))
             assertThat(bindingKeys.get()).isEqualTo(mapOf("test" to repository.get()))
         }
+    }
+
+    @Test
+    fun `replacement rebinds object`() {
+        assertThat(replaceableRepository.get()).isInstanceOf(FakeReplaceableRepository::class)
+    }
+
+    @Test
+    fun `replacement removes auto initialize`() {
+        initializableProvider.get().initialize()
+        assertThat(RealReplaceableRepository::isInitialized).isFalse()
     }
 }

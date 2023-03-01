@@ -14,7 +14,7 @@ import se.ansman.dagger.auto.compiler.ksp.KotlinPoetRenderEngine
 object KotlinAutoInitializeObjectRenderer :
     AutoInitializeModuleRenderer<KSNode, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec>(
         KotlinPoetRenderEngine,
-        ::HiltKotlinModuleBuilder
+        HiltKotlinModuleBuilder.Factory
     ) {
     override fun createInitializableFromLazy(parameter: ParameterSpec, priority: Int?): CodeBlock =
         CodeBlock.of(

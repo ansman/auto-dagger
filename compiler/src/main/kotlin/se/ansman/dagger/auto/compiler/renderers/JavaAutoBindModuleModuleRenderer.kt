@@ -9,7 +9,7 @@ import com.squareup.javapoet.TypeName
 import se.ansman.dagger.auto.compiler.kapt.JavaPoetRenderEngine
 import javax.lang.model.element.Element
 
-object JavaAutoBindModuleRenderer : AutoBindModuleRenderer<Element, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile>(
+object JavaAutoBindModuleModuleRenderer : AutoBindObjectModuleRenderer<Element, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile>(
     JavaPoetRenderEngine,
-    ::HiltJavaModuleBuilder
+    HiltJavaModuleBuilder.Factory
 )

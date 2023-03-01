@@ -1,7 +1,6 @@
 package se.ansman.dagger.auto.compiler.renderers
 
 import com.google.devtools.ksp.containingFile
-import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSNode
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
@@ -16,33 +15,24 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asClassName
+import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.codegen.OriginatingElement
+import se.ansman.dagger.auto.compiler.applyEach
 import se.ansman.dagger.auto.compiler.applyIf
 import se.ansman.dagger.auto.compiler.asClassName
 import se.ansman.dagger.auto.compiler.generatedFileComment
+import se.ansman.dagger.auto.compiler.ksp.addMemberClassArray
+import se.ansman.dagger.auto.compiler.models.HiltModule
 import se.ansman.dagger.auto.compiler.renderers.HiltModuleBuilder.ProviderMode
 
-fun buildJavaHiltModule(
-    moduleName: ClassName,
-    installInComponent: ClassName,
-    originatingTopLevelClassName: ClassName,
-    builder: HiltModuleBuilder<KSNode, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec>.() -> Unit,
-): FileSpec =
-    HiltKotlinModuleBuilder(moduleName, installInComponent, originatingTopLevelClassName)
-        .apply(builder)
-        .build()
-
-class HiltKotlinModuleBuilder(
-    private val moduleName: ClassName,
-    private val installInComponent: ClassName,
-    private val originatingTopLevelClassName: ClassName,
+class HiltKotlinModuleBuilder private constructor(
+    private val info: HiltModule<KSNode, ClassName>,
 ) : HiltModuleBuilder<KSNode, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec> {
     private val nameAllocator = NameAllocator()
-    private val files = mutableSetOf<KSFile>()
     private val bindings = mutableListOf<FunSpec>()
     private val providers = mutableListOf<FunSpec>()
 
@@ -52,10 +42,8 @@ class HiltKotlinModuleBuilder(
         mode: ProviderMode<AnnotationSpec>,
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-        originatingElement: KSNode,
         contents: (List<ParameterSpec>) -> CodeBlock,
-    ) {
-        originatingElement.containingFile?.let(files::add)
+    ) = apply {
         val parameterNameAllocator = NameAllocator()
         val params = parameters.map { it.toParameterSpec(parameterNameAllocator) }
         providers += FunSpec.builder(nameAllocator.newName(name))
@@ -75,9 +63,7 @@ class HiltKotlinModuleBuilder(
         mode: ProviderMode<AnnotationSpec>,
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-        originatingElement: KSNode,
-    ) {
-        originatingElement.containingFile?.let(files::add)
+    ) = apply {
         bindings += FunSpec.builder(nameAllocator.newName(name))
             .addModifiers(if (isPublic) KModifier.PUBLIC else KModifier.INTERNAL, KModifier.ABSTRACT)
             .addAnnotation(Binds::class)
@@ -92,40 +78,54 @@ class HiltKotlinModuleBuilder(
     }
 
     override fun build(): FileSpec {
-        val typeSpec = if (bindings.isNotEmpty()) {
-            TypeSpec.classBuilder(moduleName)
-                .addModifiers(KModifier.ABSTRACT)
-                .primaryConstructor(FunSpec.constructorBuilder().addModifiers(KModifier.PRIVATE).build())
-                .addFunctions(bindings)
-                .applyIf(providers.isNotEmpty()) {
-                    addType(
-                        TypeSpec.companionObjectBuilder()
-                            .addFunctions(providers)
-                            .build()
-                    )
-                }
-        } else {
-            TypeSpec.objectBuilder(moduleName)
-                .addFunctions(providers)
+        val typeSpec = when {
+            bindings.isNotEmpty() ->
+                TypeSpec.classBuilder(info.moduleName)
+                    .addModifiers(KModifier.ABSTRACT)
+                    .primaryConstructor(FunSpec.constructorBuilder().addModifiers(KModifier.PRIVATE).build())
+                    .addFunctions(bindings)
+                    .applyIf(providers.isNotEmpty()) {
+                        addType(
+                            TypeSpec.companionObjectBuilder()
+                                .addFunctions(providers)
+                                .build()
+                        )
+                    }
+
+            else ->
+                TypeSpec.objectBuilder(info.moduleName)
+                    .addFunctions(providers)
         }
 
         typeSpec
+            .apply { info.originatingElement.containingFile?.let(::addOriginatingKSFile) }
             .addAnnotation(Module::class)
-            .addAnnotation(
-                AnnotationSpec.builder(InstallIn::class)
-                    .addMember("%T::class", installInComponent)
-                    .build()
-            )
+            .addAnnotation(when (val installation = info.installation) {
+                is HiltModuleBuilder.Installation.InstallIn ->
+                    AnnotationSpec.builder(InstallIn::class)
+                        .applyEach(installation.components) { addMember("%T::class", it) }
+                        .build()
+
+                is HiltModuleBuilder.Installation.TestInstallIn ->
+                    AnnotationSpec.builder(ClassName("dagger.hilt.testing", "TestInstallIn"))
+                        .addMemberClassArray("components", installation.components)
+                        .addMemberClassArray("replaces", installation.replaces)
+                        .build()
+            })
             .addAnnotation(
                 AnnotationSpec.builder(OriginatingElement::class)
-                    .addMember("topLevelClass = %T::class", originatingTopLevelClassName)
+                    .addMember("topLevelClass = %T::class", info.originatingTopLevelClassName)
                     .build()
             )
 
-        return FileSpec.builder(moduleName.packageName, moduleName.simpleName)
+        return FileSpec.builder(info.moduleName.packageName, info.moduleName.simpleName)
             .addFileComment(generatedFileComment)
             .addType(typeSpec.build())
             .build()
+    }
+
+    companion object {
+        val Factory = HiltModuleBuilder.Factory(::HiltKotlinModuleBuilder)
     }
 }
 

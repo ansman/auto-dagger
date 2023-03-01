@@ -6,18 +6,22 @@ import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.AutoBind
 import se.ansman.dagger.auto.AutoBindIntoMap
 import se.ansman.dagger.auto.AutoBindIntoSet
+import se.ansman.dagger.auto.android.testing.Replaces
 import se.ansman.dagger.auto.compiler.Errors
-import se.ansman.dagger.auto.compiler.models.AutoBindObject
+import se.ansman.dagger.auto.compiler.deleteSuffix
+import se.ansman.dagger.auto.compiler.models.AutoBindObjectModule
 import se.ansman.dagger.auto.compiler.models.AutoBindType
 import se.ansman.dagger.auto.compiler.processing.AnnotationModel
 import se.ansman.dagger.auto.compiler.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.processing.Type
+import se.ansman.dagger.auto.compiler.processing.error
 import se.ansman.dagger.auto.compiler.processing.getAnnotation
 import se.ansman.dagger.auto.compiler.processing.getQualifiers
 import se.ansman.dagger.auto.compiler.processing.isAnnotatedWith
 import se.ansman.dagger.auto.compiler.processing.isFullyPublic
-import se.ansman.dagger.auto.compiler.processing.logError
+import se.ansman.dagger.auto.compiler.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.renderers.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.renderers.Renderer
 import javax.inject.Scope
@@ -26,8 +30,10 @@ import kotlin.reflect.KClass
 
 class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec, F>(
     private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
-    private val renderer: Renderer<AutoBindObject<N, TypeName, ClassName, AnnotationSpec>, F>,
+    private val renderer: Renderer<AutoBindObjectModule<N, TypeName, ClassName, AnnotationSpec>, F>,
+    private val logging: Boolean = true,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
+    private val logger = environment.logger.withTag("auto-bind").takeIf { logging }
     override val annotations: Set<KClass<out Annotation>>
         get() = setOf(
             AutoBind::class,
@@ -36,9 +42,9 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         )
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
-        environment.logInfo("AutoBind processing started")
+        logger?.info("AutoBind processing started")
         annotations.asSequence()
-            .onEach { environment.logInfo("Looking for annotation $it") }
+            .onEach { logger?.info("Looking for annotation $it") }
             .flatMap { resolver.nodesAnnotatedWith(it) }
             .distinct()
             .map { it as ClassDeclaration }
@@ -52,75 +58,118 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
     }
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.process(
-        resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>
+        resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
     ) {
-        environment.logInfo("Processing $className")
+        logger?.info("Processing $className")
+        if (isAnnotatedWith(Replaces::class)) {
+            logger?.error(Errors.Replaces.isAutoBindOrInitialize, node)
+            return
+        }
         if (isGeneric) {
-            environment.logError(Errors.AutoBind.genericType, this)
+            logger?.error(Errors.genericType(this@AutoBindProcessor.annotations.first(::isAnnotatedWith)), this)
             return
         }
 
-        val objects: MutableMap<ModuleKey<ClassName>, AutoBindObject<N, TypeName, ClassName, AnnotationSpec>> =
-            mutableMapOf()
-
-        getAnnotation(AutoBind::class)?.let { annotation ->
-            process(resolver, HiltModuleBuilder.ProviderMode.Single, annotation, objects)
-        }
-
-        getAnnotation(AutoBindIntoSet::class)?.let { annotation ->
-            process(resolver, HiltModuleBuilder.ProviderMode.IntoSet, annotation, objects)
-        }
-
-        getAnnotation(AutoBindIntoMap::class)?.let { annotation ->
-            val bindingKeys = annotations
-                .filter { it.isAnnotatedWith(MapKey::class) }
-
-            when (bindingKeys.size) {
-                0 ->
-                    environment.logError(Errors.AutoBind.missingBindingKey, this)
-
-                1 ->
-                    process(
-                        resolver,
-                        HiltModuleBuilder.ProviderMode.IntoMap(bindingKeys.single().toAnnotationSpec()),
-                        annotation,
-                        objects
-                    )
-
-                else ->
-                    environment.logError(Errors.AutoBind.multipleBindingKeys, this)
-            }
-        }
-        environment.logInfo("Found ${objects.values.size} for $className")
-        objects.values
+        val objects = getAutoBindObjectModule(this, resolver)
+        logger?.info("Found ${objects.size} for $className")
+        objects
             .asSequence()
             .map(renderer::render)
             .forEach(environment::write)
     }
 
-    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.process(
+    fun getAutoBindObjectModule(
+        type: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
+        resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
+        getBoundTypes: (AnnotationModel<ClassName, AnnotationSpec>) -> Iterable<Type<N, TypeName, ClassName, AnnotationSpec>> = {
+            getBoundSupertypes(type, it)
+        },
+    ): Collection<AutoBindObjectModule<N, TypeName, ClassName, AnnotationSpec>> {
+        val modules: MutableMap<ModuleKey<ClassName>, AutoBindObjectModule<N, TypeName, ClassName, AnnotationSpec>> =
+            mutableMapOf()
+
+        type.getAnnotation(AutoBind::class)?.let { annotation ->
+            process(
+                type = type,
+                resolver = resolver,
+                mode = HiltModuleBuilder.ProviderMode.Single,
+                annotation = annotation,
+                output = modules,
+                getBoundTypes = getBoundTypes,
+            )
+        }
+
+        type.getAnnotation(AutoBindIntoSet::class)?.let { annotation ->
+            process(
+                type = type,
+                resolver = resolver,
+                mode = HiltModuleBuilder.ProviderMode.IntoSet,
+                annotation = annotation,
+                output = modules,
+                getBoundTypes = getBoundTypes,
+            )
+        }
+
+        type.getAnnotation(AutoBindIntoMap::class)?.let { annotation ->
+            val bindingKeys = type.annotations
+                .filter { it.isAnnotatedWith(MapKey::class) }
+
+            when (bindingKeys.size) {
+                0 -> logger?.error(Errors.AutoBind.missingBindingKey, type)
+
+                1 -> process(
+                    type = type,
+                    resolver = resolver,
+                    mode = HiltModuleBuilder.ProviderMode.IntoMap(bindingKeys.single().toAnnotationSpec()),
+                    annotation = annotation,
+                    output = modules,
+                    getBoundTypes = getBoundTypes,
+                )
+
+                else -> logger?.error(Errors.AutoBind.multipleBindingKeys, type)
+            }
+        }
+        return modules.values
+    }
+
+    private fun process(
+        type: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
         mode: HiltModuleBuilder.ProviderMode<AnnotationSpec>,
         annotation: AnnotationModel<ClassName, AnnotationSpec>,
-        output: MutableMap<ModuleKey<ClassName>, AutoBindObject<N, TypeName, ClassName, AnnotationSpec>>,
+        output: MutableMap<ModuleKey<ClassName>, AutoBindObjectModule<N, TypeName, ClassName, AnnotationSpec>>,
+        getBoundTypes: (AnnotationModel<ClassName, AnnotationSpec>) -> Iterable<Type<N, TypeName, ClassName, AnnotationSpec>>,
     ) {
-        environment.logInfo("Processing annotation ${annotation.qualifiedName} for $className")
+        logger?.info("Processing annotation ${annotation.qualifiedName} for ${type.className}")
 
-        val component = getTargetComponent(resolver, annotation)
-        val key = ModuleKey(targetType = className, targetComponent = component)
-        val types = getBoundTypes(annotation).map { AutoBindType(it, mode) }
+        val component = type.getTargetComponent(resolver, annotation)
+        val key = ModuleKey(targetType = type.className, targetComponent = component)
+        val types = getBoundTypes(annotation)
+            .map { AutoBindType(it.toTypeName(), mode) }
         output[key] = output[key]
             ?.withTypesAdded(types)
-            ?: AutoBindObject(
-                sourceType = className,
-                targetComponent = component,
-                isPublic = isFullyPublic,
+            ?: AutoBindObjectModule(
+                moduleName = getModuleName(type, component),
+                installation = HiltModuleBuilder.Installation.InstallIn(component),
+                originatingTopLevelClassName = environment.renderEngine.topLevelClassName(type.className),
+                originatingElement = type.node,
+                type = type.className,
+                isPublic = type.isFullyPublic,
                 boundTypes = types,
-                qualifiers = getQualifiers(),
-                originatingElement = node,
-                originatingTopLevelClassName = environment.renderEngine.topLevelClassName(className)
+                qualifiers = type.getQualifiers(),
             )
     }
+
+    fun getModuleName(type: ClassDeclaration<*, *, ClassName, *>, component: ClassName): ClassName =
+        with(environment.renderEngine) {
+            rootPeerClass(type.className, buildString {
+                append("AutoBind")
+                simpleNames(type.className).joinTo(this, "")
+                simpleNames(component).joinTo(this, "")
+                deleteSuffix("Component")
+                append("Module")
+            })
+        }
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.getTargetComponent(
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
@@ -135,51 +184,49 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
             ?: return environment.renderEngine.className(SingletonComponent::class)
         return scopeToComponent(scope) ?: run {
-            environment.logError(Errors.AutoBind.nonStandardScope(scope.qualifiedName), this)
+            logger?.error(Errors.AutoBind.nonStandardScope(scope.qualifiedName), this)
             throw AbortProcessingError()
         }
     }
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.validateComponent(
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
-        component: ClassName
+        component: ClassName,
     ) {
         if (!resolver.lookupType(component).isAnnotatedWith(DefineComponent::class)) {
-            environment.logError(Errors.AutoBind.invalidComponent(component.toString()), this)
+            logger?.error(Errors.AutoBind.invalidComponent(component.toString()), this)
         }
     }
 
-    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.getBoundTypes(
+    fun getBoundSupertypes(
+        type: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
         annotation: AnnotationModel<ClassName, AnnotationSpec>,
-    ): List<TypeName> {
+    ): Collection<Type<N, TypeName, ClassName, AnnotationSpec>> {
         val asTypes = annotation.getValue<List<ClassDeclaration<*, *, ClassName, *>>>("asTypes")
             ?.takeUnless { it.isEmpty() }
             ?.mapTo(mutableSetOf()) { it.className }
-            ?: return supertypes.map { it.toTypeName() }.toList().also {
+            ?: return type.supertypes.also {
                 when (it.size) {
-                    0 -> environment.logError(Errors.AutoBind.noSuperTypes, this)
+                    0 -> logger?.error(Errors.AutoBind.noSuperTypes, type)
                     1 -> { /* OK */ }
-                    else -> environment.logError(Errors.AutoBind.multipleSuperTypes, this)
+                    else -> logger?.error(Errors.AutoBind.multipleSuperTypes, type)
                 }
             }
 
-        val supertypes = supertypes.associateByTo(mutableMapOf()) {
+        val supertypes = type.supertypes.associateByTo(mutableMapOf()) {
             environment.renderEngine.rawType(it.toTypeName())
         }
         supertypes.keys.retainAll(asTypes)
         val missingTypes = asTypes - supertypes.keys
         for (missingType in missingTypes) {
-            val error = if (asType().isAssignableTo(missingType)) {
+            val error = if (type.asType().isAssignableTo(missingType)) {
                 Errors.AutoBind::missingDirectSuperType
             } else {
                 Errors.AutoBind::missingBoundType
             }
-            environment.logError(error(missingType.toString()), this)
+            logger?.error(error(missingType.toString()), type)
         }
-        if (missingTypes.isNotEmpty()) {
-            throw AbortProcessingError()
-        }
-        return supertypes.values.map { it.toTypeName() }
+        return supertypes.values
     }
 
     private fun scopeToComponent(scope: AnnotationModel<*, *>): ClassName? =
@@ -211,7 +258,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
             else -> null
         }
 
-    private data class ModuleKey<ClassName>(
+    data class ModuleKey<ClassName>(
         val targetType: ClassName,
         val targetComponent: ClassName,
     )

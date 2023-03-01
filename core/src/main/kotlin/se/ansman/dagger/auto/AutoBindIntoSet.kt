@@ -15,7 +15,7 @@ import kotlin.reflect.KClass
  * @see [IntoSet]
  */
 @Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.BINARY)
 public annotation class AutoBindIntoSet(
     val inComponent: KClass<*> = Nothing::class,
     val asTypes: Array<KClass<*>> = [],

@@ -7,7 +7,8 @@ import net.ltgt.gradle.incap.IncrementalAnnotationProcessorType
 import se.ansman.dagger.auto.compiler.kapt.processing.KaptEnvironment
 import se.ansman.dagger.auto.compiler.processors.AutoBindProcessor
 import se.ansman.dagger.auto.compiler.processors.AutoInitializeProcessor
-import se.ansman.dagger.auto.compiler.renderers.JavaAutoBindModuleRenderer
+import se.ansman.dagger.auto.compiler.processors.ReplacesProcessor
+import se.ansman.dagger.auto.compiler.renderers.JavaAutoBindModuleModuleRenderer
 import se.ansman.dagger.auto.compiler.renderers.JavaAutoInitializeModuleRenderer
 import javax.annotation.processing.Processor
 import javax.lang.model.SourceVersion
@@ -20,7 +21,8 @@ class AutoDaggerAnnotationProcessor : BasicAnnotationProcessor() {
         val environment = KaptEnvironment(processingEnv)
         return listOf(
             AutoDaggerProcessorStep(environment, AutoInitializeProcessor(environment, JavaAutoInitializeModuleRenderer)),
-            AutoDaggerProcessorStep(environment, AutoBindProcessor(environment, JavaAutoBindModuleRenderer)),
+            AutoDaggerProcessorStep(environment, AutoBindProcessor(environment, JavaAutoBindModuleModuleRenderer)),
+            AutoDaggerProcessorStep(environment, ReplacesProcessor(environment, JavaAutoBindModuleModuleRenderer)),
         )
     }
 }

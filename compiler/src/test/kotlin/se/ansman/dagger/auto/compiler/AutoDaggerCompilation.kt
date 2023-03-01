@@ -33,9 +33,11 @@ abstract class AutoDaggerCompilation(protected val workingDir: File) {
     inner class Result(private val result: KotlinCompilation.Result) {
         val exitCode: KotlinCompilation.ExitCode get() = result.exitCode
         val messages: String get() = result.messages
-        private val errorMessage = filesGeneratedByAnnotationProcessor.joinToString(prefix = "$messages\n\n", separator = "\n\n") {
-            "${it.name}:\n${it.readText()}"
-        }
+        private val errorMessage = filesGeneratedByAnnotationProcessor.joinToString(
+            prefix = "$messages\n\n",
+            separator = "\n\n",
+            transform = ::formatFile
+        )
 
         val filesGeneratedByAnnotationProcessor: Sequence<File> get() = result.filesGeneratedByAnnotationProcessor
 
@@ -47,7 +49,6 @@ abstract class AutoDaggerCompilation(protected val workingDir: File) {
             assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, exitCode, errorMessage)
             assertThat(messages).contains(message)
         }
-
 
         fun findGeneratedFile(name: String): File? =
             filesGeneratedByAnnotationProcessor.find { it.name == name }

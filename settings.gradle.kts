@@ -29,5 +29,6 @@ rootProject.name = "auto-dagger"
 
 include(":core")
 include(":android")
+include(":android:testing")
 include(":compiler")
 include(":tests")

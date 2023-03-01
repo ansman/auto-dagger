@@ -3,19 +3,19 @@ package se.ansman.dagger.auto.compiler.renderers
 import dagger.Lazy
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
+import se.ansman.dagger.auto.compiler.models.HiltModule
 import javax.inject.Provider
 import kotlin.reflect.KClass
 
-interface HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile> {
+interface HiltModuleBuilder<in Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile> {
     fun addProvider(
         name: String,
         parameters: List<Parameter<TypeName, AnnotationSpec>> = emptyList(),
         mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
         returnType: DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-        originatingElement: Node,
         contents: (List<ParameterSpec>) -> CodeBlock,
-    )
+    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
 
     fun addBinding(
         name: String,
@@ -23,10 +23,28 @@ interface HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeB
         mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
         returnType: DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-        originatingElement: Node,
-    )
+    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
 
     fun build(): SourceFile
+
+    fun interface Factory<in Node, TypeName, ClassName : TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile> {
+        fun create(
+            info: HiltModule<Node, ClassName>,
+        ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
+    }
+
+    sealed class Installation<ClassName> {
+        abstract val components: Set<ClassName>
+
+        data class InstallIn<ClassName>(override val components: Set<ClassName>) : Installation<ClassName>() {
+            constructor(vararg components: ClassName) : this(components.toSet())
+        }
+
+        data class TestInstallIn<ClassName>(
+            override val components: Set<ClassName>,
+            val replaces: Set<ClassName>,
+        ) : Installation<ClassName>()
+    }
 
     sealed class Parameter<out TypeName, AnnotationSpec> {
         abstract val qualifiers: Set<AnnotationSpec>
