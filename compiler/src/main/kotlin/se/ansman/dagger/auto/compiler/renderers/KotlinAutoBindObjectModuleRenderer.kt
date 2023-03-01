@@ -9,7 +9,7 @@ import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.TypeName
 import se.ansman.dagger.auto.compiler.ksp.KotlinPoetRenderEngine
 
-object KotlinAutoBindModuleRenderer : AutoBindModuleRenderer<KSNode, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec>(
+object KotlinAutoBindObjectModuleRenderer : AutoBindObjectModuleRenderer<KSNode, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec>(
     KotlinPoetRenderEngine,
-    ::HiltKotlinModuleBuilder
+    HiltKotlinModuleBuilder.Factory
 )

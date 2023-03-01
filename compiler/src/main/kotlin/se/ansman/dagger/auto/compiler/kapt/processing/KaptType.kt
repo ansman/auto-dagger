@@ -18,8 +18,11 @@ data class KaptType(
     }
 
     override fun toTypeName(): TypeName = TypeName.get(mirror)
+    override fun isAssignableTo(type: Type<Element, TypeName, ClassName, AnnotationSpec>): Boolean =
+        isAssignableTo((type as KaptType).mirror)
     override fun isAssignableTo(type: ClassName): Boolean = isAssignableTo(type.canonicalName())
     override fun isAssignableTo(type: KClass<*>): Boolean = isAssignableTo(type.qualifiedName!!)
-    private fun isAssignableTo(type: String): Boolean =
-        resolver.environment.environment.typeUtils.isAssignable(mirror, resolver.typeLookup[type].asType().mirror)
+    private fun isAssignableTo(type: String): Boolean = isAssignableTo(resolver.typeLookup[type].asType().mirror)
+    private fun isAssignableTo(type: TypeMirror): Boolean =
+        resolver.environment.environment.typeUtils.isAssignable(mirror, type)
 }

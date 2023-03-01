@@ -73,6 +73,7 @@ nav:
   - Usage:
       - '@AutoInitialize': usage/auto-initialize.md
       - '@AutoBind': usage/auto-bind.md
+      - '@Replaces': usage/replaces.md
   - Limitations: limitations.md
   - About:
       - Release Notes: https://github.com/ansman/auto-dagger/releases

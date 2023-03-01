@@ -15,29 +15,20 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.codegen.OriginatingElement
+import se.ansman.dagger.auto.compiler.applyEach
 import se.ansman.dagger.auto.compiler.asClassName
 import se.ansman.dagger.auto.compiler.generatedFileComment
+import se.ansman.dagger.auto.compiler.models.HiltModule
 import se.ansman.dagger.auto.compiler.renderers.HiltModuleBuilder.ProviderMode
 import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 
-fun buildJavaHiltModule(
-    moduleName: ClassName,
-    installInComponent: ClassName,
-    originatingTopLevelClassName: ClassName,
-    builder: HiltModuleBuilder<Element, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile>.() -> Unit,
-): JavaFile =
-    HiltJavaModuleBuilder(moduleName, installInComponent, originatingTopLevelClassName)
-        .apply(builder)
-        .build()
-
-class HiltJavaModuleBuilder(
-    private val moduleName: ClassName,
-    installInComponent: ClassName,
-    originatingTopLevelClassName: ClassName,
+class HiltJavaModuleBuilder private constructor(
+    private val info: HiltModule<Element, ClassName>,
 ) : HiltModuleBuilder<Element, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile> {
     private val nameAllocator = NameAllocator()
-    private val typeSpec = TypeSpec.classBuilder(moduleName)
+    private val typeSpec = TypeSpec.classBuilder(info.moduleName)
+        .addOriginatingElement(info.originatingElement)
         .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
         .addMethod(
             MethodSpec.constructorBuilder()
@@ -46,13 +37,22 @@ class HiltJavaModuleBuilder(
         )
         .addAnnotation(Module::class.java)
         .addAnnotation(
-            AnnotationSpec.builder(InstallIn::class.java)
-                .addMember("value", "\$T.class", installInComponent)
-                .build()
+            when (val installation = info.installation) {
+                is HiltModuleBuilder.Installation.InstallIn ->
+                    AnnotationSpec.builder(InstallIn::class.java)
+                        .applyEach(installation.components) { addMember("value", "\$T.class", it) }
+                        .build()
+
+                is HiltModuleBuilder.Installation.TestInstallIn ->
+                    AnnotationSpec.builder(ClassName.get("dagger.hilt.testing", "TestInstallIn"))
+                        .applyEach(installation.components) { addMember("components", "\$T.class", it) }
+                        .applyEach(installation.replaces) { addMember("replaces", "\$T.class", it) }
+                        .build()
+            }
         )
         .addAnnotation(
             AnnotationSpec.builder(OriginatingElement::class.java)
-                .addMember("topLevelClass", "\$T.class", originatingTopLevelClassName)
+                .addMember("topLevelClass", "\$T.class", info.originatingTopLevelClassName)
                 .build()
         )
 
@@ -62,10 +62,8 @@ class HiltJavaModuleBuilder(
         mode: ProviderMode<AnnotationSpec>,
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-        originatingElement: Element,
-        contents: (List<ParameterSpec>) -> CodeBlock
-    ) {
-        typeSpec.addOriginatingElement(originatingElement)
+        contents: (List<ParameterSpec>) -> CodeBlock,
+    ) = apply {
         val parameterNameAllocator = NameAllocator()
         val params = parameters.map { it.toParameterSpec(parameterNameAllocator) }
         typeSpec.addMethod(
@@ -87,9 +85,7 @@ class HiltJavaModuleBuilder(
         mode: ProviderMode<AnnotationSpec>,
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-        originatingElement: Element,
-    ) {
-        typeSpec.addOriginatingElement(originatingElement)
+    ) = apply {
         typeSpec.addMethod(
             MethodSpec.methodBuilder(nameAllocator.newName(name))
                 .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
@@ -103,13 +99,17 @@ class HiltJavaModuleBuilder(
     }
 
     override fun build(): JavaFile =
-        JavaFile.builder(moduleName.packageName(), typeSpec.build())
+        JavaFile.builder(info.moduleName.packageName(), typeSpec.build())
             .addFileComment(generatedFileComment)
             .build()
+
+    companion object {
+        val Factory = HiltModuleBuilder.Factory(::HiltJavaModuleBuilder)
+    }
 }
 
 private fun HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>.toParameterSpec(
-    nameAllocator: NameAllocator
+    nameAllocator: NameAllocator,
 ): ParameterSpec =
     ParameterSpec
         .builder(asTypeName(), nameAllocator.newName(asParameterName()))

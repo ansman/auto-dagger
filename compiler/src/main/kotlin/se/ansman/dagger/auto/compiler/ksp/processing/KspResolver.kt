@@ -16,7 +16,7 @@ import se.ansman.dagger.auto.compiler.processing.Node
 import kotlin.reflect.KClass
 
 class KspResolver(
-    val environment: KspEnvironment,
+    override val environment: KspEnvironment,
     val resolver: Resolver,
 ) : AutoDaggerResolver<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
     override val typeLookup = TypeLookup { className ->
@@ -33,7 +33,7 @@ class KspResolver(
                 is KSPropertyGetter -> KspProperty(node.parent as KSPropertyDeclaration, this)
                 is KSPropertyDeclaration -> KspProperty(node, this)
                 else -> {
-                    environment.logError("Unsupported type ${node.javaClass.name}", node)
+                    environment.logger.error("Unsupported type ${node.javaClass.name}", node)
                     null
                 }
             }

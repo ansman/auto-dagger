@@ -30,7 +30,7 @@ data class KspFunction(
 
     override val returnType: KspType by lazy(LazyThreadSafetyMode.NONE) {
         node.returnType?.resolve()?.let { KspType(it, resolver) } ?: run {
-            resolver.environment.logError("Could not determine return type", node)
+            resolver.environment.logger.error("Could not determine return type", node)
             KspType(resolver.resolver.builtIns.nothingType, resolver)
         }
     }

@@ -16,7 +16,7 @@ package se.ansman.dagger.auto
  *                    are initialized first. If two initializables have the same priority then they are initialized in
  *                    an undefined order. The default priority is 1.
  */
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.BINARY)
 @Target(
     AnnotationTarget.CLASS,
     AnnotationTarget.FUNCTION,

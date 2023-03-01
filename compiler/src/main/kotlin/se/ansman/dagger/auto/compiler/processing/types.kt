@@ -7,7 +7,7 @@ interface Node<N, TypeName, ClassName : TypeName, AnnotationSpec> {
     val node: N
     val annotations: List<AnnotationModel<ClassName, AnnotationSpec>>
     val isPublic: Boolean
-    val enclosingType: ClassDeclaration<out N, TypeName, ClassName, AnnotationSpec>?
+    val enclosingType: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>?
 }
 
 val Node<*, *, *, *>.isFullyPublic: Boolean
@@ -16,6 +16,7 @@ val Node<*, *, *, *>.isFullyPublic: Boolean
 interface Type<N, TypeName, ClassName : TypeName, AnnotationSpec> {
     val declaration: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>
     fun toTypeName(): TypeName
+    fun isAssignableTo(type: Type<N, TypeName, ClassName, AnnotationSpec>): Boolean
     fun isAssignableTo(type: KClass<*>): Boolean
     fun isAssignableTo(type: ClassName): Boolean
 }

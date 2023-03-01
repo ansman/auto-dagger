@@ -99,7 +99,12 @@ val publication = publishing.publications.register<MavenPublication>("autoDagger
     artifact(sourcesJar)
     artifact(javadocJar)
     pom {
-        name.set("Auto Dagger ${project.name.capitalize(Locale.ROOT)}")
+        val moduleName = project.path
+            .removePrefix(":")
+            .splitToSequence(":")
+            .joinToString { it.capitalize(Locale.ROOT) }
+
+        name.set("Auto Dagger $moduleName")
         description.set("Automatic Dagger setup using Hilt")
         url.set(repo())
         licenses {

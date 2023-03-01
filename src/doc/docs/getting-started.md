@@ -20,5 +20,9 @@ dependencies {
     // This assumes you've already added Hilt and Dagger as dependencies
     implementation("se.ansman.dagger.auto:android:{{gradle.version}}")
     kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
+
+    // Add these if you want to replace objects during tests
+    testImplementation("se.ansman.dagger.auto:android-testing:{{gradle.version}}")
+    kaptTest("se.ansman.dagger.auto:compiler:{{gradle.version}}")
 }
 ```
