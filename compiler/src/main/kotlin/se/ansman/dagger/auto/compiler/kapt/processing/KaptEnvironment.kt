@@ -16,7 +16,10 @@ class KaptEnvironment(
     val environment: ProcessingEnvironment,
 ) : AutoDaggerEnvironment<Element, TypeName, ClassName, AnnotationSpec, JavaFile> {
     override val renderEngine: RenderEngine<TypeName, ClassName, AnnotationSpec> get() = JavaPoetRenderEngine
-    override val logger: AutoDaggerLogger<Element> = AutoDaggerKaptLogger(environment.messager)
+    override val logger: AutoDaggerLogger<Element> = AutoDaggerKaptLogger(
+        messager = environment.messager,
+        enableLogging = environment.options[AutoDaggerKaptLogger.enableLogging]?.toBooleanStrict() ?: false
+    )
 
     val typeLookup = TypeLookup(environment.elementUtils::getTypeElement)
 
