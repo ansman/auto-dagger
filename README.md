@@ -11,25 +11,8 @@ To read more please refer to the [documentation](https://auto-dagger.ansman.se/)
 
 For the changelog see the [releases page](https://github.com/ansman/auto-dagger/releases).
 
-Setup
----
-```groovy
-dependencies {
-    // Include this in java or android modules
-    implementation("se.ansman.dagger.auto:core:0.2.0")
-    
-    // Include this only in android modules
-    implementation("se.ansman.dagger.auto:android:0.2.0")
-    
-    // If using Java
-    annotationProcessor("se.ansman.dagger.auto:compiler:0.2.0")
-    
-    // If using Kotlin
-    kapt("se.ansman.dagger.auto:compiler:0.2.0")
-}
-```
-
 Basic usage
+---
 ```kotlin
 interface Repository
 
@@ -53,6 +36,24 @@ class InitializableRepository @Inject constructor() : Initializable {
 ```
 
 For the full documentation see https://auto-dagger.ansman.se/
+
+Setup
+---
+```groovy
+dependencies {
+    // Include this in java or android modules
+    implementation("se.ansman.dagger.auto:core:0.2.0")
+    
+    // Include this only in android modules
+    implementation("se.ansman.dagger.auto:android:0.2.0")
+    
+    // If using Java
+    annotationProcessor("se.ansman.dagger.auto:compiler:0.2.0")
+    
+    // If using Kotlin
+    kapt("se.ansman.dagger.auto:compiler:0.2.0")
+}
+```
 
 License
 ---
