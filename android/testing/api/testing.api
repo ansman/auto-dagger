@@ -1,0 +1,4 @@
+public abstract interface annotation class se/ansman/dagger/auto/android/testing/Replaces : java/lang/annotation/Annotation {
+	public abstract fun type ()Ljava/lang/Class;
+}
+

@@ -3,7 +3,7 @@ import com.android.build.gradle.LibraryExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.internal.tasks.userinput.UserInputHandler
 import org.gradle.configurationcache.extensions.serviceOf
-import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
 import se.ansman.dagger.auto.gradle.getOrPut
@@ -28,7 +28,8 @@ fun repo(path: String = "") = "https://github.com/ansman/auto-dagger$path"
 
 val remoteSource: Provider<String> = gitCommit.map { repo("/blob/$it") }
 
-tasks.withType<DokkaTask> {
+tasks.withType<AbstractDokkaLeafTask> {
+    moduleName.set(project.path.removePrefix(":").replace(':', '-'))
     val projectPath = project.path.removePrefix(":").replace(':', '/')
     dokkaSourceSets.configureEach {
         reportUndocumented.set(false)

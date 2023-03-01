@@ -1,7 +1,6 @@
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
-import org.jetbrains.kotlin.gradle.report.BuildScanExtensionHolder
 
 plugins {
     `version-catalog`
@@ -27,7 +26,11 @@ val version: String = providers.gradleProperty("version").get()
 val latestRelease: String = providers.gradleProperty("latestRelease").get()
 
 val isSnapshotVersion = version.endsWith("-SNAPSHOT")
-val dokkaProjects = setOf(projects.core.dependencyProject, projects.android.dependencyProject)
+val dokkaProjects = setOf(
+    projects.core.dependencyProject,
+    projects.android.dependencyProject,
+    projects.android.testing.dependencyProject,
+)
 
 apiValidation {
     ignoredPackages.addAll(setOf(
