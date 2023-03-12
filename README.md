@@ -42,14 +42,14 @@ Setup
 ```groovy
 dependencies {
     // Include this in kotlin or android modules
-    implementation("se.ansman.dagger.auto:core:0.3.0")
-    kapt("se.ansman.dagger.auto:compiler:0.3.0")
+    implementation("se.ansman.dagger.auto:core:0.4.0")
+    kapt("se.ansman.dagger.auto:compiler:0.4.0")
 
     // Include this only in android modules
-    implementation("se.ansman.dagger.auto:android:0.3.0")
+    implementation("se.ansman.dagger.auto:android:0.4.0")
     // Add these if you want to replace objects during tests
-    testImplementation("se.ansman.dagger.auto:android-testing:0.3.0")
-    kaptTest("se.ansman.dagger.auto:compiler:0.3.0")
+    testImplementation("se.ansman.dagger.auto:android-testing:0.4.0")
+    kaptTest("se.ansman.dagger.auto:compiler:0.4.0")
 }
 ```
 
