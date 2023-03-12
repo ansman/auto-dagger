@@ -55,6 +55,7 @@ abstract class BaseTest(
                 DynamicTest.dynamicTest(
                     name,
                     AutoDaggerTestCase(
+                        testType = type,
                         testName = name,
                         compilation = compilation(tempDirectory.resolve(name).apply { mkdirsOrThrow() }),
                         sources = Files.list(test)
