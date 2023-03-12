@@ -38,6 +38,7 @@ interface Function<N, TypeName, ClassName : TypeName, AnnotationSpec> : Executab
 interface ClassDeclaration<N, TypeName, ClassName : TypeName, AnnotationSpec> : Node<N, TypeName, ClassName, AnnotationSpec> {
     val className: ClassName
     val supertypes: List<Type<N, TypeName, ClassName, AnnotationSpec>>
+    val isObject: Boolean
     val isCompanionObject: Boolean
     val isGeneric: Boolean
     val superclass: Type<N, TypeName, ClassName, AnnotationSpec>?

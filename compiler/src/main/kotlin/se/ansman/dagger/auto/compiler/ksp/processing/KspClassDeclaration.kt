@@ -3,6 +3,7 @@ package se.ansman.dagger.auto.compiler.ksp.processing
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
+import com.google.devtools.ksp.symbol.Modifier
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.TypeName
@@ -36,6 +37,9 @@ data class KspClassDeclaration(
             KspClassDeclaration(it, resolver)
         }
     }
+
+    override val isObject: Boolean
+        get() = node.classKind == ClassKind.OBJECT
 
     override val isCompanionObject: Boolean
         get() = node.isCompanionObject

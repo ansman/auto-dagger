@@ -22,6 +22,21 @@ import kotlin.reflect.KClass
  * implement `Closeable` then that binding is removed. If it does implement `Closeable` then the binding is replaced with
  * the fake binding.
  *
+ * ## Objects
+ * Normally the replacement object needs to be provided to the dependency graph using either an `@Provides` annotated
+ * method or using an `@Inject` annotated constructor.
+ *
+ * Auto Dagger allows you to annotate a Kotlin object with `@Replaces` without it being provided in the graph.
+ * This is especially useful for tests:
+ * ```
+ * @Replaces(ThreadPoolExecutor::class)
+ * object DirectExecutor : Executor {
+ *   override fun execute(command: Runnable) {
+ *     command.run()
+ *   }
+ * }
+ * ```
+ *
  * ## Auto Initialize
  * If the target type is annotated with [AutoInitialize], then an empty module will be generated to replace the auto
  * initialize module, effectively disabling it.

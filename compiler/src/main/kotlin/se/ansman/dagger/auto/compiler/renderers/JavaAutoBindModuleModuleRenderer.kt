@@ -12,4 +12,6 @@ import javax.lang.model.element.Element
 object JavaAutoBindModuleModuleRenderer : AutoBindObjectModuleRenderer<Element, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile>(
     JavaPoetRenderEngine,
     HiltJavaModuleBuilder.Factory
-)
+) {
+    override fun provideObject(type: ClassName): CodeBlock = CodeBlock.of("return \$T.INSTANCE", type)
+}

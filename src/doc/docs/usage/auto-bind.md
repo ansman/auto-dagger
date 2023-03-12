@@ -76,3 +76,18 @@ class ExternalResource @Inject constructor() : Runnable, Closeable {
 ```
 
 You can bind multiple types, but only direct supertypes can be bound (see [limitations](../limitations.md#autobind-only-supports-direct-supertypes)).
+
+## Objects
+Normally the bound object needs to be provided to the dependency graph using either an `@Provides` annotated method
+or using an `@Inject` annotated constructor.
+
+Auto Dagger allows you to annotate a Kotlin object with `@AutoBind` without it being provided in the graph.
+This is especially useful for tests:
+```kotlin
+@AutoBind
+object DirectExecutor : Executor {
+  override fun execute(command: Runnable) {
+    command.run()
+  }
+}
+```

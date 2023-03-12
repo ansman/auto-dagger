@@ -14,16 +14,31 @@ abstract class AutoBindObjectModuleRenderer<Node, TypeName, ClassName : TypeName
             .create(input)
             .applyEach(input.boundTypes) { boundType ->
                 with(renderEngine) {
-                    addBinding(
-                        name = "bind${simpleName(input.type)}As${simpleName(rawType(boundType.type))}${boundType.mode.suffix}",
-                        sourceType = HiltModuleBuilder.DaggerType(input.type, input.qualifiers),
-                        mode = boundType.mode,
-                        returnType = HiltModuleBuilder.DaggerType(boundType.type, input.qualifiers),
-                        isPublic = input.isPublic,
-                    )
+                    val suffix = "${simpleName(input.type)}As${simpleName(rawType(boundType.type))}${boundType.mode.suffix}"
+                    val returnType = HiltModuleBuilder.DaggerType(boundType.type, input.qualifiers)
+                    if (input.isObject) {
+                        addProvider(
+                            name = "provide$suffix",
+                            mode = boundType.mode,
+                            returnType = returnType,
+                            isPublic = input.isPublic,
+                        ) {
+                            provideObject(input.type)
+                        }
+                    } else {
+                        addBinding(
+                            name = "bind$suffix",
+                            sourceType = HiltModuleBuilder.DaggerType(input.type, input.qualifiers),
+                            mode = boundType.mode,
+                            returnType = returnType,
+                            isPublic = input.isPublic,
+                        )
+                    }
                 }
             }
             .build()
+
+    protected abstract fun provideObject(type: ClassName): CodeBlock
 
     private val HiltModuleBuilder.ProviderMode<*>.suffix: String
         get() = when (this) {

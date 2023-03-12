@@ -30,3 +30,18 @@ the fake binding.
 ## Auto Initialize
 If the target type is annotated with `@AutoInitialize`, then an empty module will be generated to replace the auto
 initialize module, effectively removing it.
+
+## Objects
+Normally the replacement object needs to be provided to the dependency graph using either an `@Provides` annotated
+method or using an `@Inject` annotated constructor.
+
+Auto Dagger allows you to annotate a Kotlin object with `@Replaces` without it being provided in the graph.
+This is especially useful for tests:
+```kotlin
+@Replaces(ThreadPoolExecutor::class)
+object DirectExecutor : Executor {
+  override fun execute(command: Runnable) {
+    command.run()
+  }
+}
+```

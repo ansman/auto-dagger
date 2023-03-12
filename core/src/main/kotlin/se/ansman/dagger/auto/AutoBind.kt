@@ -1,6 +1,5 @@
 package se.ansman.dagger.auto
 
-import javax.inject.Qualifier
 import kotlin.reflect.KClass
 
 /**
@@ -49,6 +48,21 @@ import kotlin.reflect.KClass
  * If you have multiple supertypes use the [asTypes] parameter to specify which of them to bind. You only need to
  * specify the raw class name if the type is generic (i.e. if your type implements `Callable<Stuff>` you pass
  * `asTypes = [Callable::class]` to indicate you want to bind it).
+ *
+ * ## Objects
+ * Normally the bound object needs to be provided to the dependency graph using either an `@Provides` annotated method
+ * or using an `@Inject` annotated constructor.
+ *
+ * Auto Dagger allows you to annotate a Kotlin object with `@AutoBind` without it being provided in the graph.
+ * This is especially useful for tests:
+ * ```
+ * @AutoBind
+ * object DirectExecutor : Executor {
+ *   override fun execute(command: Runnable) {
+ *     command.run()
+ *   }
+ * }
+ * ```
  *
  * ## Multibinding
  * To bind the object using multibinding, use [AutoBindIntoSet] and/or [AutoBindIntoMap].
