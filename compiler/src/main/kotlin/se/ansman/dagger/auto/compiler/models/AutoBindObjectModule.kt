@@ -9,6 +9,7 @@ data class AutoBindObjectModule<out Node, TypeName, ClassName : TypeName, Annota
     override val originatingElement: Node,
     val type: ClassName,
     val isPublic: Boolean,
+    val isObject: Boolean,
     val boundTypes: List<AutoBindType<TypeName, AnnotationSpec>>,
     val qualifiers: Set<AnnotationSpec> = emptySet(),
 ) : HiltModule<Node, ClassName> {

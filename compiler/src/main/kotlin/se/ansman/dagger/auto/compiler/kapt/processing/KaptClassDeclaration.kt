@@ -22,11 +22,11 @@ data class KaptClassDeclaration(
         }
     }
 
+    override val isObject: Boolean
+        get() = hasFlag(Flag.Class.IS_OBJECT)
+
     override val isCompanionObject: Boolean
-        get() = resolver.kmClassLookup[node.qualifiedName.toString()]
-            ?.flags
-            ?.let(Flag.Class.IS_COMPANION_OBJECT::invoke)
-            ?: false
+        get() = hasFlag(Flag.Class.IS_COMPANION_OBJECT)
 
     override val isGeneric: Boolean
         get() = node.typeParameters.isNotEmpty()
@@ -36,5 +36,12 @@ data class KaptClassDeclaration(
             .takeUnless { it.kind == TypeKind.NONE || it.isObject }
             ?.let { KaptType(it, resolver) }
     }
+
     override fun asType(): KaptType = KaptType(node.asType(), resolver)
+
+    private fun hasFlag(flag: Flag): Boolean =
+        resolver.kmClassLookup[node.qualifiedName.toString()]
+            ?.flags
+            ?.let(flag::invoke)
+            ?: false
 }

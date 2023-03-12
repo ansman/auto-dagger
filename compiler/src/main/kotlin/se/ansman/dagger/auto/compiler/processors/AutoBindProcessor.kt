@@ -155,6 +155,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 originatingElement = type.node,
                 type = type.className,
                 isPublic = type.isFullyPublic,
+                isObject = type.isObject,
                 boundTypes = types,
                 qualifiers = type.getQualifiers(),
             )

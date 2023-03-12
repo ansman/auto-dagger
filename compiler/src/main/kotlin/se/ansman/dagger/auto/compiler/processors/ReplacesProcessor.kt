@@ -106,6 +106,7 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                     originatingElement = type.node,
                     type = type.className,
                     isPublic = type.isFullyPublic,
+                    isObject = type.isObject,
                     boundTypes = module.boundTypes,
                     qualifiers = module.qualifiers,
                 )
@@ -134,6 +135,7 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 originatingTopLevelClassName = className,
                 type = className,
                 isPublic = isFullyPublic,
+                isObject = isObject,
                 boundTypes = emptyList(),
                 qualifiers = emptySet()
             )
