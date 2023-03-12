@@ -8,6 +8,7 @@ import kotlin.test.assertEquals
 import kotlin.test.fail
 
 class AutoDaggerTestCase(
+    private val testType: String,
     private val testName: String,
     private val compilation: AutoDaggerCompilation,
     private val sources: List<TestSourceFile>,
@@ -26,9 +27,12 @@ class AutoDaggerTestCase(
             assertEquals(contents, actual, "$fileName did not match expected contents.")
             try {
                 result.loadClass(buildString {
-                    append("se.ansman.")
-                    append(testName.replace('-', '.'))
-                    append(".")
+                    append("tests")
+                    append('.')
+                    append(testType)
+                    append('.')
+                    append(testName)
+                    append('.')
                     append(fileName.substringBeforeLast("."))
                 })
             } catch (e: Exception) {

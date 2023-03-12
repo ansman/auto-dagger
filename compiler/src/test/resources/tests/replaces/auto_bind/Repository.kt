@@ -1,4 +1,4 @@
-package se.ansman.auto_bind
+package tests.replaces.auto_bind
 
 import dagger.hilt.android.components.FragmentComponent
 import dagger.multibindings.StringKey

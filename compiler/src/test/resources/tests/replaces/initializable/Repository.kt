@@ -1,4 +1,4 @@
-package se.ansman.initializable
+package tests.replaces.initializable
 
 import se.ansman.dagger.auto.AutoBind
 import se.ansman.dagger.auto.AutoInitialize
