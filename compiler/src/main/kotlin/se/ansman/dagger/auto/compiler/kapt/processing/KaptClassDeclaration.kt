@@ -3,6 +3,7 @@ package se.ansman.dagger.auto.compiler.kapt.processing
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
+import kotlinx.metadata.Flag
 import se.ansman.dagger.auto.compiler.processing.ClassDeclaration
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
@@ -22,8 +23,10 @@ data class KaptClassDeclaration(
     }
 
     override val isCompanionObject: Boolean
-        // We cannot determine this in Kapt
-        get() = false
+        get() = resolver.kmClassLookup[node.qualifiedName.toString()]
+            ?.flags
+            ?.let(Flag.Class.IS_COMPANION_OBJECT::invoke)
+            ?: false
 
     override val isGeneric: Boolean
         get() = node.typeParameters.isNotEmpty()

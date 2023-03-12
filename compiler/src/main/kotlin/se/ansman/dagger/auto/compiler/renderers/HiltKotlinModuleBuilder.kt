@@ -23,7 +23,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.codegen.OriginatingElement
 import se.ansman.dagger.auto.compiler.applyEach
 import se.ansman.dagger.auto.compiler.applyIf
-import se.ansman.dagger.auto.compiler.asClassName
+import se.ansman.dagger.auto.compiler.rawType
 import se.ansman.dagger.auto.compiler.generatedFileComment
 import se.ansman.dagger.auto.compiler.ksp.addMemberClassArray
 import se.ansman.dagger.auto.compiler.models.HiltModule
@@ -142,7 +142,7 @@ private fun ProviderMode<AnnotationSpec>.asAnnotations() =
     asAnnotations(AnnotationSpec::get)
 
 private fun HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>.asParameterName(): String =
-    asParameterName { asClassName().simpleName }
+    asParameterName { rawType().simpleName }
 
 private fun HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>.asTypeName(): TypeName =
     asTypeName { rawType, arguments -> rawType.asClassName().parameterizedBy(arguments) }

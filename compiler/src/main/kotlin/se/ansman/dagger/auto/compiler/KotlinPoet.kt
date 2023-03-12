@@ -7,9 +7,9 @@ import com.squareup.kotlinpoet.TypeName
 
 @Suppress("DeprecatedCallableAddReplaceWith")
 @Deprecated("This type is already a class name", level = DeprecationLevel.ERROR)
-fun ClassName.asClassName(): ClassName = this
+fun ClassName.rawType(): ClassName = this
 
-fun TypeName.asClassName(): ClassName =
+fun TypeName.rawType(): ClassName =
     when (this) {
         is ClassName -> this
         is ParameterizedTypeName -> rawType

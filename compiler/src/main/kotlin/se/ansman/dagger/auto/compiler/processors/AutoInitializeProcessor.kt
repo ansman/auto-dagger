@@ -16,10 +16,8 @@ import se.ansman.dagger.auto.compiler.processing.AnnotationModel
 import se.ansman.dagger.auto.compiler.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.processing.ClassDeclaration
-import se.ansman.dagger.auto.compiler.processing.Function
+import se.ansman.dagger.auto.compiler.processing.ExecutableNode
 import se.ansman.dagger.auto.compiler.processing.Node
-import se.ansman.dagger.auto.compiler.processing.Property
-import se.ansman.dagger.auto.compiler.processing.Type
 import se.ansman.dagger.auto.compiler.processing.error
 import se.ansman.dagger.auto.compiler.processing.filterQualifiers
 import se.ansman.dagger.auto.compiler.processing.getAnnotation
@@ -59,17 +57,7 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
                     environment.write(file)
                 }
 
-                is Function<N, TypeName, ClassName, AnnotationSpec> -> node.processMethod(
-                    receiver = node.receiver,
-                    returnType = node.returnType,
-                    arguments = node.arguments,
-                    output = initializableObjectsByModule
-                )
-
-                is Property<N, TypeName, ClassName, AnnotationSpec> -> node.processMethod(
-                    receiver = node.receiver,
-                    returnType = node.type,
-                    arguments = emptySequence(),
+                is ExecutableNode<N, TypeName, ClassName, AnnotationSpec> -> node.processMethod(
                     output = initializableObjectsByModule
                 )
 
@@ -117,10 +105,7 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
         )
     }
 
-    private fun Node<N, TypeName, ClassName, AnnotationSpec>.processMethod(
-        receiver: Type<N, TypeName, ClassName, AnnotationSpec>?,
-        returnType: Type<N, TypeName, ClassName, AnnotationSpec>,
-        arguments: Sequence<Type<N, TypeName, ClassName, AnnotationSpec>>,
+    private fun ExecutableNode<N, TypeName, ClassName, AnnotationSpec>.processMethod(
         output: Multimap<ModuleKey<N, ClassName>, AutoInitializeObject<TypeName, AnnotationSpec>>,
     ) {
 
@@ -147,7 +132,7 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
                 ?: arguments.firstOrNull()?.declaration?.annotations
                 ?: emptyList()
         } else {
-            returnType.declaration.annotations
+            returnType.declaration?.annotations ?: emptyList()
         }
 
         annotations.validateScopes(node)

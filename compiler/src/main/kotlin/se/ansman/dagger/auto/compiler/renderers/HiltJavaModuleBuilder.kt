@@ -16,7 +16,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.codegen.OriginatingElement
 import se.ansman.dagger.auto.compiler.applyEach
-import se.ansman.dagger.auto.compiler.asClassName
+import se.ansman.dagger.auto.compiler.rawType
 import se.ansman.dagger.auto.compiler.generatedFileComment
 import se.ansman.dagger.auto.compiler.models.HiltModule
 import se.ansman.dagger.auto.compiler.renderers.HiltModuleBuilder.ProviderMode
@@ -120,9 +120,9 @@ private fun ProviderMode<AnnotationSpec>.asAnnotations() =
     asAnnotations(AnnotationSpec::get)
 
 private fun HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>.asParameterName(): String =
-    asParameterName { asClassName().simpleName() }
+    asParameterName { rawType().simpleName() }
 
 private fun HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>.asTypeName(): TypeName =
     asTypeName { rawType, arguments ->
-        ParameterizedTypeName.get(ClassName.get(rawType.java), *arguments.toTypedArray())
+        ParameterizedTypeName.get(ClassName.get(rawType.java), *arguments.map { it.box() }.toTypedArray())
     }
