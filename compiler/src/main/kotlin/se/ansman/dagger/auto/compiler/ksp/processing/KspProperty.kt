@@ -1,5 +1,7 @@
 package se.ansman.dagger.auto.compiler.ksp.processing
 
+import com.google.devtools.ksp.KspExperimental
+import com.google.devtools.ksp.isAnnotationPresent
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
@@ -31,7 +33,7 @@ data class KspProperty(
         node.extensionReceiver?.resolve()?.let { KspType(it, resolver) }
     }
 
-    override val type: KspType by lazy(LazyThreadSafetyMode.NONE) {
+    override val returnType: KspType by lazy(LazyThreadSafetyMode.NONE) {
         node.type.resolve().let { KspType(it, resolver) }
     }
 }

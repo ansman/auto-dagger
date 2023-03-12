@@ -6,11 +6,11 @@ import com.squareup.javapoet.TypeName
 
 @Suppress("DeprecatedCallableAddReplaceWith")
 @Deprecated("This type is already a class name", level = DeprecationLevel.ERROR)
-fun ClassName.asClassName(): ClassName = this
+fun ClassName.rawType(): ClassName = this
 
-fun TypeName.asClassName(): ClassName =
-    when (this) {
-        is ClassName -> this
-        is ParameterizedTypeName -> rawType
-        else -> throw IllegalArgumentException("Cannot get class name from $this")
+fun TypeName.rawType(): ClassName =
+    when (val boxed = box()) {
+        is ClassName -> boxed
+        is ParameterizedTypeName -> boxed.rawType
+        else -> error("Cannot get raw type for $this (of type ${this.javaClass})")
     }

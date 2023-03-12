@@ -14,27 +14,26 @@ val Node<*, *, *, *>.isFullyPublic: Boolean
     get() = isPublic && enclosingType?.isPublic != false
 
 interface Type<N, TypeName, ClassName : TypeName, AnnotationSpec> {
-    val declaration: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>
+    val declaration: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>?
     fun toTypeName(): TypeName
     fun isAssignableTo(type: Type<N, TypeName, ClassName, AnnotationSpec>): Boolean
     fun isAssignableTo(type: KClass<*>): Boolean
     fun isAssignableTo(type: ClassName): Boolean
 }
 
-interface Property<N, TypeName, ClassName : TypeName, AnnotationSpec> : Node<N, TypeName, ClassName, AnnotationSpec> {
-    override val enclosingType: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>?
-    val name: String
-    val receiver: Type<N, TypeName, ClassName, AnnotationSpec>?
-    val type: Type<N, TypeName, ClassName, AnnotationSpec>
-}
-
-interface Function<N, TypeName, ClassName : TypeName, AnnotationSpec> : Node<N, TypeName, ClassName, AnnotationSpec> {
-    val arguments: Sequence<Type<N, TypeName, ClassName, AnnotationSpec>>
-    override val enclosingType: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>?
+interface ExecutableNode<N, TypeName, ClassName : TypeName, AnnotationSpec> : Node<N, TypeName, ClassName, AnnotationSpec> {
     val name: String
     val receiver: Type<N, TypeName, ClassName, AnnotationSpec>?
     val returnType: Type<N, TypeName, ClassName, AnnotationSpec>
+    val arguments: Sequence<Type<N, TypeName, ClassName, AnnotationSpec>>
 }
+
+interface Property<N, TypeName, ClassName : TypeName, AnnotationSpec> : ExecutableNode<N, TypeName, ClassName, AnnotationSpec> {
+    override val arguments: Sequence<Type<N, TypeName, ClassName, AnnotationSpec>>
+        get() = emptySequence()
+}
+
+interface Function<N, TypeName, ClassName : TypeName, AnnotationSpec> : ExecutableNode<N, TypeName, ClassName, AnnotationSpec>
 
 interface ClassDeclaration<N, TypeName, ClassName : TypeName, AnnotationSpec> : Node<N, TypeName, ClassName, AnnotationSpec> {
     val className: ClassName

@@ -13,8 +13,12 @@ data class KaptType(
     val mirror: TypeMirror,
     val resolver: KaptResolver,
 ) : Type<Element, TypeName, ClassName, AnnotationSpec> {
-    override val declaration: KaptClassDeclaration by lazy(LazyThreadSafetyMode.NONE) {
-        KaptClassDeclaration(MoreTypes.asTypeElement(mirror), resolver)
+    override val declaration: KaptClassDeclaration? by lazy(LazyThreadSafetyMode.NONE) {
+        if (mirror.kind.isPrimitive) {
+            null
+        } else {
+            KaptClassDeclaration(MoreTypes.asTypeElement(mirror), resolver)
+        }
     }
 
     override fun toTypeName(): TypeName = TypeName.get(mirror)

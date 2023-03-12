@@ -5,6 +5,8 @@ import com.google.common.collect.ImmutableSetMultimap
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
+import kotlinx.metadata.jvm.KotlinClassHeader
+import kotlinx.metadata.jvm.KotlinClassMetadata
 import se.ansman.dagger.auto.compiler.TypeLookup
 import se.ansman.dagger.auto.compiler.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.processing.ClassDeclaration
@@ -18,6 +20,27 @@ class KaptResolver(
 ) : AutoDaggerResolver<Element, TypeName, ClassName, AnnotationSpec> {
     override val typeLookup = TypeLookup { className ->
         KaptClassDeclaration(environment.typeLookup[className], this)
+    }
+
+    val kmClassLookup = TypeLookup { className ->
+        val typeElement = typeLookup[className].node
+        val metadata = typeElement.getAnnotation(Metadata::class.java)
+            ?: return@TypeLookup null
+
+        KotlinClassMetadata
+            .read(
+                KotlinClassHeader(
+                    kind = metadata.kind,
+                    metadataVersion = metadata.metadataVersion,
+                    data1 = metadata.data1,
+                    data2 = metadata.data2,
+                    extraString = metadata.extraString,
+                    packageName = metadata.packageName,
+                    extraInt = metadata.extraInt,
+                )
+            )
+            .let { it as? KotlinClassMetadata.Class }
+            ?.toKmClass()
     }
 
     @Suppress("UnstableApiUsage")

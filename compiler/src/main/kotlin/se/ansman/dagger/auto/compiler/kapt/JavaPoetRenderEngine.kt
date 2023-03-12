@@ -2,8 +2,8 @@ package se.ansman.dagger.auto.compiler.kapt
 
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
-import com.squareup.javapoet.ParameterizedTypeName
 import com.squareup.javapoet.TypeName
+import se.ansman.dagger.auto.compiler.rawType
 import se.ansman.dagger.auto.compiler.processing.RenderEngine
 import kotlin.reflect.KClass
 
@@ -17,10 +17,5 @@ object JavaPoetRenderEngine : RenderEngine<TypeName, ClassName, AnnotationSpec> 
     override fun packageName(className: ClassName): String = className.packageName()
     override fun topLevelClassName(className: ClassName): ClassName = className.topLevelClassName()
 
-    override fun rawType(typeName: TypeName): ClassName =
-        when (typeName) {
-            is ClassName -> typeName
-            is ParameterizedTypeName -> typeName.rawType
-            else -> error("Cannot get raw type for $typeName (of type ${typeName.javaClass})")
-        }
+    override fun rawType(typeName: TypeName): ClassName = typeName.rawType()
 }

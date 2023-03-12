@@ -20,9 +20,9 @@ class KspResolver(
     val resolver: Resolver,
 ) : AutoDaggerResolver<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
     override val typeLookup = TypeLookup { className ->
-        resolver.getClassDeclarationByName(resolver.getKSNameFromString(className))?.let {
-            KspClassDeclaration(it, this)
-        }
+        resolver.getClassDeclarationByName(resolver.getKSNameFromString(className))
+            ?.let { KspClassDeclaration(it, this) }
+            ?: throw IllegalArgumentException("Could not find class for name $className")
     }
 
     override fun nodesAnnotatedWith(annotation: KClass<out Annotation>): Sequence<Node<KSDeclaration, TypeName, ClassName, AnnotationSpec>> =
