@@ -21,12 +21,12 @@ if (!isRunningInIDE) {
 
 version = properties.getValue("version") as String
 
-tasks.withType<JavaCompile> {
+tasks.withType<JavaCompile>().configureEach {
     sourceCompatibility = "11"
     targetCompatibility = "11"
 }
 
-tasks.withType<KotlinCompile> {
+tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "11"
         allWarningsAsErrors = true
@@ -36,7 +36,7 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach {
     maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
 }
 
@@ -81,7 +81,7 @@ pluginManager.withPlugin("com.android.library") {
 }
 
 pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-    tasks.withType<Test> {
+    tasks.withType<Test>().configureEach {
         useJUnitPlatform()
         systemProperties(
             "junit.jupiter.execution.parallel.enabled" to "true",
@@ -96,7 +96,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
     }
 }
 
-plugins.withType<JavaBasePlugin> {
+plugins.withType<JavaBasePlugin>().configureEach {
     extensions.configure<JavaPluginExtension> {
         toolchain {
             languageVersion.set(JavaLanguageVersion.of(19))

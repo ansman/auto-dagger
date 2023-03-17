@@ -51,7 +51,7 @@ tasks.withType<AbstractDokkaLeafTask>().configureEach {
     }
 }
 
-tasks.withType<AbstractPublishToMaven> {
+tasks.withType<AbstractPublishToMaven>().configureEach {
     doLast {
         with(publication) {
             println("Published artifact $groupId:$artifactId:$version")

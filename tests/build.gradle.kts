@@ -47,14 +47,14 @@ android.sourceSets.configureEach {
 // This is needed because Dagger/Hilt doesn't support KSP yet so for our generated code to be
 // seen we need to make the output from KSP an input to KAPT
 afterEvaluate {
-    tasks.withType<Kapt> {
+    tasks.withType<Kapt>().configureEach {
         val ksp = tasks.findByName(name.replace("kapt", "ksp")) as KspTaskJvm?
-            ?: return@withType
+            ?: return@configureEach
         kaptExternalClasspath.from(ksp.destination)
     }
-    tasks.withType<KaptGenerateStubsTask> {
+    tasks.withType<KaptGenerateStubsTask>().configureEach {
         val ksp = tasks.findByName(name.replace("kaptGenerateStubs", "ksp")) as KspTaskJvm?
-            ?: return@withType
+            ?: return@configureEach
         kaptClasspath.from(ksp.destination)
     }
 }

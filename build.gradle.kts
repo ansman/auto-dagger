@@ -1,6 +1,7 @@
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
+import ru.vyarus.gradle.plugin.python.task.BasePythonTask
 
 plugins {
     `version-catalog`
@@ -124,6 +125,10 @@ tasks.dokkaHtmlMultiModule {
         version = providers.gradleProperty("version").get()
         olderVersionsDir = olderVersionsFolder
     }
+}
+
+tasks.withType<BasePythonTask>().configureEach {
+    notCompatibleWithConfigurationCache("mkdocs isn't compatible with the config cache")
 }
 
 extensions.findByName("buildScan")?.withGroovyBuilder {
