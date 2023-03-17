@@ -18,19 +18,9 @@ import org.robolectric.annotation.Config
 import kotlin.test.BeforeTest
 
 
-@HiltAndroidTest
 @RunWith(RobolectricTestRunner::class)
 @Config(application = HiltTestApplication::class)
 class AutoDaggerStartupInitializerTest {
-    @get:Rule
-    val hiltRule = HiltAndroidRule(this)
-
-    @BeforeTest
-    fun setup() {
-        hiltRule.inject()
-        Robolectric.buildContentProvider(InitializationProvider::class.java)
-            .create(ProviderInfo().apply { authority = "se.ansman.dagger.auto.androidx-startup" })
-    }
 
     @After
     fun teardown() {
@@ -42,6 +32,14 @@ class AutoDaggerStartupInitializerTest {
 
     @Test
     fun singletonComponents() {
+        assertAll {
+            assertThat(Repository::createCount).isEqualTo(0)
+            assertThat(InitializableRepository::createCount).isEqualTo(0)
+            assertThat(InitializableRepository::initCount).isEqualTo(0)
+            assertThat(QualifiedThing::createCount).isEqualTo(0)
+        }
+        Robolectric.buildContentProvider(InitializationProvider::class.java)
+            .create(ProviderInfo().apply { authority = "se.ansman.dagger.auto.androidx-startup" })
         assertAll {
             assertThat(Repository::createCount).isEqualTo(1)
             assertThat(InitializableRepository::createCount).isEqualTo(1)

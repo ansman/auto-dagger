@@ -6,6 +6,8 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import assertk.assertions.isInstanceOf
 import assertk.assertions.isSameAs
+import assertk.assertions.isTrue
+import assertk.assertions.prop
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
@@ -57,6 +59,14 @@ class SampleProjectTest {
         InitializableRepository.initCount = 0
         QualifiedThing.createCount = 0
         RealReplaceableRepository.isInitialized = false
+    }
+
+    @Test
+    fun `initializing should set isInitialized`() {
+        val initializer = initializableProvider.get()
+        assertThat(initializer).prop(AutoDaggerInitializer::isInitialized).isFalse()
+        initializer.initialize()
+        assertThat(initializer).prop(AutoDaggerInitializer::isInitialized).isTrue()
     }
 
     @Test
