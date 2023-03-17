@@ -1,5 +1,9 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 
+module:core
+se.ansman.dagger.auto
 module:android
 se.ansman.dagger.auto.android
+module:android-testing
+se.ansman.dagger.auto.android.testing

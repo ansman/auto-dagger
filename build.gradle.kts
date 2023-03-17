@@ -6,7 +6,7 @@ plugins {
     `version-catalog`
     kotlin("jvm") version libs.versions.kotlin.get() apply false
     alias(libs.plugins.dagger.hilt) apply false
-    id("org.jetbrains.dokka") version libs.versions.dokka.get()
+    id("dokka-common")
     alias(libs.plugins.binaryCompatibilityValidator)
     alias(libs.plugins.mkdocs)
 }
@@ -104,11 +104,6 @@ tasks.register<Delete>("clean") {
     delete(layout.buildDirectory)
 }
 
-dependencies {
-    dokkaPlugin(libs.dokka.versioningPlugin)
-    dokkaPlugin(libs.dokka.allModulesPagePlugin)
-}
-
 val olderVersionsFolder = file("src/doc/dokka/")
 val versionCurrentDocs by tasks.registering(DokkaMultiModuleTask::class) {
     enabled = !isSnapshotVersion
@@ -117,6 +112,10 @@ val versionCurrentDocs by tasks.registering(DokkaMultiModuleTask::class) {
         version = providers.gradleProperty("version").get()
     }
     addChildTasks(dokkaProjects, "dokkaHtmlPartial")
+}
+
+dependencies {
+    dokkaPlugin(libs.dokka.allModulesPagePlugin)
 }
 
 tasks.dokkaHtmlMultiModule {

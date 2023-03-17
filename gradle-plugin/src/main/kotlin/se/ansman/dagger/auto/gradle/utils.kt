@@ -23,3 +23,6 @@ internal fun <T> Project.cachedProvider(producer: () -> T): Provider<T> =
 
 internal fun ExtraPropertiesExtension.getOrPut(name: String, block: () -> String): String =
     if (has(name)) get(name) as String else block().also { set(name, it) }
+
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "TYPE_MISMATCH")
+fun <T : Any, R : Any> Provider<T>.mapNullable(mapper: (T) -> R?): Provider<R> = map(mapper)

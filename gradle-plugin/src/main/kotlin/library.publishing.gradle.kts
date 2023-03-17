@@ -1,3 +1,4 @@
+@file:Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 
 import com.android.build.gradle.LibraryExtension
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -7,12 +8,13 @@ import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
 import se.ansman.dagger.auto.gradle.getOrPut
+import se.ansman.dagger.auto.gradle.mapNullable
 import java.util.Locale
 
 plugins {
     id("maven-publish")
     id("signing")
-    id("org.jetbrains.dokka")
+    id("dokka-common")
 }
 
 val libs = the<LibrariesForLibs>()
@@ -26,9 +28,12 @@ val gitCommit = cachedProvider {
 
 fun repo(path: String = "") = "https://github.com/ansman/auto-dagger$path"
 
-val remoteSource: Provider<String> = gitCommit.map { repo("/blob/$it") }
+val remoteSource: Provider<String> = providers.gradleProperty("version")
+    .mapNullable { version -> version.takeUnless { it.endsWith("-SNAPSHOT") } }
+    .orElse(gitCommit)
+    .map { repo("/blob/$it") }
 
-tasks.withType<AbstractDokkaLeafTask> {
+tasks.withType<AbstractDokkaLeafTask>().configureEach {
     moduleName.set(project.path.removePrefix(":").replace(':', '-'))
     val projectPath = project.path.removePrefix(":").replace(':', '/')
     dokkaSourceSets.configureEach {
