@@ -1,6 +1,7 @@
 package se.ansman.dagger.auto
 
 import kotlin.reflect.KClass
+import javax.inject.Qualifier
 
 /**
  * Instructs Auto Dagger to automatically bind the annotated type as its parent type.
@@ -85,6 +86,7 @@ import kotlin.reflect.KClass
  *
  * @see AutoBindIntoSet
  * @see AutoBindIntoMap
+ * @since 0.2
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)

@@ -13,6 +13,7 @@ import kotlin.reflect.KClass
  * @see [AutoBind]
  * @see [AutoBindIntoSet]
  * @see [IntoSet]
+ * @since 0.2
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)

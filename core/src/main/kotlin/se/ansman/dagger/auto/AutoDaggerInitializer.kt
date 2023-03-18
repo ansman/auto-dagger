@@ -2,7 +2,11 @@ package se.ansman.dagger.auto
 
 import javax.inject.Inject
 
-/** A class that can initialize multiple [Initializable] in order of their [priority][AutoInitialize.priority]. */
+/**
+ * A class that can initialize multiple [Initializable] in order of their [priority][AutoInitialize.priority].
+ *
+ * @since 0.2
+ */
 public class AutoDaggerInitializer @Inject constructor(
     private val initializables: Set<@JvmSuppressWildcards Initializable>
 ) : Initializable {

@@ -18,6 +18,7 @@ import kotlin.reflect.KClass
  * @see [AutoBindIntoSet]
  * @see [MapKey]
  * @see [IntoMap]
+ * @since 0.2
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)

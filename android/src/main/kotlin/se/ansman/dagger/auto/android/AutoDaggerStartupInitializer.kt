@@ -10,6 +10,8 @@ import javax.inject.Singleton
  * An [Initializer] that will initialize a [Singleton] scoped [AutoDaggerStartupInitializer].
  *
  * This will be called by androidx.startup, provides no result and has no dependencies.
+ *
+ * @since 0.2
  */
 class AutoDaggerStartupInitializer : Initializer<Unit> {
     override fun create(context: Context) {

@@ -60,6 +60,8 @@ import kotlin.reflect.KClass
  * @Replaces(RealRepository::class)
  * class FakeRepository @Inject constructor() : Repository
  * ```
+ *
+ * @since 0.3
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
