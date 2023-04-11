@@ -1,5 +1,3 @@
-@file:Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-
 import com.android.build.gradle.LibraryExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.internal.tasks.userinput.UserInputHandler
@@ -9,7 +7,6 @@ import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
 import se.ansman.dagger.auto.gradle.getOrPut
 import se.ansman.dagger.auto.gradle.mapNullable
-import java.util.Locale
 
 plugins {
     id("maven-publish")
@@ -108,7 +105,7 @@ val publication = publishing.publications.register<MavenPublication>("autoDagger
         val moduleName = project.path
             .removePrefix(":")
             .splitToSequence(":")
-            .joinToString { it.capitalize(Locale.ROOT) }
+            .joinToString { it.replaceFirstChar(Char::uppercaseChar) }
 
         name.set("Auto Dagger $moduleName")
         description.set("Automatic Dagger setup using Hilt")
@@ -140,7 +137,7 @@ if (findProperty("signArtifacts")?.toString()?.toBoolean() == true) {
     signing {
         sign(publication.get())
         gradle.taskGraph.whenReady {
-            if (hasTask(tasks.getByName("sign${publication.name.capitalize(Locale.ROOT)}Publication"))) {
+            if (hasTask(tasks.getByName("sign${publication.name.replaceFirstChar(Char::uppercaseChar)}Publication"))) {
                 rootProject.ext.getOrPut("signing.gnupg.passphrase") {
                     serviceOf<UserInputHandler>()
                         .askQuestion("Signing key passphrase: ", "")

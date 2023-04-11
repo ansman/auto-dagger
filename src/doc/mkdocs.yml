@@ -35,6 +35,8 @@ theme:
     - navigation.top
     - navigation.instant
     - navigation.expand
+extra_css:
+  - stylesheets/extra.css
 
 extra:
   version:
