@@ -82,6 +82,10 @@ gitPublish {
     }
 }
 
+python {
+    pip("pip:23.0.1")
+}
+
 tasks.mkdocsBuild {
     doFirst {
         delete(mkdocs.buildDir)
