@@ -13,7 +13,7 @@ class SomeRepository @Inject constructor() {
 ```
 
 ## Initializable
-It's often considered bad practice to have side effects in a constructor/initializer block. If this is a concern your
+It's often considered bad practice to have side effects in a constructor/initializer block. If this is a concern, your
 object can implement the `Initializable` interface. Auto Dagger will then call `initialize` when it's time to initialize.
 
 ```kotlin
