@@ -1,6 +1,5 @@
 package se.ansman.dagger.auto.compiler
 
-import org.jetbrains.kotlin.incremental.mkdirsOrThrow
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.DynamicContainer
 import org.junit.jupiter.api.DynamicNode
@@ -57,7 +56,7 @@ abstract class BaseTest(
                     AutoDaggerTestCase(
                         testType = type,
                         testName = name,
-                        compilation = compilation(tempDirectory.resolve(name).apply { mkdirsOrThrow() }),
+                        compilation = compilation(tempDirectory.resolve(name).apply { mkdirs() }),
                         sources = Files.list(test)
                             .asSequence()
                             .filter { it.isRegularFile() }

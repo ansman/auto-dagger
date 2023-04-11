@@ -1,7 +1,5 @@
 package se.ansman.dagger.auto.compiler
 
-import org.jetbrains.kotlin.incremental.deleteRecursivelyOrThrow
-import org.jetbrains.kotlin.incremental.mkdirsOrThrow
 import org.junit.jupiter.api.function.Executable
 import java.io.File
 import kotlin.test.assertEquals
@@ -51,8 +49,8 @@ class AutoDaggerTestCase(
     }
 
     private fun AutoDaggerCompilation.Result.writeExpectedFiles(writeExpectedFilesTo: File) {
-        writeExpectedFilesTo.deleteRecursivelyOrThrow()
-        writeExpectedFilesTo.mkdirsOrThrow()
+        writeExpectedFilesTo.deleteRecursively()
+        writeExpectedFilesTo.mkdirs()
         filesGeneratedByAnnotationProcessor.forEach { file ->
             writeExpectedFilesTo.resolve("${file.name}.txt").writeText(file.readText().trim())
         }
