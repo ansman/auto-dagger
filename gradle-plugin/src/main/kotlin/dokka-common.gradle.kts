@@ -14,4 +14,7 @@ dependencies {
 
 tasks.withType<AbstractDokkaTask>().configureEach {
     notCompatibleWithConfigurationCache("Dokka does not support config cache yet")
+    if (name == "dokkaHtmlPartial") {
+        dependsOn("kaptKotlin")
+    }
 }
