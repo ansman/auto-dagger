@@ -1,6 +1,7 @@
 package se.ansman.dagger.auto.compiler.processors
 
 import dagger.MapKey
+import dagger.Reusable
 import dagger.hilt.DefineComponent
 import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.AutoBind
@@ -232,7 +233,8 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
 
     private fun scopeToComponent(scope: AnnotationModel<*, *>): ClassName? =
         when (scope.qualifiedName) {
-            Singleton::class.java.name ->
+            Singleton::class.java.name,
+            Reusable::class.java.name ->
                 environment.renderEngine.className(SingletonComponent::class)
 
             "dagger.hilt.android.scopes.ActivityRetainedScoped" ->

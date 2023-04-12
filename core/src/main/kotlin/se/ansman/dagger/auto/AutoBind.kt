@@ -1,7 +1,7 @@
 package se.ansman.dagger.auto
 
-import kotlin.reflect.KClass
 import javax.inject.Qualifier
+import kotlin.reflect.KClass
 
 /**
  * Instructs Auto Dagger to automatically bind the annotated type as its parent type.
@@ -34,6 +34,7 @@ import javax.inject.Qualifier
  * |--------------------------|-----------------------------|
  * | No scope                 | `SingletonComponent`        |
  * | `Singleton`              | `SingletonComponent`        |
+ * | `Reusable`               | `SingletonComponent`        |
  * | `ActivityRetainedScoped` | `ActivityRetainedComponent` |
  * | `ActivityScoped`         | `ActivityComponent`         |
  * | `FragmentScoped`         | `FragmentComponent`         |
