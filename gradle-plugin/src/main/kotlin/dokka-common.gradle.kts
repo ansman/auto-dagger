@@ -19,6 +19,8 @@ tasks.withType<AbstractDokkaTask>().configureEach {
 
 pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
     pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
-        tasks.named("dokkaHtmlPartial").dependsOn("kaptKotlin")
+        tasks.withType<AbstractDokkaTask>().configureEach {
+            dependsOn("kaptKotlin")
+        }
     }
 }
