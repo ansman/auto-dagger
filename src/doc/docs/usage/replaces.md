@@ -15,6 +15,7 @@ class FakeRepository @Inject constructor() : Repository
 ```
 
 To use `@Replaces` there are some requirements:
+
 - The replacement must implement the types bound the target. 
 - The replacement target must be annotated with `@AutoBind`.
 - The replacement must not be annotated with `@AutoBind`, `@AutoBindIntoSet`, `@AutoBindIntoMap`, or `@AutoInitialize`.
