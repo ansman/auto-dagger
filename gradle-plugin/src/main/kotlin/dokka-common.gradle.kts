@@ -1,5 +1,4 @@
 
-import com.android.build.gradle.internal.tasks.factory.dependsOn
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.AbstractDokkaTask
 
