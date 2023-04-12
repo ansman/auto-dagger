@@ -47,6 +47,7 @@ AutoDagger will try to infer the component to install the binding in using the s
 |--------------------------|-----------------------------|
 | No scope                 | `SingletonComponent`        |
 | `Singleton`              | `SingletonComponent`        |
+| `Reusable`               | `SingletonComponent`        |
 | `ActivityRetainedScoped` | `ActivityRetainedComponent` |
 | `ActivityScoped`         | `ActivityComponent`         |
 | `FragmentScoped`         | `FragmentComponent`         |
