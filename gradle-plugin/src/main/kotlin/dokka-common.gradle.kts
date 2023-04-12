@@ -1,4 +1,5 @@
 
+import com.android.build.gradle.internal.tasks.factory.dependsOn
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.AbstractDokkaTask
 
@@ -14,7 +15,10 @@ dependencies {
 
 tasks.withType<AbstractDokkaTask>().configureEach {
     notCompatibleWithConfigurationCache("Dokka does not support config cache yet")
-    if (name == "dokkaHtmlPartial") {
-        dependsOn("kaptKotlin")
+}
+
+pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+    pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
+        tasks.named("dokkaHtmlPartial").dependsOn("kaptKotlin")
     }
 }

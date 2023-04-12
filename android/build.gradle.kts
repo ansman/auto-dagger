@@ -14,3 +14,7 @@ dependencies {
     kapt(libs.dagger.compiler)
     kapt(libs.dagger.hilt.compiler)
 }
+
+tasks.dokkaHtmlMultiModule {
+    enabled = false
+}
