@@ -2,8 +2,8 @@ Auto Dagger [![Build Gradle](https://github.com/ansman/auto-dagger/actions/workf
 ===
 Auto Dagger allows you to automate some Dagger setup using Hilt.
 
-For example you can annotate `@Singleton` scoped objects with `@AutoInitialize` and have the be initialized during app
-launch and you can use the `@AutoBind` annotation to automatically bind objects.
+For example you can use the `@AutoInitialize` annotation to automatically initialize objects 
+during app launch and you can use the `@AutoBind` annotation to automatically bind objects.
 
 Automatic initialization is done using AndroidX Startup.
 
