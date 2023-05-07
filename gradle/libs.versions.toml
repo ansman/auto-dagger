@@ -57,7 +57,7 @@ incap-compiler = { module = "net.ltgt.gradle.incap:incap-processor", version.ref
 compileTesting = { module ="com.github.tschuchortdev:kotlin-compile-testing", version.ref = "compileTesting" }
 compileTesting-ksp = { module ="com.github.tschuchortdev:kotlin-compile-testing-ksp", version.ref = "compileTesting" }
 
-junit = "junit:junit:4.13"
+junit = "junit:junit:4.13.2"
 junit-jupiter = "org.junit.jupiter:junit-jupiter:5.9.1"
 
 assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
