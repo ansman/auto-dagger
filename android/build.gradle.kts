@@ -18,3 +18,7 @@ dependencies {
 tasks.dokkaHtmlMultiModule {
     enabled = false
 }
+
+tasks.dokkaJavadoc {
+    dependsOn("kaptReleaseKotlin")
+}
