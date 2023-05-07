@@ -1,11 +1,11 @@
 [versions]
-kotlin = "1.8.20"
+kotlin = "1.8.21"
 dokka = "1.8.10"
 compileTesting = "1.5.0"
 autoService = "1.0.1"
-incap = "0.3"
-dagger = "2.45"
-ksp = "1.8.20-1.0.10"
+incap = "1.0.0"
+dagger = "2.46"
+ksp = "1.8.21-1.0.11"
 android-minSdk = "14"
 android-compileSdk = "33"
 androidx-test = "1.5.0"
@@ -14,7 +14,7 @@ kotlinpoet = "1.12.0"
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.13.0"
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.13.1"
 mkdocs = "ru.vyarus.mkdocs:3.0.0"
 
 [libraries]
@@ -25,7 +25,7 @@ dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", versi
 dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
 dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 
-okio = "com.squareup.okio:okio:3.2.0"
+okio = "com.squareup.okio:okio:3.3.0"
 
 android-gradlePlugin = "com.android.tools.build:gradle:8.1.0-alpha11"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
@@ -57,12 +57,12 @@ incap-compiler = { module = "net.ltgt.gradle.incap:incap-processor", version.ref
 compileTesting = { module ="com.github.tschuchortdev:kotlin-compile-testing", version.ref = "compileTesting" }
 compileTesting-ksp = { module ="com.github.tschuchortdev:kotlin-compile-testing-ksp", version.ref = "compileTesting" }
 
-juniper = "org.junit.jupiter:junit-jupiter:5.9.3"
-junit = "junit:junit:4.13"
+junit = "junit:junit:4.13.2"
+junit-jupiter = "org.junit.jupiter:junit-jupiter:5.9.3"
 
 assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
 
-robolectric = "org.robolectric:robolectric:4.9.2"
+robolectric = "org.robolectric:robolectric:4.10.2"
 
 testLogger = "com.adarshr:gradle-test-logger-plugin:3.2.0"
 
@@ -71,7 +71,7 @@ compileTesting = ["compileTesting", "compileTesting-ksp"]
 kotlinpoet = ["kotlinpoet", "kotlinpoet-ksp"]
 jvmTesting = [
     "kotlin-test",
-    "juniper",
+    "junit-jupiter",
     "assertk",
 ]
 androidTesting = [
