@@ -14,12 +14,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
-    @Suppress("UnstableApiUsage")
-    versionCatalogs {
-        create("libs") {
-            from(files("libs.versions.toml"))
-        }
-    }
 }
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
