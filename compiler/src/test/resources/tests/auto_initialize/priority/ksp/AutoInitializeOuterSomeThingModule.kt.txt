@@ -18,5 +18,5 @@ public object AutoInitializeOuterSomeThingModule {
   @Provides
   @IntoSet
   public fun provideSomeThingAsInitializable(lazySomeThing: Lazy<Outer.SomeThing>): Initializable =
-      lazySomeThing.asInitializable(priority = 4711)
+      lazySomeThing.asInitializable(priority = 4_711)
 }

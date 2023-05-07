@@ -17,5 +17,5 @@ public object AutoInitializeOuterSomeThingModule {
   @Provides
   @IntoSet
   public fun provideSomeThingAsInitializable(someThing: Outer.SomeThing): Initializable =
-      someThing.withPriority(4711)
+      someThing.withPriority(4_711)
 }
