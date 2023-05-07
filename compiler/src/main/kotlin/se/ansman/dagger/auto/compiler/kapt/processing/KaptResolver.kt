@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableSetMultimap
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
-import kotlinx.metadata.jvm.KotlinClassHeader
 import kotlinx.metadata.jvm.KotlinClassMetadata
 import se.ansman.dagger.auto.compiler.TypeLookup
 import se.ansman.dagger.auto.compiler.processing.AutoDaggerResolver
@@ -28,17 +27,7 @@ class KaptResolver(
             ?: return@TypeLookup null
 
         KotlinClassMetadata
-            .read(
-                KotlinClassHeader(
-                    kind = metadata.kind,
-                    metadataVersion = metadata.metadataVersion,
-                    data1 = metadata.data1,
-                    data2 = metadata.data2,
-                    extraString = metadata.extraString,
-                    packageName = metadata.packageName,
-                    extraInt = metadata.extraInt,
-                )
-            )
+            .read(metadata)
             .let { it as? KotlinClassMetadata.Class }
             ?.toKmClass()
     }
