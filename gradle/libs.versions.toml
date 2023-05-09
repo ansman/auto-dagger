@@ -21,6 +21,8 @@ mkdocs = "ru.vyarus.mkdocs:3.0.0"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
+kotlinx-metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.6.0"
+
 dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
 dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
@@ -65,6 +67,8 @@ assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
 robolectric = "org.robolectric:robolectric:4.10.2"
 
 testLogger = "com.adarshr:gradle-test-logger-plugin:3.2.0"
+
+shadow = "com.github.johnrengelman:shadow:8.1.1"
 
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]
