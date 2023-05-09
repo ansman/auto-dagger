@@ -3,6 +3,7 @@ plugins {
     kotlin("kapt")
     id("library")
     id("library.publishing")
+    id("com.github.johnrengelman.shadow")
 }
 
 tasks.withType<Test>().configureEach {
@@ -23,12 +24,15 @@ tasks.withType<Test>().configureEach {
     }
 }
 
+val shade by configurations.named("compileShaded")
 dependencies {
+    shade(libs.kotlinx.metadata) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+    }
     implementation(libs.javapoet)
     implementation(libs.bundles.kotlinpoet)
     implementation(libs.dagger)
     implementation(libs.dagger.hilt.core)
-    implementation(libs.dagger.hilt.compiler)
     implementation(libs.ksp.api)
     api(projects.core)
     api(projects.android.testing)

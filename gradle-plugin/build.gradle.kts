@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+    api(libs.shadow)
     api(libs.android.gradlePlugin)
     api(libs.dokka.gradlePlugin)
     api(libs.testLogger)

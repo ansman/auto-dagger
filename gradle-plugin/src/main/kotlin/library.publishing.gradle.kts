@@ -1,5 +1,7 @@
-
 import com.android.build.gradle.LibraryExtension
+import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.internal.tasks.userinput.UserInputHandler
 import org.gradle.configurationcache.extensions.serviceOf
@@ -175,9 +177,31 @@ pluginManager.withPlugin("com.android.library") {
     }
 }
 
+pluginManager.withPlugin("com.github.johnrengelman.shadow") {
+    val shade: Configuration = configurations.create("compileShaded")
+    configurations.named("compileOnly") {
+        extendsFrom(shade)
+    }
+    configurations.named("testRuntimeOnly") {
+        extendsFrom(shade)
+    }
+
+    tasks.named<ShadowJar>("shadowJar") {
+        archiveClassifier.set("")
+        configurations = listOf(shade)
+        isEnableRelocation = true
+        relocationPrefix = "se.ansman.dagger.auto${project.path.replace(':', '.').replace('-', '_')}"
+        transformers.add(ServiceFileTransformer())
+    }
+}
+
 pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
     publication {
-        from(components["java"])
+        if (pluginManager.hasPlugin("com.github.johnrengelman.shadow")) {
+            the<ShadowExtension>().component(this)
+        } else {
+            from(components["java"])
+        }
     }
 
     sourcesJar {
