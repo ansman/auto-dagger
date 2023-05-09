@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.AutoBind
 import se.ansman.dagger.auto.AutoBindIntoMap
 import se.ansman.dagger.auto.AutoBindIntoSet
+import se.ansman.dagger.auto.BindGenericAs
 import se.ansman.dagger.auto.android.testing.Replaces
 import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.deleteSuffix
@@ -20,6 +21,7 @@ import se.ansman.dagger.auto.compiler.processing.Type
 import se.ansman.dagger.auto.compiler.processing.error
 import se.ansman.dagger.auto.compiler.processing.getAnnotation
 import se.ansman.dagger.auto.compiler.processing.getQualifiers
+import se.ansman.dagger.auto.compiler.processing.getValue
 import se.ansman.dagger.auto.compiler.processing.isAnnotatedWith
 import se.ansman.dagger.auto.compiler.processing.isFullyPublic
 import se.ansman.dagger.auto.compiler.processing.rootPeerClass
@@ -143,10 +145,33 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
     ) {
         logger?.info("Processing annotation ${annotation.qualifiedName} for ${type.className}")
 
+        val bindGenericAs = annotation.getValue("bindGenericAs") ?: BindGenericAs.Type
+
         val component = type.getTargetComponent(resolver, annotation)
         val key = ModuleKey(targetType = type.className, targetComponent = component)
         val types = getBoundTypes(annotation)
-            .map { AutoBindType(it.toTypeName(), mode) }
+            .also { boundTypes ->
+                if (bindGenericAs != BindGenericAs.Type && boundTypes.none { it.isGeneric }) {
+                    logger?.error(Errors.AutoBind.invalidBindMode(bindGenericAs), type)
+                }
+            }
+            .asSequence()
+            .flatMap { boundType ->
+                val typeName = boundType.toTypeName()
+                when (bindGenericAs) {
+                    BindGenericAs.Type ->
+                        sequenceOf(typeName)
+
+                    BindGenericAs.Wildcard ->
+                        sequenceOf(resolver.environment.renderEngine.asWildcard(typeName))
+
+                    BindGenericAs.TypeAndWildcard ->
+                        sequenceOf(typeName, resolver.environment.renderEngine.asWildcard(typeName))
+                }
+            }
+            .distinct()
+            .map { AutoBindType(it, mode) }
+            .toList()
         output[key] = output[key]
             ?.withTypesAdded(types)
             ?: AutoBindObjectModule(
@@ -210,7 +235,9 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
             ?: return type.supertypes.also {
                 when (it.size) {
                     0 -> logger?.error(Errors.AutoBind.noSuperTypes, type)
-                    1 -> { /* OK */ }
+                    1 -> { /* OK */
+                    }
+
                     else -> logger?.error(Errors.AutoBind.multipleSuperTypes, type)
                 }
             }

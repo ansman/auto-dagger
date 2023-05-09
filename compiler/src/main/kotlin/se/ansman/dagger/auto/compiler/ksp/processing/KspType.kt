@@ -18,6 +18,9 @@ data class KspType(
         KspClassDeclaration(type.unwrapTypeAlias().declaration as KSClassDeclaration, resolver)
     }
 
+    override val isGeneric: Boolean
+        get() = type.arguments.isNotEmpty()
+
     override fun toTypeName(): TypeName = type.toTypeName()
     override fun isAssignableTo(type: Type<KSDeclaration, TypeName, ClassName, AnnotationSpec>): Boolean =
         isAssignableTo((type as KspType).type)

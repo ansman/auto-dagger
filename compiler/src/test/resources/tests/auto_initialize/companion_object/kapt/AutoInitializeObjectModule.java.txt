@@ -22,7 +22,7 @@ public abstract class AutoInitializeObjectModule {
 
   @Provides
   @IntoSet
-  public static Initializable provideIntegerAsInitializable(Lazy<Integer> lazyInteger) {
+  public static Initializable provideIntAsInitializable(Lazy<Integer> lazyInteger) {
     return Initializable.fromLazy(lazyInteger);
   }
 }

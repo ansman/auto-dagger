@@ -14,7 +14,13 @@ abstract class AutoBindObjectModuleRenderer<Node, TypeName, ClassName : TypeName
             .create(input)
             .applyEach(input.boundTypes) { boundType ->
                 with(renderEngine) {
-                    val suffix = "${simpleName(input.type)}As${simpleName(rawType(boundType.type))}${boundType.mode.suffix}"
+                    val suffix = buildString {
+                        this
+                            .append(simpleName(input.type))
+                            .append("As")
+                            .append(simpleName(boundType.type))
+                            .append(boundType.mode.suffix)
+                    }
                     val returnType = HiltModuleBuilder.DaggerType(boundType.type, input.qualifiers)
                     if (input.isObject) {
                         addProvider(

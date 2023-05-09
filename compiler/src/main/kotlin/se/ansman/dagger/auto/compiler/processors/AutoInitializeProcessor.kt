@@ -22,6 +22,7 @@ import se.ansman.dagger.auto.compiler.processing.error
 import se.ansman.dagger.auto.compiler.processing.filterQualifiers
 import se.ansman.dagger.auto.compiler.processing.getAnnotation
 import se.ansman.dagger.auto.compiler.processing.getQualifiers
+import se.ansman.dagger.auto.compiler.processing.getValue
 import se.ansman.dagger.auto.compiler.processing.isAnnotatedWith
 import se.ansman.dagger.auto.compiler.processing.isFullyPublic
 import se.ansman.dagger.auto.compiler.processing.rootPeerClass

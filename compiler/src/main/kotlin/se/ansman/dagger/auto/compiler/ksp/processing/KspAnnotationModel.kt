@@ -34,11 +34,24 @@ class KspAnnotationModel(
     override fun isOfType(type: String): Boolean =
         type.endsWith(annotation.shortName.asString()) && type == qualifiedName
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : Any> getValue(name: String): T? =
+    override fun <T : Any> getValue(type: Class<T>, name: String): T? =
         annotation.arguments.find { it.name?.asString() == name }
             ?.takeUnless { it.isDefault() }
-            ?.convertedValue as T?
+            ?.convertedValue
+            ?.let { value ->
+                if (type.isEnum) {
+                    val enumEntry = (value as KspClassDeclaration)
+                        .node
+                        .simpleName
+                        .asString()
+
+                    type.enumConstants
+                        .first { (it as Enum<*>).name == enumEntry }!!
+                        .let(type::cast)
+                } else {
+                    type.cast(value)
+                }
+            }
 
     override fun toAnnotationSpec(): AnnotationSpec = annotation.toAnnotationSpecFixed()
 
@@ -54,6 +67,7 @@ class KspAnnotationModel(
                 is Float,
                 is Double,
                 is String -> this
+
                 is List<*> -> map { it!!.convert() }
                 is KSType -> KspClassDeclaration(declaration as KSClassDeclaration, resolver)
                 else -> throw UnsupportedOperationException("Annotation value of type $javaClass isn't supported")

@@ -34,9 +34,10 @@ class KaptAnnotationModel(
     override fun isOfType(type: String): Boolean =
         type.endsWith(mirror.annotationType.asElement().simpleName) && type == className.canonicalName()
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : Any> getValue(name: String): T? =
-        getValueNamed(name)?.accept(AnnotationValueVisitor, resolver) as T?
+    override fun <T : Any> getValue(type: Class<T>, name: String): T? =
+        getValueNamed(name)
+            ?.accept(KaptAnnotationValueVisitor, KaptAnnotationValueVisitor.Context(resolver, type))
+            ?.let(type::cast)
 
     private fun getValueNamed(name: String): AnnotationValue? =
         mirror.elementValues.entries.find { it.key.simpleName.contentEquals(name) }?.value
@@ -44,27 +45,34 @@ class KaptAnnotationModel(
     override fun toAnnotationSpec(): AnnotationSpec = AnnotationSpec.get(mirror)
 }
 
-private object AnnotationValueVisitor : AnnotationValueVisitor<Any, KaptResolver> {
-    override fun visit(av: AnnotationValue, p: KaptResolver): Any = av.accept(this, p)
-    override fun visitBoolean(b: Boolean, p: KaptResolver): Any = b
-    override fun visitByte(b: Byte, p: KaptResolver): Any = b
-    override fun visitChar(c: Char, p: KaptResolver): Any = c
-    override fun visitDouble(d: Double, p: KaptResolver): Any = d
-    override fun visitFloat(f: Float, p: KaptResolver): Any = f
-    override fun visitInt(i: Int, p: KaptResolver): Any = i
-    override fun visitLong(i: Long, p: KaptResolver): Any = i
-    override fun visitShort(s: Short, p: KaptResolver): Any = s
-    override fun visitString(s: String, p: KaptResolver): Any = s
-    override fun visitType(t: TypeMirror, p: KaptResolver): Any = KaptClassDeclaration(MoreTypes.asTypeElement(t), p)
+private object KaptAnnotationValueVisitor : AnnotationValueVisitor<Any, KaptAnnotationValueVisitor.Context> {
+    override fun visit(av: AnnotationValue, p: Context): Any = av.accept(this, p)
+    override fun visitBoolean(b: Boolean, p: Context): Any = b
+    override fun visitByte(b: Byte, p: Context): Any = b
+    override fun visitChar(c: Char, p: Context): Any = c
+    override fun visitDouble(d: Double, p: Context): Any = d
+    override fun visitFloat(f: Float, p: Context): Any = f
+    override fun visitInt(i: Int, p: Context): Any = i
+    override fun visitLong(i: Long, p: Context): Any = i
+    override fun visitShort(s: Short, p: Context): Any = s
+    override fun visitString(s: String, p: Context): Any = s
+    override fun visitType(t: TypeMirror, p: Context): Any =
+        KaptClassDeclaration(MoreTypes.asTypeElement(t), p.resolver)
 
-    override fun visitEnumConstant(c: VariableElement?, p: KaptResolver): Any {
-        throw UnsupportedOperationException("Enum type annotation values aren't supported")
-    }
+    override fun visitEnumConstant(c: VariableElement, p: Context): Any =
+        requireNotNull(p.type.enumConstants.find { (it as Enum<*>).name == c.simpleName.toString() }) {
+            "Unknown enum constant ${c.simpleName} on ${p.type}"
+        }
 
-    override fun visitAnnotation(a: AnnotationMirror, p: KaptResolver): Any = KaptAnnotationModel(a, p)
-    override fun visitArray(vals: List<AnnotationValue>, p: KaptResolver): Any = vals.map { it.accept(this, p) }
+    override fun visitAnnotation(a: AnnotationMirror, p: Context): Any = KaptAnnotationModel(a, p.resolver)
+    override fun visitArray(vals: List<AnnotationValue>, p: Context): Any = vals.map { it.accept(this, p) }
 
-    override fun visitUnknown(av: AnnotationValue, p: KaptResolver): Any {
+    override fun visitUnknown(av: AnnotationValue, p: Context): Any {
         throw UnsupportedOperationException("Unsupported annotation value $av")
     }
+
+    class Context(
+        val resolver: KaptResolver,
+        val type: Class<*>,
+    )
 }

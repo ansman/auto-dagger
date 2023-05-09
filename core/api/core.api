@@ -5,11 +5,13 @@ public abstract interface annotation class se/ansman/dagger/auto/AutoBind : java
 
 public abstract interface annotation class se/ansman/dagger/auto/AutoBindIntoMap : java/lang/annotation/Annotation {
 	public abstract fun asTypes ()[Ljava/lang/Class;
+	public abstract fun bindGenericAs ()Lse/ansman/dagger/auto/BindGenericAs;
 	public abstract fun inComponent ()Ljava/lang/Class;
 }
 
 public abstract interface annotation class se/ansman/dagger/auto/AutoBindIntoSet : java/lang/annotation/Annotation {
 	public abstract fun asTypes ()[Ljava/lang/Class;
+	public abstract fun bindGenericAs ()Lse/ansman/dagger/auto/BindGenericAs;
 	public abstract fun inComponent ()Ljava/lang/Class;
 }
 
@@ -43,6 +45,14 @@ public abstract interface annotation class se/ansman/dagger/auto/AutoInitialize 
 
 public final class se/ansman/dagger/auto/AutoInitialize$Companion {
 	public static final field defaultPriority I
+}
+
+public final class se/ansman/dagger/auto/BindGenericAs : java/lang/Enum {
+	public static final field Type Lse/ansman/dagger/auto/BindGenericAs;
+	public static final field TypeAndWildcard Lse/ansman/dagger/auto/BindGenericAs;
+	public static final field Wildcard Lse/ansman/dagger/auto/BindGenericAs;
+	public static fun valueOf (Ljava/lang/String;)Lse/ansman/dagger/auto/BindGenericAs;
+	public static fun values ()[Lse/ansman/dagger/auto/BindGenericAs;
 }
 
 public final class se/ansman/dagger/auto/HiltWrapper_AutoDaggerModule {

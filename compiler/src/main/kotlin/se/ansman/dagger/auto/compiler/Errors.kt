@@ -1,5 +1,6 @@
 package se.ansman.dagger.auto.compiler
 
+import se.ansman.dagger.auto.BindGenericAs
 import kotlin.reflect.KClass
 
 object Errors {
@@ -31,6 +32,9 @@ object Errors {
 
         fun nonStandardScope(scope: String): String =
             "Scope $scope is not a standard scope so you must specify a component explicitly using the `inComponent` parameter."
+
+        fun invalidBindMode(bindGenericAs: BindGenericAs): String =
+            "Using BindGenericAs.${bindGenericAs.name} requires at least one generic supertype."
     }
 
     object Replaces {
