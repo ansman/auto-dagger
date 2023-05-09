@@ -39,7 +39,7 @@ buildscripts {
 }
 
 dependencies {
-    implementation("se.ansman.dagger.auto:android:{{gradle.snapshotVersion}}-SNAPSHOT")
-    kapt("se.ansman.dagger.auto:compiler:{{gradle.snapshotVersion}}-SNAPSHOT")
+    implementation("se.ansman.dagger.auto:android:{{gradle.snapshotVersion}}")
+    kapt("se.ansman.dagger.auto:compiler:{{gradle.snapshotVersion}}")
 }
 ```
