@@ -26,3 +26,20 @@ dependencies {
     kaptTest("se.ansman.dagger.auto:compiler:{{gradle.version}}")
 }
 ```
+
+### Snapshots
+Snapshots are published on every commit to [Sonatype's snapshot repository](https://s01.oss.sonatype.org/content/repositories/snapshots/se/ansman/dagger/auto/). 
+To use a snapshot add the snapshot repository:
+```kotlin
+buildscripts {
+    repositories {
+        ...
+        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+    }
+}
+
+dependencies {
+    implementation("se.ansman.dagger.auto:android:{{gradle.snapshotVersion}}-SNAPSHOT")
+    kapt("se.ansman.dagger.auto:compiler:{{gradle.snapshotVersion}}-SNAPSHOT")
+}
+```

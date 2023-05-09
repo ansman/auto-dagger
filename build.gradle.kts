@@ -67,6 +67,7 @@ mkdocs {
     }
     extras = mapOf(
         "version" to latestRelease,
+        "snapshotVersion" to version,
         "dokkaLink" to "/$dokkaDocsPath" + if (latestRelease == version) {
             "/"
         } else {
