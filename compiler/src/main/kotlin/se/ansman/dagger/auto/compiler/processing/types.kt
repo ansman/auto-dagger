@@ -15,6 +15,7 @@ val Node<*, *, *, *>.isFullyPublic: Boolean
 
 interface Type<N, TypeName, ClassName : TypeName, AnnotationSpec> {
     val declaration: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>?
+    val isGeneric: Boolean
     fun toTypeName(): TypeName
     fun isAssignableTo(type: Type<N, TypeName, ClassName, AnnotationSpec>): Boolean
     fun isAssignableTo(type: KClass<*>): Boolean
@@ -51,9 +52,12 @@ interface AnnotationModel<ClassName, AnnotationSpec> {
     val declaredAnnotations: List<AnnotationModel<ClassName, AnnotationSpec>>
     fun isOfType(type: KClass<out Annotation>): Boolean
     fun isOfType(type: String): Boolean
-    fun <T : Any> getValue(name: String): T?
+    fun <T : Any> getValue(type: Class<T>, name: String): T?
     fun toAnnotationSpec(): AnnotationSpec
 }
+
+inline fun <reified T : Any> AnnotationModel<*, *>.getValue(name: String): T? =
+    getValue(T::class.java, name)
 
 fun AnnotationModel<*, *>.isAnnotatedWith(kClass: KClass<out Annotation>): Boolean =
     declaredAnnotations.any { it.isOfType(kClass) }

@@ -21,6 +21,9 @@ data class KaptType(
         }
     }
 
+    override val isGeneric: Boolean
+        get() = MoreTypes.asTypeElement(mirror).typeParameters.isNotEmpty()
+
     override fun toTypeName(): TypeName = TypeName.get(mirror)
     override fun isAssignableTo(type: Type<Element, TypeName, ClassName, AnnotationSpec>): Boolean =
         isAssignableTo((type as KaptType).mirror)

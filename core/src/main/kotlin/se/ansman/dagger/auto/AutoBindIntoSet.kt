@@ -10,9 +10,13 @@ import kotlin.reflect.KClass
  *
  * See also [Set Multibindings](https://dagger.dev/dev-guide/multibindings.html#set-multibindings)
  *
- * @see [AutoBind]
- * @see [AutoBindIntoSet]
- * @see [IntoSet]
+ * @param inComponent Which component to install the binding in. Defaults to being inferred based on the scope.
+ * @param asTypes Specifies which supertypes to bind the object as. Required if there are multiple supertypes.
+ * @param bindGenericAs Specifies how generic supertypes should be bound. Defaults to [BindGenericAs.Type].
+ * @see AutoBind
+ * @see AutoBindIntoSet
+ * @see IntoSet
+ * @see BindGenericAs
  * @since 0.2
  */
 @Target(AnnotationTarget.CLASS)
@@ -20,4 +24,5 @@ import kotlin.reflect.KClass
 public annotation class AutoBindIntoSet(
     val inComponent: KClass<*> = Nothing::class,
     val asTypes: Array<KClass<*>> = [],
+    val bindGenericAs: BindGenericAs = BindGenericAs.Type,
 )

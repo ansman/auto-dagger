@@ -10,6 +10,7 @@ import se.ansman.dagger.auto.compiler.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.processing.ClassDeclaration
 import se.ansman.dagger.auto.compiler.processing.error
 import se.ansman.dagger.auto.compiler.processing.getAnnotation
+import se.ansman.dagger.auto.compiler.processing.getValue
 import se.ansman.dagger.auto.compiler.processing.isAnnotatedWith
 import se.ansman.dagger.auto.compiler.processing.isFullyPublic
 import se.ansman.dagger.auto.compiler.processing.rootPeerClass

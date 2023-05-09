@@ -7,12 +7,16 @@ interface RenderEngine<TypeName, ClassName : TypeName, AnnotationSpec> {
     fun className(qualifiedName: String): ClassName
     fun className(type: KClass<*>): ClassName
 
-    fun simpleName(className: ClassName): String
+    fun typeArguments(typeName: TypeName): List<TypeName>
+
+    fun simpleName(typeName: TypeName): String
     fun simpleNames(className: ClassName): List<String>
     fun packageName(className: ClassName): String
     fun topLevelClassName(className: ClassName): ClassName
 
     fun rawType(typeName: TypeName): ClassName
+
+    fun asWildcard(typeName: TypeName): TypeName
 }
 
 fun <ClassName> RenderEngine<*, ClassName, *>.rootPeerClass(className: ClassName, name: String): ClassName =

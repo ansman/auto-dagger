@@ -18,5 +18,5 @@ public abstract class AutoBindRealTypeSingletonModule {
   }
 
   @Binds
-  public abstract Type2<String> bindRealTypeAsType2(RealType realType);
+  public abstract Type2<String> bindRealTypeAsType2OfString(RealType realType);
 }

@@ -13,5 +13,5 @@ import kotlin.String
 @OriginatingElement(topLevelClass = RealType::class)
 public abstract class AutoBindRealTypeSingletonModule private constructor() {
   @Binds
-  public abstract fun RealType.bindRealTypeAsType2(): Type2<String>
+  public abstract fun RealType.bindRealTypeAsType2OfString(): Type2<String>
 }

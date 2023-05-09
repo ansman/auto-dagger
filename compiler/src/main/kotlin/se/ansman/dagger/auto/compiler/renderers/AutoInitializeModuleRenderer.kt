@@ -16,7 +16,7 @@ abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName
             .applyEach(input.objects) { obj ->
                 when {
                     obj.isInitializable && obj.priority == null -> addBinding(
-                        name = "bind${renderEngine.simpleName(renderEngine.rawType(obj.targetType))}AsInitializable",
+                        name = "bind${renderEngine.simpleName(obj.targetType)}AsInitializable",
                         sourceType = HiltModuleBuilder.DaggerType(obj.targetType, obj.qualifiers),
                         mode = HiltModuleBuilder.ProviderMode.IntoSet,
                         returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),
@@ -24,7 +24,7 @@ abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName
                     )
 
                     obj.isInitializable && obj.priority != null -> addProvider(
-                        name = "provide${renderEngine.simpleName(renderEngine.rawType(obj.targetType))}AsInitializable",
+                        name = "provide${renderEngine.simpleName(obj.targetType)}AsInitializable",
                         parameters = listOf(HiltModuleBuilder.DaggerType(obj.targetType, obj.qualifiers)),
                         mode = HiltModuleBuilder.ProviderMode.IntoSet,
                         returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),
@@ -32,7 +32,7 @@ abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName
                     ) { (parameter) -> wrapInitializable(parameter, obj.priority) }
 
                     else -> addProvider(
-                        name = "provide${renderEngine.simpleName(renderEngine.rawType(obj.targetType))}AsInitializable",
+                        name = "provide${renderEngine.simpleName(obj.targetType)}AsInitializable",
                         parameters = listOf(HiltModuleBuilder.Lazy(obj.targetType, obj.qualifiers)),
                         mode = HiltModuleBuilder.ProviderMode.IntoSet,
                         returnType = HiltModuleBuilder.DaggerType(renderEngine.className(initializable)),

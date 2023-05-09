@@ -19,5 +19,6 @@ public abstract class AutoBindRunnableThingSingletonModule {
   }
 
   @Binds
-  public abstract Function0<String> bindRunnableThingAsFunction0(RunnableThing runnableThing);
+  public abstract Function0<String> bindRunnableThingAsFunction0OfString(
+      RunnableThing runnableThing);
 }
