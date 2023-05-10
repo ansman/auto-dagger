@@ -1,15 +1,15 @@
+
 import com.android.build.gradle.LibraryExtension
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
 import org.gradle.accessors.dm.LibrariesForLibs
-import org.gradle.api.internal.tasks.userinput.UserInputHandler
-import org.gradle.configurationcache.extensions.serviceOf
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
 import se.ansman.dagger.auto.gradle.getOrPut
 import se.ansman.dagger.auto.gradle.mapNullable
+import java.io.ByteArrayOutputStream
 
 plugins {
     id("maven-publish")
@@ -142,8 +142,15 @@ if (findProperty("signArtifacts")?.toString()?.toBoolean() == true) {
         gradle.taskGraph.whenReady {
             if (hasTask(tasks.getByName("sign${publication.name.replaceFirstChar(Char::uppercaseChar)}Publication"))) {
                 rootProject.ext.getOrPut("signing.gnupg.passphrase") {
-                    serviceOf<UserInputHandler>()
-                        .askQuestion("Signing key passphrase: ", "")
+                    val output = ByteArrayOutputStream()
+                    exec {
+                        commandLine("op", "read", "op://private/GnuPG/password")
+                        standardOutput = output
+                        errorOutput = System.err
+                    }
+                        .rethrowFailure()
+                        .assertNormalExitValue()
+                    output.toString(Charsets.UTF_8)
                 }
                 useGpgCmd()
             }
