@@ -108,6 +108,7 @@ class StringCallable @Inject constructor() : Callable<String> {
 ```
 
 There are 3 options for `bindGenericAs`:
+
 - `Type` - Binds the object to the exact supertype (`Callable<String>` in the example above). This is the default. 
 - `Wildcard` - Binds the object using wildcards (`Callable<*>` in the example above).
 - `TypeAndWildcard` - Binds the object as both the exact type and using wildcards.
