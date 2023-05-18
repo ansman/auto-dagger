@@ -34,9 +34,9 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.dagger.hilt.core)
     implementation(libs.ksp.api)
-    api(projects.core)
-    api(projects.android.testing)
-    api(libs.auto.common)
+    implementation(projects.core)
+    implementation(projects.android.testing)
+    implementation(libs.auto.common)
 
     implementation(libs.auto.service.annotations)
     kapt(libs.auto.service)
