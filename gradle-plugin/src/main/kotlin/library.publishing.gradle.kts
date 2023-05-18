@@ -193,12 +193,16 @@ pluginManager.withPlugin("com.github.johnrengelman.shadow") {
         extendsFrom(shade)
     }
 
-    tasks.named<ShadowJar>("shadowJar") {
+    val shadowJar = tasks.named<ShadowJar>("shadowJar") {
         archiveClassifier.set("")
         configurations = listOf(shade)
         isEnableRelocation = true
         relocationPrefix = "se.ansman.dagger.auto${project.path.replace(':', '.').replace('-', '_')}"
         transformers.add(ServiceFileTransformer())
+    }
+
+    artifacts {
+        add("runtimeOnly", shadowJar)
     }
 }
 
