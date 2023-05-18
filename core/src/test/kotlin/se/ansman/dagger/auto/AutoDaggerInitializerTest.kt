@@ -1,11 +1,11 @@
 package se.ansman.dagger.auto
 
 import assertk.assertAll
+import assertk.assertFailure
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.each
 import assertk.assertions.isEqualTo
-import assertk.assertions.isFailure
 import assertk.assertions.isInstanceOf
 import assertk.assertions.isSameAs
 import assertk.assertions.isZero
@@ -119,7 +119,7 @@ class AutoDaggerInitializerTest {
             initializer.initialize()
         }
         initializer = AutoDaggerInitializer(setOf(initializable))
-        assertThat(initializer::initialize).isFailure().isInstanceOf(IllegalStateException::class)
+        assertFailure(initializer::initialize).isInstanceOf(IllegalStateException::class)
     }
 
     @Test
