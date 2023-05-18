@@ -64,7 +64,7 @@ junit-jupiter = "org.junit.jupiter:junit-jupiter:5.9.3"
 
 assertk = "com.willowtreeapps.assertk:assertk-jvm:0.26"
 
-robolectric = "org.robolectric:robolectric:4.10.2"
+robolectric = "org.robolectric:robolectric:4.10.3"
 
 testLogger = "com.adarshr:gradle-test-logger-plugin:3.2.0"
 
