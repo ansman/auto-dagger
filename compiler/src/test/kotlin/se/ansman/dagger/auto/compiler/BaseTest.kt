@@ -216,6 +216,21 @@ abstract class BaseTest(
         }
 
         @Test
+        fun `binding initializable with auto initialize is prohibited`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+
+                    @se.ansman.dagger.auto.AutoBind
+                    @se.ansman.dagger.auto.AutoInitialize
+                    class SomeThing : se.ansman.dagger.auto.Initializable
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.noSuperTypes)
+        }
+
+        @Test
         fun `invalid asTypes`(@TempDir tempDirectory: File) {
             compilation(tempDirectory)
                 .compile(

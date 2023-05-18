@@ -19,6 +19,7 @@ object Errors {
         const val missingBindingKey = "To use @AutoBindIntoMap you must also annotate the type with a map key"
         const val multipleBindingKeys = "Multiple map keys specified, make sure there is only a single map key"
         const val noSuperTypes = "Multiple map keys specified, make sure there is only a single map key"
+        const val cannotBindInitializable = "You"
         const val multipleSuperTypes = "Multiple supertypes found. Use the `asTypes` parameter to specify which types to bind"
 
         fun missingBoundType(boundType: String): String =

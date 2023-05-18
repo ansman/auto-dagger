@@ -7,7 +7,9 @@ import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.AutoBind
 import se.ansman.dagger.auto.AutoBindIntoMap
 import se.ansman.dagger.auto.AutoBindIntoSet
+import se.ansman.dagger.auto.AutoInitialize
 import se.ansman.dagger.auto.BindGenericAs
+import se.ansman.dagger.auto.Initializable
 import se.ansman.dagger.auto.android.testing.Replaces
 import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.deleteSuffix
@@ -232,14 +234,21 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         val asTypes = annotation.getValue<List<ClassDeclaration<*, *, ClassName, *>>>("asTypes")
             ?.takeUnless { it.isEmpty() }
             ?.mapTo(mutableSetOf()) { it.className }
-            ?: return type.supertypes.also {
-                when (it.size) {
-                    0 -> logger?.error(Errors.AutoBind.noSuperTypes, type)
-                    1 -> { /* OK */
-                    }
-
-                    else -> logger?.error(Errors.AutoBind.multipleSuperTypes, type)
+            ?: return type.supertypes
+                // If a type is annotated with @AutoInitialize, we exclude Initializable
+                .filterNot {
+                    it.toTypeName() == environment.renderEngine.className(Initializable::class) &&
+                            type.isAnnotatedWith(AutoInitialize::class)
                 }
+                .also {
+                    when (it.size) {
+                        0 -> logger?.error(Errors.AutoBind.noSuperTypes, type)
+                        1 -> {
+                            /* OK */
+                        }
+
+                        else -> logger?.error(Errors.AutoBind.multipleSuperTypes, type)
+                    }
             }
 
         val supertypes = type.supertypes.associateByTo(mutableMapOf()) {
