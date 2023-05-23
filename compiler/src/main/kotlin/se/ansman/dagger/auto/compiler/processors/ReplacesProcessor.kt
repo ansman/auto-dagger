@@ -109,7 +109,6 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                     isPublic = type.isFullyPublic,
                     isObject = type.isObject,
                     boundTypes = module.boundTypes,
-                    qualifiers = module.qualifiers,
                 )
             }
             .map(renderer::render)
@@ -138,7 +137,6 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 isPublic = isFullyPublic,
                 isObject = isObject,
                 boundTypes = emptyList(),
-                qualifiers = emptySet()
             )
         )
         environment.write(file)

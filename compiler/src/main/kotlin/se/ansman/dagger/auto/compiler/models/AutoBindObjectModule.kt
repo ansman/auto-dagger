@@ -11,7 +11,6 @@ data class AutoBindObjectModule<out Node, TypeName, ClassName : TypeName, Annota
     val isPublic: Boolean,
     val isObject: Boolean,
     val boundTypes: List<AutoBindType<TypeName, AnnotationSpec>>,
-    val qualifiers: Set<AnnotationSpec> = emptySet(),
 ) : HiltModule<Node, ClassName> {
     fun withTypesAdded(types: List<AutoBindType<TypeName, AnnotationSpec>>) =
         copy(boundTypes = boundTypes + types)

@@ -151,6 +151,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
 
         val component = type.getTargetComponent(resolver, annotation)
         val key = ModuleKey(targetType = type.className, targetComponent = component)
+        val qualifiers = type.getQualifiers()
         val types = getBoundTypes(annotation)
             .also { boundTypes ->
                 if (bindGenericAs != BindGenericAs.Type && boundTypes.none { it.isGeneric }) {
@@ -172,7 +173,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 }
             }
             .distinct()
-            .map { AutoBindType(it, mode) }
+            .map { AutoBindType(it, mode, qualifiers) }
             .toList()
         output[key] = output[key]
             ?.withTypesAdded(types)
@@ -185,7 +186,6 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 isPublic = type.isFullyPublic,
                 isObject = type.isObject,
                 boundTypes = types,
-                qualifiers = type.getQualifiers(),
             )
     }
 
