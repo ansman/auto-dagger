@@ -2,7 +2,7 @@ Auto Dagger [![Build Gradle](https://github.com/ansman/auto-dagger/actions/workf
 ===
 Auto Dagger allows you to automate some Dagger setup using Hilt.
 
-For example you can use the `@AutoInitialize` annotation to automatically initialize objects 
+For example you can use the `@AutoInitialize` annotation to automatically initialize objects
 during app launch and you can use the `@AutoBind` annotation to automatically bind objects.
 
 Automatic initialization is done using AndroidX Startup.
@@ -42,14 +42,14 @@ Setup
 ```groovy
 dependencies {
     // Include this in kotlin or android modules
-    implementation("se.ansman.dagger.auto:core:0.6.0")
-    kapt("se.ansman.dagger.auto:compiler:0.6.0")
+    implementation("se.ansman.dagger.auto:core:0.6.1")
+    kapt("se.ansman.dagger.auto:compiler:0.6.1")
 
     // Include this only in android modules
-    implementation("se.ansman.dagger.auto:android:0.6.0")
+    implementation("se.ansman.dagger.auto:android:0.6.1")
     // Add these if you want to replace objects during tests
-    testImplementation("se.ansman.dagger.auto:android-testing:0.6.0")
-    kaptTest("se.ansman.dagger.auto:compiler:0.6.0")
+    testImplementation("se.ansman.dagger.auto:android-testing:0.6.1")
+    kaptTest("se.ansman.dagger.auto:compiler:0.6.1")
 }
 ```
 
