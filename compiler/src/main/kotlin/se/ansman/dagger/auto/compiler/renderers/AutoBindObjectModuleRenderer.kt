@@ -21,7 +21,7 @@ abstract class AutoBindObjectModuleRenderer<Node, TypeName, ClassName : TypeName
                             .append(simpleName(boundType.type))
                             .append(boundType.mode.suffix)
                     }
-                    val returnType = HiltModuleBuilder.DaggerType(boundType.type, input.qualifiers)
+                    val returnType = HiltModuleBuilder.DaggerType(boundType.type, boundType.qualifiers)
                     if (input.isObject) {
                         addProvider(
                             name = "provide$suffix",
@@ -34,7 +34,7 @@ abstract class AutoBindObjectModuleRenderer<Node, TypeName, ClassName : TypeName
                     } else {
                         addBinding(
                             name = "bind$suffix",
-                            sourceType = HiltModuleBuilder.DaggerType(input.type, input.qualifiers),
+                            sourceType = HiltModuleBuilder.DaggerType(input.type),
                             mode = boundType.mode,
                             returnType = returnType,
                             isPublic = input.isPublic,
