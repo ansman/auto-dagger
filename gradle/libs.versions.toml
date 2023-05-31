@@ -9,7 +9,7 @@ ksp = "1.8.21-1.0.11"
 android-minSdk = "14"
 android-compileSdk = "33"
 androidx-test = "1.5.0"
-kotlinpoet = "1.13.2"
+kotlinpoet = "1.14.2"
 
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
