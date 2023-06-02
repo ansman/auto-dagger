@@ -285,6 +285,49 @@ abstract class BaseTest(
                 )
                 .assertFailedWithMessage(Errors.AutoBind.multipleSuperTypes)
         }
+
+        @Test
+        fun `prevents binding into parent or unrelated components`(@TempDir tempDirectory: File) {
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+
+                    interface Repository
+     
+                    @se.ansman.dagger.auto.AutoBind(inComponent = dagger.hilt.components.SingletonComponent::class)
+                    @dagger.hilt.android.scopes.ActivityScoped
+                    class ActivityRepository @javax.inject.Inject constructor() : Repository
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.parentComponent("SingletonComponent", "ActivityComponent"))
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+
+                    interface Repository
+     
+                    @se.ansman.dagger.auto.AutoBind(inComponent = dagger.hilt.android.components.ActivityComponent::class)
+                    @dagger.hilt.android.scopes.FragmentScoped
+                    class FragmentRepository @javax.inject.Inject constructor() : Repository
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.parentComponent("ActivityComponent", "FragmentComponent"))
+            compilation(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+
+                    interface Repository
+     
+                    @se.ansman.dagger.auto.AutoBind(inComponent = dagger.hilt.components.SingletonComponent::class)
+                    @dagger.hilt.android.scopes.FragmentScoped
+                    class FragmentRepository @javax.inject.Inject constructor() : Repository
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.parentComponent("SingletonComponent", "FragmentComponent"))
+        }
     }
 
     @Nested

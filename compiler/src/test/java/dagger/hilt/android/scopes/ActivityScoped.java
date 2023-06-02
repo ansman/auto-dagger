@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Dagger Authors.
+ * Copyright (C) 2020 The Dagger Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package dagger.hilt.android.components;
+package dagger.hilt.android.scopes;
 
-import dagger.hilt.DefineComponent;
-import dagger.hilt.android.scopes.FragmentScoped;
+import static java.lang.annotation.RetentionPolicy.CLASS;
 
-@FragmentScoped
-@DefineComponent(parent = ActivityComponent.class)
-public interface FragmentComponent {}
+import java.lang.annotation.Retention;
+
+import javax.inject.Scope;
+
+@Scope
+@Retention(CLASS)
+public @interface ActivityScoped {}
