@@ -212,7 +212,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.guessComponent(): ClassName {
         val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
             ?: return environment.renderEngine.className(SingletonComponent::class)
-        return scopeToComponent(scope) ?: run {
+        return scope.guessComponent() ?: run {
             logger?.error(Errors.AutoBind.nonStandardScope(scope.qualifiedName), this)
             throw AbortProcessingError()
         }
@@ -222,9 +222,40 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
         component: ClassName,
     ) {
-        if (!resolver.lookupType(component).isAnnotatedWith(DefineComponent::class)) {
+        val defineComponent = resolver.lookupType(component)
+            .getAnnotation(DefineComponent::class)
+        if (defineComponent == null) {
             logger?.error(Errors.AutoBind.invalidComponent(component.toString()), this)
+            return
         }
+        val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
+            ?: return
+        val inferredComponent = scope.guessComponent() ?: return
+        if (isComponentChildComponent(resolver, component, inferredComponent)) {
+            logger?.error(
+                message = Errors.AutoBind.parentComponent(
+                    installIn = resolver.environment.renderEngine.simpleName(component),
+                    inferredComponent = resolver.environment.renderEngine.simpleName(inferredComponent)
+                ),
+                node = this
+            )
+        }
+    }
+
+    private fun isComponentChildComponent(
+        resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
+        installInComponent: ClassName,
+        inferredComponent: ClassName,
+    ): Boolean {
+        var c = inferredComponent
+        while (c != installInComponent) {
+            c = resolver.lookupType(c)
+                .getAnnotation(DefineComponent::class)
+                ?.getValue<ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>>("parent")
+                ?.className
+                ?: return false
+        }
+        return true
     }
 
     fun getBoundSupertypes(
@@ -249,7 +280,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
 
                         else -> logger?.error(Errors.AutoBind.multipleSuperTypes, type)
                     }
-            }
+                }
 
         val supertypes = type.supertypes.associateByTo(mutableMapOf()) {
             environment.renderEngine.rawType(it.toTypeName())
@@ -267,8 +298,8 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         return supertypes.values
     }
 
-    private fun scopeToComponent(scope: AnnotationModel<*, *>): ClassName? =
-        when (scope.qualifiedName) {
+    private fun AnnotationModel<*, *>.guessComponent(): ClassName? =
+        when (qualifiedName) {
             Singleton::class.java.name,
             Reusable::class.java.name ->
                 environment.renderEngine.className(SingletonComponent::class)

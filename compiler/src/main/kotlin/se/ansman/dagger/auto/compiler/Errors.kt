@@ -31,6 +31,9 @@ object Errors {
         fun invalidComponent(component: String): String =
             "The specified component $component isn't a Dagger component"
 
+        fun parentComponent(installIn: String, inferredComponent: String): String =
+            "The installIn component $installIn is a parent component of $inferredComponent and cannot be used as installIn for @AutoBind"
+
         fun nonStandardScope(scope: String): String =
             "Scope $scope is not a standard scope so you must specify a component explicitly using the `inComponent` parameter."
 

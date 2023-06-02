@@ -18,7 +18,8 @@ package dagger.hilt.android.components;
 
 import dagger.hilt.DefineComponent;
 import dagger.hilt.android.scopes.FragmentScoped;
+import dagger.hilt.components.SingletonComponent;
 
 @FragmentScoped
-@DefineComponent(parent = ActivityComponent.class)
-public interface FragmentComponent {}
+@DefineComponent(parent = SingletonComponent.class)
+public interface ActivityComponent {}
