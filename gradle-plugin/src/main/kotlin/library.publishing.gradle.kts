@@ -89,6 +89,12 @@ with(publishing) {
     }
 }
 
+tasks.register("publishSnapshot") {
+    if (providers.gradleProperty("version").get().endsWith("-SNAPSHOT")) {
+        dependsOn("publishAllPublicationsToSonatypeSnapshotsRepository")
+    }
+}
+
 val javadocJar by tasks.registering(Jar::class) {
     from(tasks.dokkaJavadoc)
     archiveClassifier.set("javadoc")

@@ -48,7 +48,7 @@ jobs:
     - name: Deploy Snapshot
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: publishAllPublicationsToSonatypeSnapshotsRepository --stacktrace
+        arguments: publishSnapshot --stacktrace
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
