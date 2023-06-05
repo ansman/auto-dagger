@@ -248,13 +248,13 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         inferredComponent: ClassName,
     ): Boolean {
         var c = inferredComponent
-        while (c != installInComponent) {
+        do {
             c = resolver.lookupType(c)
                 .getAnnotation(DefineComponent::class)
                 ?.getValue<ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>>("parent")
                 ?.className
                 ?: return false
-        }
+        } while (c != installInComponent)
         return true
     }
 
