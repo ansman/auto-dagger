@@ -35,7 +35,7 @@ androidx-test = { module = "androidx.test:core-ktx", version.ref = "androidx-tes
 androidx-test-runner = "androidx.test:runner:1.5.2"
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
 
-auto-common = "com.google.auto:auto-common:1.2.1"
+auto-common = "com.google.auto:auto-common:1.2.2"
 auto-service = { module = "com.google.auto.service:auto-service", version.ref = "autoService" }
 auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoService" }
 
