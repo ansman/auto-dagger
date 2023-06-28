@@ -18,7 +18,7 @@ object Errors {
     object AutoBind {
         const val missingBindingKey = "To use @AutoBindIntoMap you must also annotate the type with a map key"
         const val multipleBindingKeys = "Multiple map keys specified, make sure there is only a single map key"
-        const val noSuperTypes = "Multiple map keys specified, make sure there is only a single map key"
+        const val noSuperTypes = "There are no supertypes so there is nothing to bind. Make sure you implement an interface or extend a class to use @AutoBind."
         const val cannotBindInitializable = "You"
         const val multipleSuperTypes = "Multiple supertypes found. Use the `asTypes` parameter to specify which types to bind"
 
