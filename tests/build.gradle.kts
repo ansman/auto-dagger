@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import com.google.devtools.ksp.gradle.KspTaskJvm
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 import org.jetbrains.kotlin.gradle.tasks.Kapt
 
@@ -28,6 +27,14 @@ android {
             dimension = "type"
         }
     }
+    sourceSets {
+        configureEach {
+            java.srcDir(buildDir.resolve("generated/ksp/$name/kotlin"))
+            if (name.startsWith("test")) {
+                java.srcDir(buildDir.resolve("generated/ksp/${name.removePrefix("test").replaceFirstChar(Char::lowercaseChar)}UnitTest/kotlin"))
+            }
+        }
+    }
 }
 
 androidComponents {
@@ -40,22 +47,17 @@ androidComponents {
     }
 }
 
-android.sourceSets.configureEach {
-    idea.module.sourceDirs.add(buildDir.resolve("generated/ksp/$name/kotlin"))
-}
-
 // This is needed because Dagger/Hilt doesn't support KSP yet so for our generated code to be
-// seen we need to make the output from KSP an input to KAPT
+// seen we need to make KAPT depend on KSP
+val variantUnitTestClassPaths = mutableMapOf<String, FileCollection>()
 afterEvaluate {
     tasks.withType<Kapt>().configureEach {
-        val ksp = tasks.findByName(name.replace("kapt", "ksp")) as KspTaskJvm?
-            ?: return@configureEach
-        kaptExternalClasspath.from(ksp.destination)
+        tasks.findByName(name.replace("kapt", "ksp"))
+            ?.let { dependsOn(it) }
     }
     tasks.withType<KaptGenerateStubsTask>().configureEach {
-        val ksp = tasks.findByName(name.replace("kaptGenerateStubs", "ksp")) as KspTaskJvm?
-            ?: return@configureEach
-        kaptClasspath.from(ksp.destination)
+        tasks.findByName(name.replace("kaptGenerateStubs", "ksp"))
+            ?.let { dependsOn(it) }
     }
 }
 
