@@ -27,7 +27,7 @@ dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", versi
 dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
 dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 
-okio = "com.squareup.okio:okio:3.3.0"
+okio = "com.squareup.okio:okio:3.4.0"
 
 android-gradlePlugin = "com.android.tools.build:gradle:8.1.0-beta04"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
