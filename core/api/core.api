@@ -51,6 +51,7 @@ public final class se/ansman/dagger/auto/BindGenericAs : java/lang/Enum {
 	public static final field Type Lse/ansman/dagger/auto/BindGenericAs;
 	public static final field TypeAndWildcard Lse/ansman/dagger/auto/BindGenericAs;
 	public static final field Wildcard Lse/ansman/dagger/auto/BindGenericAs;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lse/ansman/dagger/auto/BindGenericAs;
 	public static fun values ()[Lse/ansman/dagger/auto/BindGenericAs;
 }
