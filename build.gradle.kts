@@ -6,6 +6,8 @@ import ru.vyarus.gradle.plugin.python.task.BasePythonTask
 plugins {
     `version-catalog`
     kotlin("jvm") version libs.versions.kotlin.get() apply false
+    // Needed as a workaround for https://github.com/google/dagger/issues/3965
+    alias(libs.plugins.ksp) apply false
     alias(libs.plugins.dagger.hilt) apply false
     id("dokka-common")
     alias(libs.plugins.binaryCompatibilityValidator)
