@@ -3,7 +3,8 @@ package se.ansman.dagger.auto.compiler.kapt.processing
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
-import kotlinx.metadata.Flag
+import kotlinx.metadata.ClassKind
+import kotlinx.metadata.kind
 import se.ansman.dagger.auto.compiler.processing.ClassDeclaration
 import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
@@ -13,6 +14,8 @@ data class KaptClassDeclaration(
     override val node: TypeElement,
     override val resolver: KaptResolver,
 ) : KaptNode(), ClassDeclaration<Element, TypeName, ClassName, AnnotationSpec> {
+    private val kmClass by lazy { resolver.kmClassLookup[node.qualifiedName.toString()] }
+
     override val className: ClassName by lazy(LazyThreadSafetyMode.NONE) { ClassName.get(node) }
 
     override val supertypes: List<KaptType> by lazy(LazyThreadSafetyMode.NONE) {
@@ -23,10 +26,10 @@ data class KaptClassDeclaration(
     }
 
     override val isObject: Boolean
-        get() = hasFlag(Flag.Class.IS_OBJECT)
+        get() = kmClass?.kind == ClassKind.OBJECT
 
     override val isCompanionObject: Boolean
-        get() = hasFlag(Flag.Class.IS_COMPANION_OBJECT)
+        get() = kmClass?.kind == ClassKind.COMPANION_OBJECT
 
     override val isGeneric: Boolean
         get() = node.typeParameters.isNotEmpty()
@@ -38,10 +41,4 @@ data class KaptClassDeclaration(
     }
 
     override fun asType(): KaptType = KaptType(node.asType(), resolver)
-
-    private fun hasFlag(flag: Flag): Boolean =
-        resolver.kmClassLookup[node.qualifiedName.toString()]
-            ?.flags
-            ?.let(flag::invoke)
-            ?: false
 }

@@ -29,7 +29,7 @@ class KaptResolver(
         KotlinClassMetadata
             .read(metadata)
             .let { it as? KotlinClassMetadata.Class }
-            ?.toKmClass()
+            ?.kmClass
     }
 
     @Suppress("UnstableApiUsage")
