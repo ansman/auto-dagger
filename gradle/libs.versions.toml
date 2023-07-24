@@ -60,7 +60,7 @@ compileTesting = { module ="com.github.tschuchortdev:kotlin-compile-testing", ve
 compileTesting-ksp = { module ="com.github.tschuchortdev:kotlin-compile-testing-ksp", version.ref = "compileTesting" }
 
 junit = "junit:junit:4.13.2"
-junit-jupiter = "org.junit.jupiter:junit-jupiter:5.9.3"
+junit-jupiter = "org.junit.jupiter:junit-jupiter:5.10.0"
 
 assertk = "com.willowtreeapps.assertk:assertk-jvm:0.26.1"
 
