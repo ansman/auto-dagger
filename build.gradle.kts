@@ -69,7 +69,8 @@ mkdocs {
     }
     extras = mapOf(
         "version" to latestRelease,
-        "snapshotVersion" to version,
+        "daggerVersion" to libs.versions.dagger.get(),
+        "snapshotVersion" to version.removeSuffix("-SNAPSHOT") + "-SNAPSHOT",
         "dokkaLink" to "/$dokkaDocsPath" + if (latestRelease == version) {
             "/"
         } else {

@@ -3,27 +3,44 @@
 ## Installation
 [![Maven Central](https://img.shields.io/maven-central/v/se.ansman.dagger.auto/core.svg)](https://central.sonatype.com/search?smo=true&q=se.ansman.dagger.auto)
 
-### Kotlin Modules
-For pure Kotlin modules you just need to add two dependencies:
-```kotlin
-dependencies {
-    // This assumes you've already added Hilt and Dagger as dependencies
-    implementation("se.ansman.dagger.auto:core:{{gradle.version}}")
-    kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
-}
-```
-
 ### Android Modules
-If your module is an Android module you should add the `android` dependency instead of `core`:
+For pure Kotlin modules you need to add KAPT, the auto-dagger android dependency, the auto-dagger compiler as well as 
+the hilt dependencies:
 ```kotlin
+plugins {
+    kotlin("kapt") // For Groovy build scripts use id('kotlin-kapt')
+    id("com.google.dagger.hilt.android") // Optional, but recommended
+}
+
 dependencies {
-    // This assumes you've already added Hilt and Dagger as dependencies
     implementation("se.ansman.dagger.auto:android:{{gradle.version}}")
     kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
 
     // Add these if you want to replace objects during tests
     testImplementation("se.ansman.dagger.auto:android-testing:{{gradle.version}}")
     kaptTest("se.ansman.dagger.auto:compiler:{{gradle.version}}")
+
+    // If you haven't already you need to add the Dagger dependencies
+    implementation("com.google.dagger:hilt-android:{{gradle.daggerVersion}}")
+    kapt("com.google.dagger:hilt-android-compiler:{{gradle.daggerVersion}}")
+}
+```
+
+### Kotlin Modules
+For pure Kotlin modules you need to add KAPT, the auto-dagger core dependency, the auto-dagger compiler as well as the
+hilt dependencies:
+```kotlin
+plugins {
+    kotlin("kapt") // For Groovy build scripts use id('kotlin-kapt')
+}
+
+dependencies {
+    implementation("se.ansman.dagger.auto:core:{{gradle.version}}")
+    kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
+    
+    // If you haven't already you need to add the Dagger dependencies
+    implementation("com.google.dagger:hilt-core:{{gradle.daggerVersion}}")
+    kapt("com.google.dagger:hilt-compiler:{{gradle.daggerVersion}}")
 }
 ```
 
