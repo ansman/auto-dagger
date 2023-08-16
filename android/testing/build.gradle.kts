@@ -5,5 +5,6 @@ plugins {
 }
 
 dependencies {
+    implementation(libs.dagger.hilt.core)
     api(projects.core)
 }

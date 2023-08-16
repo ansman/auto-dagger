@@ -1,5 +1,6 @@
 package se.ansman.dagger.auto
 
+import dagger.hilt.GeneratesRootInput
 import dagger.multibindings.IntoSet
 import kotlin.reflect.KClass
 
@@ -21,6 +22,7 @@ import kotlin.reflect.KClass
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
+@GeneratesRootInput
 public annotation class AutoBindIntoSet(
     val inComponent: KClass<*> = Nothing::class,
     val asTypes: Array<KClass<*>> = [],

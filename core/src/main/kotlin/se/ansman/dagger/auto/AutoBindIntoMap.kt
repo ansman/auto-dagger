@@ -1,6 +1,7 @@
 package se.ansman.dagger.auto
 
 import dagger.MapKey
+import dagger.hilt.GeneratesRootInput
 import dagger.multibindings.IntoMap
 import dagger.multibindings.StringKey
 import kotlin.reflect.KClass
@@ -26,6 +27,7 @@ import kotlin.reflect.KClass
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
+@GeneratesRootInput
 public annotation class AutoBindIntoMap(
     val inComponent: KClass<*> = Nothing::class,
     val asTypes: Array<KClass<*>> = [],
