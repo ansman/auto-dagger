@@ -1,5 +1,6 @@
 package se.ansman.dagger.auto
 
+import dagger.hilt.GeneratesRootInput
 import javax.inject.Qualifier
 import kotlin.reflect.KClass
 
@@ -91,6 +92,7 @@ import kotlin.reflect.KClass
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
+@GeneratesRootInput
 public annotation class AutoBind(
     val inComponent: KClass<*> = Nothing::class,
     val asTypes: Array<KClass<*>> = [],

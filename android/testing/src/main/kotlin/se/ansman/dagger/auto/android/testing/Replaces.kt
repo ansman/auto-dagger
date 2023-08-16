@@ -1,5 +1,6 @@
 package se.ansman.dagger.auto.android.testing
 
+import dagger.hilt.GeneratesRootInput
 import se.ansman.dagger.auto.AutoBind
 import se.ansman.dagger.auto.AutoBindIntoMap
 import se.ansman.dagger.auto.AutoBindIntoSet
@@ -65,6 +66,7 @@ import kotlin.reflect.KClass
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
+@GeneratesRootInput
 annotation class Replaces(
     val type: KClass<*>,
 )

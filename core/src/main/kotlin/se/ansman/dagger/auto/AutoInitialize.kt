@@ -1,5 +1,7 @@
 package se.ansman.dagger.auto
 
+import dagger.hilt.GeneratesRootInput
+
 /**
  * Marks the given objects as being initializable.
  *
@@ -23,6 +25,7 @@ package se.ansman.dagger.auto
     AnnotationTarget.FUNCTION,
     AnnotationTarget.PROPERTY_GETTER,
 )
+@GeneratesRootInput
 public annotation class AutoInitialize(
     val priority: Int = defaultPriority
 ) {
