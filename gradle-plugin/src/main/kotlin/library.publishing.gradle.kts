@@ -191,17 +191,19 @@ pluginManager.withPlugin("com.android.library") {
     }
 }
 
-pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-    publication {
-        if (pluginManager.hasPlugin("com.github.johnrengelman.shadow")) {
-            the<ShadowExtension>().component(this)
-        } else {
-            from(components["java"])
+afterEvaluate {
+    if (pluginManager.hasPlugin("org.jetbrains.kotlin.jvm")) {
+        publication {
+            if (pluginManager.hasPlugin("com.github.johnrengelman.shadow")) {
+                the<ShadowExtension>().component(this)
+            } else {
+                from(components["java"])
+            }
         }
-    }
 
-    sourcesJar {
-        dependsOn("classes")
-        from(project.extensions.getByType<SourceSetContainer>().getByName("main").allSource)
+        sourcesJar {
+            dependsOn("classes")
+            from(project.extensions.getByType<SourceSetContainer>().getByName("main").allSource)
+        }
     }
 }
