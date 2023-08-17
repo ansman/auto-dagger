@@ -11,7 +11,7 @@ class AutoDaggerProcessorStep(
     private val environment: KaptEnvironment,
     private val processor: KaptProcessor
 ) : BasicAnnotationProcessor.Step {
-    override fun annotations(): Set<String> = processor.annotations.mapTo(mutableSetOf()) { it.qualifiedName!! }
+    override fun annotations(): Set<String> = processor.annotations
 
     override fun process(elementsByAnnotation: ImmutableSetMultimap<String, Element>): Set<Element> {
         processor.process(KaptResolver(environment, elementsByAnnotation))

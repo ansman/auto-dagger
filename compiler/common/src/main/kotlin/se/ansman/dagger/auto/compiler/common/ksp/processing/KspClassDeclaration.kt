@@ -3,6 +3,8 @@ package se.ansman.dagger.auto.compiler.common.ksp.processing
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
+import com.google.devtools.ksp.symbol.KSFunctionDeclaration
+import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.TypeName
@@ -31,6 +33,18 @@ data class KspClassDeclaration(
             .toList()
     }
 
+    override val declaredNodes: List<KspExecutableNode> by lazy(LazyThreadSafetyMode.NONE) {
+        node.declarations
+            .mapNotNull {
+                when (it) {
+                    is KSFunctionDeclaration -> KspFunction(it, resolver)
+                    is KSPropertyDeclaration -> KspProperty(it, resolver)
+                    else -> null
+                }
+            }
+            .toList()
+    }
+
     override val enclosingType: KspClassDeclaration? by lazy(LazyThreadSafetyMode.NONE) {
         (node.parentDeclaration as KSClassDeclaration?)?.let {
             KspClassDeclaration(it, resolver)
@@ -45,6 +59,9 @@ data class KspClassDeclaration(
 
     override val isGeneric: Boolean
         get() = node.typeParameters.isNotEmpty()
+
+    override val isInterface: Boolean
+        get() = node.classKind == ClassKind.INTERFACE
 
     override val superclass: Type<KSDeclaration, TypeName, ClassName, AnnotationSpec>?
         get() = supertypes.find { it.declaration.node.classKind == ClassKind.CLASS }

@@ -67,6 +67,6 @@ import kotlin.reflect.KClass
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
 @GeneratesRootInput
-annotation class Replaces(
+public annotation class Replaces(
     val type: KClass<*>,
 )

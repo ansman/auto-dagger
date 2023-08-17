@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
-    id("library")
+    id("library.api")
     id("library.publishing")
 }
 

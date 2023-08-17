@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm")
-    id("library")
+    id("library.api")
     id("library.publishing")
 }
 

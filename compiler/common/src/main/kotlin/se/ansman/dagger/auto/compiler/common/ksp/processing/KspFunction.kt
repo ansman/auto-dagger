@@ -1,6 +1,5 @@
 package se.ansman.dagger.auto.compiler.common.ksp.processing
 
-import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
@@ -11,18 +10,10 @@ import se.ansman.dagger.auto.compiler.common.processing.Function
 data class KspFunction(
     override val node: KSFunctionDeclaration,
     override val resolver: KspResolver,
-) : KspNode(), Function<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
-    override val enclosingType: KspClassDeclaration? by lazy(LazyThreadSafetyMode.NONE) {
-        (node.parentDeclaration as KSClassDeclaration?)?.let {
-            KspClassDeclaration(it, resolver)
-        }
-    }
-
+) : KspExecutableNode(), Function<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
     override val arguments: Sequence<KspType> by lazy(LazyThreadSafetyMode.NONE) {
         node.parameters.map { KspType(it.type.resolve(), resolver) }.asSequence()
     }
-    override val name: String
-        get() = node.simpleName.asString()
 
     override val receiver: KspType? by lazy(LazyThreadSafetyMode.NONE) {
         node.extensionReceiver?.resolve()?.let { KspType(it, resolver) }

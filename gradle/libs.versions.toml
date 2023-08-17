@@ -29,6 +29,8 @@ dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-pl
 
 okio = "com.squareup.okio:okio:3.5.0"
 
+retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+
 android-gradlePlugin = "com.android.tools.build:gradle:8.1.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 androidx-test = { module = "androidx.test:core-ktx", version.ref = "androidx-test" }

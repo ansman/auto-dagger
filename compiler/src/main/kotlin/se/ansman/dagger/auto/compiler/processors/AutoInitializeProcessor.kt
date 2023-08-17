@@ -10,6 +10,7 @@ import se.ansman.dagger.auto.AutoInitialize
 import se.ansman.dagger.auto.Initializable
 import se.ansman.dagger.auto.android.testing.Replaces
 import se.ansman.dagger.auto.compiler.Errors
+import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.processing.AnnotationModel
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
@@ -23,22 +24,21 @@ import se.ansman.dagger.auto.compiler.common.processing.getQualifiers
 import se.ansman.dagger.auto.compiler.common.processing.getValue
 import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
 import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
+import se.ansman.dagger.auto.compiler.common.processing.nodesAnnotatedWith
 import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
-import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
-import se.ansman.dagger.auto.compiler.models.AutoInitializeModule
-import se.ansman.dagger.auto.compiler.models.AutoInitializeObject
+import se.ansman.dagger.auto.compiler.models.autoinitialize.AutoInitializeModule
+import se.ansman.dagger.auto.compiler.models.autoinitialize.AutoInitializeObject
 import javax.inject.Scope
 import javax.inject.Singleton
-import kotlin.reflect.KClass
 
 class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F>(
     private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
     private val renderer: Renderer<AutoInitializeModule<N, TypeName, ClassName, AnnotationSpec>, F>,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
     private val logger = environment.logger.withTag("auto-initialize")
-    override val annotations: Set<KClass<out Annotation>> = setOf(AutoInitialize::class)
+    override val annotations: Set<String> = setOf(AutoInitialize::class.java.name)
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
         val initializableObjectsByModule =

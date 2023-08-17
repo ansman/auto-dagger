@@ -7,6 +7,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.ksp.writeTo
+import se.ansman.dagger.auto.compiler.common.Options
 import se.ansman.dagger.auto.compiler.common.ksp.KotlinPoetRenderEngine
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerLogger
@@ -18,7 +19,10 @@ class KspEnvironment(
     override val renderEngine: RenderEngine<TypeName, ClassName, AnnotationSpec>
         get() = KotlinPoetRenderEngine
 
-    override val logger: AutoDaggerLogger<KSNode> = AutoDaggerKspLogger(environment.logger)
+    override val logger: AutoDaggerLogger<KSNode> = AutoDaggerKspLogger(
+        logger = environment.logger,
+        enableLogging = environment.options[Options.enableLogging]?.toBooleanStrict() ?: false
+    )
 
     override fun write(file: FileSpec) {
         file.writeTo(environment.codeGenerator, aggregating = false)

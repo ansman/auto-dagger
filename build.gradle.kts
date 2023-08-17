@@ -30,11 +30,9 @@ val version: String = providers.gradleProperty("version").get()
 val latestRelease: String = providers.gradleProperty("latestRelease").get()
 
 val isSnapshotVersion = version.endsWith("-SNAPSHOT")
-val dokkaProjects = setOf(
-    projects.core.dependencyProject,
-    projects.android.dependencyProject,
-    projects.android.testing.dependencyProject,
-)
+val dokkaProjects = subprojects
+    .filter { ":compiler" !in it.path && ":tests" !in it.path }
+    .toSet()
 
 apiValidation {
     ignoredPackages.addAll(setOf(

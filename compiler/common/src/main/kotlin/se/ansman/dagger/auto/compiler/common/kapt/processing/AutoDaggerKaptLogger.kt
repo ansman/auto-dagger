@@ -21,8 +21,4 @@ class AutoDaggerKaptLogger(
 
     private fun log(kind: Kind, message: String, node: Element?) =
         messager.printMessage(kind, "$tag $message", node)
-
-    companion object {
-        const val enableLogging = "autoDagger.enableLogging"
-    }
 }

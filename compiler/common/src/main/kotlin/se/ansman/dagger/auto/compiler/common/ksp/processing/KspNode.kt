@@ -1,5 +1,6 @@
 package se.ansman.dagger.auto.compiler.common.ksp.processing
 
+import com.google.devtools.ksp.isPrivate
 import com.google.devtools.ksp.isPublic
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
@@ -16,4 +17,7 @@ sealed class KspNode : Node<KSDeclaration, TypeName, ClassName, AnnotationSpec> 
 
     override val isPublic: Boolean
         get() = node.isPublic()
+
+    override val isPrivate: Boolean
+        get() = node.isPrivate()
 }

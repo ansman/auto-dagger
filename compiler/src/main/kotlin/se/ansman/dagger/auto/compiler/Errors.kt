@@ -5,7 +5,13 @@ import kotlin.reflect.KClass
 
 object Errors {
     fun genericType(annotation: KClass<out Annotation>) =
-        "Objects annotated with @${annotation.simpleName} cannot be generic"
+        genericType(annotation.simpleName!!)
+
+    fun genericType(annotation: String) =
+        "Objects annotated with @${annotation.substringAfterLast('.')} cannot be generic"
+
+    fun invalidComponent(component: String): String =
+        "The specified component $component isn't a Dagger component"
 
     object AutoInitialize {
         const val wrongScope = "Objects annotated with @AutoInitialize must also be annotated with @Singleton"
@@ -19,7 +25,6 @@ object Errors {
         const val missingBindingKey = "To use @AutoBindIntoMap you must also annotate the type with a map key"
         const val multipleBindingKeys = "Multiple map keys specified, make sure there is only a single map key"
         const val noSuperTypes = "There are no supertypes so there is nothing to bind. Make sure you implement an interface or extend a class to use @AutoBind."
-        const val cannotBindInitializable = "You"
         const val multipleSuperTypes = "Multiple supertypes found. Use the `asTypes` parameter to specify which types to bind"
 
         fun missingBoundType(boundType: String): String =
@@ -27,9 +32,6 @@ object Errors {
 
         fun missingDirectSuperType(boundType: String): String =
             "$boundType is specified using `asTypes` but isn't a direct supertype"
-
-        fun invalidComponent(component: String): String =
-            "The specified component $component isn't a Dagger component"
 
         fun parentComponent(installIn: String, inferredComponent: String): String =
             "The installIn component $installIn is a parent component of $inferredComponent and cannot be used as installIn for @AutoBind"
@@ -49,5 +51,17 @@ object Errors {
 
         fun targetIsNotAutoBind(replacedObject: String): String =
             "Replacement target $replacedObject must be annotated with @AutoBind"
+    }
+
+    object Retrofit {
+        const val nonInterface = "Only interfaces can be annotated with @AutoProvideService."
+        const val privateType = "@AutoProvideService annotated types must not be private."
+        const val emptyService = "@AutoProvideService annotated types must have at least one method."
+        const val propertiesNotAllowed = "Retrofit services cannot contain properties."
+        const val invalidServiceMethod = "Methods in retrofit services must be annotated with a HTTP method annotation such as @GET."
+        const val scopeAndReusable = "You cannot mix a scope and @Reusable on the same type. Remove the scope or @Reusable."
+
+        fun invalidScope(scope: String, component: String, neededScope: String) =
+            "You cannot use @$scope when installing in $component, use @$neededScope instead."
     }
 }
