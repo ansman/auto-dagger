@@ -1,9 +1,11 @@
 package se.ansman.dagger.auto.compiler.renderers
 
 import se.ansman.dagger.auto.Initializable
-import se.ansman.dagger.auto.compiler.applyEach
+import se.ansman.dagger.auto.compiler.common.applyEach
+import se.ansman.dagger.auto.compiler.common.processing.RenderEngine
+import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
+import se.ansman.dagger.auto.compiler.common.rendering.Renderer
 import se.ansman.dagger.auto.compiler.models.AutoInitializeModule
-import se.ansman.dagger.auto.compiler.processing.RenderEngine
 
 abstract class AutoInitializeModuleRenderer<Node, TypeName, ClassName : TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>(
     private val renderEngine: RenderEngine<TypeName, ClassName, AnnotationSpec>,

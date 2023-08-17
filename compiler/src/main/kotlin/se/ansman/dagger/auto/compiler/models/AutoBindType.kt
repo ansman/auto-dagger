@@ -1,6 +1,6 @@
 package se.ansman.dagger.auto.compiler.models
 
-import se.ansman.dagger.auto.compiler.renderers.HiltModuleBuilder
+import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 
 data class AutoBindType<TypeName, AnnotationSpec>(
     val type: TypeName,
