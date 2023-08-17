@@ -4,19 +4,20 @@ import se.ansman.dagger.auto.AutoBind
 import se.ansman.dagger.auto.AutoInitialize
 import se.ansman.dagger.auto.android.testing.Replaces
 import se.ansman.dagger.auto.compiler.Errors
+import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
+import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
+import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.error
+import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
+import se.ansman.dagger.auto.compiler.common.processing.getValue
+import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
+import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
+import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
+import se.ansman.dagger.auto.compiler.common.Processor
+import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
+import se.ansman.dagger.auto.compiler.common.rendering.NoOpRenderer
+import se.ansman.dagger.auto.compiler.common.rendering.Renderer
 import se.ansman.dagger.auto.compiler.models.AutoBindObjectModule
-import se.ansman.dagger.auto.compiler.processing.AutoDaggerEnvironment
-import se.ansman.dagger.auto.compiler.processing.AutoDaggerResolver
-import se.ansman.dagger.auto.compiler.processing.ClassDeclaration
-import se.ansman.dagger.auto.compiler.processing.error
-import se.ansman.dagger.auto.compiler.processing.getAnnotation
-import se.ansman.dagger.auto.compiler.processing.getValue
-import se.ansman.dagger.auto.compiler.processing.isAnnotatedWith
-import se.ansman.dagger.auto.compiler.processing.isFullyPublic
-import se.ansman.dagger.auto.compiler.processing.rootPeerClass
-import se.ansman.dagger.auto.compiler.renderers.HiltModuleBuilder
-import se.ansman.dagger.auto.compiler.renderers.NoOpRenderer
-import se.ansman.dagger.auto.compiler.renderers.Renderer
 import kotlin.reflect.KClass
 
 class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec, F>(

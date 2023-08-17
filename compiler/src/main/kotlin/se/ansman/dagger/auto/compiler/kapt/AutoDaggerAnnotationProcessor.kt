@@ -4,8 +4,8 @@ import com.google.auto.common.BasicAnnotationProcessor
 import com.google.auto.service.AutoService
 import net.ltgt.gradle.incap.IncrementalAnnotationProcessor
 import net.ltgt.gradle.incap.IncrementalAnnotationProcessorType
-import se.ansman.dagger.auto.compiler.kapt.processing.AutoDaggerKaptLogger
-import se.ansman.dagger.auto.compiler.kapt.processing.KaptEnvironment
+import se.ansman.dagger.auto.compiler.common.kapt.processing.AutoDaggerKaptLogger
+import se.ansman.dagger.auto.compiler.common.kapt.processing.KaptEnvironment
 import se.ansman.dagger.auto.compiler.processors.AutoBindProcessor
 import se.ansman.dagger.auto.compiler.processors.AutoInitializeProcessor
 import se.ansman.dagger.auto.compiler.processors.ReplacesProcessor

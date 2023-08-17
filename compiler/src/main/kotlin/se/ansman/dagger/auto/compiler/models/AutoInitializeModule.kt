@@ -1,6 +1,7 @@
 package se.ansman.dagger.auto.compiler.models
 
-import se.ansman.dagger.auto.compiler.renderers.HiltModuleBuilder
+import se.ansman.dagger.auto.compiler.common.models.HiltModule
+import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 
 data class AutoInitializeModule<out Node, TypeName, ClassName : TypeName, AnnotationSpec>(
     override val moduleName: ClassName,

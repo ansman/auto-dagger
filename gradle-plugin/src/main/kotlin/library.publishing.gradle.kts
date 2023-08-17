@@ -1,10 +1,9 @@
 
 import com.android.build.gradle.LibraryExtension
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
 import se.ansman.dagger.auto.gradle.getOrPut
@@ -18,6 +17,8 @@ plugins {
 }
 
 val libs = the<LibrariesForLibs>()
+
+archivesName.set(project.path.removePrefix(":").replace(':', '-'))
 
 val gitCommit = cachedProvider {
     project.execWithOutput {
@@ -34,7 +35,7 @@ val remoteSource: Provider<String> = providers.gradleProperty("version")
     .map { repo("/blob/$it") }
 
 tasks.withType<AbstractDokkaLeafTask>().configureEach {
-    moduleName.set(project.path.removePrefix(":").replace(':', '-'))
+    moduleName.set(archivesName)
     val projectPath = project.path.removePrefix(":").replace(':', '/')
     dokkaSourceSets.configureEach {
         reportUndocumented.set(false)
@@ -187,28 +188,6 @@ pluginManager.withPlugin("com.android.library") {
                 )
             )
         )
-    }
-}
-
-pluginManager.withPlugin("com.github.johnrengelman.shadow") {
-    val shade: Configuration = configurations.create("compileShaded")
-    configurations.named("compileOnly") {
-        extendsFrom(shade)
-    }
-    configurations.named("testRuntimeOnly") {
-        extendsFrom(shade)
-    }
-
-    val shadowJar = tasks.named<ShadowJar>("shadowJar") {
-        archiveClassifier.set("")
-        configurations = listOf(shade)
-        isEnableRelocation = true
-        relocationPrefix = "se.ansman.dagger.auto${project.path.replace(':', '.').replace('-', '_')}"
-        transformers.add(ServiceFileTransformer())
-    }
-
-    artifacts {
-        add("runtimeOnly", shadowJar)
     }
 }
 
