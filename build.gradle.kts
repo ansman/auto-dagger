@@ -35,19 +35,23 @@ val dokkaProjects = subprojects
     .toSet()
 
 apiValidation {
-    ignoredPackages.addAll(setOf(
-        "hilt_aggregated_deps",
-        "dagger.hilt"
-    ))
-    ignoredClasses.addAll(setOf(
-        "se.ansman.dagger.auto.HiltWrapper_AutoDaggerInitializeModule",
-        "se.ansman.dagger.auto.android.HiltWrapper_AutoDaggerInitializerEntryPoint",
-    ))
+    ignoredPackages.addAll(
+        setOf(
+            "hilt_aggregated_deps",
+            "dagger.hilt"
+        )
+    )
+    ignoredClasses.addAll(
+        setOf(
+            "se.ansman.dagger.auto.HiltWrapper_AutoDaggerInitializeModule",
+            "se.ansman.dagger.auto.android.HiltWrapper_AutoDaggerInitializerEntryPoint",
+        )
+    )
     ignoredProjects.addAll(
         subprojects.asSequence()
             .minus(dokkaProjects)
             .map { it.name }
-        )
+    )
 }
 
 val dokkaDocsPath = "dokka"
@@ -68,7 +72,14 @@ mkdocs {
     extras = mapOf(
         "version" to latestRelease,
         "daggerVersion" to libs.versions.dagger.get(),
-        "snapshotVersion" to version.removeSuffix("-SNAPSHOT") + "-SNAPSHOT",
+        "snapshotVersion" to version.replace(Regex("(\\d+)\\.(\\d+)\\.(\\d+)(?:-(.+))?")) {
+            val (major, minor, patch, qualifier) = it.destructured
+            if (qualifier == "SNAPSHOT") {
+                it.groupValues[0]
+            } else {
+                "$major.${minor.toInt() + 1}.0-SNAPSHOT"
+            }
+        },
         "dokkaLink" to "/$dokkaDocsPath" + if (latestRelease == version) {
             "/"
         } else {
