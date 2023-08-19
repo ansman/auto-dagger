@@ -43,14 +43,21 @@ For detailed instructions see the [getting-started](https://auto-dagger.ansman.s
 ```groovy
 dependencies {
     // Include this in kotlin or android modules
-    implementation("se.ansman.dagger.auto:core:0.6.5")
-    kapt("se.ansman.dagger.auto:compiler:0.6.5")
+    implementation("se.ansman.dagger.auto:core:0.7.0")
+    kapt("se.ansman.dagger.auto:compiler:0.7.0")
 
     // Include this only in android modules
-    implementation("se.ansman.dagger.auto:android:0.6.5")
+    implementation("se.ansman.dagger.auto:android:0.7.0")
+    
     // Add these if you want to replace objects during tests
-    testImplementation("se.ansman.dagger.auto:android-testing:0.6.5")
-    kaptTest("se.ansman.dagger.auto:compiler:0.6.5")
+    testImplementation("se.ansman.dagger.auto:android-testing:0.7.0")
+    kaptTest("se.ansman.dagger.auto:compiler:0.7.0")
+    
+    // If you want to provide Retrofit services add the Retrofit dependency
+    implementation("se.ansman.dagger.auto:retrofit:0.7.0")
+    
+    // If you want to inject a CoroutineScope into ViewModels add the ViewModel dependency
+    implementation("se.ansman.dagger.auto:androidx-viewmodel:0.7.0")
 }
 ```
 
