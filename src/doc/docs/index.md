@@ -2,9 +2,11 @@ Auto Dagger
 ===
 Auto Dagger allows you to automate some Dagger setup using Hilt.
 
-For example you can use the @AutoInitialize annotation to automatically initialize objects during app launch and you can use the @AutoBind annotation to automatically bind objects.
+For example you can use the `@AutoInitialize` annotation to automatically initialize objects during app launch and you can use the `@AutoBind` annotation to automatically bind objects.
 
 Automatic initialization is done using AndroidX Startup.
+
+There's also integrations with popular third party libraries such as AndroidX and Retrofit.  
 
 You can find the project on GitHub in the [ansman/auto-dagger](https://github.com/ansman/auto-dagger) repo.
 
