@@ -17,7 +17,7 @@ class KspAnnotationModel(
     private val annotation: KSAnnotation,
     private val resolver: KspResolver,
 ) : AnnotationModel<ClassName, AnnotationSpec> {
-    private val className by lazy(LazyThreadSafetyMode.NONE) {
+    override val className by lazy(LazyThreadSafetyMode.NONE) {
         annotation.annotationType.resolve().toClassName()
     }
 
@@ -33,6 +33,9 @@ class KspAnnotationModel(
 
     override fun isOfType(type: String): Boolean =
         type.endsWith(annotation.shortName.asString()) && type == qualifiedName
+
+    override fun isOfType(type: ClassName): Boolean =
+        annotation.shortName.asString() == type.simpleName && type == className
 
     override fun <T : Any> getValue(type: Class<T>, name: String): T? =
         annotation.arguments.find { it.name?.asString() == name }

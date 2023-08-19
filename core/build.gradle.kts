@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm")
     kotlin("kapt")
-    id("library")
+    id("library.api")
     id("library.publishing")
 }
 

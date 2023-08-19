@@ -11,7 +11,6 @@ import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
 import javax.lang.model.element.Element
 import javax.lang.model.element.ElementKind
-import kotlin.reflect.KClass
 
 class KaptResolver(
     override val environment: KaptEnvironment,
@@ -33,8 +32,8 @@ class KaptResolver(
     }
 
     @Suppress("UnstableApiUsage")
-    override fun nodesAnnotatedWith(annotation: KClass<out Annotation>): Sequence<KaptNode> =
-        annotatedElements[annotation.java.name].asSequence().mapNotNull { element ->
+    override fun nodesAnnotatedWith(annotation: String): Sequence<KaptNode> =
+        annotatedElements[annotation].asSequence().mapNotNull { element ->
             when {
                 MoreElements.isType(element) ->
                     KaptClassDeclaration(MoreElements.asType(element), this)

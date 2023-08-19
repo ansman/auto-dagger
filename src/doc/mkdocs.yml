@@ -77,6 +77,8 @@ nav:
       - '@AutoInitialize': usage/auto-initialize.md
       - '@AutoBind': usage/auto-bind.md
       - '@Replaces': usage/replaces.md
+  - Integrations:
+      - Retrofit: integrations/retrofit.md
   - Limitations: limitations.md
   - About:
       - Release Notes: https://github.com/ansman/auto-dagger/releases

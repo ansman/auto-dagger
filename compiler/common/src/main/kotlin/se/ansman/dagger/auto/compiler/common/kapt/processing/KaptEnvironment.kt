@@ -4,6 +4,7 @@ import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.JavaFile
 import com.squareup.javapoet.TypeName
+import se.ansman.dagger.auto.compiler.common.Options
 import se.ansman.dagger.auto.compiler.common.TypeLookup
 import se.ansman.dagger.auto.compiler.common.kapt.JavaPoetRenderEngine
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
@@ -18,7 +19,7 @@ class KaptEnvironment(
     override val renderEngine: RenderEngine<TypeName, ClassName, AnnotationSpec> get() = JavaPoetRenderEngine
     override val logger: AutoDaggerLogger<Element> = AutoDaggerKaptLogger(
         messager = environment.messager,
-        enableLogging = environment.options[AutoDaggerKaptLogger.enableLogging]?.toBooleanStrict() ?: false
+        enableLogging = environment.options[Options.enableLogging]?.toBooleanStrict() ?: false
     )
 
     val typeLookup = TypeLookup(environment.elementUtils::getTypeElement)

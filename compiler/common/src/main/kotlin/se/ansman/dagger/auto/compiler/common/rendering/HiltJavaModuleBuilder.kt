@@ -58,10 +58,10 @@ class HiltJavaModuleBuilder private constructor(
 
     override fun addProvider(
         name: String,
-        parameters: List<HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>>,
-        mode: ProviderMode<AnnotationSpec>,
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
+        parameters: List<HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>>,
+        mode: ProviderMode<AnnotationSpec>,
         contents: (List<ParameterSpec>) -> CodeBlock,
     ) = apply {
         val parameterNameAllocator = NameAllocator()
@@ -82,9 +82,9 @@ class HiltJavaModuleBuilder private constructor(
     override fun addBinding(
         name: String,
         sourceType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
-        mode: ProviderMode<AnnotationSpec>,
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
+        mode: ProviderMode<AnnotationSpec>
     ) = apply {
         typeSpec.addMethod(
             MethodSpec.methodBuilder(nameAllocator.newName(name))

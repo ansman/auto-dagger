@@ -10,8 +10,10 @@ import se.ansman.dagger.auto.compiler.common.ksp.processing.KspResolver
 import se.ansman.dagger.auto.compiler.processors.AutoBindProcessor
 import se.ansman.dagger.auto.compiler.processors.AutoInitializeProcessor
 import se.ansman.dagger.auto.compiler.processors.ReplacesProcessor
-import se.ansman.dagger.auto.compiler.renderers.KotlinAutoBindObjectModuleRenderer
-import se.ansman.dagger.auto.compiler.renderers.KotlinAutoInitializeObjectRenderer
+import se.ansman.dagger.auto.compiler.processors.RetrofitProcessor
+import se.ansman.dagger.auto.compiler.renderers.autobind.KotlinAutoBindObjectModuleRenderer
+import se.ansman.dagger.auto.compiler.renderers.autoinitialize.KotlinAutoInitializeObjectRenderer
+import se.ansman.dagger.auto.compiler.renderers.retrofit.KotlinRetrofitObjectRenderer
 
 class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : SymbolProcessor {
     private val environment = KspEnvironment(environment)
@@ -27,6 +29,10 @@ class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : Symbo
         ReplacesProcessor(
             environment = this.environment,
             renderer = KotlinAutoBindObjectModuleRenderer
+        ),
+        RetrofitProcessor(
+            environment = this.environment,
+            renderer = KotlinRetrofitObjectRenderer
         ),
     )
 

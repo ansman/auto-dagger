@@ -4,6 +4,7 @@ import se.ansman.dagger.auto.AutoBind
 import se.ansman.dagger.auto.AutoInitialize
 import se.ansman.dagger.auto.android.testing.Replaces
 import se.ansman.dagger.auto.compiler.Errors
+import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
@@ -12,13 +13,12 @@ import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
 import se.ansman.dagger.auto.compiler.common.processing.getValue
 import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
 import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
+import se.ansman.dagger.auto.compiler.common.processing.nodesAnnotatedWith
 import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
-import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.NoOpRenderer
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
-import se.ansman.dagger.auto.compiler.models.AutoBindObjectModule
-import kotlin.reflect.KClass
+import se.ansman.dagger.auto.compiler.models.autobind.AutoBindObjectModule
 
 class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec, F>(
     private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
@@ -28,8 +28,7 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
     private val autoBindProcessor = AutoBindProcessor(environment, NoOpRenderer, logging = false)
     private val autoInitializeProcessor = AutoInitializeProcessor(environment, NoOpRenderer)
 
-    override val annotations: Set<KClass<out Annotation>>
-        get() = setOf(Replaces::class)
+    override val annotations: Set<String> = setOf(Replaces::class.java.name)
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
         logger.info("@Replaces processing started")

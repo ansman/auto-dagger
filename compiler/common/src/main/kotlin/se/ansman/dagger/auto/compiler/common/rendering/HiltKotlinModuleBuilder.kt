@@ -38,11 +38,11 @@ class HiltKotlinModuleBuilder private constructor(
 
     override fun addProvider(
         name: String,
-        parameters: List<HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>>,
-        mode: ProviderMode<AnnotationSpec>,
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-        contents: (List<ParameterSpec>) -> CodeBlock,
+        parameters: List<HiltModuleBuilder.Parameter<TypeName, AnnotationSpec>>,
+        mode: ProviderMode<AnnotationSpec>,
+        contents: (List<ParameterSpec>) -> CodeBlock
     ) = apply {
         val parameterNameAllocator = NameAllocator()
         val params = parameters.map { it.toParameterSpec(parameterNameAllocator) }
@@ -60,9 +60,9 @@ class HiltKotlinModuleBuilder private constructor(
     override fun addBinding(
         name: String,
         sourceType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
-        mode: ProviderMode<AnnotationSpec>,
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
+        mode: ProviderMode<AnnotationSpec>
     ) = apply {
         bindings += FunSpec.builder(nameAllocator.newName(name))
             .addModifiers(if (isPublic) KModifier.PUBLIC else KModifier.INTERNAL, KModifier.ABSTRACT)

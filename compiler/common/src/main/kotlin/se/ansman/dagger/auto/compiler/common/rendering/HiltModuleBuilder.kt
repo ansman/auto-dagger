@@ -10,19 +10,19 @@ import kotlin.reflect.KClass
 interface HiltModuleBuilder<in Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile> {
     fun addProvider(
         name: String,
-        parameters: List<Parameter<TypeName, AnnotationSpec>> = emptyList(),
-        mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
         returnType: DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
+        parameters: List<Parameter<TypeName, AnnotationSpec>> = emptyList(),
+        mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
         contents: (List<ParameterSpec>) -> CodeBlock,
     ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
 
     fun addBinding(
         name: String,
         sourceType: DaggerType<TypeName, AnnotationSpec>,
-        mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
         returnType: DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
+        mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
     ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
 
     fun build(): SourceFile

@@ -18,7 +18,7 @@ class KaptAnnotationModel(
     override val qualifiedName: String
         get() = className.canonicalName()
 
-    private val className by lazy {
+    override val className: ClassName by lazy {
         mirror.annotationType.asElement().asType()
             .let(MoreTypes::asTypeElement)
             .let(ClassName::get)
@@ -33,6 +33,9 @@ class KaptAnnotationModel(
 
     override fun isOfType(type: String): Boolean =
         type.endsWith(mirror.annotationType.asElement().simpleName) && type == className.canonicalName()
+
+    override fun isOfType(type: ClassName): Boolean =
+        mirror.annotationType.asElement().simpleName.contentEquals(type.simpleName()) && type == className
 
     override fun <T : Any> getValue(type: Class<T>, name: String): T? =
         getValueNamed(name)

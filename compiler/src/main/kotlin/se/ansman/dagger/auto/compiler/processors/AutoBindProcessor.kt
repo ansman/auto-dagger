@@ -12,6 +12,7 @@ import se.ansman.dagger.auto.BindGenericAs
 import se.ansman.dagger.auto.Initializable
 import se.ansman.dagger.auto.android.testing.Replaces
 import se.ansman.dagger.auto.compiler.Errors
+import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.deleteSuffix
 import se.ansman.dagger.auto.compiler.common.processing.AnnotationModel
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
@@ -25,14 +26,13 @@ import se.ansman.dagger.auto.compiler.common.processing.getValue
 import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
 import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
 import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
-import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
-import se.ansman.dagger.auto.compiler.models.AutoBindObjectModule
-import se.ansman.dagger.auto.compiler.models.AutoBindType
+import se.ansman.dagger.auto.compiler.models.autobind.AutoBindObjectModule
+import se.ansman.dagger.auto.compiler.models.autobind.AutoBindType
+import se.ansman.dagger.auto.compiler.utils.ComponentValidator.validateComponent
 import javax.inject.Scope
 import javax.inject.Singleton
-import kotlin.reflect.KClass
 
 class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec, F>(
     private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
@@ -40,12 +40,11 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
     private val logging: Boolean = true,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
     private val logger = environment.logger.withTag("auto-bind").takeIf { logging }
-    override val annotations: Set<KClass<out Annotation>>
-        get() = setOf(
-            AutoBind::class,
-            AutoBindIntoSet::class,
-            AutoBindIntoMap::class,
-        )
+    override val annotations: Set<String> = setOf(
+        AutoBind::class.java.name,
+        AutoBindIntoSet::class.java.name,
+        AutoBindIntoMap::class.java.name,
+    )
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
         logger?.info("AutoBind processing started")
@@ -205,9 +204,9 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
         annotation: AnnotationModel<ClassName, AnnotationSpec>,
     ): ClassName =
-        annotation.getValue<ClassDeclaration<*, *, ClassName, *>>("inComponent")
-            ?.className
+        annotation.getValue<ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>>("inComponent")
             ?.also { validateComponent(resolver, it) }
+            ?.className
             ?: guessComponent()
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.guessComponent(): ClassName {
@@ -221,12 +220,9 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.validateComponent(
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
-        component: ClassName,
+        component: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
     ) {
-        val defineComponent = resolver.lookupType(component)
-            .getAnnotation(DefineComponent::class)
-        if (defineComponent == null) {
-            logger?.error(Errors.AutoBind.invalidComponent(component.toString()), this)
+        if (!component.validateComponent(this, logger)){
             return
         }
         val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
@@ -235,7 +231,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         if (isComponentChildComponent(resolver, component, inferredComponent)) {
             logger?.error(
                 message = Errors.AutoBind.parentComponent(
-                    installIn = resolver.environment.renderEngine.simpleName(component),
+                    installIn = resolver.environment.renderEngine.simpleName(component.className),
                     inferredComponent = resolver.environment.renderEngine.simpleName(inferredComponent)
                 ),
                 node = this
@@ -245,7 +241,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
 
     private fun isComponentChildComponent(
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
-        installInComponent: ClassName,
+        installInComponent: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
         inferredComponent: ClassName,
     ): Boolean {
         var c = inferredComponent
@@ -255,7 +251,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 ?.getValue<ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>>("parent")
                 ?.className
                 ?: return false
-        } while (c != installInComponent)
+        } while (c != installInComponent.className)
         return true
     }
 

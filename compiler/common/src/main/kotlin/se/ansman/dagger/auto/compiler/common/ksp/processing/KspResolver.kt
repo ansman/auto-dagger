@@ -13,7 +13,6 @@ import se.ansman.dagger.auto.compiler.common.TypeLookup
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
 import se.ansman.dagger.auto.compiler.common.processing.Node
-import kotlin.reflect.KClass
 
 class KspResolver(
     override val environment: KspEnvironment,
@@ -25,8 +24,8 @@ class KspResolver(
             ?: throw IllegalArgumentException("Could not find class for name $className")
     }
 
-    override fun nodesAnnotatedWith(annotation: KClass<out Annotation>): Sequence<Node<KSDeclaration, TypeName, ClassName, AnnotationSpec>> =
-        resolver.getSymbolsWithAnnotation(annotation.qualifiedName!!).mapNotNull { node ->
+    override fun nodesAnnotatedWith(annotation: String): Sequence<Node<KSDeclaration, TypeName, ClassName, AnnotationSpec>> =
+        resolver.getSymbolsWithAnnotation(annotation).mapNotNull { node ->
             when (node) {
                 is KSClassDeclaration -> KspClassDeclaration(node, this)
                 is KSFunctionDeclaration -> KspFunction(node, this)
