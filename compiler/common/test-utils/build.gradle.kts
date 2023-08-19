@@ -2,6 +2,7 @@ plugins {
     java
     kotlin("jvm")
     id("library")
+    id("dokka-common")
 }
 
 dependencies {

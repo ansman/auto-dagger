@@ -2,7 +2,15 @@
 If you use [Retrofit](https://square.github.io/retrofit/) to define your API services, you can use the 
 `@AutoProvideService` to automatically contribute your services to the Dagger graph.
 
-Example:
+Firstly add the required dependency:
+```kotlin
+dependencies {
+    implementation("se.ansman.dagger.auto:retrofit:{{gradle.version}}")
+    kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
+}
+```
+    
+Then annotate your service with `@AutoProvideService`:
 ```kotlin
 @AutoProvideService
 class ApiService {

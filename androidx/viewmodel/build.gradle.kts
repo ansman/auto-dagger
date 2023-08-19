@@ -8,9 +8,7 @@ plugins {
 
 dependencies {
     api(projects.core)
-    implementation(libs.dagger)
     implementation(libs.dagger.hilt.android)
-    implementation(libs.androidx.startup)
-    kapt(libs.dagger.compiler)
+    implementation(libs.androidx.lifecycle.viewmodel)
     kapt(libs.dagger.hilt.compiler)
 }
