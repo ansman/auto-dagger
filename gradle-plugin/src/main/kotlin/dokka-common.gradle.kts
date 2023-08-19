@@ -16,10 +16,15 @@ tasks.withType<AbstractDokkaTask>().configureEach {
     notCompatibleWithConfigurationCache("Dokka does not support config cache yet")
 }
 
-pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-    pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
+pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
+    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
         tasks.withType<AbstractDokkaTask>().configureEach {
             dependsOn("kaptKotlin")
+        }
+    }
+    pluginManager.withPlugin("com.android.library") {
+        tasks.withType<AbstractDokkaTask>().configureEach {
+            dependsOn("kaptReleaseKotlin")
         }
     }
 }

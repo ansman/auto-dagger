@@ -1,0 +1,16 @@
+public final class co/ansman/dagger/auto/androidx/viewmodel/AutoDaggerViewModelCoroutineScopeComponent {
+	public static final field INSTANCE Lco/ansman/dagger/auto/androidx/viewmodel/AutoDaggerViewModelCoroutineScopeComponent;
+	public final fun provideViewModelScope (Ldagger/hilt/android/ViewModelLifecycle;)Lkotlinx/coroutines/CoroutineScope;
+}
+
+public final class co/ansman/dagger/auto/androidx/viewmodel/AutoDaggerViewModelCoroutineScopeComponent_ProvideViewModelScopeFactory : dagger/internal/Factory {
+	public fun <init> (Ljavax/inject/Provider;)V
+	public static fun create (Ljavax/inject/Provider;)Lco/ansman/dagger/auto/androidx/viewmodel/AutoDaggerViewModelCoroutineScopeComponent_ProvideViewModelScopeFactory;
+	public synthetic fun get ()Ljava/lang/Object;
+	public fun get ()Lkotlinx/coroutines/CoroutineScope;
+	public static fun provideViewModelScope (Ldagger/hilt/android/ViewModelLifecycle;)Lkotlinx/coroutines/CoroutineScope;
+}
+
+public abstract interface annotation class co/ansman/dagger/auto/androidx/viewmodel/ViewModelSpecific : java/lang/annotation/Annotation {
+}
+
