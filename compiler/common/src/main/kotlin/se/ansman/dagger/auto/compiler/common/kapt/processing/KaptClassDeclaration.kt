@@ -34,7 +34,6 @@ data class KaptClassDeclaration(
     override val declaredNodes: List<KaptFunction> by lazy(LazyThreadSafetyMode.NONE) {
         node.enclosedElements
             .filter { it.kind == ElementKind.METHOD }
-            .onEach { println(it.simpleName) }
             .map(MoreElements::asExecutable)
             .map { KaptFunction(it, resolver) }
     }
