@@ -10,6 +10,8 @@ android-minSdk = "14"
 android-compileSdk = "33"
 androidx-test = "1.5.0"
 kotlinpoet = "1.14.2"
+room = "2.5.2"
+retrofit = "2.9.0"
 
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
@@ -29,7 +31,8 @@ dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-pl
 
 okio = "com.squareup.okio:okio:3.5.0"
 
-retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
 android-gradlePlugin = "com.android.tools.build:gradle:8.1.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
@@ -72,6 +75,9 @@ robolectric = "org.robolectric:robolectric:4.10.3"
 testLogger = "com.adarshr:gradle-test-logger-plugin:3.2.0"
 
 shadow = "com.github.johnrengelman:shadow:8.1.1"
+
+room = { module ="androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module ="androidx.room:room-compiler", version.ref = "room" }
 
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]

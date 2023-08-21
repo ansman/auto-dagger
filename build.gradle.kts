@@ -73,7 +73,7 @@ mkdocs {
         "version" to latestRelease,
         "daggerVersion" to libs.versions.dagger.get(),
         "snapshotVersion" to version.replace(Regex("(\\d+)\\.(\\d+)\\.(\\d+)(?:-(.+))?")) {
-            val (major, minor, patch, qualifier) = it.destructured
+            val (major, minor, _, qualifier) = it.destructured
             if (qualifier == "SNAPSHOT") {
                 it.groupValues[0]
             } else {

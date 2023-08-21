@@ -1,10 +1,12 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.android.build.gradle.internal.lint.AndroidLintAnalysisTask
+import com.google.devtools.ksp.gradle.KspTask
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 import org.jetbrains.kotlin.gradle.tasks.Kapt
 
 plugins {
-    id("com.android.library")
+    id("com.android.application")
     kotlin("android")
     kotlin("kapt")
     alias(libs.plugins.ksp)
@@ -38,11 +40,11 @@ android {
 }
 
 androidComponents {
-    beforeVariants(selector().withBuildType("release")) { variant ->
+    beforeVariants { variant ->
         with(variant) {
-            enableAndroidTest = false
+            enableAndroidTest = variant.buildType == "debug"
             enableTestFixtures = false
-            enableUnitTest = false
+            enableUnitTest = variant.buildType == "debug"
         }
     }
 }
@@ -63,12 +65,22 @@ afterEvaluate {
 
 dependencies {
     implementation(projects.android)
+    implementation(projects.androidx.viewmodel)
+    implementation(projects.androidx.room)
+    implementation(projects.retrofit)
+    implementation(libs.retrofit.moshi)
     implementation(projects.android.testing)
     implementation(libs.dagger.hilt.android)
     "kaptJava"(projects.compiler)
     "kspKotlin"(projects.compiler)
     kapt(libs.dagger.compiler)
     kapt(libs.dagger.hilt.compiler)
+
+    // Third party
+    implementation(libs.retrofit)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.room)
+    ksp(libs.room.compiler)
 
     // Unit test
     testImplementation(libs.dagger.hilt.android.testing)
@@ -78,4 +90,8 @@ dependencies {
     testCompileOnly(libs.androidx.startup)
     kaptTest(libs.dagger.compiler)
     kaptTest(libs.dagger.hilt.compiler)
+}
+
+tasks.withType<AndroidLintAnalysisTask>().configureEach {
+    dependsOn(tasks.withType<KspTask>())
 }
