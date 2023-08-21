@@ -2,8 +2,11 @@
 
 import com.adarshr.gradle.testlogger.TestLoggerExtension
 import com.adarshr.gradle.testlogger.theme.ThemeType
-import com.android.build.api.variant.LibraryAndroidComponentsExtension
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.variant.AndroidComponentsExtension
+import com.android.build.api.variant.HasAndroidTestBuilder
+import com.android.build.api.variant.HasTestFixturesBuilder
+import com.android.build.api.variant.HasUnitTestBuilder
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -40,8 +43,8 @@ tasks.withType<Test>().configureEach {
     maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
 }
 
-pluginManager.withPlugin("com.android.library") {
-    configure<LibraryExtension> {
+pluginManager.withPlugin("com.android.base") {
+    extensions.getByType(CommonExtension::class).apply {
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         defaultConfig {
             minSdk = libs.versions.android.minSdk.get().toInt()
@@ -63,12 +66,21 @@ pluginManager.withPlugin("com.android.library") {
         }
     }
 
-    configure<LibraryAndroidComponentsExtension> {
+    if (pluginManager.hasPlugin("com.android.application")) {
+    }
+
+    extensions.getByType(AndroidComponentsExtension::class).apply {
         beforeVariants(selector().withBuildType("release")) { variant ->
             with(variant) {
-                enableAndroidTest = false
-                enableTestFixtures = false
-                enableUnitTest = false
+                if (this is HasAndroidTestBuilder) {
+                    enableAndroidTest = false
+                }
+                if (this is HasTestFixturesBuilder) {
+                    enableTestFixtures = false
+                }
+                if (this is HasUnitTestBuilder) {
+                    enableUnitTest = false
+                }
             }
         }
     }
