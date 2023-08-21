@@ -1,5 +1,6 @@
 package se.ansman.dagger.auto.compiler.common.ksp.processing
 
+import com.google.devtools.ksp.isConstructor
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
@@ -25,4 +26,6 @@ data class KspFunction(
             KspType(resolver.resolver.builtIns.nothingType, resolver)
         }
     }
+
+    override val isConstructor: Boolean get() = node.isConstructor()
 }

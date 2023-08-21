@@ -58,6 +58,9 @@ dependencies {
     
     // If you want to inject a CoroutineScope into ViewModels add the ViewModel dependency
     implementation("se.ansman.dagger.auto:androidx-viewmodel:0.7.0")
+    
+    // If you want to automatically provide your Room DAOs add the Room dependency
+    implementation("se.ansman.dagger.auto:androidx-room:0.7.0")
 }
 ```
 

@@ -4,15 +4,17 @@ import com.google.auto.common.BasicAnnotationProcessor
 import com.google.auto.service.AutoService
 import net.ltgt.gradle.incap.IncrementalAnnotationProcessor
 import net.ltgt.gradle.incap.IncrementalAnnotationProcessorType
+import se.ansman.dagger.auto.compiler.androidx.room.AndroidXRoomProcessor
+import se.ansman.dagger.auto.compiler.androidx.room.renderer.JavaAndroidXRoomDatabaseModuleRenderer
+import se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor
+import se.ansman.dagger.auto.compiler.autobind.renderer.JavaAutoBindModuleModuleRenderer
+import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
+import se.ansman.dagger.auto.compiler.autoinitialize.renderer.JavaAutoInitializeModuleRenderer
 import se.ansman.dagger.auto.compiler.common.Options
 import se.ansman.dagger.auto.compiler.common.kapt.processing.KaptEnvironment
-import se.ansman.dagger.auto.compiler.processors.AutoBindProcessor
-import se.ansman.dagger.auto.compiler.processors.AutoInitializeProcessor
-import se.ansman.dagger.auto.compiler.processors.ReplacesProcessor
-import se.ansman.dagger.auto.compiler.processors.RetrofitProcessor
-import se.ansman.dagger.auto.compiler.renderers.autobind.JavaAutoBindModuleModuleRenderer
-import se.ansman.dagger.auto.compiler.renderers.autoinitialize.JavaAutoInitializeModuleRenderer
-import se.ansman.dagger.auto.compiler.renderers.retrofit.JavaRetrofitModuleRenderer
+import se.ansman.dagger.auto.compiler.replaces.ReplacesProcessor
+import se.ansman.dagger.auto.compiler.retrofit.RetrofitProcessor
+import se.ansman.dagger.auto.compiler.retrofit.renderer.JavaRetrofitModuleRenderer
 import javax.annotation.processing.Processor
 import javax.lang.model.SourceVersion
 
@@ -28,6 +30,7 @@ class AutoDaggerAnnotationProcessor : BasicAnnotationProcessor() {
             AutoDaggerProcessorStep(environment, AutoBindProcessor(environment, JavaAutoBindModuleModuleRenderer)),
             AutoDaggerProcessorStep(environment, ReplacesProcessor(environment, JavaAutoBindModuleModuleRenderer)),
             AutoDaggerProcessorStep(environment, RetrofitProcessor(environment, JavaRetrofitModuleRenderer)),
+            AutoDaggerProcessorStep(environment, AndroidXRoomProcessor(environment, JavaAndroidXRoomDatabaseModuleRenderer)),
         )
     }
 }

@@ -9,10 +9,12 @@ interface RenderEngine<TypeName, ClassName : TypeName, AnnotationSpec> {
 
     fun typeArguments(typeName: TypeName): List<TypeName>
 
+    fun qualifierName(className: ClassName): String
     fun simpleName(typeName: TypeName): String
     fun simpleNames(className: ClassName): List<String>
     fun packageName(className: ClassName): String
     fun topLevelClassName(className: ClassName): ClassName
+
 
     fun rawType(typeName: TypeName): ClassName
 

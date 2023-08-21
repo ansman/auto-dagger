@@ -15,10 +15,8 @@ import se.ansman.dagger.auto.compiler.common.processing.RenderEngine
 
 class KspEnvironment(
     val environment: SymbolProcessorEnvironment,
-) : AutoDaggerEnvironment<KSNode, TypeName, ClassName, AnnotationSpec, FileSpec> {
-    override val renderEngine: RenderEngine<TypeName, ClassName, AnnotationSpec>
-        get() = KotlinPoetRenderEngine
-
+) : AutoDaggerEnvironment<KSNode, TypeName, ClassName, AnnotationSpec, FileSpec>,
+    RenderEngine<TypeName, ClassName, AnnotationSpec> by KotlinPoetRenderEngine {
     override val logger: AutoDaggerLogger<KSNode> = AutoDaggerKspLogger(
         logger = environment.logger,
         enableLogging = environment.options[Options.enableLogging]?.toBooleanStrict() ?: false

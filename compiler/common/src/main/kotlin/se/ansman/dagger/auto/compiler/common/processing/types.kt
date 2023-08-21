@@ -1,6 +1,5 @@
 package se.ansman.dagger.auto.compiler.common.processing
 
-import com.squareup.javapoet.ClassName
 import javax.inject.Qualifier
 import kotlin.reflect.KClass
 
@@ -25,9 +24,10 @@ interface Type<N, TypeName, ClassName : TypeName, AnnotationSpec> {
     val isGeneric: Boolean
     fun toTypeName(): TypeName
     fun isAssignableTo(type: Type<N, TypeName, ClassName, AnnotationSpec>): Boolean
-    fun isAssignableTo(type: KClass<*>): Boolean
     fun isAssignableTo(type: ClassName): Boolean
+    fun isAssignableTo(type: String): Boolean
 }
+fun Type<*, *, *, *>.isAssignableTo(type: KClass<*>): Boolean = isAssignableTo(type.qualifiedName!!)
 
 interface ExecutableNode<N, TypeName, ClassName : TypeName, AnnotationSpec> :
     Node<N, TypeName, ClassName, AnnotationSpec> {
@@ -44,7 +44,9 @@ interface Property<N, TypeName, ClassName : TypeName, AnnotationSpec> :
 }
 
 interface Function<N, TypeName, ClassName : TypeName, AnnotationSpec> :
-    ExecutableNode<N, TypeName, ClassName, AnnotationSpec>
+    ExecutableNode<N, TypeName, ClassName, AnnotationSpec> {
+    val isConstructor: Boolean
+}
 
 interface ClassDeclaration<N, TypeName, ClassName : TypeName, AnnotationSpec> :
     Node<N, TypeName, ClassName, AnnotationSpec> {
@@ -56,7 +58,6 @@ interface ClassDeclaration<N, TypeName, ClassName : TypeName, AnnotationSpec> :
     val isGeneric: Boolean
     val isInterface: Boolean
     val superclass: Type<N, TypeName, ClassName, AnnotationSpec>?
-    override val enclosingType: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>?
     fun asType(): Type<N, TypeName, ClassName, AnnotationSpec>
 }
 

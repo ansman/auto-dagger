@@ -1,0 +1,4 @@
+public abstract interface annotation class co/ansman/dagger/auto/androidx/room/AutoProvideDaos : java/lang/annotation/Annotation {
+	public abstract fun inComponent ()Ljava/lang/Class;
+}
+

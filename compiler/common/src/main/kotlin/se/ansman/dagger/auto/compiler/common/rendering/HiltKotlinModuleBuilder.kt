@@ -1,7 +1,7 @@
 package se.ansman.dagger.auto.compiler.common.rendering
 
 import com.google.devtools.ksp.containingFile
-import com.google.devtools.ksp.symbol.KSNode
+import com.google.devtools.ksp.symbol.KSDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -30,8 +30,8 @@ import se.ansman.dagger.auto.compiler.common.rawType
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.ProviderMode
 
 class HiltKotlinModuleBuilder private constructor(
-    private val info: HiltModule<KSNode, ClassName>,
-) : HiltModuleBuilder<KSNode, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec> {
+    private val info: HiltModule<KSDeclaration, ClassName>,
+) : HiltModuleBuilder<KSDeclaration, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec> {
     private val nameAllocator = NameAllocator()
     private val bindings = mutableListOf<FunSpec>()
     private val providers = mutableListOf<FunSpec>()

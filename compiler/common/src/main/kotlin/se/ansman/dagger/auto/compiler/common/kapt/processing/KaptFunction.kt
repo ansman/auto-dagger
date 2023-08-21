@@ -5,6 +5,7 @@ import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
 import se.ansman.dagger.auto.compiler.common.processing.Function
 import javax.lang.model.element.Element
+import javax.lang.model.element.ElementKind
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.element.Modifier
 
@@ -32,4 +33,7 @@ data class KaptFunction(
 
     override val isPrivate: Boolean
         get() = Modifier.PRIVATE in node.modifiers
+
+    override val isConstructor: Boolean
+        get() = node.kind == ElementKind.CONSTRUCTOR
 }
