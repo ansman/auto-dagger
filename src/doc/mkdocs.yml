@@ -78,7 +78,9 @@ nav:
       - '@AutoBind': usage/auto-bind.md
       - '@Replaces': usage/replaces.md
   - Integrations:
-      - AndroidX ViewModel: integrations/androidx-viewmodel.md
+      - AndroidX:
+        - Room: integrations/androidx/room.md
+        - ViewModel: integrations/androidx/viewmodel.md
       - Retrofit: integrations/retrofit.md
   - Limitations: limitations.md
   - About:

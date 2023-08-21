@@ -7,7 +7,6 @@ import com.squareup.javapoet.TypeName
 import se.ansman.dagger.auto.compiler.common.processing.Type
 import javax.lang.model.element.Element
 import javax.lang.model.type.TypeMirror
-import kotlin.reflect.KClass
 
 data class KaptType(
     val mirror: TypeMirror,
@@ -28,8 +27,7 @@ data class KaptType(
     override fun isAssignableTo(type: Type<Element, TypeName, ClassName, AnnotationSpec>): Boolean =
         isAssignableTo((type as KaptType).mirror)
     override fun isAssignableTo(type: ClassName): Boolean = isAssignableTo(type.canonicalName())
-    override fun isAssignableTo(type: KClass<*>): Boolean = isAssignableTo(type.qualifiedName!!)
-    private fun isAssignableTo(type: String): Boolean = isAssignableTo(resolver.typeLookup[type].asType().mirror)
+    override fun isAssignableTo(type: String): Boolean = isAssignableTo(resolver.typeLookup[type].asType().mirror)
     private fun isAssignableTo(type: TypeMirror): Boolean =
         resolver.environment.environment.typeUtils.isAssignable(mirror, type)
 }

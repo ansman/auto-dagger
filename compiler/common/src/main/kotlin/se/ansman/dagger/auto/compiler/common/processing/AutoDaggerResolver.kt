@@ -1,6 +1,5 @@
 package se.ansman.dagger.auto.compiler.common.processing
 
-import org.checkerframework.checker.units.qual.N
 import se.ansman.dagger.auto.compiler.common.TypeLookup
 import kotlin.reflect.KClass
 
@@ -14,7 +13,7 @@ interface AutoDaggerResolver<N, TypeName, ClassName : TypeName, AnnotationSpec> 
 
 fun <N, TypeName, ClassName : TypeName, AnnotationSpec> AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>
         .lookupType(className: KClass<*>): ClassDeclaration<N, TypeName, ClassName, AnnotationSpec> =
-    lookupType(environment.renderEngine.className(className))
+    lookupType(environment.className(className))
 
 fun <N, TypeName, ClassName : TypeName, AnnotationSpec> AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>
         .nodesAnnotatedWith(annotation: KClass<out Annotation>): Sequence<Node<N, TypeName, ClassName, AnnotationSpec>> =

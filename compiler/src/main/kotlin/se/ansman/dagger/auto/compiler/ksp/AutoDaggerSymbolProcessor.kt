@@ -4,16 +4,18 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.KSAnnotated
+import se.ansman.dagger.auto.compiler.androidx.room.AndroidXRoomProcessor
+import se.ansman.dagger.auto.compiler.androidx.room.renderer.KotlinAndroidXRoomDatabaseModuleRenderer
+import se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor
+import se.ansman.dagger.auto.compiler.autobind.renderer.KotlinAutoBindObjectModuleRenderer
+import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
+import se.ansman.dagger.auto.compiler.autoinitialize.renderer.KotlinAutoInitializeObjectRenderer
 import se.ansman.dagger.auto.compiler.common.ksp.KspProcessor
 import se.ansman.dagger.auto.compiler.common.ksp.processing.KspEnvironment
 import se.ansman.dagger.auto.compiler.common.ksp.processing.KspResolver
-import se.ansman.dagger.auto.compiler.processors.AutoBindProcessor
-import se.ansman.dagger.auto.compiler.processors.AutoInitializeProcessor
-import se.ansman.dagger.auto.compiler.processors.ReplacesProcessor
-import se.ansman.dagger.auto.compiler.processors.RetrofitProcessor
-import se.ansman.dagger.auto.compiler.renderers.autobind.KotlinAutoBindObjectModuleRenderer
-import se.ansman.dagger.auto.compiler.renderers.autoinitialize.KotlinAutoInitializeObjectRenderer
-import se.ansman.dagger.auto.compiler.renderers.retrofit.KotlinRetrofitObjectRenderer
+import se.ansman.dagger.auto.compiler.replaces.ReplacesProcessor
+import se.ansman.dagger.auto.compiler.retrofit.RetrofitProcessor
+import se.ansman.dagger.auto.compiler.retrofit.renderer.KotlinRetrofitObjectRenderer
 
 class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : SymbolProcessor {
     private val environment = KspEnvironment(environment)
@@ -33,6 +35,10 @@ class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : Symbo
         RetrofitProcessor(
             environment = this.environment,
             renderer = KotlinRetrofitObjectRenderer
+        ),
+        AndroidXRoomProcessor(
+            environment = this.environment,
+            renderer = KotlinAndroidXRoomDatabaseModuleRenderer
         ),
     )
 

@@ -28,6 +28,8 @@ object KotlinPoetRenderEngine : RenderEngine<TypeName, ClassName, AnnotationSpec
             is WildcardTypeName -> emptyList()
         }
 
+    override fun qualifierName(className: ClassName): String = className.canonicalName
+
     override fun simpleName(typeName: TypeName): String =
         when (typeName) {
             is ClassName -> typeName.simpleName

@@ -64,4 +64,11 @@ object Errors {
         fun invalidScope(scope: String, component: String, neededScope: String) =
             "You cannot use @$scope when installing in $component, use @$neededScope instead."
     }
+
+    object AndroidX {
+        object Room {
+            const val notADatabase = "Types annotated @AutoProvideDao must be annotated with @Database and directly extend RoomDatabase."
+            const val typeMustDirectlyExtendRoomDatabase = "Indirect inheritance of RoomDatabase is not supported right now. If this is needed, open a feature request at https://github.com/ansman/auto-dagger/issues/new and explain your use case."
+        }
+    }
 }
