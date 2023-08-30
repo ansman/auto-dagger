@@ -18,10 +18,12 @@ public abstract class AutoBindRealRepositoryFragmentModule private constructor()
   @Binds
   @IntoMap
   @StringKey("repository")
-  public abstract fun RealRepository.bindRealRepositoryAsCallableOfStringIntoMap(): Callable<String>
+  public abstract fun bindRealRepositoryAsCallableOfStringIntoMap(realRepository: RealRepository):
+      Callable<String>
 
   @Binds
   @IntoMap
   @StringKey("repository")
-  public abstract fun RealRepository.bindRealRepositoryAsCallableOfStarIntoMap(): Callable<*>
+  public abstract fun bindRealRepositoryAsCallableOfStarIntoMap(realRepository_: RealRepository):
+      Callable<*>
 }

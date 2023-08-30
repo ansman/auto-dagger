@@ -16,9 +16,9 @@ import kotlin.Int
 public abstract class AutoBindIntProviderSingletonModule private constructor() {
   @Binds
   @IntoSet
-  public abstract fun IntProvider.bindIntProviderAsCallableOfIntIntoSet(): Callable<Int>
+  public abstract fun bindIntProviderAsCallableOfIntIntoSet(intProvider: IntProvider): Callable<Int>
 
   @Binds
   @IntoSet
-  public abstract fun IntProvider.bindIntProviderAsCallableOfStarIntoSet(): Callable<*>
+  public abstract fun bindIntProviderAsCallableOfStarIntoSet(intProvider_: IntProvider): Callable<*>
 }

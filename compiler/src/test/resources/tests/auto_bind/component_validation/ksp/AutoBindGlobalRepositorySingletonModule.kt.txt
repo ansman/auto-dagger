@@ -12,5 +12,6 @@ import dagger.hilt.components.SingletonComponent
 @OriginatingElement(topLevelClass = GlobalRepository::class)
 public abstract class AutoBindGlobalRepositorySingletonModule private constructor() {
   @Binds
-  public abstract fun GlobalRepository.bindGlobalRepositoryAsRepository(): Repository
+  public abstract fun bindGlobalRepositoryAsRepository(globalRepository: GlobalRepository):
+      Repository
 }

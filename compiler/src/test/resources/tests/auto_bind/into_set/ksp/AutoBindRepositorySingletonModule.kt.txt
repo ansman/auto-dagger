@@ -15,5 +15,5 @@ import java.io.Closeable
 public abstract class AutoBindRepositorySingletonModule private constructor() {
   @Binds
   @IntoSet
-  public abstract fun Repository.bindRepositoryAsCloseableIntoSet(): Closeable
+  public abstract fun bindRepositoryAsCloseableIntoSet(repository: Repository): Closeable
 }

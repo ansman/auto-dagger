@@ -11,5 +11,5 @@ import dagger.hilt.codegen.OriginatingElement
 @OriginatingElement(topLevelClass = RealRepository::class)
 public abstract class AutoBindRealRepositoryMyModule private constructor() {
   @Binds
-  public abstract fun RealRepository.bindRealRepositoryAsRepository(): Repository
+  public abstract fun bindRealRepositoryAsRepository(realRepository: RealRepository): Repository
 }

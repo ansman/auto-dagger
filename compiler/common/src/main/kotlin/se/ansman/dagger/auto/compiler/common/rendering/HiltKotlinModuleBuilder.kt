@@ -1,6 +1,5 @@
 package se.ansman.dagger.auto.compiler.common.rendering
 
-import com.google.devtools.ksp.containingFile
 import com.google.devtools.ksp.symbol.KSDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
@@ -68,10 +67,7 @@ class HiltKotlinModuleBuilder private constructor(
             .addModifiers(if (isPublic) KModifier.PUBLIC else KModifier.INTERNAL, KModifier.ABSTRACT)
             .addAnnotation(Binds::class)
             .addAnnotations(mode.asAnnotations())
-            .addAnnotations(sourceType.qualifiers.map {
-                it.toBuilder().useSiteTarget(AnnotationSpec.UseSiteTarget.RECEIVER).build()
-            })
-            .receiver(sourceType.type)
+            .addParameter(sourceType.toParameterSpec(nameAllocator))
             .addAnnotations(returnType.qualifiers)
             .returns(returnType.type)
             .build()

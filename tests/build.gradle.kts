@@ -2,8 +2,6 @@
 
 import com.android.build.gradle.internal.lint.AndroidLintAnalysisTask
 import com.google.devtools.ksp.gradle.KspTask
-import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
-import org.jetbrains.kotlin.gradle.tasks.Kapt
 
 plugins {
     id("com.android.application")
@@ -12,7 +10,6 @@ plugins {
     alias(libs.plugins.ksp)
     id("library")
     id("com.google.dagger.hilt.android")
-    idea
 }
 
 android {
@@ -49,20 +46,6 @@ androidComponents {
     }
 }
 
-// This is needed because Dagger/Hilt doesn't support KSP yet so for our generated code to be
-// seen we need to make KAPT depend on KSP
-val variantUnitTestClassPaths = mutableMapOf<String, FileCollection>()
-afterEvaluate {
-    tasks.withType<Kapt>().configureEach {
-        tasks.findByName(name.replace("kapt", "ksp"))
-            ?.let { dependsOn(it) }
-    }
-    tasks.withType<KaptGenerateStubsTask>().configureEach {
-        tasks.findByName(name.replace("kaptGenerateStubs", "ksp"))
-            ?.let { dependsOn(it) }
-    }
-}
-
 dependencies {
     implementation(projects.android)
     implementation(projects.androidx.viewmodel)
@@ -73,8 +56,10 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     "kaptJava"(projects.compiler)
     "kspKotlin"(projects.compiler)
-    kapt(libs.dagger.compiler)
-    kapt(libs.dagger.hilt.compiler)
+    "kaptJava"(libs.dagger.compiler)
+    "kspKotlin"(libs.dagger.compiler)
+    "kaptJava"(libs.dagger.hilt.compiler)
+    "kspKotlin"(libs.dagger.hilt.compiler)
 
     // Third party
     implementation(libs.retrofit)
@@ -88,8 +73,10 @@ dependencies {
     "kspTestKotlin"(projects.compiler)
     // Compile Only is used here to ensure it's included by the android module
     testCompileOnly(libs.androidx.startup)
-    kaptTest(libs.dagger.compiler)
-    kaptTest(libs.dagger.hilt.compiler)
+    "kaptTestJava"(libs.dagger.compiler)
+    "kspTestKotlin"(libs.dagger.compiler)
+    "kaptTestJava"(libs.dagger.hilt.compiler)
+    "kspTestKotlin"(libs.dagger.hilt.compiler)
 }
 
 tasks.withType<AndroidLintAnalysisTask>().configureEach {

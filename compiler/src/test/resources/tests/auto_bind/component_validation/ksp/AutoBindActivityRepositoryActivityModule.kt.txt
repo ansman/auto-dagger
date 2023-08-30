@@ -12,5 +12,6 @@ import dagger.hilt.codegen.OriginatingElement
 @OriginatingElement(topLevelClass = ActivityRepository::class)
 public abstract class AutoBindActivityRepositoryActivityModule private constructor() {
   @Binds
-  public abstract fun ActivityRepository.bindActivityRepositoryAsRepository(): Repository
+  public abstract fun bindActivityRepositoryAsRepository(activityRepository: ActivityRepository):
+      Repository
 }

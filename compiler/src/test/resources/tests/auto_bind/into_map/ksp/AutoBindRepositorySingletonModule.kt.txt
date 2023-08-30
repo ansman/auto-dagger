@@ -17,5 +17,5 @@ public abstract class AutoBindRepositorySingletonModule private constructor() {
   @Binds
   @IntoMap
   @StringKey("test")
-  public abstract fun Repository.bindRepositoryAsCloseableIntoMap(): Closeable
+  public abstract fun bindRepositoryAsCloseableIntoMap(repository: Repository): Closeable
 }

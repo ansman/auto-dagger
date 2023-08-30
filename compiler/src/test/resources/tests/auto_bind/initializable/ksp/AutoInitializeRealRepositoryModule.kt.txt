@@ -15,5 +15,6 @@ import se.ansman.dagger.auto.Initializable
 public abstract class AutoInitializeRealRepositoryModule private constructor() {
   @Binds
   @IntoSet
-  public abstract fun RealRepository.bindRealRepositoryAsInitializable(): Initializable
+  public abstract fun bindRealRepositoryAsInitializable(realRepository: RealRepository):
+      Initializable
 }

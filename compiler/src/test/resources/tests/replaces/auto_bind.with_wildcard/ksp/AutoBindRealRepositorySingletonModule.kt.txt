@@ -14,9 +14,10 @@ import java.util.concurrent.Callable
 @OriginatingElement(topLevelClass = RealRepository::class)
 public abstract class AutoBindRealRepositorySingletonModule private constructor() {
   @Binds
-  public abstract fun RealRepository.bindRealRepositoryAsRepository(): Repository
+  public abstract fun bindRealRepositoryAsRepository(realRepository: RealRepository): Repository
 
   @Binds
   @IntoSet
-  public abstract fun RealRepository.bindRealRepositoryAsCallableOfStarIntoSet(): Callable<*>
+  public abstract fun bindRealRepositoryAsCallableOfStarIntoSet(realRepository_: RealRepository):
+      Callable<*>
 }

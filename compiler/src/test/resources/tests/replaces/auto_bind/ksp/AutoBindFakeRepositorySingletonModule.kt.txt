@@ -15,5 +15,5 @@ import dagger.hilt.testing.TestInstallIn
 @OriginatingElement(topLevelClass = FakeRepository::class)
 public abstract class AutoBindFakeRepositorySingletonModule private constructor() {
   @Binds
-  public abstract fun FakeRepository.bindFakeRepositoryAsRepository(): Repository
+  public abstract fun bindFakeRepositoryAsRepository(fakeRepository: FakeRepository): Repository
 }

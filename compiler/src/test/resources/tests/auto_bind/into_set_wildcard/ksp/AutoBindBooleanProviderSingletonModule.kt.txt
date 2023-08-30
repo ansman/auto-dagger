@@ -16,6 +16,7 @@ import kotlin.Boolean
 public abstract class AutoBindBooleanProviderSingletonModule private constructor() {
   @Binds
   @IntoSet
-  public abstract fun BooleanProvider.bindBooleanProviderAsCallableOfBooleanIntoSet():
+  public abstract
+      fun bindBooleanProviderAsCallableOfBooleanIntoSet(booleanProvider: BooleanProvider):
       Callable<Boolean>
 }
