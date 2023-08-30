@@ -16,5 +16,6 @@ public abstract class AutoBindAuthInterceptorSingletonModule private constructor
   @Binds
   @IntoSet
   @Named("api")
-  public abstract fun AuthInterceptor.bindAuthInterceptorAsInterceptorIntoSet(): Interceptor
+  public abstract fun bindAuthInterceptorAsInterceptorIntoSet(authInterceptor: AuthInterceptor):
+      Interceptor
 }

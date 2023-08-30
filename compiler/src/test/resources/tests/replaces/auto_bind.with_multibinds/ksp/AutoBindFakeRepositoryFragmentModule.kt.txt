@@ -20,5 +20,5 @@ public abstract class AutoBindFakeRepositoryFragmentModule private constructor()
   @Binds
   @IntoMap
   @StringKey("repository")
-  public abstract fun FakeRepository.bindFakeRepositoryAsRunnableIntoMap(): Runnable
+  public abstract fun bindFakeRepositoryAsRunnableIntoMap(fakeRepository: FakeRepository): Runnable
 }

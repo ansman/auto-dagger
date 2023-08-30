@@ -15,5 +15,6 @@ import java.util.concurrent.Callable
 public abstract class AutoBindStringProviderSingletonModule private constructor() {
   @Binds
   @IntoSet
-  public abstract fun StringProvider.bindStringProviderAsCallableOfStarIntoSet(): Callable<*>
+  public abstract fun bindStringProviderAsCallableOfStarIntoSet(stringProvider: StringProvider):
+      Callable<*>
 }

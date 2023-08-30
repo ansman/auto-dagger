@@ -12,5 +12,6 @@ import dagger.hilt.components.SingletonComponent
 @OriginatingElement(topLevelClass = RealSomeUseCase::class)
 public abstract class AutoBindRealSomeUseCaseSingletonModule private constructor() {
   @Binds
-  public abstract fun RealSomeUseCase.bindRealSomeUseCaseAsSomeUseCase(): SomeUseCase
+  public abstract fun bindRealSomeUseCaseAsSomeUseCase(realSomeUseCase: RealSomeUseCase):
+      SomeUseCase
 }

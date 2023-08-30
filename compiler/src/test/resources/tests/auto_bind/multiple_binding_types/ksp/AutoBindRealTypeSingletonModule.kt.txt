@@ -15,14 +15,14 @@ import dagger.multibindings.StringKey
 @OriginatingElement(topLevelClass = RealType::class)
 public abstract class AutoBindRealTypeSingletonModule private constructor() {
   @Binds
-  public abstract fun RealType.bindRealTypeAsType1(): Type1
+  public abstract fun bindRealTypeAsType1(realType: RealType): Type1
 
   @Binds
   @IntoSet
-  public abstract fun RealType.bindRealTypeAsType2IntoSet(): Type2
+  public abstract fun bindRealTypeAsType2IntoSet(realType_: RealType): Type2
 
   @Binds
   @IntoMap
   @StringKey("test")
-  public abstract fun RealType.bindRealTypeAsType3IntoMap(): Type3
+  public abstract fun bindRealTypeAsType3IntoMap(realType__: RealType): Type3
 }

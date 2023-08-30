@@ -12,11 +12,11 @@ import dagger.hilt.components.SingletonComponent
 @OriginatingElement(topLevelClass = RealType::class)
 public abstract class AutoBindRealTypeSingletonModule private constructor() {
   @Binds
-  public abstract fun RealType.bindRealTypeAsType1(): Type1
+  public abstract fun bindRealTypeAsType1(realType: RealType): Type1
 
   @Binds
-  public abstract fun RealType.bindRealTypeAsType2(): Type2
+  public abstract fun bindRealTypeAsType2(realType_: RealType): Type2
 
   @Binds
-  public abstract fun RealType.bindRealTypeAsType3(): Type3
+  public abstract fun bindRealTypeAsType3(realType__: RealType): Type3
 }

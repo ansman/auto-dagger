@@ -65,13 +65,3 @@ subsequent exceptions are added as suppressed exceptions.
 ## `AutoDaggerStartupInitializer`
 `AutoDaggerStartupInitializer` is the [AndroidX Startup](https://developer.android.com/topic/libraries/app-startup)
 initializer that performs the initialization at startup.
-
-## Why does it generate Java?
-Given that the library is written in Kotlin, why are the generated files Java files and not Kotlin files?
-
-This is because when using KAPT, which Dagger uses, generating Kotlin files would create a bit of overhead since it 
-needs to generate Java stubs for the generated files before continuing with the next round of processing.
-
-By generating Java files the stub generation can be skipped.
-
-Auto Dagger has support for KSP so when Dagger/Hilt supports it, Auto Dagger will start generating Kotlin files. 

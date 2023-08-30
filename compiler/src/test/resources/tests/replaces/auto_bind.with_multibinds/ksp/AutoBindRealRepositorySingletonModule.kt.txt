@@ -14,9 +14,10 @@ import java.io.Closeable
 @OriginatingElement(topLevelClass = RealRepository::class)
 public abstract class AutoBindRealRepositorySingletonModule private constructor() {
   @Binds
-  public abstract fun RealRepository.bindRealRepositoryAsRepository(): Repository
+  public abstract fun bindRealRepositoryAsRepository(realRepository: RealRepository): Repository
 
   @Binds
   @IntoSet
-  public abstract fun RealRepository.bindRealRepositoryAsCloseableIntoSet(): Closeable
+  public abstract fun bindRealRepositoryAsCloseableIntoSet(realRepository_: RealRepository):
+      Closeable
 }

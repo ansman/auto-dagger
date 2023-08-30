@@ -42,9 +42,14 @@ Setup
 For detailed instructions see the [getting-started](https://auto-dagger.ansman.se/latest/getting-started/) page.
 ```groovy
 dependencies {
+    // Set up your dagger dependencies and compiler
+    
     // Include this in kotlin or android modules
     implementation("se.ansman.dagger.auto:core:0.8.0")
     kapt("se.ansman.dagger.auto:compiler:0.8.0")
+    // If you're using KSP
+    ksp("se.ansman.dagger.auto:compiler:0.8.0")
+    
 
     // Include this only in android modules
     implementation("se.ansman.dagger.auto:android:0.8.0")
@@ -52,6 +57,8 @@ dependencies {
     // Add these if you want to replace objects during tests
     testImplementation("se.ansman.dagger.auto:android-testing:0.8.0")
     kaptTest("se.ansman.dagger.auto:compiler:0.8.0")
+    // If you're using KSP
+    kspTest("se.ansman.dagger.auto:compiler:0.8.0")
     
     // If you want to provide Retrofit services add the Retrofit dependency
     implementation("se.ansman.dagger.auto:retrofit:0.8.0")
