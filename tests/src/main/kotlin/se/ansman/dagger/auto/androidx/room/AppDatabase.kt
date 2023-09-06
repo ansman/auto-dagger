@@ -6,7 +6,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.RoomDatabase
-import co.ansman.dagger.auto.androidx.room.AutoProvideDaos
 
 @Entity("users")
 data class User(@PrimaryKey val id: String, val name: String)

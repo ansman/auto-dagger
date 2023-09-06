@@ -1,6 +1,6 @@
 package se.ansman.dagger.auto.compiler.androidx.room
 
-import co.ansman.dagger.auto.androidx.room.AutoProvideDaos
+import se.ansman.dagger.auto.androidx.room.AutoProvideDaos
 import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.androidx.room.models.AndroidXRoomDatabaseModule

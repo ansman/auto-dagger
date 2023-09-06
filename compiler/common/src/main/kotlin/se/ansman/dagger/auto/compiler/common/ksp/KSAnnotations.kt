@@ -6,12 +6,12 @@ import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSName
 import com.google.devtools.ksp.symbol.KSType
-import com.google.devtools.ksp.symbol.KSTypeAlias
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.ksp.toClassName
 import se.ansman.dagger.auto.compiler.common.applyEachIndexed
+import se.ansman.dagger.auto.compiler.common.ksp.processing.unwrapTypeAlias
 import java.util.Locale
 
 /**
@@ -39,8 +39,6 @@ fun KSAnnotation.toAnnotationSpecFixed(): AnnotationSpec =
             )
         }
         .build()
-
-fun KSType.unwrapTypeAlias(): KSType = (declaration as? KSTypeAlias)?.type?.resolve() ?: this
 
 private fun CodeBlock.Builder.addAnnotationValue(value: Any): CodeBlock.Builder =
     when (value) {
