@@ -2,11 +2,13 @@ package se.ansman.dagger.auto.compiler.common.testutils
 
 import assertk.assertThat
 import assertk.assertions.contains
+import assertk.assertions.isNotNull
 import com.tschuchort.compiletesting.KotlinCompilation
 import org.intellij.lang.annotations.Language
 import java.io.File
 import java.io.OutputStream
 import kotlin.test.assertEquals
+import kotlin.test.fail
 
 abstract class Compilation(
     protected val workingDir: File
@@ -49,17 +51,29 @@ abstract class Compilation(
 
         val filesGeneratedByAnnotationProcessor: Sequence<File> get() = result.filesGeneratedByAnnotationProcessor
 
-        fun assertIsSuccessful() {
+        fun assertIsSuccessful(): Result = apply {
             assertEquals(KotlinCompilation.ExitCode.OK, exitCode, errorMessage)
         }
 
-        fun assertFailedWithMessage(message: String) {
+        fun assertGeneratedFileNamed(name: String): Result = apply {
+            if (findGeneratedFile(name) == null) {
+                fail(filesGeneratedByAnnotationProcessor.joinToString(
+                    separator = "\n",
+                    prefix = "Expected a file named $name to be generated. Generated files:\n"
+                ))
+            }
+            assertThat(findGeneratedFile(name), name = "file named $name").isNotNull()
+        }
+
+        fun assertFailedWithMessage(message: String): Result = apply {
             assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, exitCode, errorMessage)
             assertThat(messages).contains(message)
         }
 
         fun findGeneratedFile(name: String): File? =
-            filesGeneratedByAnnotationProcessor.find { it.name == name }
+            filesGeneratedByAnnotationProcessor.find {
+                name == if ('.' in name) it.name else it.nameWithoutExtension
+            }
 
         fun readGeneratedFile(name: String): String =
             requireNotNull(findGeneratedFile(name)) {

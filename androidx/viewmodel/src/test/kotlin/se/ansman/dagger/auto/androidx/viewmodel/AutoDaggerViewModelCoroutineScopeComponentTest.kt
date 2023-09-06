@@ -1,4 +1,4 @@
-package co.ansman.dagger.auto.androidx.viewmodel
+package se.ansman.dagger.auto.androidx.viewmodel
 
 import assertk.assertThat
 import assertk.assertions.isFalse

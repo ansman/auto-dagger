@@ -18,7 +18,9 @@ class KspAnnotationModel(
     private val resolver: KspResolver,
 ) : AnnotationModel<ClassName, AnnotationSpec> {
     override val className by lazy(LazyThreadSafetyMode.NONE) {
-        annotation.annotationType.resolve().toClassName()
+        annotation.annotationType.resolve()
+            .unwrapTypeAlias()
+            .toClassName()
     }
 
     override val qualifiedName: String
