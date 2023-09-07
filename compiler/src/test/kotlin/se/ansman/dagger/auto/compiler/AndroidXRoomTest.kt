@@ -70,26 +70,4 @@ class AndroidXRoomTest {
             )
             .assertFailedWithMessage(Errors.AndroidX.Room.typeMustDirectlyExtendRoomDatabase)
     }
-
-    @ParameterizedTest
-    @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
-    fun `the legacy annotation works`(compilationFactory: Compilation.Factory) {
-        compilationFactory.create(tempDirectory)
-            .compile(
-                """
-                package co.ansman.dagger.auto.androidx.room
-
-                interface UserDao
-
-                @androidx.room.Database(entities = [], version = 1)
-                @Suppress("DEPRECATION_ERROR")
-                @AutoProvideDaos
-                abstract class AppDatabase : androidx.room.RoomDatabase() {
-                    abstract val users: UserDao
-                }
-                """
-            )
-            .assertIsSuccessful()
-            .assertGeneratedFileNamed("AutoDaggerAppDatabaseModule")
-    }
 }
