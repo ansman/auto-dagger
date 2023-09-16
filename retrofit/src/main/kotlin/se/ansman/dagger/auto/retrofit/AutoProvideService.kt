@@ -5,7 +5,7 @@ import dagger.hilt.components.SingletonComponent
 import kotlin.reflect.KClass
 
 /**
- * Marks a [Retrofit](https://square.github.io/retrofit/) for automatic contribution to your dependency graph.
+ * Marks a [Retrofit](https://square.github.io/retrofit/) Service for automatic contribution to your dependency graph.
  *
  * Simply add this annotation to the API services you want to inject and auto-dagger will generate the necessary modules.
  *
