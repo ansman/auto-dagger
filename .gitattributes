@@ -1,1 +1,2 @@
-src/doc/* linguist-documentation
+src/doc/dokka/** linguist-generated
+src/doc/** linguist-documentation
