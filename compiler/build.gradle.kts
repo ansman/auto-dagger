@@ -1,6 +1,7 @@
 plugins {
     id("library.compiler")
     id("library.publishing")
+    `java-test-fixtures`
 }
 
 dependencies {
@@ -8,5 +9,5 @@ dependencies {
     implementation(projects.retrofit)
     implementation(projects.androidx.room)
     implementation(projects.android.testing)
-    testImplementation(libs.retrofit)
+    testFixturesApi(projects.compiler.common.testUtils)
 }

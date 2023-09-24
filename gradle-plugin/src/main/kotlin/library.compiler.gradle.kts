@@ -34,7 +34,7 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.dagger.hilt.core)
     implementation(libs.ksp.api)
-    implementation(libs.auto.common)
+    api(libs.auto.common)
 
     implementation(libs.auto.service.annotations)
     kapt(libs.auto.service)

@@ -1,8 +1,10 @@
-package se.ansman.dagger.auto.compiler
+package se.ansman.dagger.auto.androidx.room
 
 import org.junit.jupiter.api.io.TempDir
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ArgumentsSource
+import se.ansman.dagger.auto.compiler.AutoDaggerCompilationFactoryProvider
+import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.common.testutils.Compilation
 import java.io.File
 

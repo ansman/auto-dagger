@@ -6,4 +6,5 @@ plugins {
 
 dependencies {
     implementation(libs.dagger.hilt.core)
+    testImplementation(testFixtures(projects.compiler))
 }
