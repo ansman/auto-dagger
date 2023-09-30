@@ -3,6 +3,7 @@
 import com.adarshr.gradle.testlogger.TestLoggerExtension
 import com.adarshr.gradle.testlogger.theme.ThemeType
 import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.Lint
 import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.android.build.api.variant.HasTestFixturesBuilder
@@ -43,6 +44,17 @@ tasks.withType<Test>().configureEach {
     maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
 }
 
+fun Lint.configure() {
+    abortOnError = true
+    warningsAsErrors = true
+    checkReleaseBuilds = false
+    disable.addAll(setOf(
+        "GradleDependency",
+        "AndroidGradlePluginVersion",
+        "MissingApplicationIcon",
+    ))
+}
+
 pluginManager.withPlugin("com.android.base") {
     extensions.getByType(CommonExtension::class).apply {
         compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -64,9 +76,7 @@ pluginManager.withPlugin("com.android.base") {
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
         }
-    }
-
-    if (pluginManager.hasPlugin("com.android.application")) {
+        lint.configure()
     }
 
     extensions.getByType(AndroidComponentsExtension::class).apply {
@@ -93,6 +103,7 @@ pluginManager.withPlugin("com.android.base") {
 }
 
 pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+    pluginManager.apply("com.android.lint")
     tasks.withType<Test>().configureEach {
         useJUnitPlatform()
         systemProperties(
@@ -106,6 +117,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
     dependencies {
         "testImplementation"(libs.bundles.jvmTesting)
     }
+    the<Lint>().configure()
 }
 
 plugins.withType<JavaBasePlugin>().configureEach {
