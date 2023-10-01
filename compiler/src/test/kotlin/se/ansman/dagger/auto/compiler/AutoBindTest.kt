@@ -1,5 +1,7 @@
 package se.ansman.dagger.auto.compiler
 
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.io.TempDir
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ArgumentsSource
@@ -161,5 +163,115 @@ class AutoBindTest {
                 """
             )
             .assertFailedWithMessage(Errors.AutoBind.parentComponent("SingletonComponent", "FragmentComponent"))
+    }
+
+    @Nested
+    @DisplayName("auto bind generic as default")
+    inner class AutoBindGenericAsDefault {
+
+        @ParameterizedTest
+        @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+        fun `target must be generic`(compilationFactory: Compilation.Factory) {
+            compilationFactory.create(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.BindGenericAs.Default(se.ansman.dagger.auto.BindGenericAs.Wildcard)
+                    interface SomeThing
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.BindGenericAsDefault.nonGenericType)
+        }
+
+        @ParameterizedTest
+        @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+        fun `cannot be applied to final classes`(compilationFactory: Compilation.Factory) {
+            compilationFactory.create(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.BindGenericAs.Default(se.ansman.dagger.auto.BindGenericAs.Wildcard)
+                    class SomeThing<T>
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.BindGenericAsDefault.nonAbstractType)
+        }
+
+        @ParameterizedTest
+        @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+        fun `can be applied to interfaces`(compilationFactory: Compilation.Factory) {
+            compilationFactory.create(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.BindGenericAs.Default(se.ansman.dagger.auto.BindGenericAs.Wildcard)
+                    interface SomeThing<T>
+                    """
+                )
+                .assertIsSuccessful()
+        }
+
+        @ParameterizedTest
+        @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+        fun `can be applied to abstract classes`(compilationFactory: Compilation.Factory) {
+            compilationFactory.create(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.BindGenericAs.Default(se.ansman.dagger.auto.BindGenericAs.Wildcard)
+                    abstract class SomeThing<T>
+                    """
+                )
+                .assertIsSuccessful()
+        }
+
+        @ParameterizedTest
+        @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+        fun `can be applied to sealed classes`(compilationFactory: Compilation.Factory) {
+            compilationFactory.create(tempDirectory)
+                .compile(
+                    """
+                package se.ansman
+    
+                @se.ansman.dagger.auto.BindGenericAs.Default(se.ansman.dagger.auto.BindGenericAs.Wildcard)
+                sealed class SomeThing<T>
+                """
+                )
+                .assertIsSuccessful()
+        }
+
+        @ParameterizedTest
+        @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+        fun `cannot be applied to open classes`(compilationFactory: Compilation.Factory) {
+            compilationFactory.create(tempDirectory)
+                .compile(
+                    """
+                package se.ansman
+    
+                @se.ansman.dagger.auto.BindGenericAs.Default(se.ansman.dagger.auto.BindGenericAs.Wildcard)
+                open class SomeThing<T>
+                """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.BindGenericAsDefault.nonAbstractType)
+        }
+
+        @ParameterizedTest
+        @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+        fun `cannot be applied to objects`(compilationFactory: Compilation.Factory) {
+            compilationFactory.create(tempDirectory)
+                .compile(
+                    """
+                    package se.ansman
+        
+                    @se.ansman.dagger.auto.BindGenericAs.Default(se.ansman.dagger.auto.BindGenericAs.Wildcard)
+                    object SomeThing<T>
+                    """
+                )
+                .assertFailedWithMessage(Errors.AutoBind.BindGenericAsDefault.nonAbstractType)
+        }
     }
 }

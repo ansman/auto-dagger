@@ -41,6 +41,11 @@ object Errors {
 
         fun invalidBindMode(bindGenericAs: BindGenericAs): String =
             "Using BindGenericAs.${bindGenericAs.name} requires at least one generic supertype."
+
+        object BindGenericAsDefault {
+            const val nonGenericType = "@BindGenericAs.Default can only be applied to generic types."
+            const val nonAbstractType = "@BindGenericAs.Default can only be applied to interfaces and abstract/open classes."
+        }
     }
 
     object Replaces {

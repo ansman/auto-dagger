@@ -27,7 +27,7 @@ class AndroidXRoomProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
     private val logger = environment.logger.withTag("androidx.room")
     override val annotations: Set<String> = setOf(
-        AutoProvideDaos::class.java.name,
+        AutoProvideDaos::class.java.canonicalName,
     )
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
