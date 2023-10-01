@@ -94,10 +94,15 @@ object DirectExecutor : Executor {
 ```
 
 ## Generics
-When using multibindings, it's sometimes useful to be able to bind generic types as wildcard.
+When using multibindings, it's often useful to be able to bind generic types as wildcard.
 
 Auto Dagger will, by default, bind the exact type of the supertype. But using the `bindGenericAs` parameter you can
 chose to bind it as a wildcard instead.
+
+For types you own, it's sometimes useful to specify a different default for `bindGenericAs`. For example, say you have
+a `Resource<T>` interface. You probably want to always bind this using wildcards since every resource will have a unique
+type for `T`. So you can annotate `Resource` with `@BindGenericAs.Default(BindGenericAs.Wildcard)` to indicate 
+that, unless specified explicitly, it should be bound as `Resource<*>`. 
 
 ```kotlin
 // This will bind StringCallable as Callable<*>
@@ -105,10 +110,18 @@ chose to bind it as a wildcard instead.
 class StringCallable @Inject constructor() : Callable<String> {
     override fun call(): String = ""
 }
+
+// For types you own you can specify @BindGenericAs.Default to change the default.
+@BindGenericAs.Default(BindGenericAs.Wildcard)
+interface Resource<T>
+
+// This will be bound as Resource<*> since the default has been set to wildcard for Resource.
+@AutoBindIntoSet
+class SomeResource @Inject constructor() : Resource<Something>
 ```
 
 There are 3 options for `bindGenericAs`:
 
-- `Type` - Binds the object to the exact supertype (`Callable<String>` in the example above). This is the default. 
+- `Type` - Binds the object to the exact supertype (`Callable<String>` in the example above). This is the default unless set with `@BindGenericAs.Default`. 
 - `Wildcard` - Binds the object using wildcards (`Callable<*>` in the example above).
 - `TypeAndWildcard` - Binds the object as both the exact type and using wildcards.

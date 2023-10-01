@@ -7,6 +7,7 @@ import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
 import se.ansman.dagger.auto.compiler.common.processing.Function
 import se.ansman.dagger.auto.compiler.common.processing.Property
 import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
@@ -34,7 +35,7 @@ class RetrofitProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F>(
     }
     private val logger = environment.logger.withTag("retrofit")
     override val annotations: Set<String> = setOf(
-        AutoProvideService::class.java.name,
+        AutoProvideService::class.java.canonicalName,
     )
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
@@ -73,7 +74,7 @@ class RetrofitProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F>(
     }
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.validateService() {
-        if (!isInterface) logger.error(Errors.Retrofit.nonInterface, node)
+        if (!(kind == Kind.Interface)) logger.error(Errors.Retrofit.nonInterface, node)
         if (isGeneric) logger.error(Errors.genericType(AutoProvideService::class), node)
         if (isFullyPrivate) logger.error(Errors.Retrofit.privateType, node)
         if (declaredNodes.isEmpty()) logger.error(Errors.Retrofit.emptyService, node)

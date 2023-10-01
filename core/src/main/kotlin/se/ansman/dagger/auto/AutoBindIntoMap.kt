@@ -17,10 +17,12 @@ import kotlin.reflect.KClass
  *
  * @param inComponent Which component to install the binding in. Defaults to being inferred based on the scope.
  * @param asTypes Specifies which supertypes to bind the object as. Required if there are multiple supertypes.
- * @param bindGenericAs Specifies how generic supertypes should be bound. Defaults to [BindGenericAs.Type].
+ * @param bindGenericAs Specifies how generic supertypes should be bound. Defaults to [BindGenericAs.ExactType] or if the
+ *   target type is annotated with [BindGenericAs.Default].
  * @see AutoBind
  * @see AutoBindIntoSet
  * @see BindGenericAs
+ * @see BindGenericAs.Default
  * @see MapKey
  * @see IntoMap
  * @since 0.2
@@ -31,5 +33,5 @@ import kotlin.reflect.KClass
 public annotation class AutoBindIntoMap(
     val inComponent: KClass<*> = Nothing::class,
     val asTypes: Array<KClass<*>> = [],
-    val bindGenericAs: BindGenericAs = BindGenericAs.Type,
+    val bindGenericAs: BindGenericAs = BindGenericAs.ExactType,
 )

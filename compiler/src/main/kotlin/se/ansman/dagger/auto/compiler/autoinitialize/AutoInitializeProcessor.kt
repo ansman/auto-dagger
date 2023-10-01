@@ -17,6 +17,7 @@ import se.ansman.dagger.auto.compiler.common.processing.AnnotationModel
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
 import se.ansman.dagger.auto.compiler.common.processing.ExecutableNode
 import se.ansman.dagger.auto.compiler.common.processing.Node
 import se.ansman.dagger.auto.compiler.common.processing.error
@@ -39,7 +40,7 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
     private val renderer: Renderer<AutoInitializeModule<N, TypeName, ClassName, AnnotationSpec>, F>,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
     private val logger = environment.logger.withTag("auto-initialize")
-    override val annotations: Set<String> = setOf(AutoInitialize::class.java.name)
+    override val annotations: Set<String> = setOf(AutoInitialize::class.java.canonicalName)
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
         val initializableObjectsByModule =
@@ -113,7 +114,7 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
     ) {
 
         val module = enclosingType
-            ?.let { if (it.isCompanionObject) it.enclosingType else it }
+            ?.let { if (it.kind == Kind.CompanionObject) it.enclosingType else it }
             ?: run {
                 logger.error(Errors.AutoInitialize.methodInNonModule, this@processMethod)
                 return

@@ -20,6 +20,7 @@ import se.ansman.dagger.auto.compiler.common.processing.AnnotationModel
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
 import se.ansman.dagger.auto.compiler.common.processing.Type
 import se.ansman.dagger.auto.compiler.common.processing.error
 import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
@@ -40,15 +41,19 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
     private val logging: Boolean = true,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
     private val logger = environment.logger.withTag("auto-bind").takeIf { logging }
-    override val annotations: Set<String> = setOf(
-        AutoBind::class.java.name,
-        AutoBindIntoSet::class.java.name,
-        AutoBindIntoMap::class.java.name,
+    private val autoBindAnnotations = setOf(
+        AutoBind::class.java.canonicalName,
+        AutoBindIntoSet::class.java.canonicalName,
+        AutoBindIntoMap::class.java.canonicalName,
+    )
+
+    override val annotations: Set<String> = autoBindAnnotations + setOf(
+        BindGenericAs.Default::class.java.canonicalName
     )
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
         logger?.info("AutoBind processing started")
-        annotations.asSequence()
+        autoBindAnnotations.asSequence()
             .onEach { logger?.info("Looking for annotation $it") }
             .flatMap { resolver.nodesAnnotatedWith(it) }
             .distinct()
@@ -60,6 +65,32 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                     return@forEach
                 }
             }
+        logger?.info("Validating BindGenericAs.Default")
+        resolver.nodesAnnotatedWith(BindGenericAs.Default::class.java.canonicalName)
+            .map { it as ClassDeclaration }
+            .forEach { node ->
+                node.validateBindGenericAsDefault()
+            }
+        logger?.info("AutoBind processing finished")
+    }
+
+    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.validateBindGenericAsDefault() {
+        logger?.info("Validating $className")
+        if (!isGeneric) {
+            logger?.error(Errors.AutoBind.BindGenericAsDefault.nonGenericType, this)
+        }
+        val isSupportedType = when (kind) {
+            ClassDeclaration.Kind.Class -> isAbstract || isSealedClass
+            ClassDeclaration.Kind.Interface -> true
+            ClassDeclaration.Kind.EnumClass,
+            ClassDeclaration.Kind.EnumEntry,
+            ClassDeclaration.Kind.AnnotationClass,
+            ClassDeclaration.Kind.Object,
+            ClassDeclaration.Kind.CompanionObject -> false
+        }
+        if (!isSupportedType) {
+            logger?.error(Errors.AutoBind.BindGenericAsDefault.nonAbstractType, this)
+        }
     }
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.process(
@@ -147,28 +178,35 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
     ) {
         logger?.info("Processing annotation ${annotation.qualifiedName} for ${type.className}")
 
-        val bindGenericAs = annotation.getValue("bindGenericAs") ?: BindGenericAs.Type
+        val targetTypes = getBoundTypes(annotation)
+            .associateBy({it}) { boundType ->
+                val bindGenericAs = annotation.getValue<BindGenericAs>("bindGenericAs")
+                    ?: boundType.getDefaultBindGenericAs()
+                    ?: BindGenericAs.ExactType
+
+                if (bindGenericAs != BindGenericAs.ExactType && !boundType.isGeneric) {
+                    logger?.error(Errors.AutoBind.invalidBindMode(bindGenericAs), type)
+                }
+
+                bindGenericAs
+            }
 
         val component = type.getTargetComponent(resolver, annotation)
         val key = ModuleKey(targetType = type.className, targetComponent = component)
         val qualifiers = type.getQualifiers()
-        val types = getBoundTypes(annotation)
-            .also { boundTypes ->
-                if (bindGenericAs != BindGenericAs.Type && boundTypes.none { it.isGeneric }) {
-                    logger?.error(Errors.AutoBind.invalidBindMode(bindGenericAs), type)
-                }
-            }
+
+        val boundTypes = targetTypes
             .asSequence()
-            .flatMap { boundType ->
+            .flatMap { (boundType, bindGenericAs) ->
                 val typeName = boundType.toTypeName()
                 when (bindGenericAs) {
-                    BindGenericAs.Type ->
+                    BindGenericAs.ExactType ->
                         sequenceOf(typeName)
 
                     BindGenericAs.Wildcard ->
                         sequenceOf(resolver.environment.asWildcard(typeName))
 
-                    BindGenericAs.TypeAndWildcard ->
+                    BindGenericAs.ExactTypeAndWildcard ->
                         sequenceOf(typeName, resolver.environment.asWildcard(typeName))
                 }
             }
@@ -176,7 +214,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
             .map { AutoBindType(it, mode, qualifiers) }
             .toList()
         output[key] = output[key]
-            ?.withTypesAdded(types)
+            ?.withTypesAdded(boundTypes)
             ?: AutoBindObjectModule(
                 moduleName = getModuleName(type, component),
                 installation = HiltModuleBuilder.Installation.InstallIn(component),
@@ -184,8 +222,8 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 originatingElement = type.node,
                 type = type.className,
                 isPublic = type.isFullyPublic,
-                isObject = type.isObject,
-                boundTypes = types,
+                isObject = type.kind == Kind.Object,
+                boundTypes = boundTypes,
             )
     }
 
@@ -209,6 +247,11 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
             ?.className
             ?: guessComponent()
 
+    private fun Type<N, TypeName, ClassName, AnnotationSpec>.getDefaultBindGenericAs(): BindGenericAs? =
+        declaration
+            ?.getAnnotation(BindGenericAs.Default::class)
+            ?.getValue("value")
+
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.guessComponent(): ClassName {
         val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
             ?: return environment.className(SingletonComponent::class)
@@ -222,7 +265,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
         component: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
     ) {
-        if (!component.validateComponent(this, logger)){
+        if (!component.validateComponent(this, logger)) {
             return
         }
         val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
@@ -297,8 +340,8 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
 
     private fun AnnotationModel<*, *>.guessComponent(): ClassName? =
         when (qualifiedName) {
-            Singleton::class.java.name,
-            Reusable::class.java.name ->
+            Singleton::class.java.canonicalName,
+            Reusable::class.java.canonicalName ->
                 environment.className(SingletonComponent::class)
 
             "dagger.hilt.android.scopes.ActivityRetainedScoped" ->

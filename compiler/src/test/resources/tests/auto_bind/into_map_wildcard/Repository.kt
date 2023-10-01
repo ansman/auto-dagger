@@ -12,13 +12,13 @@ class StringProvider @Inject constructor() : Callable<String> {
     override fun call(): String = "Hello"
 }
 
-@AutoBindIntoSet(bindGenericAs = BindGenericAs.TypeAndWildcard)
+@AutoBindIntoSet(bindGenericAs = BindGenericAs.ExactTypeAndWildcard)
 @StringKey("int")
 class IntProvider @Inject constructor() : Callable<Int> {
     override fun call(): Int = 4711
 }
 
-@AutoBindIntoSet(bindGenericAs = BindGenericAs.Type)
+@AutoBindIntoSet(bindGenericAs = BindGenericAs.ExactType)
 @StringKey("boolean")
 class BooleanProvider @Inject constructor() : Callable<Boolean> {
     override fun call(): Boolean = true

@@ -20,8 +20,8 @@ import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.NoOpRenderer
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
 import se.ansman.dagger.auto.compiler.autobind.models.AutoBindObjectModule
-import se.ansman.dagger.auto.compiler.autobind.renderer.AutoBindObjectModuleRenderer
 import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
+import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
 
 class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec, F>(
     private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
@@ -31,7 +31,7 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
     private val autoBindProcessor = AutoBindProcessor(environment, NoOpRenderer, logging = false)
     private val autoInitializeProcessor = AutoInitializeProcessor(environment, NoOpRenderer)
 
-    override val annotations: Set<String> = setOf(Replaces::class.java.name)
+    override val annotations: Set<String> = setOf(Replaces::class.java.canonicalName)
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {
         logger.info("@Replaces processing started")
@@ -110,7 +110,7 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                     originatingElement = type.node,
                     type = type.className,
                     isPublic = type.isFullyPublic,
-                    isObject = type.isObject,
+                    isObject = type.kind == Kind.Object,
                     boundTypes = module.boundTypes,
                 )
             }
@@ -138,7 +138,7 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 originatingTopLevelClassName = className,
                 type = className,
                 isPublic = isFullyPublic,
-                isObject = isObject,
+                isObject = kind == Kind.Object,
                 boundTypes = emptyList(),
             )
         )

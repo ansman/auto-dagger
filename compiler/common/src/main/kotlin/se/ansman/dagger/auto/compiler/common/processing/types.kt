@@ -50,15 +50,25 @@ interface Function<N, TypeName, ClassName : TypeName, AnnotationSpec> :
 
 interface ClassDeclaration<N, TypeName, ClassName : TypeName, AnnotationSpec> :
     Node<N, TypeName, ClassName, AnnotationSpec> {
+    val kind: Kind
     val className: ClassName
     val supertypes: List<Type<N, TypeName, ClassName, AnnotationSpec>>
     val declaredNodes: List<ExecutableNode<N, TypeName, ClassName, AnnotationSpec>>
-    val isObject: Boolean
-    val isCompanionObject: Boolean
     val isGeneric: Boolean
-    val isInterface: Boolean
+    val isAbstract: Boolean
+    val isSealedClass: Boolean
     val superclass: Type<N, TypeName, ClassName, AnnotationSpec>?
     fun asType(): Type<N, TypeName, ClassName, AnnotationSpec>
+
+    enum class Kind {
+        Class,
+        Interface,
+        EnumClass,
+        EnumEntry,
+        AnnotationClass,
+        Object,
+        CompanionObject
+    }
 }
 
 interface AnnotationModel<ClassName, AnnotationSpec> {

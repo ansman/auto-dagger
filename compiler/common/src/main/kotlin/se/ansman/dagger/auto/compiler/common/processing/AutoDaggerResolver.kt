@@ -17,4 +17,4 @@ fun <N, TypeName, ClassName : TypeName, AnnotationSpec> AutoDaggerResolver<N, Ty
 
 fun <N, TypeName, ClassName : TypeName, AnnotationSpec> AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>
         .nodesAnnotatedWith(annotation: KClass<out Annotation>): Sequence<Node<N, TypeName, ClassName, AnnotationSpec>> =
-    nodesAnnotatedWith(annotation.java.name)
+    nodesAnnotatedWith(annotation.java.canonicalName)

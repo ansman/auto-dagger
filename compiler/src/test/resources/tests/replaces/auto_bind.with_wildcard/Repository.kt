@@ -18,7 +18,7 @@ interface Repository
 @AutoBindIntoMap(
     inComponent = FragmentComponent::class,
     asTypes = [Callable::class],
-    bindGenericAs = BindGenericAs.TypeAndWildcard
+    bindGenericAs = BindGenericAs.ExactTypeAndWildcard
 )
 @StringKey("repository")
 @Singleton
