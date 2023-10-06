@@ -97,7 +97,15 @@ gitPublish {
 }
 
 python {
-    pip("pip:23.0.1")
+    pip(
+        "pip:23.2.1",
+        "mkdocs:1.5.3",
+        "mkdocs-material:9.1.1",
+        "mkdocs-minify-plugin:0.7.1",
+        "Pygments:2.16.1",
+        "pymdown-extensions:10.3",
+        "mkdocs-markdownextradata-plugin:0.2.5"
+    )
 }
 
 tasks.mkdocsBuild {

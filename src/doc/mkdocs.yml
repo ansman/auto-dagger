@@ -12,18 +12,25 @@ copyright: 'Copyright &copy; 2022-2023 Nicklas Ansman'
 
 plugins:
   - markdownextradata
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
 
 theme:
   name: 'material'
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
+      primary: black
+      accent: indigo
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
@@ -34,7 +41,13 @@ theme:
     - navigation.tracking
     - navigation.top
     - navigation.instant
+    - navigation.instant.prefetch
     - navigation.expand
+    - toc.follow
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
 extra_css:
   - stylesheets/extra.css
 
@@ -52,23 +65,45 @@ markdown_extensions:
   - attr_list
   - def_list
   - footnotes
-  - meta
   - md_in_html
-  - codehilite:
-      guess_lang: false
   - toc:
       permalink: true
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
-  - pymdownx.magiclink
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
   - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
 
 nav:
   - Home: index.md
