@@ -23,7 +23,7 @@ mkdocs = "ru.vyarus.mkdocs:3.0.0"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
-kotlinx-metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.7.0"
+kotlinx-metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.8.0"
 
 dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
