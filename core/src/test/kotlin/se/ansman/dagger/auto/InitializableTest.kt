@@ -2,7 +2,7 @@ package se.ansman.dagger.auto
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import dagger.internal.DoubleCheck
+import dagger.Lazy
 import org.junit.jupiter.api.Test
 import se.ansman.dagger.auto.Initializable.Companion.asInitializable
 import javax.inject.Provider
@@ -16,7 +16,15 @@ class InitializableTest {
             ++callCount
         }
     }
-    private val lazy = DoubleCheck.lazy(provider)
+    private val lazy = object : Lazy<Unit> {
+        private var called = false
+        override fun get() {
+            if (!called) {
+                called = true
+                provider.get()
+            }
+        }
+    }
 
     @Test
     fun `asInitializable returns an initializable that calls get`() {
