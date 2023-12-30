@@ -60,7 +60,7 @@ mkdocs {
     updateSiteUrl = false
     strict = providers.gradleProperty("strictDocs").orNull?.toBoolean() ?: true
     publish.apply {
-        repoDir = project.buildDir.resolve("gh-pages").path
+        repoDir = layout.buildDirectory.dir("gh-pages").get().asFile.path
         if (isSnapshotVersion) {
             // We don't want to "store" the latest so instead of using an alias we simply use "latest" as the doc path
             docPath = "latest"
