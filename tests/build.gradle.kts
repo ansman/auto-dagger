@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.android.build.api.variant.HasAndroidTestBuilder
+import com.android.build.api.variant.HasTestFixturesBuilder
+import com.android.build.api.variant.HasUnitTestBuilder
 import com.android.build.gradle.internal.lint.AndroidLintAnalysisTask
 import com.google.devtools.ksp.gradle.KspTask
 
@@ -26,23 +29,13 @@ android {
             dimension = "type"
         }
     }
-    sourceSets {
-        configureEach {
-            java.srcDir(buildDir.resolve("generated/ksp/$name/kotlin"))
-            if (name.startsWith("test")) {
-                java.srcDir(buildDir.resolve("generated/ksp/${name.removePrefix("test").replaceFirstChar(Char::lowercaseChar)}UnitTest/kotlin"))
-            }
-        }
-    }
 }
 
 androidComponents {
     beforeVariants { variant ->
-        with(variant) {
-            enableAndroidTest = variant.buildType == "debug"
-            enableTestFixtures = false
-            enableUnitTest = variant.buildType == "debug"
-        }
+        (variant as? HasAndroidTestBuilder)?.enableAndroidTest = variant.buildType == "debug"
+        (variant as? HasTestFixturesBuilder)?.enableTestFixtures = false
+        (variant as? HasUnitTestBuilder)?.enableUnitTest = variant.buildType == "debug"
     }
 }
 
