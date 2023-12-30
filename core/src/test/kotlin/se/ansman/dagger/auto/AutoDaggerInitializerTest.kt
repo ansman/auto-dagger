@@ -7,7 +7,7 @@ import assertk.assertions.containsExactly
 import assertk.assertions.each
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
-import assertk.assertions.isSameAs
+import assertk.assertions.isSameInstanceAs
 import assertk.assertions.isZero
 import assertk.assertions.prop
 import org.junit.jupiter.api.Test
@@ -107,7 +107,7 @@ class AutoDaggerInitializerTest {
             assertThat(i3::initializeCount).isEqualTo(1)
             assertThat(i4::initializeCount).isEqualTo(1)
             assertThat(i5::initializeCount).isEqualTo(1)
-            assertThat(e).isSameAs(e2)
+            assertThat(e).isSameInstanceAs(e2)
             assertThat(e2.suppressedExceptions).containsExactly(e4)
         }
     }

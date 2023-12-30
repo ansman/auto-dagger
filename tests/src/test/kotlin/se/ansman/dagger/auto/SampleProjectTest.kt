@@ -5,7 +5,7 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import assertk.assertions.isInstanceOf
-import assertk.assertions.isSameAs
+import assertk.assertions.isSameInstanceAs
 import assertk.assertions.isTrue
 import assertk.assertions.prop
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -132,7 +132,7 @@ class SampleProjectTest {
     @Test
     fun `auto bind works`() {
         assertAll {
-            assertThat(closeable.get()).isSameAs(repository.get())
+            assertThat(closeable.get()).isSameInstanceAs(repository.get())
             assertThat(closeables.get()).isEqualTo(setOf(repository.get()))
             assertThat(bindingKeys.get()).isEqualTo(mapOf("test" to repository.get()))
         }
