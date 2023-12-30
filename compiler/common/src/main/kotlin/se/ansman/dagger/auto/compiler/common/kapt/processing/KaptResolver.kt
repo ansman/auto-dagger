@@ -26,7 +26,7 @@ class KaptResolver(
             ?: return@TypeLookup null
 
         KotlinClassMetadata
-            .read(metadata)
+            .readLenient(metadata)
             .let { it as? KotlinClassMetadata.Class }
             ?.kmClass
     }
