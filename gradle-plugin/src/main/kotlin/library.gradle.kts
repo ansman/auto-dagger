@@ -81,17 +81,9 @@ pluginManager.withPlugin("com.android.base") {
 
     extensions.getByType(AndroidComponentsExtension::class).apply {
         beforeVariants(selector().withBuildType("release")) { variant ->
-            with(variant) {
-                if (this is HasAndroidTestBuilder) {
-                    enableAndroidTest = false
-                }
-                if (this is HasTestFixturesBuilder) {
-                    enableTestFixtures = false
-                }
-                if (this is HasUnitTestBuilder) {
-                    enableUnitTest = false
-                }
-            }
+            (variant as? HasAndroidTestBuilder)?.enableAndroidTest = false
+            (variant as? HasTestFixturesBuilder)?.enableTestFixtures = false
+            (variant as? HasUnitTestBuilder)?.enableUnitTest = false
         }
     }
 
