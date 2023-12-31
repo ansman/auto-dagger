@@ -25,7 +25,7 @@ import kotlin.reflect.KClass
  * @see BindGenericAs.Default
  * @see MapKey
  * @see IntoMap
- * @since 0.2
+ * @since 1.0.0
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)

@@ -11,7 +11,7 @@ import dagger.Lazy
  * Although you can use this interface by itself, it's meant to be used in conjunction with [AutoInitialize].
  *
  * @see AutoInitialize
- * @since 0.2
+ * @since 1.0.0
  */
 public interface Initializable {
     /** Initializes the initializable. */
@@ -24,7 +24,7 @@ public interface Initializable {
          *
          * When the returned [Initializable] is initialized, the lazy value is computed.
          *
-         * @since 0.2
+         * @since 1.0.0
          */
         @JvmStatic
         @JvmName("fromLazy")
@@ -38,7 +38,7 @@ public interface Initializable {
         /**
          * Returns a new [Initializable] with the given [priority].
          *
-         * @since 0.2
+         * @since 1.0.0
          */
         @JvmStatic
         public fun Initializable.withPriority(priority: Int): Initializable =

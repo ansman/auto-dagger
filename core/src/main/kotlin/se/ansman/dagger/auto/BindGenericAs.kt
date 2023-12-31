@@ -6,7 +6,7 @@ package se.ansman.dagger.auto
  * The default is [ExactType] unless the bound type is annotated with [Default] in which case that is used
  * as the default.
  *
- * @since 0.6.0
+ * @since 1.0.0
  */
 public enum class BindGenericAs {
     /**
@@ -83,7 +83,7 @@ public enum class BindGenericAs {
      *
      * @see AutoBindIntoSet
      * @see AutoBindIntoMap
-     * @since 0.10.0
+     * @since 1.0.0
      */
     @MustBeDocumented
     @Target(AnnotationTarget.CLASS)

@@ -11,7 +11,7 @@ import javax.inject.Singleton
  *
  * This will be called by androidx.startup, provides no result and has no dependencies.
  *
- * @since 0.2
+ * @since 1.0.0
  */
 class AutoDaggerStartupInitializer : Initializer<Unit> {
     override fun create(context: Context) {

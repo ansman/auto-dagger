@@ -5,7 +5,7 @@ import javax.inject.Inject
 /**
  * A class that can initialize multiple [Initializable] in order of their [priority][AutoInitialize.priority].
  *
- * @since 0.2
+ * @since 1.0.0
  */
 public class AutoDaggerInitializer @Inject constructor(
     private val initializables: Set<@JvmSuppressWildcards Initializable>

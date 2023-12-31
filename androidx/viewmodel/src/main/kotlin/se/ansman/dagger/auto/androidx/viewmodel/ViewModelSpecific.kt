@@ -23,6 +23,8 @@ import javax.inject.Qualifier
  *   private val viewModelScope: CoroutineScope
  * ) : ViewModel()
  * ```
+ *
+ * @since 1.0.0
  */
 @MustBeDocumented
 @Retention(AnnotationRetention.BINARY)

@@ -67,6 +67,7 @@ import kotlin.reflect.KClass
  * ```
  *
  * @param inComponent The component to install the service in. Defaults to [SingletonComponent].
+ * @since 1.0.0
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)

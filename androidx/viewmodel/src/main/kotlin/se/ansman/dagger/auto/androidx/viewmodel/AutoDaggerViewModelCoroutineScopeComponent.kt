@@ -27,6 +27,8 @@ import kotlin.coroutines.CoroutineContext
  *   private val viewModelScope: CoroutineScope
  * ) : ViewModel()
  * ```
+ *
+ * @since 1.0.0
  */
 @Module
 @InstallIn(ViewModelComponent::class)

@@ -20,7 +20,7 @@ import kotlin.reflect.KClass
  * @see IntoSet
  * @see BindGenericAs
  * @see BindGenericAs.Default
- * @since 0.2
+ * @since 1.0.0
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
