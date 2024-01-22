@@ -5,11 +5,11 @@ compileTesting = "1.5.0"
 autoService = "1.1.1"
 incap = "1.0.0"
 dagger = "2.50"
-ksp = "1.9.22-1.0.16"
-android-minSdk = "14"
+ksp = "1.9.22-1.0.17"
+android-minSdk = "19"
 android-compileSdk = "34"
 androidx-test = "1.5.0"
-kotlinpoet = "1.15.3"
+kotlinpoet = "1.16.0"
 room = "2.6.1"
 retrofit = "2.9.0"
 
@@ -23,7 +23,7 @@ mkdocs = "ru.vyarus.mkdocs:3.0.0"
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
-kotlinx-metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.8.0"
+kotlinx-metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0"
 
 dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
@@ -34,7 +34,7 @@ okio = "com.squareup.okio:okio:3.7.0"
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
-android-gradlePlugin = "com.android.tools.build:gradle:8.2.0"
+android-gradlePlugin = "com.android.tools.build:gradle:8.2.1"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel:2.7.0"
 androidx-test = { module = "androidx.test:core-ktx", version.ref = "androidx-test" }
