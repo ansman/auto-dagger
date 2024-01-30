@@ -16,7 +16,7 @@ retrofit = "2.9.0"
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.13.2"
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.14.0"
 mkdocs = "ru.vyarus.mkdocs:3.0.0"
 
 [libraries]
