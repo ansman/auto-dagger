@@ -115,7 +115,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
 plugins.withType<JavaBasePlugin>().configureEach {
     extensions.configure<JavaPluginExtension> {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(19))
+            languageVersion.set(JavaLanguageVersion.of(21))
             vendor.set(JvmVendorSpec.AZUL)
         }
     }
