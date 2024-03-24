@@ -62,6 +62,7 @@ gradle-app.setting
 .idea/modules
 .idea/.name
 .idea/migrations.xml
+.idea/misc.xml
 *.iml
 *.ipr
 
