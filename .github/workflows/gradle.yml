@@ -20,7 +20,7 @@ jobs:
     - uses: actions/setup-java@v3
       with:
         distribution: 'zulu'
-        java-version: '21'
+        java-version: '19'
 
     - name: Cache Python
       uses: actions/cache@v3
@@ -43,7 +43,7 @@ jobs:
     - uses: actions/setup-java@v3
       with:
         distribution: 'zulu'
-        java-version: '21'
+        java-version: '19'
 
     - name: Deploy Snapshot
       uses: gradle/gradle-build-action@v2

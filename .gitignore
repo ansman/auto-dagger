@@ -62,6 +62,7 @@ gradle-app.setting
 .idea/modules
 .idea/.name
 .idea/migrations.xml
+.idea/misc.xml
 *.iml
 *.ipr
 
@@ -100,5 +101,3 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
-
-.idea/misc.xml
