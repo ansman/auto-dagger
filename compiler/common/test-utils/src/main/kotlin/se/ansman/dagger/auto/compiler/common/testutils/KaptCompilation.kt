@@ -1,10 +1,13 @@
 package se.ansman.dagger.auto.compiler.common.testutils
 
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import se.ansman.dagger.auto.compiler.common.Options
 import java.io.File
 import javax.annotation.processing.Processor
 
+@OptIn(ExperimentalCompilerApi::class)
 class KaptCompilation(
     private val processors: () -> List<Processor>,
     workingDir: File,
@@ -21,7 +24,7 @@ class KaptCompilation(
             .compile()
             .let(::Result)
 
-    override val KotlinCompilation.Result.filesGeneratedByAnnotationProcessor: Sequence<File>
+    override val JvmCompilationResult.filesGeneratedByAnnotationProcessor: Sequence<File>
         get() = sourcesGeneratedByAnnotationProcessor.asSequence()
 
     class Factory(vararg processors: () -> Processor) : Compilation.Factory {

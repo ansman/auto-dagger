@@ -3,13 +3,16 @@ package se.ansman.dagger.auto.compiler.common.testutils
 import assertk.assertThat
 import assertk.assertions.contains
 import assertk.assertions.isNotNull
+import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import org.intellij.lang.annotations.Language
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import java.io.File
 import java.io.OutputStream
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
+@OptIn(ExperimentalCompilerApi::class)
 abstract class Compilation(
     protected val workingDir: File
 ) {
@@ -32,7 +35,7 @@ abstract class Compilation(
         configuration: KotlinCompilation.() -> Unit
     ): Result
 
-    protected abstract val KotlinCompilation.Result.filesGeneratedByAnnotationProcessor: Sequence<File>
+    protected abstract val JvmCompilationResult.filesGeneratedByAnnotationProcessor: Sequence<File>
 
     interface Factory {
         val expectedFilesDirectoryName: String
@@ -40,7 +43,7 @@ abstract class Compilation(
         fun create(workingDir: File): Compilation
     }
 
-    inner class Result(private val result: KotlinCompilation.Result) {
+    inner class Result(private val result: JvmCompilationResult) {
         val exitCode: KotlinCompilation.ExitCode get() = result.exitCode
         val messages: String get() = result.messages
         private val errorMessage = filesGeneratedByAnnotationProcessor.joinToString(
