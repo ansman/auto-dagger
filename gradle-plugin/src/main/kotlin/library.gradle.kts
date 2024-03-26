@@ -42,17 +42,32 @@ tasks.withType<KotlinCompile>().configureEach {
 
 tasks.withType<Test>().configureEach {
     maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
+    jvmArgs(
+        "-Djava.awt.headless=true",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+    )
 }
 
 fun Lint.configure() {
     abortOnError = true
     warningsAsErrors = true
     checkReleaseBuilds = false
-    disable.addAll(setOf(
-        "GradleDependency",
-        "AndroidGradlePluginVersion",
-        "MissingApplicationIcon",
-    ))
+    disable.addAll(
+        setOf(
+            "GradleDependency",
+            "AndroidGradlePluginVersion",
+            "MissingApplicationIcon",
+        )
+    )
 }
 
 pluginManager.withPlugin("com.android.base") {
@@ -81,7 +96,7 @@ pluginManager.withPlugin("com.android.base") {
 
     extensions.getByType(AndroidComponentsExtension::class).apply {
         beforeVariants(selector().withBuildType("release")) { variant ->
-            (variant as? HasAndroidTestBuilder)?.enableAndroidTest = false
+            (variant as? HasAndroidTestBuilder)?.androidTest?.enable = false
             (variant as? HasTestFixturesBuilder)?.enableTestFixtures = false
             (variant as? HasUnitTestBuilder)?.enableUnitTest = false
         }
@@ -100,10 +115,10 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
         useJUnitPlatform()
         systemProperties(
             "junit.jupiter.execution.parallel.enabled" to "true",
-            "junit.jupiter.execution.parallel.config.strategy"  to "dynamic",
-            "junit.jupiter.execution.parallel.config.dynamic.factor"  to "1",
-            "junit.jupiter.execution.parallel.mode.default"  to "concurrent",
-            "junit.jupiter.execution.parallel.mode.classes.default"  to "concurrent",
+            "junit.jupiter.execution.parallel.config.strategy" to "dynamic",
+            "junit.jupiter.execution.parallel.config.dynamic.factor" to "1",
+            "junit.jupiter.execution.parallel.mode.default" to "concurrent",
+            "junit.jupiter.execution.parallel.mode.classes.default" to "concurrent",
         )
     }
     dependencies {
@@ -115,8 +130,18 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
 plugins.withType<JavaBasePlugin>().configureEach {
     extensions.configure<JavaPluginExtension> {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(19))
+            languageVersion.set(JavaLanguageVersion.of(21))
             vendor.set(JvmVendorSpec.AZUL)
+        }
+    }
+}
+
+configurations.configureEach {
+    resolutionStrategy {
+        eachDependency {
+            if (requested.group == "org.jetbrains.kotlin") {
+                useVersion(libs.versions.kotlin.get())
+            }
         }
     }
 }

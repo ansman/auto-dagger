@@ -268,7 +268,7 @@ class AutoBindTest {
                     package se.ansman
         
                     @se.ansman.dagger.auto.BindGenericAs.Default(se.ansman.dagger.auto.BindGenericAs.Wildcard)
-                    object SomeThing<T>
+                    object SomeThing
                     """
                 )
                 .assertFailedWithMessage(Errors.AutoBind.BindGenericAsDefault.nonAbstractType)

@@ -33,7 +33,7 @@ android {
 
 androidComponents {
     beforeVariants { variant ->
-        (variant as? HasAndroidTestBuilder)?.enableAndroidTest = variant.buildType == "debug"
+        (variant as? HasAndroidTestBuilder)?.androidTest?.enable = variant.buildType == "debug"
         (variant as? HasTestFixturesBuilder)?.enableTestFixtures = false
         (variant as? HasUnitTestBuilder)?.enableUnitTest = variant.buildType == "debug"
     }
