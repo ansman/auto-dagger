@@ -14,7 +14,6 @@ configurations.named("compileOnly") { extendsFrom(compileShaded) }
 configurations.named("testRuntimeOnly") { extendsFrom(compileShaded) }
 
 val shadowJar = tasks.named<ShadowJar>("shadowJar") {
-    archiveClassifier.set("")
     configurations = listOf(compileShaded)
     isEnableRelocation = true
     relocationPrefix = "se.ansman.dagger.auto${project.path.replace(':', '.').replace('-', '_')}"
