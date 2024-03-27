@@ -63,6 +63,7 @@ gradle-app.setting
 .idea/.name
 .idea/migrations.xml
 .idea/misc.xml
+.idea/copilot.xml
 *.iml
 *.ipr
 
