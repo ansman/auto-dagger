@@ -1,4 +1,5 @@
 
+import co.hinge.gradle.projectaccessors.copy
 import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {
@@ -16,7 +17,9 @@ tasks.withType<Test>().configureEach {
 }
 
 dependencies {
-    implementation(project(":compiler:common", configuration = "shadow"))
+    implementation(projects.compiler.common.copy(
+        targetConfiguration = "shadow"
+    ))
     implementation(libs.javapoet)
     implementation(libs.bundles.kotlinpoet)
     implementation(libs.dagger)
@@ -30,5 +33,5 @@ dependencies {
     implementation(libs.incap)
     kapt(libs.incap.compiler)
 
-    testImplementation(project(":compiler:common:test-utils"))
+    testImplementation(projects.compiler.common.testUtils)
 }
