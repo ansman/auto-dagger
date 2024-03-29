@@ -205,5 +205,12 @@ afterEvaluate {
             dependsOn("classes")
             from(project.extensions.getByType<SourceSetContainer>().getByName("main").allSource)
         }
+        if (pluginManager.hasPlugin("java-test-fixture")) {
+            // Disables publishing test fixtures:
+            // https://docs.gradle.org/current/userguide/java_testing.html#ex-disable-publishing-of-test-fixtures-variants
+            val javaComponent = components["java"] as AdhocComponentWithVariants
+            javaComponent.withVariantsFromConfiguration(configurations["testFixturesApiElements"]) { skip() }
+            javaComponent.withVariantsFromConfiguration(configurations["testFixturesRuntimeElements"]) { skip() }
+        }
     }
 }

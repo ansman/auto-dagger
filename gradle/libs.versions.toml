@@ -12,12 +12,14 @@ androidx-test = "1.5.0"
 kotlinpoet = "1.16.0"
 room = "2.6.1"
 retrofit = "2.11.0"
+projectAccessors = "1.1.0"
 
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.14.0"
 mkdocs = "ru.vyarus.mkdocs:3.0.0"
+projectAccessors = { id = "co.hinge.gradle.project-accessors", version.ref = "projectAccessors" }
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -59,13 +61,13 @@ dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing
 dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 
-ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp"}
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 
 incap = { module = "net.ltgt.gradle.incap:incap", version.ref = "incap" }
 incap-compiler = { module = "net.ltgt.gradle.incap:incap-processor", version.ref = "incap" }
 
-compileTesting = { module ="dev.zacsweers.kctfork:core", version.ref = "compileTesting" }
-compileTesting-ksp = { module ="dev.zacsweers.kctfork:ksp", version.ref = "compileTesting" }
+compileTesting = { module = "dev.zacsweers.kctfork:core", version.ref = "compileTesting" }
+compileTesting-ksp = { module = "dev.zacsweers.kctfork:ksp", version.ref = "compileTesting" }
 
 junit = "junit:junit:4.13.2"
 junit-jupiter = "org.junit.jupiter:junit-jupiter:5.10.2"
@@ -78,8 +80,10 @@ testLogger = "com.adarshr:gradle-test-logger-plugin:4.0.0"
 
 shadow = "com.github.johnrengelman:shadow:8.1.1"
 
-room = { module ="androidx.room:room-ktx", version.ref = "room" }
-room-compiler = { module ="androidx.room:room-compiler", version.ref = "room" }
+room = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accessors", version.ref = "projectAccessors" }
 
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]
