@@ -6,8 +6,8 @@ plugins {
 
 dependencies {
     implementation(projects.core)
-    implementation(projects.retrofit)
-    implementation(projects.androidx.room)
-    implementation(projects.android.testing)
+    implementation(projects.thirdParty.retrofit)
+    implementation(projects.thirdParty.androidx.room)
+    implementation(projects.thirdParty.android.testing)
     testFixturesApi(projects.compiler.common.testUtils)
 }

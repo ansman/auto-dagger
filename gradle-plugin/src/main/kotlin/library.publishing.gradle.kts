@@ -1,5 +1,6 @@
 
 import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.internal.scope.ProjectInfo.Companion.getBaseName
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
@@ -18,7 +19,10 @@ plugins {
 
 val libs = the<LibrariesForLibs>()
 
-archivesName.set(project.path.removePrefix(":").replace(':', '-'))
+archivesName.set(project.path
+    .removePrefix(":third-party")
+    .removePrefix(":")
+    .replace(':', '-'))
 
 val gitCommit = cachedProvider {
     project.execWithOutput {
@@ -107,15 +111,19 @@ val sourcesJar by tasks.registering(Jar::class) {
 
 val publication = publishing.publications.register<MavenPublication>("autoDagger") {
     groupId = rootProject.group as String
-    artifactId = project.path.removePrefix(":").replace(':', '-')
+    artifactId = project.path
+        .removePrefix(":third-party")
+        .removePrefix(":")
+        .replace(':', '-')
     version = providers.gradleProperty("version").get()
     artifact(sourcesJar)
     artifact(javadocJar)
     pom {
         val moduleName = project.path
+            .removePrefix(":third-party")
             .removePrefix(":")
             .splitToSequence(":")
-            .joinToString { it.replaceFirstChar(Char::uppercaseChar) }
+            .joinToString(" ") { it.replaceFirstChar(Char::uppercaseChar) }
 
         name.set("Auto Dagger $moduleName")
         description.set("Automatic Dagger setup using Hilt")
@@ -205,12 +213,12 @@ afterEvaluate {
             dependsOn("classes")
             from(project.extensions.getByType<SourceSetContainer>().getByName("main").allSource)
         }
-        if (pluginManager.hasPlugin("java-test-fixture")) {
-            // Disables publishing test fixtures:
-            // https://docs.gradle.org/current/userguide/java_testing.html#ex-disable-publishing-of-test-fixtures-variants
-            val javaComponent = components["java"] as AdhocComponentWithVariants
-            javaComponent.withVariantsFromConfiguration(configurations["testFixturesApiElements"]) { skip() }
-            javaComponent.withVariantsFromConfiguration(configurations["testFixturesRuntimeElements"]) { skip() }
-        }
     }
+}
+pluginManager.withPlugin("org.gradle.java-test-fixtures") {
+    // Disables publishing test fixtures:
+    // https://docs.gradle.org/current/userguide/java_testing.html#ex-disable-publishing-of-test-fixtures-variants
+    val javaComponent = components["java"] as AdhocComponentWithVariants
+    javaComponent.withVariantsFromConfiguration(configurations["testFixturesApiElements"]) { skip() }
+    javaComponent.withVariantsFromConfiguration(configurations["testFixturesRuntimeElements"]) { skip() }
 }

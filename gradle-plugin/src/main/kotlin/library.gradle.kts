@@ -77,7 +77,9 @@ pluginManager.withPlugin("com.android.base") {
             minSdk = libs.versions.android.minSdk.get().toInt()
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
-        namespace = (rootProject.group as String) + project.path.replace(':', '.')
+        namespace = (rootProject.group as String) + project.path
+            .removePrefix(":third-party")
+            .replace(':', '.')
         buildFeatures {
             buildConfig = false
             resValues = false

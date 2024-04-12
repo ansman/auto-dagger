@@ -40,12 +40,7 @@ androidComponents {
 }
 
 dependencies {
-    implementation(projects.android)
-    implementation(projects.androidx.viewmodel)
-    implementation(projects.androidx.room)
-    implementation(projects.retrofit)
     implementation(libs.retrofit.moshi)
-    implementation(projects.android.testing)
     implementation(libs.dagger.hilt.android)
     "kaptJava"(projects.compiler)
     "kspKotlin"(projects.compiler)
@@ -55,6 +50,11 @@ dependencies {
     "kspKotlin"(libs.dagger.hilt.compiler)
 
     // Third party
+    implementation(projects.thirdParty.android.testing)
+    implementation(projects.thirdParty.android)
+    implementation(projects.thirdParty.androidx.viewmodel)
+    implementation(projects.thirdParty.androidx.room)
+    implementation(projects.thirdParty.retrofit)
     implementation(libs.retrofit)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.room)
