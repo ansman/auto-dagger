@@ -5,10 +5,6 @@ plugins {
     id("library.publishing")
 }
 
-kotlin {
-    explicitApi()
-}
-
 dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)

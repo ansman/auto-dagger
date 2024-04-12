@@ -16,6 +16,6 @@ object JavaRetrofitModuleRenderer :
         HiltJavaModuleBuilder.Factory
     ) {
 
-    override fun provideService(serviceClass: ClassName, retrofitParameter: ParameterSpec): CodeBlock =
-        CodeBlock.of("return \$N.create(\$T.class)", retrofitParameter, serviceClass)
+    override fun provideService(serviceClass: ClassName, serviceFactoryParameter: ParameterSpec): CodeBlock =
+        CodeBlock.of("return \$N.create(\$T.class)", serviceFactoryParameter, serviceClass)
 }

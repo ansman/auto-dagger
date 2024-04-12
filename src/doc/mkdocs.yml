@@ -117,6 +117,7 @@ nav:
         - Room: integrations/androidx/room.md
         - ViewModel: integrations/androidx/viewmodel.md
       - Retrofit: integrations/retrofit.md
+      - Ktorfit: integrations/ktorfit.md
   - Limitations: limitations.md
   - About:
       - Release Notes: https://github.com/ansman/auto-dagger/releases

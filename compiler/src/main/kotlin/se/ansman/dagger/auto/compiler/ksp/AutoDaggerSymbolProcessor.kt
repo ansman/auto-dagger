@@ -13,6 +13,8 @@ import se.ansman.dagger.auto.compiler.autoinitialize.renderer.KotlinAutoInitiali
 import se.ansman.dagger.auto.compiler.common.ksp.KspProcessor
 import se.ansman.dagger.auto.compiler.common.ksp.processing.KspEnvironment
 import se.ansman.dagger.auto.compiler.common.ksp.processing.KspResolver
+import se.ansman.dagger.auto.compiler.ktorfit.KtorfitProcessor
+import se.ansman.dagger.auto.compiler.ktorfit.renderer.KotlinKtorfitObjectRenderer
 import se.ansman.dagger.auto.compiler.replaces.ReplacesProcessor
 import se.ansman.dagger.auto.compiler.retrofit.RetrofitProcessor
 import se.ansman.dagger.auto.compiler.retrofit.renderer.KotlinRetrofitObjectRenderer
@@ -35,6 +37,10 @@ class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : Symbo
         RetrofitProcessor(
             environment = this.environment,
             renderer = KotlinRetrofitObjectRenderer
+        ),
+        KtorfitProcessor(
+            environment = this.environment,
+            renderer = KotlinKtorfitObjectRenderer
         ),
         AndroidXRoomProcessor(
             environment = this.environment,

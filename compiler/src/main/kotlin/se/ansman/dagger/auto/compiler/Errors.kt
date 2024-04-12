@@ -58,16 +58,32 @@ object Errors {
             "Replacement target $replacedObject must be annotated with @AutoBind"
     }
 
-    object Retrofit {
-        const val nonInterface = "Only interfaces can be annotated with @AutoProvideService."
-        const val privateType = "@AutoProvideService annotated types must not be private."
-        const val emptyService = "@AutoProvideService annotated types must have at least one method."
-        const val propertiesNotAllowed = "Retrofit services cannot contain properties."
-        const val invalidServiceMethod = "Methods in retrofit services must be annotated with a HTTP method annotation such as @GET."
-        const val scopeAndReusable = "You cannot mix a scope and @Reusable on the same type. Remove the scope or @Reusable."
+    interface ApiService {
+        val nonInterface: String
+        val privateType: String
+        val emptyService: String
+        val propertiesNotAllowed: String
+        val invalidServiceMethod: String
+        val scopeAndReusable: String
+        fun invalidScope(scope: String, component: String, neededScope: String): String
 
-        fun invalidScope(scope: String, component: String, neededScope: String) =
+    }
+
+    object Retrofit : ApiService{
+        override val nonInterface = "Only interfaces can be annotated with @AutoProvideService."
+        override val privateType = "@AutoProvideService annotated types must not be private."
+        override val emptyService = "@AutoProvideService annotated types must have at least one method."
+        override val propertiesNotAllowed = "Retrofit services cannot contain properties."
+        override val invalidServiceMethod = "Methods in retrofit services must be annotated with a HTTP method annotation such as @GET."
+        override val scopeAndReusable = "You cannot mix a scope and @Reusable on the same type. Remove the scope or @Reusable."
+
+        override fun invalidScope(scope: String, component: String, neededScope: String) =
             "You cannot use @$scope when installing in $component, use @$neededScope instead."
+    }
+
+    object Ktorfit : ApiService by Retrofit {
+        override val propertiesNotAllowed = "Ktorfit services cannot contain properties."
+        override val invalidServiceMethod = "Methods in ktorfit services must be annotated with a HTTP method annotation such as @GET."
     }
 
     object AndroidX {

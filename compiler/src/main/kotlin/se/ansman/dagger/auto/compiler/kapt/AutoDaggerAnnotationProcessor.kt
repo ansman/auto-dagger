@@ -12,6 +12,8 @@ import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
 import se.ansman.dagger.auto.compiler.autoinitialize.renderer.JavaAutoInitializeModuleRenderer
 import se.ansman.dagger.auto.compiler.common.Options
 import se.ansman.dagger.auto.compiler.common.kapt.processing.KaptEnvironment
+import se.ansman.dagger.auto.compiler.ktorfit.KtorfitProcessor
+import se.ansman.dagger.auto.compiler.ktorfit.renderer.JavaKtorfitModuleRenderer
 import se.ansman.dagger.auto.compiler.replaces.ReplacesProcessor
 import se.ansman.dagger.auto.compiler.retrofit.RetrofitProcessor
 import se.ansman.dagger.auto.compiler.retrofit.renderer.JavaRetrofitModuleRenderer
@@ -30,6 +32,7 @@ class AutoDaggerAnnotationProcessor : BasicAnnotationProcessor() {
             AutoDaggerProcessorStep(environment, AutoBindProcessor(environment, JavaAutoBindModuleModuleRenderer)),
             AutoDaggerProcessorStep(environment, ReplacesProcessor(environment, JavaAutoBindModuleModuleRenderer)),
             AutoDaggerProcessorStep(environment, RetrofitProcessor(environment, JavaRetrofitModuleRenderer)),
+            AutoDaggerProcessorStep(environment, KtorfitProcessor(environment, JavaKtorfitModuleRenderer)),
             AutoDaggerProcessorStep(environment, AndroidXRoomProcessor(environment, JavaAndroidXRoomDatabaseModuleRenderer)),
         )
     }

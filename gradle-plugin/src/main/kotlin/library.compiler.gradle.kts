@@ -10,12 +10,6 @@ plugins {
 
 val libs = the<LibrariesForLibs>()
 
-tasks.withType<Test>().configureEach {
-    if (providers.gradleProperty("updateExpectedTestFiles").orNull?.toBoolean() == true) {
-        systemProperty("writeExpectedFilesTo", file("src/test/resources/tests"))
-    }
-}
-
 dependencies {
     implementation(projects.compiler.common.copy(
         targetConfiguration = "shadow"

@@ -1,0 +1,4 @@
+public abstract interface annotation class se/ansman/dagger/auto/ktorfit/AutoProvideService : java/lang/annotation/Annotation {
+	public abstract fun inComponent ()Ljava/lang/Class;
+}
+

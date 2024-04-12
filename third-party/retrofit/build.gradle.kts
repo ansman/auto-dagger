@@ -4,10 +4,6 @@ plugins {
     id("library.publishing")
 }
 
-kotlin {
-    explicitApi()
-}
-
 dependencies {
     implementation(libs.dagger.hilt.core)
     testImplementation(testFixtures(projects.compiler))

@@ -4,6 +4,7 @@ import com.android.build.gradle.internal.scope.ProjectInfo.Companion.getBaseName
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
