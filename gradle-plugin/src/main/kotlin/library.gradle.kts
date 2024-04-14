@@ -55,6 +55,9 @@ tasks.withType<Test>().configureEach {
         "--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
         "--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
     )
+    if (providers.gradleProperty("updateExpectedTestFiles").orNull?.toBoolean() == true) {
+        systemProperty("writeExpectedFilesTo", file("src/test/resources/tests"))
+    }
 }
 
 fun Lint.configure() {

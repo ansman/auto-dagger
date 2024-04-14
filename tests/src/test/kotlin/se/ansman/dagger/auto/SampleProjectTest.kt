@@ -18,6 +18,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import se.ansman.dagger.auto.ktorfit.ExampleKtorfitApiService
+import se.ansman.dagger.auto.retrofit.ExampleRetrofitApiService
 import java.io.Closeable
 import javax.inject.Inject
 import javax.inject.Provider
@@ -34,6 +36,14 @@ class SampleProjectTest {
 
     @Inject
     lateinit var repository: Provider<Repository>
+
+    @Suppress("unused")
+    @Inject
+    lateinit var retrofitService: Provider<ExampleRetrofitApiService>
+
+    @Suppress("unused")
+    @Inject
+    lateinit var ktorfitService: Provider<ExampleKtorfitApiService>
 
     @Inject
     lateinit var replaceableRepository: Provider<ReplaceableRepository>

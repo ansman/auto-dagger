@@ -18,6 +18,7 @@ plugins {
 android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = 21
     }
     flavorDimensions += "type"
     productFlavors {
@@ -55,7 +56,9 @@ dependencies {
     implementation(projects.thirdParty.androidx.viewmodel)
     implementation(projects.thirdParty.androidx.room)
     implementation(projects.thirdParty.retrofit)
+    implementation(projects.thirdParty.ktorfit)
     implementation(libs.retrofit)
+    implementation(libs.ktorfit)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.room)
     ksp(libs.room.compiler)

@@ -12,6 +12,7 @@ androidx-test = "1.5.0"
 kotlinpoet = "1.16.0"
 room = "2.6.1"
 retrofit = "2.11.0"
+ktorfit = "1.12.0"
 projectAccessors = "1.1.0"
 
 [plugins]
@@ -84,6 +85,8 @@ room = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accessors", version.ref = "projectAccessors" }
+
+ktorfit = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
 
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]

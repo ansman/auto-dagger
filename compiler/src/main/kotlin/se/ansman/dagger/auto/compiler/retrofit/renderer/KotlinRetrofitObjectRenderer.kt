@@ -17,6 +17,6 @@ object KotlinRetrofitObjectRenderer :
         HiltKotlinModuleBuilder.Factory
     ) {
 
-    override fun provideService(serviceClass: ClassName, retrofitParameter: ParameterSpec): CodeBlock =
-        CodeBlock.of("return %N.%M()", retrofitParameter, MemberName("retrofit2", "create"))
+    override fun provideService(serviceClass: ClassName, serviceFactoryParameter: ParameterSpec): CodeBlock =
+        CodeBlock.of("return %N.%M()", serviceFactoryParameter, MemberName("retrofit2", "create"))
 }
