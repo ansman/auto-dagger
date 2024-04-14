@@ -1,16 +1,12 @@
 
 import com.android.build.gradle.LibraryExtension
-import com.android.build.gradle.internal.scope.ProjectInfo.Companion.getBaseName
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
-import se.ansman.dagger.auto.gradle.getOrPut
 import se.ansman.dagger.auto.gradle.mapNullable
-import java.io.ByteArrayOutputStream
 
 plugins {
     id("maven-publish")
@@ -154,23 +150,8 @@ val publication = publishing.publications.register<MavenPublication>("autoDagger
 
 if (findProperty("signArtifacts")?.toString()?.toBoolean() == true) {
     signing {
+        useGpgCmd()
         sign(publication.get())
-        gradle.taskGraph.whenReady {
-            if (hasTask(tasks.getByName("sign${publication.name.replaceFirstChar(Char::uppercaseChar)}Publication"))) {
-                rootProject.ext.getOrPut("signing.gnupg.passphrase") {
-                    val output = ByteArrayOutputStream()
-                    exec {
-                        commandLine("op", "read", "op://private/GnuPG/password")
-                        standardOutput = output
-                        errorOutput = System.err
-                    }
-                        .rethrowFailure()
-                        .assertNormalExitValue()
-                    output.toString(Charsets.UTF_8).trim()
-                }
-                useGpgCmd()
-            }
-        }
     }
 }
 
