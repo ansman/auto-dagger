@@ -13,5 +13,6 @@ dependencies {
     api(libs.ksp.api)
     api(libs.bundles.compileTesting)
     api(libs.okio)
+    runtimeOnly(libs.ksp)
     runtimeOnly(libs.kotlin.compiler.embeddable)
 }
