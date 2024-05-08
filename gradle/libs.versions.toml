@@ -1,11 +1,11 @@
 [versions]
-kotlin = "1.9.23"
+kotlin = "1.9.24"
 dokka = "1.9.20"
 compileTesting = "0.4.1"
 autoService = "1.1.1"
 incap = "1.0.0"
 dagger = "2.51.1"
-ksp = "1.9.23-1.0.20"
+ksp = "1.9.24-1.0.20"
 android-minSdk = "19"
 android-compileSdk = "34"
 androidx-test = "1.5.0"
@@ -26,7 +26,6 @@ projectAccessors = { id = "co.hinge.gradle.project-accessors", version.ref = "pr
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
-kotlin-annotationProcessing-embeddable = { module = "org.jetbrains.kotlin:kotlin-annotation-processing-embeddable", version.ref = "kotlin" }
 
 kotlinx-metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0"
 
@@ -62,6 +61,7 @@ dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing
 dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 
+ksp = { module = "com.google.devtools.ksp:symbol-processing", version.ref = "ksp" }
 ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 
 incap = { module = "net.ltgt.gradle.incap:incap", version.ref = "incap" }
