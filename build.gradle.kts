@@ -52,6 +52,7 @@ apiValidation {
             .minus(dokkaProjects)
             .map { it.name }
     )
+    apiDumpDirectory = "src/main/api"
 }
 
 val dokkaDocsPath = "dokka"
