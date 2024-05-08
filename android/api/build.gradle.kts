@@ -6,6 +6,12 @@ plugins {
     id("library.publishing")
 }
 
+android {
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+}
+
 dependencies {
     api(projects.core)
     implementation(libs.dagger)
