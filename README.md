@@ -45,34 +45,34 @@ dependencies {
     // Set up your dagger dependencies and compiler
 
     // Include this in kotlin or android modules
-    implementation("se.ansman.dagger.auto:core:1.2.0")
-    kapt("se.ansman.dagger.auto:compiler:1.2.0")
+    implementation("se.ansman.dagger.auto:core:1.2.1")
+    kapt("se.ansman.dagger.auto:compiler:1.2.1")
     // If you're using KSP
-    ksp("se.ansman.dagger.auto:compiler:1.2.0")
+    ksp("se.ansman.dagger.auto:compiler:1.2.1")
 
 
     // Include this in your app module
-    implementation("se.ansman.dagger.auto:android:1.2.0")
+    implementation("se.ansman.dagger.auto:android:1.2.1")
     // Or this in your library module
-    implementation("se.ansman.dagger.auto:android-api:1.2.0")
+    implementation("se.ansman.dagger.auto:android-api:1.2.1")
 
     // Add these if you want to replace objects during tests
-    testImplementation("se.ansman.dagger.auto:android-testing:1.2.0")
-    kaptTest("se.ansman.dagger.auto:compiler:1.2.0")
+    testImplementation("se.ansman.dagger.auto:android-testing:1.2.1")
+    kaptTest("se.ansman.dagger.auto:compiler:1.2.1")
     // If you're using KSP
-    kspTest("se.ansman.dagger.auto:compiler:1.2.0")
+    kspTest("se.ansman.dagger.auto:compiler:1.2.1")
 
     // If you want to provide Retrofit services add the Retrofit dependency
-    implementation("se.ansman.dagger.auto:retrofit:1.2.0")
+    implementation("se.ansman.dagger.auto:retrofit:1.2.1")
 
     // If you want to provide Ktorfit services add the Retrofit dependency
-    implementation("se.ansman.dagger.auto:ktorfit:1.2.0")
+    implementation("se.ansman.dagger.auto:ktorfit:1.2.1")
 
     // If you want to inject a CoroutineScope into ViewModels add the ViewModel dependency
-    implementation("se.ansman.dagger.auto:androidx-viewmodel:1.2.0")
+    implementation("se.ansman.dagger.auto:androidx-viewmodel:1.2.1")
 
     // If you want to automatically provide your Room DAOs add the Room dependency
-    implementation("se.ansman.dagger.auto:androidx-room:1.2.0")
+    implementation("se.ansman.dagger.auto:androidx-room:1.2.1")
 }
 ```
 
