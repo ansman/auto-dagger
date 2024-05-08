@@ -10,7 +10,7 @@ dependencies {
     api(projects.core)
     implementation(libs.dagger)
     implementation(libs.dagger.hilt.android)
-    implementation(libs.androidx.startup)
+    compileOnly(libs.androidx.startup)
     kapt(libs.dagger.compiler)
     kapt(libs.dagger.hilt.compiler)
 }

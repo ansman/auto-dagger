@@ -51,8 +51,8 @@ dependencies {
     "kspKotlin"(libs.dagger.hilt.compiler)
 
     // Third party
-    implementation(projects.thirdParty.android.testing)
-    implementation(projects.thirdParty.android)
+    implementation(projects.android.testing)
+    implementation(projects.android)
     implementation(projects.thirdParty.androidx.viewmodel)
     implementation(projects.thirdParty.androidx.room)
     implementation(projects.thirdParty.retrofit)

@@ -16,7 +16,12 @@ plugins {
 }
 
 dependencies {
+    // For app modules add the android dependency
     implementation("se.ansman.dagger.auto:android:{{gradle.version}}")
+    // And for library modules add the android-api dependency:
+    implementation("se.ansman.dagger.auto:android-api:{{gradle.version}}")
+    
+    // Next add the compiler using KAPT
     kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
     // or if you use KSP
     ksp("se.ansman.dagger.auto:compiler:{{gradle.version}}")

@@ -51,8 +51,10 @@ dependencies {
     ksp("se.ansman.dagger.auto:compiler:1.1.0")
 
 
-    // Include this only in android modules
+    // Include this in your app module
     implementation("se.ansman.dagger.auto:android:1.1.0")
+    // Or this in your library module
+    implementation("se.ansman.dagger.auto:android-api:1.1.0")
 
     // Add these if you want to replace objects during tests
     testImplementation("se.ansman.dagger.auto:android-testing:1.1.0")
