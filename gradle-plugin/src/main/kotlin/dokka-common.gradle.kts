@@ -24,7 +24,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
     }
     pluginManager.withPlugin("com.android.library") {
         tasks.withType<AbstractDokkaTask>().configureEach {
-            dependsOn("kaptReleaseKotlin")
+            dependsOn("kaptReleaseKotlin", "kaptDebugKotlin")
         }
     }
 }
