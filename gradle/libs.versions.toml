@@ -88,6 +88,8 @@ projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accesso
 
 ktorfit = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
 
+sonatypePublishFix = "se.ansman.sonatype-publish-fix:gradle-plugin:1.0.0"
+
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]
 kotlinpoet = ["kotlinpoet", "kotlinpoet-ksp"]

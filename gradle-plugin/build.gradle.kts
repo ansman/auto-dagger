@@ -13,4 +13,5 @@ dependencies {
     api(libs.dokka.gradlePlugin)
     api(libs.testLogger)
     api(libs.kotlin.jvm.gradle)
+    api(libs.sonatypePublishFix)
 }
