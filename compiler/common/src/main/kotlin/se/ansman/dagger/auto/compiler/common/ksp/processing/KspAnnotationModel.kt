@@ -75,6 +75,7 @@ class KspAnnotationModel(
 
                 is List<*> -> map { it!!.convert() }
                 is KSType -> KspClassDeclaration(declaration as KSClassDeclaration, resolver)
+                is KSClassDeclaration -> KspClassDeclaration(this, resolver)
                 else -> throw UnsupportedOperationException("Annotation value of type $javaClass isn't supported")
             }
             return value?.convert()

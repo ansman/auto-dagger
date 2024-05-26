@@ -4,22 +4,9 @@ import dagger.Reusable
 import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.common.Processor
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerLogger
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
-import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.*
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
 import se.ansman.dagger.auto.compiler.common.processing.Function
-import se.ansman.dagger.auto.compiler.common.processing.Property
-import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
-import se.ansman.dagger.auto.compiler.common.processing.getQualifiers
-import se.ansman.dagger.auto.compiler.common.processing.getValue
-import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
-import se.ansman.dagger.auto.compiler.common.processing.isFullyPrivate
-import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
-import se.ansman.dagger.auto.compiler.common.processing.lookupType
-import se.ansman.dagger.auto.compiler.common.processing.nodesAnnotatedWith
-import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.retrofit.models.ApiServiceModule
 import se.ansman.dagger.auto.compiler.retrofit.renderer.BaseApiServiceModuleRenderer
@@ -54,7 +41,7 @@ abstract class BaseApiServiceProcessor<N, TypeName, ClassName : TypeName, Annota
                     ?: resolver.lookupType(SingletonComponent::class)
 
                 service.validateService()
-                service.validateComponent(resolver, targetComponent)
+                validateComponent(service, resolver, targetComponent)
 
                 ApiServiceModule(
                     moduleName = environment.rootPeerClass(

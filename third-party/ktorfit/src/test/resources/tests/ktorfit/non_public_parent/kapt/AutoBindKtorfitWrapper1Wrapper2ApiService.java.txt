@@ -19,6 +19,6 @@ public abstract class AutoBindKtorfitWrapper1Wrapper2ApiService {
 
   @Provides
   public static Wrapper1.Wrapper2.ApiService provideApiService(Ktorfit ktorfit) {
-    return ktorfit.create(null);
+    return _ApiServiceImplKt.createApiService(ktorfit);
   }
 }

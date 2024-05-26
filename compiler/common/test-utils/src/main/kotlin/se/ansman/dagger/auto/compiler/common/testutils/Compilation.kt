@@ -37,6 +37,10 @@ abstract class Compilation(
 
     protected abstract val JvmCompilationResult.filesGeneratedByAnnotationProcessor: Sequence<File>
 
+    companion object {
+        val mutex = Any()
+    }
+
     interface Factory {
         val expectedFilesDirectoryName: String
 
@@ -85,5 +89,4 @@ abstract class Compilation(
 
         fun loadClass(className: String): Class<*> = result.classLoader.loadClass(className)
     }
-
 }

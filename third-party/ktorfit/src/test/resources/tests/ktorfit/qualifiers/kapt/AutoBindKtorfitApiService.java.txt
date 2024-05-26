@@ -20,6 +20,6 @@ public abstract class AutoBindKtorfitApiService {
 
   @Provides
   public static ApiService provideApiService(@Named("api1") Ktorfit ktorfit) {
-    return ktorfit.create(null);
+    return _ApiServiceImplKt.createApiService(ktorfit);
   }
 }

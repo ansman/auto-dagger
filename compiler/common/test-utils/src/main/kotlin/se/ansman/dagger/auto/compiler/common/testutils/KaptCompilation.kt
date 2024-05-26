@@ -20,8 +20,9 @@ class KaptCompilation(
                 configuration()
                 annotationProcessors = processors()
                 this.sources = sources.map { it.toSourceFile() }
+                useKapt4 = true
             }
-            .compile()
+            .run { synchronized(mutex) { compile() } }
             .let(::Result)
 
     override val JvmCompilationResult.filesGeneratedByAnnotationProcessor: Sequence<File>

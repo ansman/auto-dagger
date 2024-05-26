@@ -9,6 +9,7 @@ import com.android.build.api.variant.HasAndroidTestBuilder
 import com.android.build.api.variant.HasTestFixturesBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val libs = the<LibrariesForLibs>()
@@ -31,17 +32,18 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = "11"
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
         allWarningsAsErrors = true
-        freeCompilerArgs = freeCompilerArgs + listOf(
-            "-Xcontext-receivers"
+        freeCompilerArgs.addAll(
+            "-Xsuppress-version-warnings",
         )
     }
 }
 
 tasks.withType<Test>().configureEach {
-    maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
+    maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+    maxHeapSize = "1g"
     jvmArgs(
         "-Djava.awt.headless=true",
         "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
@@ -118,13 +120,6 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
     pluginManager.apply("com.android.lint")
     tasks.withType<Test>().configureEach {
         useJUnitPlatform()
-        systemProperties(
-            "junit.jupiter.execution.parallel.enabled" to "true",
-            "junit.jupiter.execution.parallel.config.strategy" to "dynamic",
-            "junit.jupiter.execution.parallel.config.dynamic.factor" to "1",
-            "junit.jupiter.execution.parallel.mode.default" to "concurrent",
-            "junit.jupiter.execution.parallel.mode.classes.default" to "concurrent",
-        )
     }
     dependencies {
         "testImplementation"(libs.bundles.jvmTesting)

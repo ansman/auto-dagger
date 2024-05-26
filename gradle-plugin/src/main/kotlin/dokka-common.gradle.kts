@@ -12,10 +12,6 @@ dependencies {
     dokkaPlugin(libs.dokka.versioningPlugin)
 }
 
-tasks.withType<AbstractDokkaTask>().configureEach {
-    notCompatibleWithConfigurationCache("Dokka does not support config cache yet")
-}
-
 pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
     pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
         tasks.withType<AbstractDokkaTask>().configureEach {

@@ -19,5 +19,5 @@ interface UserDao {
 @Database(entities = [User::class], version = 1, exportSchema = false)
 @AutoProvideDaos
 abstract class AppDatabase : RoomDatabase() {
-    abstract val users: UserDao
+    abstract fun getUsers(): UserDao
 }

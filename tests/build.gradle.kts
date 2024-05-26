@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.ksp)
     id("library")
     id("com.google.dagger.hilt.android")
+    alias(libs.plugins.ktorfit)
 }
 
 android {
@@ -38,6 +39,10 @@ androidComponents {
         (variant as? HasTestFixturesBuilder)?.enableTestFixtures = false
         (variant as? HasUnitTestBuilder)?.enableUnitTest = variant.buildType == "debug"
     }
+}
+
+ksp {
+    arg("room.generateKotlin", "true")
 }
 
 dependencies {

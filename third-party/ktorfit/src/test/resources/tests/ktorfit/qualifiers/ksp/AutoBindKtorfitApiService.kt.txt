@@ -14,5 +14,6 @@ import javax.inject.Named
 @OriginatingElement(topLevelClass = ApiService::class)
 public object AutoBindKtorfitApiService {
   @Provides
-  public fun provideApiService(@Named("api1") ktorfit: Ktorfit): ApiService = ktorfit.create()
+  public fun provideApiService(@Named("api1") ktorfit: Ktorfit): ApiService =
+      ktorfit.createApiService()
 }

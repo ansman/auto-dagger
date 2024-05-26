@@ -17,5 +17,10 @@ object JavaKtorfitModuleRenderer :
     ) {
 
     override fun provideService(serviceClass: ClassName, serviceFactoryParameter: ParameterSpec): CodeBlock =
-        CodeBlock.of("return \$N.create(null)", serviceFactoryParameter)
+        CodeBlock.of(
+            "return \$T.create\$N(\$N)",
+            ClassName.get(serviceClass.packageName(), "_${serviceClass.simpleName()}ImplKt"),
+            serviceClass.simpleName(),
+            serviceFactoryParameter
+        )
 }
