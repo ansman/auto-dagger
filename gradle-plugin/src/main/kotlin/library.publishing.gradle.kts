@@ -69,10 +69,10 @@ with(publishing) {
         name = "mavenCentral"
         setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
         credentials {
-            username = providers.gradleProperty("sonatype.username")
+            username = providers.gradleProperty("sonatype.s01.oss.sonatype.org.username")
                 .orElse(providers.environmentVariable("SONATYPE_USERNAME"))
                 .orNull
-            password = providers.gradleProperty("sonatype.password")
+            password = providers.gradleProperty("sonatype.s01.oss.sonatype.org.password")
                 .orElse(providers.environmentVariable("SONATYPE_PASSWORD"))
                 .orNull
         }
@@ -82,10 +82,10 @@ with(publishing) {
         name = "sonatypeSnapshots"
         setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
         credentials {
-            username = providers.gradleProperty("sonatype.username")
+            username = providers.gradleProperty("sonatype.s01.oss.sonatype.org.username")
                 .orElse(providers.environmentVariable("SONATYPE_USERNAME"))
                 .orNull
-            password = providers.gradleProperty("sonatype.password")
+            password = providers.gradleProperty("sonatype.s01.oss.sonatype.org.password")
                 .orElse(providers.environmentVariable("SONATYPE_PASSWORD"))
                 .orNull
         }
