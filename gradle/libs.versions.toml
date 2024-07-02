@@ -40,7 +40,7 @@ retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.re
 
 android-gradlePlugin = "com.android.tools.build:gradle:8.5.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
-androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel:2.8.2"
+androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel:2.8.3"
 androidx-test = { module = "androidx.test:core-ktx", version.ref = "androidx-test" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
