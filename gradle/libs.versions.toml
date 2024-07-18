@@ -18,7 +18,7 @@ projectAccessors = "1.1.0"
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.14.0"
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.16.0"
 mkdocs = "ru.vyarus.mkdocs:4.0.1"
 projectAccessors = { id = "co.hinge.gradle.project-accessors", version.ref = "projectAccessors" }
 
