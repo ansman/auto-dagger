@@ -129,7 +129,7 @@ val publication = publishing.publications.register<MavenPublication>("autoDagger
         licenses {
             license {
                 name.set("The Apache Software License, Version 2.0")
-                url.set(remoteSource.map { "$it/LICENSE.txt" })
+                url.set("https://raw.githubusercontent.com/ansman/auto-dagger/main/LICENSE.txt")
                 distribution.set("repo")
             }
         }
