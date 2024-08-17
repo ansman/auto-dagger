@@ -1,5 +1,4 @@
 pluginManagement {
-    @Suppress("UnstableApiUsage")
     includeBuild("gradle-plugin")
 
     repositories {

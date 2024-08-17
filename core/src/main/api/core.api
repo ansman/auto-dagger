@@ -79,3 +79,7 @@ public final class se/ansman/dagger/auto/Initializable$Companion {
 	public final fun withPriority (Lse/ansman/dagger/auto/Initializable;I)Lse/ansman/dagger/auto/Initializable;
 }
 
+public abstract interface annotation class se/ansman/dagger/auto/OptionallyProvided : java/lang/annotation/Annotation {
+	public abstract fun inComponent ()Ljava/lang/Class;
+}
+

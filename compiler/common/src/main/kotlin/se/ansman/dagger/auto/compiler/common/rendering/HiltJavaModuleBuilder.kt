@@ -11,6 +11,7 @@ import com.squareup.javapoet.ParameterizedTypeName
 import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeSpec
 import dagger.Binds
+import dagger.BindsOptionalOf
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -85,13 +86,43 @@ class HiltJavaModuleBuilder private constructor(
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
         mode: ProviderMode<AnnotationSpec>
+    ) = addBinding(
+        bindingAnnotation = Binds::class.java,
+        name = name,
+        sourceType = sourceType,
+        returnType = returnType,
+        mode = mode,
+    )
+
+    override fun addOptionalBinding(
+        name: String,
+        type: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
+        isPublic: Boolean
+    ) = addBinding(
+        bindingAnnotation = BindsOptionalOf::class.java,
+        name = name,
+        sourceType = null,
+        returnType = type,
+        mode = ProviderMode.Single
+    )
+
+    private fun addBinding(
+        bindingAnnotation: Class<out Annotation>,
+        name: String,
+        sourceType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>?,
+        returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
+        mode: ProviderMode<AnnotationSpec>
     ) = apply {
         typeSpec.addMethod(
             MethodSpec.methodBuilder(nameAllocator.newName(name))
                 .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
-                .addAnnotation(Binds::class.java)
+                .addAnnotation(bindingAnnotation)
                 .addAnnotations(mode.asAnnotations())
-                .addParameter(sourceType.toParameterSpec(NameAllocator()))
+                .apply {
+                    if (sourceType != null) {
+                        addParameter(sourceType.toParameterSpec(NameAllocator()))
+                    }
+                }
                 .addAnnotations(returnType.qualifiers)
                 .returns(returnType.type)
                 .build()

@@ -112,6 +112,7 @@ nav:
       - '@AutoInitialize': usage/auto-initialize.md
       - '@AutoBind': usage/auto-bind.md
       - '@Replaces': usage/replaces.md
+      - '@OptionallyProvided': usage/optionally-provided.md
   - Integrations:
       - AndroidX:
         - Room: integrations/androidx/room.md

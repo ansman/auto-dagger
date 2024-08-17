@@ -1,9 +1,6 @@
 package se.ansman.dagger.auto.compiler.autobind
 
 import dagger.MapKey
-import dagger.Reusable
-import dagger.hilt.DefineComponent
-import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.AutoBind
 import se.ansman.dagger.auto.AutoBindIntoMap
 import se.ansman.dagger.auto.AutoBindIntoSet
@@ -31,16 +28,14 @@ import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
 import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
-import se.ansman.dagger.auto.compiler.utils.ComponentValidator.validateComponent
-import javax.inject.Scope
-import javax.inject.Singleton
+import se.ansman.dagger.auto.compiler.utils.getTargetComponent
 
 class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec, F>(
-    private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
+    override val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
     private val renderer: Renderer<AutoBindObjectModule<N, TypeName, ClassName, AnnotationSpec>, F>,
     private val logging: Boolean = true,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
-    private val logger = environment.logger.withTag("auto-bind").takeIf { logging }
+    override val logger = environment.logger.withTag("auto-bind").takeIf { logging }
     private val autoBindAnnotations = setOf(
         AutoBind::class.java.canonicalName,
         AutoBindIntoSet::class.java.canonicalName,
@@ -80,13 +75,13 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
             logger?.error(Errors.AutoBind.BindGenericAsDefault.nonGenericType, this)
         }
         val isSupportedType = when (kind) {
-            ClassDeclaration.Kind.Class -> isAbstract || isSealedClass
-            ClassDeclaration.Kind.Interface -> true
-            ClassDeclaration.Kind.EnumClass,
-            ClassDeclaration.Kind.EnumEntry,
-            ClassDeclaration.Kind.AnnotationClass,
-            ClassDeclaration.Kind.Object,
-            ClassDeclaration.Kind.CompanionObject -> false
+            Kind.Class -> isAbstract || isSealedClass
+            Kind.Interface -> true
+            Kind.EnumClass,
+            Kind.EnumEntry,
+            Kind.AnnotationClass,
+            Kind.Object,
+            Kind.CompanionObject -> false
         }
         if (!isSupportedType) {
             logger?.error(Errors.AutoBind.BindGenericAsDefault.nonAbstractType, this)
@@ -192,6 +187,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
             }
 
         val component = type.getTargetComponent(resolver, annotation)
+            ?: throw AbortProcessingError()
         val key = ModuleKey(targetType = type.className, targetComponent = component)
         val qualifiers = type.getQualifiers()
 
@@ -238,65 +234,10 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
             })
         }
 
-    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.getTargetComponent(
-        resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
-        annotation: AnnotationModel<ClassName, AnnotationSpec>,
-    ): ClassName =
-        annotation.getValue<ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>>("inComponent")
-            ?.also { validateComponent(resolver, it) }
-            ?.className
-            ?: guessComponent()
-
     private fun Type<N, TypeName, ClassName, AnnotationSpec>.getDefaultBindGenericAs(): BindGenericAs? =
         declaration
             ?.getAnnotation(BindGenericAs.Default::class)
             ?.getValue("value")
-
-    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.guessComponent(): ClassName {
-        val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
-            ?: return environment.className(SingletonComponent::class)
-        return scope.guessComponent() ?: run {
-            logger?.error(Errors.AutoBind.nonStandardScope(scope.qualifiedName), this)
-            throw AbortProcessingError()
-        }
-    }
-
-    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.validateComponent(
-        resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
-        component: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
-    ) {
-        if (!component.validateComponent(this, logger)) {
-            return
-        }
-        val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
-            ?: return
-        val inferredComponent = scope.guessComponent() ?: return
-        if (isComponentChildComponent(resolver, component, inferredComponent)) {
-            logger?.error(
-                message = Errors.AutoBind.parentComponent(
-                    installIn = resolver.environment.simpleName(component.className),
-                    inferredComponent = resolver.environment.simpleName(inferredComponent)
-                ),
-                node = this
-            )
-        }
-    }
-
-    private fun isComponentChildComponent(
-        resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
-        installInComponent: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
-        inferredComponent: ClassName,
-    ): Boolean {
-        var c = inferredComponent
-        do {
-            c = resolver.lookupType(c)
-                .getAnnotation(DefineComponent::class)
-                ?.getValue<ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>>("parent")
-                ?.className
-                ?: return false
-        } while (c != installInComponent.className)
-        return true
-    }
 
     fun getBoundSupertypes(
         type: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
@@ -337,36 +278,6 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         }
         return supertypes.values
     }
-
-    private fun AnnotationModel<*, *>.guessComponent(): ClassName? =
-        when (qualifiedName) {
-            Singleton::class.java.canonicalName,
-            Reusable::class.java.canonicalName ->
-                environment.className(SingletonComponent::class)
-
-            "dagger.hilt.android.scopes.ActivityRetainedScoped" ->
-                environment.className("dagger.hilt.android.components", "ActivityRetainedComponent")
-
-            "dagger.hilt.android.scopes.ActivityScoped" ->
-                environment.className("dagger.hilt.android.components", "ActivityComponent")
-
-            "dagger.hilt.android.scopes.FragmentScoped" ->
-                environment.className("dagger.hilt.android.components", "FragmentComponent")
-
-            "dagger.hilt.android.scopes.ServiceScoped" ->
-                environment.className("dagger.hilt.android.components", "ServiceComponent")
-
-            "dagger.hilt.android.scopes.ViewScoped" ->
-                environment.className("dagger.hilt.android.components", "ViewComponent")
-
-            "dagger.hilt.android.scopes.ViewModelScoped" ->
-                environment.className("dagger.hilt.android.components", "ViewModelComponent")
-
-            "dagger.hilt.android.scopes.ViewWithFragmentScoped" ->
-                environment.className("dagger.hilt.android.components", "ViewWithFragmentComponent")
-
-            else -> null
-        }
 
     data class ModuleKey<ClassName>(
         val targetType: ClassName,

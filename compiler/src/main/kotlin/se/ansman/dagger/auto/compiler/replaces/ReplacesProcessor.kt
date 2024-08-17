@@ -5,10 +5,13 @@ import se.ansman.dagger.auto.AutoInitialize
 import se.ansman.dagger.auto.android.testing.Replaces
 import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor
+import se.ansman.dagger.auto.compiler.autobind.models.AutoBindObjectModule
+import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
 import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
 import se.ansman.dagger.auto.compiler.common.processing.error
 import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
 import se.ansman.dagger.auto.compiler.common.processing.getValue
@@ -19,15 +22,12 @@ import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.NoOpRenderer
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
-import se.ansman.dagger.auto.compiler.autobind.models.AutoBindObjectModule
-import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
-import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
 
 class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec, F>(
-    private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
+    override val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
     private val renderer: Renderer<AutoBindObjectModule<N, TypeName, ClassName, AnnotationSpec>, F>,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
-    private val logger = environment.logger.withTag("replaces")
+    override val logger = environment.logger.withTag("replaces")
     private val autoBindProcessor = AutoBindProcessor(environment, NoOpRenderer, logging = false)
     private val autoInitializeProcessor = AutoInitializeProcessor(environment, NoOpRenderer)
 
