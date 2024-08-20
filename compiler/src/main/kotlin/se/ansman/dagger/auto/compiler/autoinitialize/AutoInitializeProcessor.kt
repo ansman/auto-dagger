@@ -36,10 +36,10 @@ import javax.inject.Scope
 import javax.inject.Singleton
 
 class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F>(
-    private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
+    override val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
     private val renderer: Renderer<AutoInitializeModule<N, TypeName, ClassName, AnnotationSpec>, F>,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
-    private val logger = environment.logger.withTag("auto-initialize")
+    override val logger = environment.logger.withTag("auto-initialize")
     override val annotations: Set<String> = setOf(AutoInitialize::class.java.canonicalName)
 
     override fun process(resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>) {

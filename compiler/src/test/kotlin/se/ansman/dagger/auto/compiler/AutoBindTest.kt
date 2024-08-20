@@ -15,7 +15,7 @@ class AutoBindTest {
     
     @ParameterizedTest
     @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
-    fun `supertype must not be generic`(compilationFactory: Compilation.Factory) {
+    fun `type must not be generic`(compilationFactory: Compilation.Factory) {
         compilationFactory.create(tempDirectory)
             .compile(
                 """
@@ -136,7 +136,7 @@ class AutoBindTest {
                 class ActivityRepository @javax.inject.Inject constructor() : Repository
                 """
             )
-            .assertFailedWithMessage(Errors.AutoBind.parentComponent("SingletonComponent", "ActivityComponent"))
+            .assertFailedWithMessage(Errors.parentComponent("SingletonComponent", "ActivityComponent"))
         compilationFactory.create(tempDirectory)
             .compile(
                 """
@@ -149,7 +149,7 @@ class AutoBindTest {
                 class FragmentRepository @javax.inject.Inject constructor() : Repository
                 """
             )
-            .assertFailedWithMessage(Errors.AutoBind.parentComponent("ActivityComponent", "FragmentComponent"))
+            .assertFailedWithMessage(Errors.parentComponent("ActivityComponent", "FragmentComponent"))
         compilationFactory.create(tempDirectory)
             .compile(
                 """
@@ -162,7 +162,7 @@ class AutoBindTest {
                 class FragmentRepository @javax.inject.Inject constructor() : Repository
                 """
             )
-            .assertFailedWithMessage(Errors.AutoBind.parentComponent("SingletonComponent", "FragmentComponent"))
+            .assertFailedWithMessage(Errors.parentComponent("SingletonComponent", "FragmentComponent"))
     }
 
     @Nested

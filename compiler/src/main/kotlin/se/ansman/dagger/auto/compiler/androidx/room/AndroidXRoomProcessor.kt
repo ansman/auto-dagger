@@ -1,7 +1,7 @@
 package se.ansman.dagger.auto.compiler.androidx.room
 
-import se.ansman.dagger.auto.androidx.room.AutoProvideDaos
 import dagger.hilt.components.SingletonComponent
+import se.ansman.dagger.auto.androidx.room.AutoProvideDaos
 import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.androidx.room.models.AndroidXRoomDatabaseModule
 import se.ansman.dagger.auto.compiler.androidx.room.renderer.AndroidXRoomDatabaseModuleRenderer
@@ -19,13 +19,13 @@ import se.ansman.dagger.auto.compiler.common.processing.lookupType
 import se.ansman.dagger.auto.compiler.common.processing.nodesAnnotatedWith
 import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
-import se.ansman.dagger.auto.compiler.utils.ComponentValidator.validateComponent
+import se.ansman.dagger.auto.compiler.utils.validateComponent
 
 class AndroidXRoomProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F>(
-    private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
+    override val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
     private val renderer: AndroidXRoomDatabaseModuleRenderer<N, TypeName, ClassName, AnnotationSpec, *, *, F>
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
-    private val logger = environment.logger.withTag("androidx.room")
+    override val logger = environment.logger.withTag("androidx.room")
     override val annotations: Set<String> = setOf(
         AutoProvideDaos::class.java.canonicalName,
     )
@@ -42,7 +42,7 @@ class AndroidXRoomProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F
                     ?: resolver.lookupType(SingletonComponent::class)
 
                 database.validateDatabase()
-                targetComponent.validateComponent(database, logger)
+                database.validateComponent(resolver, targetComponent)
 
                 AndroidXRoomDatabaseModule(
                     moduleName = environment.rootPeerClass(

@@ -13,6 +13,12 @@ object Errors {
     fun invalidComponent(component: String): String =
         "The specified component $component isn't a Dagger component"
 
+    fun nonStandardScope(scope: String): String =
+        "Scope $scope is not a standard scope so you must specify a component explicitly using the `inComponent` parameter."
+
+    fun parentComponent(inComponent: String, inferredComponent: String): String =
+        "The component $inComponent is a parent component of $inferredComponent and cannot be used as inComponent"
+
     object AutoInitialize {
         const val wrongScope = "Objects annotated with @AutoInitialize must also be annotated with @Singleton"
         const val unscopedType = wrongScope
@@ -32,12 +38,6 @@ object Errors {
 
         fun missingDirectSuperType(boundType: String): String =
             "$boundType is specified using `asTypes` but isn't a direct supertype"
-
-        fun parentComponent(installIn: String, inferredComponent: String): String =
-            "The installIn component $installIn is a parent component of $inferredComponent and cannot be used as installIn for @AutoBind"
-
-        fun nonStandardScope(scope: String): String =
-            "Scope $scope is not a standard scope so you must specify a component explicitly using the `inComponent` parameter."
 
         fun invalidBindMode(bindGenericAs: BindGenericAs): String =
             "Using BindGenericAs.${bindGenericAs.name} requires at least one generic supertype."
@@ -91,5 +91,9 @@ object Errors {
             const val notADatabase = "Types annotated @AutoProvideDao must be annotated with @Database and directly extend RoomDatabase."
             const val typeMustDirectlyExtendRoomDatabase = "Indirect inheritance of RoomDatabase is not supported right now. If this is needed, open a feature request at https://github.com/ansman/auto-dagger/issues/new and explain your use case."
         }
+    }
+
+    object OptionallyProvided {
+        const val objectType = "Objects annotated with @OptionallyProvided must not be objects"
     }
 }

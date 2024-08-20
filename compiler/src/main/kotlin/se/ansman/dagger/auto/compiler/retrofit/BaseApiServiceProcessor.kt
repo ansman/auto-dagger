@@ -23,17 +23,17 @@ import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.retrofit.models.ApiServiceModule
 import se.ansman.dagger.auto.compiler.retrofit.renderer.BaseApiServiceModuleRenderer
-import se.ansman.dagger.auto.compiler.utils.ComponentValidator.validateComponent
+import se.ansman.dagger.auto.compiler.utils.validateComponent
 import javax.inject.Scope
 import kotlin.reflect.KClass
 
 abstract class BaseApiServiceProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F>(
-    private val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
+    override val environment: AutoDaggerEnvironment<N, TypeName, ClassName, AnnotationSpec, F>,
     private val renderer: BaseApiServiceModuleRenderer<N, TypeName, ClassName, AnnotationSpec, *, *, F>,
     private val annotation: KClass<out Annotation>,
     serviceAnnotations: Set<String>,
     private val modulePrefix: String,
-    private val logger: AutoDaggerLogger<N>,
+    override val logger: AutoDaggerLogger<N>,
     private val errors: Errors.ApiService,
 ) : Processor<N, TypeName, ClassName, AnnotationSpec> {
     override val annotations: Set<String> = setOf(annotation.java.canonicalName)
@@ -54,7 +54,7 @@ abstract class BaseApiServiceProcessor<N, TypeName, ClassName : TypeName, Annota
                     ?: resolver.lookupType(SingletonComponent::class)
 
                 service.validateService()
-                targetComponent.validateComponent(service, logger)
+                service.validateComponent(resolver, targetComponent)
 
                 ApiServiceModule(
                     moduleName = environment.rootPeerClass(

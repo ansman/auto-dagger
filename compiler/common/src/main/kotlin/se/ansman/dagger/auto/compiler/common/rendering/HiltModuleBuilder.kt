@@ -25,6 +25,12 @@ interface HiltModuleBuilder<in Node, TypeName, AnnotationSpec, ParameterSpec, Co
         mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
     ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
 
+    fun addOptionalBinding(
+        name: String,
+        type: DaggerType<TypeName, AnnotationSpec>,
+        isPublic: Boolean,
+    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
+
     fun build(): SourceFile
 
     fun interface Factory<in Node, TypeName, ClassName : TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile> {
@@ -78,8 +84,8 @@ interface HiltModuleBuilder<in Node, TypeName, AnnotationSpec, ParameterSpec, Co
     ) : Parameter<TypeName, AnnotationSpec>()
 
     sealed class ProviderMode<out AnnotationSpec> {
-        object Single : ProviderMode<Nothing>()
-        object IntoSet : ProviderMode<Nothing>()
+        data object Single : ProviderMode<Nothing>()
+        data object IntoSet : ProviderMode<Nothing>()
         data class IntoMap<AnnotationSpec>(val bindingKey: AnnotationSpec) : ProviderMode<AnnotationSpec>()
     }
 }

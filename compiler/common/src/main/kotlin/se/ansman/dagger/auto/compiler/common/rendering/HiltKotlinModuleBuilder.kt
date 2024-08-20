@@ -16,6 +16,7 @@ import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asClassName
 import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import dagger.Binds
+import dagger.BindsOptionalOf
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +28,7 @@ import se.ansman.dagger.auto.compiler.common.ksp.addMemberClassArray
 import se.ansman.dagger.auto.compiler.common.models.HiltModule
 import se.ansman.dagger.auto.compiler.common.rawType
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.ProviderMode
+import kotlin.reflect.KClass
 
 class HiltKotlinModuleBuilder private constructor(
     private val info: HiltModule<KSDeclaration, ClassName>,
@@ -62,12 +64,46 @@ class HiltKotlinModuleBuilder private constructor(
         returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
         mode: ProviderMode<AnnotationSpec>
+    ) = addBinding(
+        bindingAnnotation = Binds::class,
+        name = name,
+        sourceType = sourceType,
+        returnType = returnType,
+        isPublic = isPublic,
+        mode = mode,
+    )
+
+    override fun addOptionalBinding(
+        name: String,
+        type: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
+        isPublic: Boolean
+    ): HiltModuleBuilder<KSDeclaration, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec> =
+        addBinding(
+            bindingAnnotation = BindsOptionalOf::class,
+            name = name,
+            sourceType = null,
+            returnType = type,
+            isPublic = isPublic,
+            mode = ProviderMode.Single
+        )
+
+    private fun addBinding(
+        bindingAnnotation: KClass<out Annotation>,
+        name: String,
+        sourceType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>?,
+        returnType: HiltModuleBuilder.DaggerType<TypeName, AnnotationSpec>,
+        isPublic: Boolean,
+        mode: ProviderMode<AnnotationSpec>
     ) = apply {
         bindings += FunSpec.builder(nameAllocator.newName(name))
             .addModifiers(if (isPublic) KModifier.PUBLIC else KModifier.INTERNAL, KModifier.ABSTRACT)
-            .addAnnotation(Binds::class)
+            .addAnnotation(bindingAnnotation)
             .addAnnotations(mode.asAnnotations())
-            .addParameter(sourceType.toParameterSpec(nameAllocator))
+            .apply {
+                if (sourceType != null) {
+                    addParameter(sourceType.toParameterSpec(nameAllocator))
+                }
+            }
             .addAnnotations(returnType.qualifiers)
             .returns(returnType.type)
             .build()
