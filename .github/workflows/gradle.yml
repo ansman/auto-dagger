@@ -21,7 +21,7 @@ jobs:
       uses: actions/cache@v4
       id: cache-android-sdk
       with:
-        path: /usr/local/lib/android
+        path: /usr/local/lib/android/sdk
         key: ${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}-android-sdk
 
     - uses: actions/setup-java@v3
@@ -48,11 +48,11 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Cache Android SDK
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       id: cache-android-sdk
       with:
-        path: /usr/local/lib/android
-        key: ${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}-android-sdk
+        path: /usr/local/lib/android/sdk
+        key: ${{ runner.os }}-android-sdk-${{ hashFiles('gradle/libs.versions.toml') }}
 
     - uses: actions/setup-java@v3
       with:
