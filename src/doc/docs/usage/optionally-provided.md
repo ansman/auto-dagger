@@ -1,9 +1,9 @@
 # `@OptionallyProvided` Usage
-Denotes that there might not be an implementation of the given type.
+Denotes that the annotated type might not be provided to the dependency graph.
 
 This will generate a `@BindsOptionalOf` binding for the annotated type.
 
-This is useful when the implementation will only be available in some types of builds. For example
+This is useful when the type will only be provided under certain circumstances. For example
 an Android app might have some debug settings that are only available in debuggable builds.
 
 ```kotlin
