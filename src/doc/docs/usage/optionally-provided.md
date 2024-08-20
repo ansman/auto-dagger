@@ -44,7 +44,7 @@ interface DebugApi
 ```
 
 ## Qualifiers
-Any [Qualifier]s on the annotated type will be carried over to the binding:
+Any `Qualifier`s on the annotated type will be carried over to the binding:
 ```
 @Named("Prod")
 @OptionallyProvided
