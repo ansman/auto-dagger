@@ -53,33 +53,30 @@ class ResourceBasedTestGenerator(
     ): DynamicTest? {
         val name = test.fileName.toString()
         val expectedDirectory = test.resolve(factory.expectedFilesDirectoryName)
-        return if (expectedDirectory.exists() || writeExpectedFilesTo != null) {
-            DynamicTest.dynamicTest(
-                factory.expectedFilesDirectoryName,
-                ResourceTestCase(
-                    testType = type,
-                    testName = name,
-                    compilation = factory.create(tempDirectory.resolve(name).apply { mkdirs() }),
-                    sources = Files.list(test)
-                        .asSequence()
-                        .filter { it.isRegularFile() }
-                        .map(Path::toFile)
-                        .map(TestSourceFile::File)
-                        .toList(),
-                    writeExpectedFilesTo = writeExpectedFilesTo
-                        ?.resolve("$type/${test.name}/${factory.expectedFilesDirectoryName}"),
-                    expectedFiles = expectedDirectory
-                        .takeIf(Path::exists)
-                        ?.let(Files::list)
-                        ?.asSequence()
-                        ?.associateBy(
-                            { it.fileName.toString().removeSuffix(".txt") },
-                            { it.readText().trim() })
-                        ?: emptyMap()
-                )
+        return DynamicTest.dynamicTest(
+            factory.expectedFilesDirectoryName,
+            ResourceTestCase(
+                testType = type,
+                testName = name,
+                compilation = factory.create(tempDirectory.resolve(name).apply { mkdirs() }),
+                sources = Files.list(test)
+                    .asSequence()
+                    .filter { it.isRegularFile() }
+                    .map(Path::toFile)
+                    .map(TestSourceFile::File)
+                    .toList(),
+                writeExpectedFilesTo = writeExpectedFilesTo
+                    ?.resolve("$type/${test.name}/${factory.expectedFilesDirectoryName}"),
+                expectedFiles = expectedDirectory
+                    .takeIf(Path::exists)
+                    ?.let(Files::list)
+                    ?.asSequence()
+                    ?.filter { it.name != "empty.txt" }
+                    ?.associateBy(
+                        { it.fileName.toString().removeSuffix(".txt") },
+                        { it.readText().trim() })
+                    ?: emptyMap()
             )
-        } else {
-            null
-        }
+        )
     }
 }
