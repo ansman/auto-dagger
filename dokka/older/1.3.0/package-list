@@ -1,0 +1,17 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:core
+se.ansman.dagger.auto
+module:android-api
+se.ansman.dagger.auto.android
+module:android-testing
+se.ansman.dagger.auto.android.testing
+module:ktorfit
+se.ansman.dagger.auto.ktorfit
+module:retrofit
+se.ansman.dagger.auto.retrofit
+module:androidx-room
+se.ansman.dagger.auto.androidx.room
+module:androidx-viewmodel
+se.ansman.dagger.auto.androidx.viewmodel
