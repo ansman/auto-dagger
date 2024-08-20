@@ -47,6 +47,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Cache Android SDK
+      uses: actions/cache@v4
+      id: cache-android-sdk
+      with:
+        path: /usr/local/lib/android
+        key: ${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}-android-sdk
+
     - uses: actions/setup-java@v3
       with:
         distribution: 'zulu'
