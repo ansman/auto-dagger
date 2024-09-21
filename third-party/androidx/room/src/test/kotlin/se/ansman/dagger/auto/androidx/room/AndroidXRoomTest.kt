@@ -20,6 +20,7 @@ class AndroidXRoomTest {
                 """
                 package se.ansman.dagger.auto.androidx.room
 
+                @androidx.room.Dao
                 interface UserDao
 
                 @AutoProvideDaos
@@ -39,6 +40,7 @@ class AndroidXRoomTest {
                 """
                 package se.ansman.dagger.auto.androidx.room
 
+                @androidx.room.Dao
                 interface UserDao
 
                 @androidx.room.Database(entities = [], version = 1)
@@ -59,6 +61,7 @@ class AndroidXRoomTest {
                 """
                 package se.ansman.dagger.auto.androidx.room
 
+                @androidx.room.Dao
                 interface UserDao
 
                 abstract class BaseDatabase : androidx.room.RoomDatabase()
@@ -71,5 +74,32 @@ class AndroidXRoomTest {
                 """
             )
             .assertFailedWithMessage(Errors.AndroidX.Room.typeMustDirectlyExtendRoomDatabase)
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+    fun `non dao functions`(compilationFactory: Compilation.Factory) {
+        // See https://github.com/ansman/auto-dagger/issues/224
+        compilationFactory.create(tempDirectory)
+            .compile(
+                """
+                package se.ansman.dagger.auto.androidx.room
+
+                import androidx.room.withTransaction
+
+                @androidx.room.Dao
+                interface UserDao
+
+                @androidx.room.Database(entities = [], version = 1)
+                @AutoProvideDaos
+                abstract class AppDatabase : androidx.room.RoomDatabase() {
+                    abstract val users: UserDao
+                    
+                    suspend fun <R> withTransaction(block: suspend () -> R): R = 
+                        (this as androidx.room.RoomDatabase).withTransaction(block)
+                }
+                """
+            )
+            .assertIsSuccessful()
     }
 }

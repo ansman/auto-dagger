@@ -13,8 +13,10 @@ data class KspType(
     val type: KSType,
     private val resolver: KspResolver,
 ) : Type<KSDeclaration, TypeName, ClassName, AnnotationSpec> {
-    override val declaration: KspClassDeclaration by lazy(LazyThreadSafetyMode.NONE) {
-        KspClassDeclaration(type.unwrapTypeAlias().declaration as KSClassDeclaration, resolver)
+    override val declaration: KspClassDeclaration? by lazy(LazyThreadSafetyMode.NONE) {
+        val declaration = type.unwrapTypeAlias().declaration as? KSClassDeclaration
+            ?: return@lazy null
+        KspClassDeclaration(declaration, resolver)
     }
 
     override val isGeneric: Boolean

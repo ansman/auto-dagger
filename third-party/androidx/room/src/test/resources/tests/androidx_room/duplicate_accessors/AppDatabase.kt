@@ -1,9 +1,11 @@
 package tests.androidx_room.duplicate_accessors
 
+import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import se.ansman.dagger.auto.androidx.room.AutoProvideDaos
 
+@Dao
 interface UserDao
 
 @Database(entities = [], version = 1)

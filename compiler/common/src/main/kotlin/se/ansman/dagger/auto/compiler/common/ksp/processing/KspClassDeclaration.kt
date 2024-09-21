@@ -78,7 +78,7 @@ data class KspClassDeclaration(
         get() = Modifier.SEALED in node.modifiers
 
     override val superclass: Type<KSDeclaration, TypeName, ClassName, AnnotationSpec>?
-        get() = supertypes.find { it.declaration.node.classKind == ClassKind.CLASS }
+        get() = supertypes.find { it.declaration?.node?.classKind == ClassKind.CLASS }
 
     override fun asType(): KspType = KspType(node.asStarProjectedType(), resolver)
 }
