@@ -1,0 +1,106 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>OptionallyProvided</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script>
+<link href="../../../styles/multimodule.css" rel="Stylesheet"></head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+<a class="library-name--link" href="../../../index.html">
+                            auto-dagger
+                    </a>            </div>
+            <div class="library-version">
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;se.ansman.dagger.auto/-optionally-provided/index.html&quot;}"><div class="versions-dropdown">
+  <div class="versions-dropdown-button">1.2.1</div>
+  <div class="versions-dropdown-data"><a href="../../../../../not-found-version.html?v=1.4.0">1.4.0</a><a href="index.html">1.3.0</a><a href="index.html">1.2.1</a><a href="index.html">1.2.0</a><a href="index.html">1.1.0</a><a href="index.html">1.0.0</a></div>
+</div>
+</dokka-template-command>            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":core:dokkaHtmlPartial/main">jvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="core::se.ansman.dagger.auto/OptionallyProvided///PointingToDeclaration//537371977">
+  <div class="breadcrumbs"><a href="../../index.html">core</a><span class="delimiter">/</span><a href="../index.html">se.ansman.dagger.auto</a><span class="delimiter">/</span><span class="current">OptionallyProvided</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Optionally</span><wbr><span><span>Provided</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:dokkaHtmlPartial/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html"><span class="token annotation builtin">Target</span></a><span class="token punctuation">(</span><span>allowedTargets<span class="token operator"> = </span><span class="token punctuation">[</span><span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-annotation-target/-c-l-a-s-s/index.html">AnnotationTarget.CLASS</a></span><wbr><span class="token punctuation">]</span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">annotation class </span><a href="index.html">OptionallyProvided</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>inComponent<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Nothing::class</span></span><span class="token punctuation">)</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/ansman/auto-dagger/blob/1.4.0/core/src/main/kotlin/se/ansman/dagger/auto/OptionallyProvided.kt#L75">source</a>)</span></span></div><p class="paragraph">Denotes that the annotated type might not be provided to the dependency graph.</p><p class="paragraph">This will generate a <span data-unresolved-link="dagger/BindsOptionalOf///PointingToDeclaration/"><code class="lang-kotlin">@BindsOptionalOf</code></span> binding for the annotated type.</p><p class="paragraph">This is useful when the type will only be provided under certain circumstances. For example an Android app might have some debug settings that are only available in debuggable builds.</p><h2 class="">Example</h2><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">@OptionallyProvided<br>interface DebugApi<br><br>// This generates<br>@BindsOptionalOf<br>abstract fun bindsOptionalDebugApi(): DebugApi<br><br>// Then in your implementation module<br>@AutoBind<br>@Singleton<br>class RealDebugApi @Inject constructor() : DebugApi</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class="">Component</h2><p class="paragraph">Auto Dagger tries to infer the component based on the scope of the object using the following mapping:</p><table><thead><tr><th>Scope</th><th>Component</th></tr></thead><tbody><tr><td>No scope</td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">SingletonComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">Singleton</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">SingletonComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">Reusable</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">SingletonComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ActivityRetainedScoped</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ActivityRetainedComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ActivityScoped</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ActivityComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">FragmentScoped</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">FragmentComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ServiceScoped</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ServiceComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ViewScoped</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ViewComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ViewModelScoped</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ViewModelComponent</code></td></tr><tr><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ViewWithFragmentScoped</code></td><td><code class="org.jetbrains.dokka.pages.commenttable@3f32ac5e lang-kotlin">ViewWithFragmentComponent</code></td></tr></tbody></table><p class="paragraph">If you want to install the binding in a different component or if you're using a custom scope, then you can use the <a href="in-component.html">inComponent</a> parameter to explicit provide the component:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">@OptionallyProvided(inComponent = SomeComponent::class)<br>interface DebugApi</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h2 class="">Qualifiers</h2><p class="paragraph">Any <span data-unresolved-link="javax.inject/Qualifier///PointingToDeclaration/">Qualifier</span>s on the annotated type will be carried over to the binding:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">@Named("Prod")<br>@OptionallyProvided<br>interface Authenticator<br><br>// Generates the equivalent to:<br>@BindsOptionalOf<br>@Named("Prod")<br>abstract fun bindsOptionalAuthenticator(): Authenticator</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><span class="kdoc-tag"><h4 class="">Since</h4><p class="paragraph">1.3.0</p></span><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":core:dokkaHtmlPartial/main" data-filterable-set=":core:dokkaHtmlPartial/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>in</span><wbr><span><span>Component</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Which component to install the binding in. Defaults to being inferred based on the scope.</p></div></div></div></div></div><h4 class="">See also</h4><div class="table"><div class="table-row" data-filterable-current=":core:dokkaHtmlPartial/main" data-filterable-set=":core:dokkaHtmlPartial/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-auto-bind/index.html"><span>Auto</span><wbr><span><span>Bind</span></span></a></div></span></div><div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-1923802262%2FProperties%2F537371977" anchor-label="inComponent" id="-1923802262%2FProperties%2F537371977" data-filterable-set=":core:dokkaHtmlPartial/main"></a>
+          <div class="table-row" data-filterable-current=":core:dokkaHtmlPartial/main" data-filterable-set=":core:dokkaHtmlPartial/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="in-component.html"><span>in</span><wbr><span><span>Component</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1923802262%2FProperties%2F537371977"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":core:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="in-component.html">inComponent</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
