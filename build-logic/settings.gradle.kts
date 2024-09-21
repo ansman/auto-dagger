@@ -22,4 +22,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "gradle-plugin"
+rootProject.name = "build-logic"
