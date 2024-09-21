@@ -196,6 +196,7 @@ class AutoBindProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         output[key] = output[key]
             ?.withTypesAdded(boundTypes)
             ?: AutoBindObjectModule(
+                processor = javaClass,
                 moduleName = getModuleName(type, component),
                 installation = HiltModuleBuilder.Installation.InstallIn(component),
                 originatingTopLevelClassName = environment.topLevelClassName(type.className),

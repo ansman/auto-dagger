@@ -7,8 +7,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.codegen.OriginatingElement
 import dagger.hilt.components.SingletonComponent
 import de.jensklingenberg.ktorfit.Ktorfit
+import javax.`annotation`.processing.Generated
 import javax.inject.Singleton
 
+@Generated("se.ansman.dagger.auto.compiler.ktorfit.KtorfitProcessor")
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = ApiService::class)

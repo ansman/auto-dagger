@@ -5,7 +5,9 @@ import dagger.BindsOptionalOf;
 import dagger.Module;
 import dagger.hilt.InstallIn;
 import dagger.hilt.codegen.OriginatingElement;
+import javax.annotation.processing.Generated;
 
+@Generated("se.ansman.dagger.auto.compiler.optionallyprovided.OptionallyProvidedProcessor")
 @Module
 @InstallIn(MyComponent.class)
 @OriginatingElement(

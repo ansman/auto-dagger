@@ -7,7 +7,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.codegen.OriginatingElement
 import de.jensklingenberg.ktorfit.Ktorfit
+import javax.`annotation`.processing.Generated
 
+@Generated("se.ansman.dagger.auto.compiler.ktorfit.KtorfitProcessor")
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = ApiService::class)

@@ -7,8 +7,10 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.codegen.OriginatingElement;
 import dagger.hilt.components.SingletonComponent;
 import java.lang.String;
+import javax.annotation.processing.Generated;
 import kotlin.jvm.functions.Function0;
 
+@Generated("se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor")
 @Module
 @InstallIn(SingletonComponent.class)
 @OriginatingElement(

@@ -6,9 +6,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.codegen.OriginatingElement
+import javax.`annotation`.processing.Generated
 import retrofit2.Retrofit
 import retrofit2.create
 
+@Generated("se.ansman.dagger.auto.compiler.retrofit.RetrofitProcessor")
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = ApiService::class)

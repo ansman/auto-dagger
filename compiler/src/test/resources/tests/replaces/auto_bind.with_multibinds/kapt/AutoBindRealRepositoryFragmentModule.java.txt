@@ -9,7 +9,9 @@ import dagger.hilt.codegen.OriginatingElement;
 import dagger.multibindings.IntoMap;
 import dagger.multibindings.StringKey;
 import java.lang.Runnable;
+import javax.annotation.processing.Generated;
 
+@Generated("se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor")
 @Module
 @InstallIn(FragmentComponent.class)
 @OriginatingElement(

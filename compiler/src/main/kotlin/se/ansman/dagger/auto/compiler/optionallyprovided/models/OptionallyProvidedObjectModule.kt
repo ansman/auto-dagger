@@ -1,9 +1,11 @@
 package se.ansman.dagger.auto.compiler.optionallyprovided.models
 
+import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.models.HiltModule
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 
 data class OptionallyProvidedObjectModule<out Node, TypeName, ClassName : TypeName, AnnotationSpec>(
+    override val processor: Class<out Processor<*, *, *, *>>,
     override val moduleName: ClassName,
     override val installation: HiltModuleBuilder.Installation<ClassName>,
     override val originatingTopLevelClassName: ClassName,

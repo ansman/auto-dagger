@@ -53,6 +53,7 @@ class OptionallyProvidedProcessor<N, TypeName : Any, ClassName : TypeName, Annot
         val component = getTargetComponent(this, resolver, annotation)
             ?: return null
         return OptionallyProvidedObjectModule(
+            processor = this@OptionallyProvidedProcessor.javaClass,
             moduleName = getModuleName(this, component),
             installation = HiltModuleBuilder.Installation.InstallIn(component),
             originatingTopLevelClassName = environment.topLevelClassName(className),
