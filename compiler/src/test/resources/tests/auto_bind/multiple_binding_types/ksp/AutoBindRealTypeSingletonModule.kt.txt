@@ -9,7 +9,9 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import dagger.multibindings.StringKey
+import javax.`annotation`.processing.Generated
 
+@Generated("se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor")
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = RealType::class)

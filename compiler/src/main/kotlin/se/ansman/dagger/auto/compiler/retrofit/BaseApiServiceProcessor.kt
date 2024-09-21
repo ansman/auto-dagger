@@ -44,6 +44,7 @@ abstract class BaseApiServiceProcessor<N, TypeName, ClassName : TypeName, Annota
                 validateComponent(service, resolver, targetComponent)
 
                 ApiServiceModule(
+                    processor = javaClass,
                     moduleName = environment.rootPeerClass(
                         service.className,
                         environment.simpleNames(service.className).joinToString(

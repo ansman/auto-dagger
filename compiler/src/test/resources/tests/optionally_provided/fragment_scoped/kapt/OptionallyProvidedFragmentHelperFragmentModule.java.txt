@@ -6,7 +6,9 @@ import dagger.Module;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.components.FragmentComponent;
 import dagger.hilt.codegen.OriginatingElement;
+import javax.annotation.processing.Generated;
 
+@Generated("se.ansman.dagger.auto.compiler.optionallyprovided.OptionallyProvidedProcessor")
 @Module
 @InstallIn(FragmentComponent.class)
 @OriginatingElement(

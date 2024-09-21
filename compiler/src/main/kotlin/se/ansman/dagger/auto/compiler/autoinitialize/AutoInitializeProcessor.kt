@@ -13,23 +13,8 @@ import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.autoinitialize.models.AutoInitializeModule
 import se.ansman.dagger.auto.compiler.autoinitialize.models.AutoInitializeObject
 import se.ansman.dagger.auto.compiler.common.Processor
-import se.ansman.dagger.auto.compiler.common.processing.AnnotationModel
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
-import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.*
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
-import se.ansman.dagger.auto.compiler.common.processing.ExecutableNode
-import se.ansman.dagger.auto.compiler.common.processing.Node
-import se.ansman.dagger.auto.compiler.common.processing.error
-import se.ansman.dagger.auto.compiler.common.processing.filterQualifiers
-import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
-import se.ansman.dagger.auto.compiler.common.processing.getQualifiers
-import se.ansman.dagger.auto.compiler.common.processing.getValue
-import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
-import se.ansman.dagger.auto.compiler.common.processing.isAssignableTo
-import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
-import se.ansman.dagger.auto.compiler.common.processing.nodesAnnotatedWith
-import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
 import javax.inject.Scope
@@ -72,6 +57,7 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
         for ((moduleKey, providers) in initializableObjectsByModule.asMap()) {
             val module = with(environment) {
                 AutoInitializeModule(
+                    processor = this@AutoInitializeProcessor.javaClass,
                     moduleName = rootPeerClass(
                         moduleKey.moduleName,
                         simpleNames(moduleKey.moduleName).joinToString(
@@ -101,6 +87,7 @@ class AutoInitializeProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec,
             qualifiers = type.getQualifiers()
         )
         return AutoInitializeModule(
+            processor = this@AutoInitializeProcessor.javaClass,
             moduleName = obj.targetType.moduleName,
             installation = HiltModuleBuilder.Installation.InstallIn(className(SingletonComponent::class)),
             originatingTopLevelClassName = environment.topLevelClassName(type.className),

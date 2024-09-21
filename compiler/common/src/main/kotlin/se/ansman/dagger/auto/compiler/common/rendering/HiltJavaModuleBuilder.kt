@@ -1,15 +1,6 @@
 package se.ansman.dagger.auto.compiler.common.rendering
 
-import com.squareup.javapoet.AnnotationSpec
-import com.squareup.javapoet.ClassName
-import com.squareup.javapoet.CodeBlock
-import com.squareup.javapoet.JavaFile
-import com.squareup.javapoet.MethodSpec
-import com.squareup.javapoet.NameAllocator
-import com.squareup.javapoet.ParameterSpec
-import com.squareup.javapoet.ParameterizedTypeName
-import com.squareup.javapoet.TypeName
-import com.squareup.javapoet.TypeSpec
+import com.squareup.javapoet.*
 import dagger.Binds
 import dagger.BindsOptionalOf
 import dagger.Module
@@ -21,6 +12,7 @@ import se.ansman.dagger.auto.compiler.common.generatedFileComment
 import se.ansman.dagger.auto.compiler.common.models.HiltModule
 import se.ansman.dagger.auto.compiler.common.rawType
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.ProviderMode
+import javax.annotation.processing.Generated
 import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 
@@ -36,6 +28,9 @@ class HiltJavaModuleBuilder private constructor(
                 .addModifiers(Modifier.PRIVATE)
                 .build()
         )
+        .addAnnotation(AnnotationSpec.builder(Generated::class.java)
+            .addMember("value", "\$S", info.processor.name)
+            .build())
         .addAnnotation(Module::class.java)
         .addAnnotation(
             when (val installation = info.installation) {

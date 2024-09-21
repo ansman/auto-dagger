@@ -8,17 +8,8 @@ import se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor
 import se.ansman.dagger.auto.compiler.autobind.models.AutoBindObjectModule
 import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
 import se.ansman.dagger.auto.compiler.common.Processor
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
-import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.*
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration.Kind
-import se.ansman.dagger.auto.compiler.common.processing.error
-import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
-import se.ansman.dagger.auto.compiler.common.processing.getValue
-import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
-import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
-import se.ansman.dagger.auto.compiler.common.processing.nodesAnnotatedWith
-import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.NoOpRenderer
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
@@ -101,6 +92,7 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
                 )
                 logger.info("Generating replacement for ${module.moduleName} named $moduleName")
                 AutoBindObjectModule(
+                    processor = javaClass,
                     moduleName = moduleName,
                     installation = HiltModuleBuilder.Installation.TestInstallIn(
                         components = module.installation.components,
@@ -129,6 +121,7 @@ class ReplacesProcessor<N, TypeName : Any, ClassName : TypeName, AnnotationSpec,
         logger.info("Rendering $moduleName")
         val file = renderer.render(
             AutoBindObjectModule(
+                processor = this@ReplacesProcessor.javaClass,
                 moduleName = moduleName,
                 installation = HiltModuleBuilder.Installation.TestInstallIn(
                     components = autoInitializeModule.installation.components,

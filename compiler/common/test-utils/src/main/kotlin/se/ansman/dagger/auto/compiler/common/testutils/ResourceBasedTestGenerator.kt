@@ -16,7 +16,9 @@ import kotlin.streams.asSequence
 class ResourceBasedTestGenerator(
     private val compilationFactoryProvider: CompilationFactoryProvider,
 ) {
-    private val writeExpectedFilesTo = System.getProperty("writeExpectedFilesTo")?.let(::File)
+    private val writeExpectedFilesTo = System.getProperty("writeExpectedFilesTo")
+        ?.takeIf { System.getProperty("writeExpectedFiles")?.toBooleanStrict() ?: false }
+        ?.let(::File)
 
     fun generateTests(tempDirectory: File): Iterable<DynamicNode> =
         Files.list(ClassLoader.getSystemResource("tests").toURI().toPath())

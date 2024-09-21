@@ -1,19 +1,8 @@
 package se.ansman.dagger.auto.compiler.common.rendering
 
 import com.google.devtools.ksp.symbol.KSDeclaration
-import com.squareup.kotlinpoet.AnnotationSpec
-import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.CodeBlock
-import com.squareup.kotlinpoet.DelicateKotlinPoetApi
-import com.squareup.kotlinpoet.FileSpec
-import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.KModifier
-import com.squareup.kotlinpoet.NameAllocator
-import com.squareup.kotlinpoet.ParameterSpec
+import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import com.squareup.kotlinpoet.TypeName
-import com.squareup.kotlinpoet.TypeSpec
-import com.squareup.kotlinpoet.asClassName
 import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import dagger.Binds
 import dagger.BindsOptionalOf
@@ -28,6 +17,7 @@ import se.ansman.dagger.auto.compiler.common.ksp.addMemberClassArray
 import se.ansman.dagger.auto.compiler.common.models.HiltModule
 import se.ansman.dagger.auto.compiler.common.rawType
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.ProviderMode
+import javax.annotation.processing.Generated
 import kotlin.reflect.KClass
 
 class HiltKotlinModuleBuilder private constructor(
@@ -131,6 +121,9 @@ class HiltKotlinModuleBuilder private constructor(
 
         typeSpec
             .apply { info.originatingElement.containingFile?.let(::addOriginatingKSFile) }
+            .addAnnotation(AnnotationSpec.builder(Generated::class)
+                .addMember("%S", info.processor.name)
+                .build())
             .addAnnotation(Module::class)
             .addAnnotation(when (val installation = info.installation) {
                 is HiltModuleBuilder.Installation.InstallIn ->

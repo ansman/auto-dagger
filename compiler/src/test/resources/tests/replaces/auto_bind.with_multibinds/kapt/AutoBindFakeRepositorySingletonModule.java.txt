@@ -8,7 +8,9 @@ import dagger.hilt.components.SingletonComponent;
 import dagger.hilt.testing.TestInstallIn;
 import dagger.multibindings.IntoSet;
 import java.io.Closeable;
+import javax.annotation.processing.Generated;
 
+@Generated("se.ansman.dagger.auto.compiler.replaces.ReplacesProcessor")
 @Module
 @TestInstallIn(
     components = SingletonComponent.class,

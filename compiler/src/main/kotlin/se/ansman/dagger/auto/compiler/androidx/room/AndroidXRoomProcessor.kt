@@ -35,6 +35,7 @@ class AndroidXRoomProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F
                 validateComponent(database, resolver, targetComponent)
 
                 AndroidXRoomDatabaseModule(
+                    processor = javaClass,
                     moduleName = environment.rootPeerClass(
                         database.className,
                         environment.simpleNames(database.className).joinToString(

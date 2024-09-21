@@ -5,7 +5,9 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.hilt.InstallIn;
 import dagger.hilt.codegen.OriginatingElement;
+import javax.annotation.processing.Generated;
 
+@Generated("se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor")
 @Module
 @InstallIn(MyComponent.class)
 @OriginatingElement(

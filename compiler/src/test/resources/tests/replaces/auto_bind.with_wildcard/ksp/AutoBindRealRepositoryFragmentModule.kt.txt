@@ -9,8 +9,10 @@ import dagger.hilt.codegen.OriginatingElement
 import dagger.multibindings.IntoMap
 import dagger.multibindings.StringKey
 import java.util.concurrent.Callable
+import javax.`annotation`.processing.Generated
 import kotlin.String
 
+@Generated("se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor")
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = RealRepository::class)
