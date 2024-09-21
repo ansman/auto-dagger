@@ -15,5 +15,5 @@ import de.jensklingenberg.ktorfit.Ktorfit
 public object AutoBindKtorfitApiService {
   @Provides
   @Reusable
-  public fun provideApiService(ktorfit: Ktorfit): ApiService = ktorfit.create()
+  public fun provideApiService(ktorfit: Ktorfit): ApiService = ktorfit.createApiService()
 }

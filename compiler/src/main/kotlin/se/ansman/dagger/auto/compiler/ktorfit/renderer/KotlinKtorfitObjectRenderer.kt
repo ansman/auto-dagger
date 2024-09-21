@@ -17,5 +17,5 @@ object KotlinKtorfitObjectRenderer :
     ) {
 
     override fun provideService(serviceClass: ClassName, serviceFactoryParameter: ParameterSpec): CodeBlock =
-        CodeBlock.of("return %N.create()", serviceFactoryParameter)
+        CodeBlock.of("return %N.create%N()", serviceFactoryParameter, serviceClass.simpleName)
 }

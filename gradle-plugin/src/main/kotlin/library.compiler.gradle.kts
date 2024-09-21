@@ -1,6 +1,7 @@
 
 import co.hinge.gradle.projectaccessors.copy
 import org.gradle.accessors.dm.LibrariesForLibs
+import se.ansman.dagger.auto.gradle.setupResourceTests
 
 plugins {
     kotlin("jvm")
@@ -9,6 +10,8 @@ plugins {
 }
 
 val libs = the<LibrariesForLibs>()
+
+setupResourceTests()
 
 dependencies {
     implementation(projects.compiler.common.copy(

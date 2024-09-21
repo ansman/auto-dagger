@@ -4,14 +4,7 @@ import se.ansman.dagger.auto.OptionallyProvided
 import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.common.Processor
 import se.ansman.dagger.auto.compiler.common.deleteSuffix
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
-import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
-import se.ansman.dagger.auto.compiler.common.processing.error
-import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
-import se.ansman.dagger.auto.compiler.common.processing.getQualifiers
-import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
-import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
+import se.ansman.dagger.auto.compiler.common.processing.*
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.common.rendering.Renderer
 import se.ansman.dagger.auto.compiler.optionallyprovided.models.OptionallyProvidedObjectModule
@@ -57,7 +50,7 @@ class OptionallyProvidedProcessor<N, TypeName : Any, ClassName : TypeName, Annot
         resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
     ): OptionallyProvidedObjectModule<N, TypeName, ClassName, AnnotationSpec>? {
         val annotation = getAnnotation(annotation)!!
-        val component = getTargetComponent(resolver, annotation)
+        val component = getTargetComponent(this, resolver, annotation)
             ?: return null
         return OptionallyProvidedObjectModule(
             moduleName = getModuleName(this, component),

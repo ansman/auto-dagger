@@ -1,26 +1,27 @@
 [versions]
-kotlin = "1.9.24"
+kotlin = "2.0.20"
 dokka = "1.9.20"
-compileTesting = "0.4.1"
+compileTesting = "0.5.1"
 autoService = "1.1.1"
 incap = "1.0.0"
 dagger = "2.52"
-ksp = "1.9.24-1.0.20"
+ksp = "2.0.20-1.0.25"
 android-minSdk = "21"
 android-compileSdk = "35"
 androidx-test = "1.6.1"
 kotlinpoet = "1.18.1"
 room = "2.6.1"
 retrofit = "2.11.0"
-ktorfit = "1.14.0"
+ktorfit = "2.1.0"
 projectAccessors = "1.1.0"
 
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.16.0"
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.16.3"
 mkdocs = "ru.vyarus.mkdocs:4.0.1"
 projectAccessors = { id = "co.hinge.gradle.project-accessors", version.ref = "projectAccessors" }
+ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -58,7 +59,6 @@ dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = 
 dagger-hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "dagger" }
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
-dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 
 ksp = { module = "com.google.devtools.ksp:symbol-processing", version.ref = "ksp" }

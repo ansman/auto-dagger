@@ -8,5 +8,6 @@ import java.io.File
 abstract class ResourceBasedTests {
     @TestFactory
     fun resources(@TempDir tempDirectory: File) =
-        ResourceBasedTestGenerator(AutoDaggerCompilationFactoryProvider()).generateTests(tempDirectory)
+        ResourceBasedTestGenerator(AutoDaggerCompilationFactoryProvider())
+            .generateTests(tempDirectory)
 }

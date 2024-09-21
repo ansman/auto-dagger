@@ -3,7 +3,6 @@ import com.android.build.gradle.LibraryExtension
 import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
-import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
 import se.ansman.dagger.auto.gradle.mapNullable
@@ -17,10 +16,10 @@ plugins {
 
 val libs = the<LibrariesForLibs>()
 
-archivesName.set(project.path
-    .removePrefix(":third-party")
-    .removePrefix(":")
-    .replace(':', '-'))
+//archivesName.set(project.path
+//    .removePrefix(":third-party")
+//    .removePrefix(":")
+//    .replace(':', '-'))
 
 val gitCommit = cachedProvider {
     project.execWithOutput {
@@ -37,7 +36,7 @@ val remoteSource: Provider<String> = providers.gradleProperty("version")
     .map { repo("/blob/$it") }
 
 tasks.withType<AbstractDokkaLeafTask>().configureEach {
-    moduleName.set(archivesName)
+//    moduleName.set(archivesName)
     val projectPath = project.path.removePrefix(":").replace(':', '/')
     dokkaSourceSets.configureEach {
         reportUndocumented.set(false)

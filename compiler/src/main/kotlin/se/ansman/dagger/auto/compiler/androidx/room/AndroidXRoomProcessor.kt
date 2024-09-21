@@ -6,18 +6,8 @@ import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.androidx.room.models.AndroidXRoomDatabaseModule
 import se.ansman.dagger.auto.compiler.androidx.room.renderer.AndroidXRoomDatabaseModuleRenderer
 import se.ansman.dagger.auto.compiler.common.Processor
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
-import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
+import se.ansman.dagger.auto.compiler.common.processing.*
 import se.ansman.dagger.auto.compiler.common.processing.Function
-import se.ansman.dagger.auto.compiler.common.processing.Property
-import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
-import se.ansman.dagger.auto.compiler.common.processing.getValue
-import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
-import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
-import se.ansman.dagger.auto.compiler.common.processing.lookupType
-import se.ansman.dagger.auto.compiler.common.processing.nodesAnnotatedWith
-import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.utils.validateComponent
 
@@ -42,7 +32,7 @@ class AndroidXRoomProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F
                     ?: resolver.lookupType(SingletonComponent::class)
 
                 database.validateDatabase()
-                database.validateComponent(resolver, targetComponent)
+                validateComponent(database, resolver, targetComponent)
 
                 AndroidXRoomDatabaseModule(
                     moduleName = environment.rootPeerClass(

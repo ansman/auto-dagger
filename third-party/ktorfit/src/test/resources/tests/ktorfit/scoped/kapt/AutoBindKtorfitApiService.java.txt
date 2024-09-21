@@ -21,6 +21,6 @@ public abstract class AutoBindKtorfitApiService {
   @Provides
   @Singleton
   public static ApiService provideApiService(Ktorfit ktorfit) {
-    return ktorfit.create(null);
+    return _ApiServiceImplKt.createApiService(ktorfit);
   }
 }

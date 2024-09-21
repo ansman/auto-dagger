@@ -1,7 +1,10 @@
 package se.ansman.dagger.auto.compiler.common.testutils
 
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
-import com.tschuchort.compiletesting.*
+import com.tschuchort.compiletesting.JvmCompilationResult
+import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.configureKsp
+import com.tschuchort.compiletesting.kspProcessorOptions
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import se.ansman.dagger.auto.compiler.common.Options
 import java.io.File
@@ -18,25 +21,27 @@ class KspCompilation(
     ): Result =
         KotlinCompilation()
             .apply {
-                kspArgs[Options.enableLogging] = "true"
+                kspProcessorOptions[Options.enableLogging] = "true"
                 configuration()
                 this.sources = sources.map { it.toSourceFile() }
-                symbolProcessorProviders = processorProviders()
-                kspWithCompilation = true
+                configureKsp(useKsp2 = true) {
+                    symbolProcessorProviders.addAll(processorProviders())
+                }
             }
             .compileFixed()
             .let(::Result)
 
     private fun KotlinCompilation.compileFixed(): JvmCompilationResult {
-        val result = synchronized(mutex) { compile() }
-        // This works around a bug where compile-testing-kotlin returns OK even though KSP failed.
-        if (
-            result.exitCode == KotlinCompilation.ExitCode.OK &&
-            "e: Error occurred in KSP, check log for detail" in result.messages
-        ) {
-            return JvmCompilationResult(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.messages, this)
-        }
-        return result
+        return compile()
+//        val result = synchronized(mutex) { compile() }
+//        // This works around a bug where compile-testing-kotlin returns OK even though KSP failed.
+//        if (
+//            result.exitCode == KotlinCompilation.ExitCode.OK &&
+//            "e: Error occurred in KSP, check log for detail" in result.messages
+//        ) {
+//            return JvmCompilationResult(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.messages, this, )
+//        }
+//        return result
     }
 
     private fun File.listSourceFiles(): Sequence<File> =
@@ -44,10 +49,6 @@ class KspCompilation(
 
     override val JvmCompilationResult.filesGeneratedByAnnotationProcessor: Sequence<File>
         get() = workingDir.resolve("ksp/sources").listSourceFiles()
-
-    companion object {
-        private val mutex = Any()
-    }
 
     class Factory(vararg processorProviders: () -> SymbolProcessorProvider) : Compilation.Factory {
         private val processorProviders = { processorProviders.map { it() }}

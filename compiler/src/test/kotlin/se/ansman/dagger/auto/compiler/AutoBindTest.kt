@@ -1,6 +1,5 @@
 package se.ansman.dagger.auto.compiler
 
-import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.io.TempDir
 import org.junit.jupiter.params.ParameterizedTest
@@ -166,7 +165,6 @@ class AutoBindTest {
     }
 
     @Nested
-    @DisplayName("auto bind generic as default")
     inner class AutoBindGenericAsDefault {
 
         @ParameterizedTest

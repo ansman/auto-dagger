@@ -5,62 +5,55 @@ import dagger.hilt.DefineComponent
 import dagger.hilt.components.SingletonComponent
 import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.common.Processor
-import se.ansman.dagger.auto.compiler.common.processing.AnnotationModel
-import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
-import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
-import se.ansman.dagger.auto.compiler.common.processing.Node
-import se.ansman.dagger.auto.compiler.common.processing.error
-import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
-import se.ansman.dagger.auto.compiler.common.processing.getValue
-import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
+import se.ansman.dagger.auto.compiler.common.processing.*
 import javax.inject.Scope
 import javax.inject.Singleton
 
-context(Processor<N, TypeName, ClassName, AnnotationSpec>)
-fun <N, TypeName, ClassName: TypeName, AnnotationSpec> ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.getTargetComponent(
+fun <N, TypeName, ClassName : TypeName, AnnotationSpec> Processor<N, TypeName, ClassName, AnnotationSpec>.getTargetComponent(
+    declaration: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
     resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
     annotation: AnnotationModel<ClassName, AnnotationSpec>,
 ): ClassName? =
     annotation.getValue<ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>>("inComponent")
-        ?.also { validateComponent(resolver, it) }
+        ?.also { validateComponent(declaration, resolver, it) }
         ?.className
-        ?: guessComponent()
+        ?: guessComponent(declaration)
 
-context(Processor<N, *, ClassName, *>)
-fun <N, ClassName> ClassDeclaration<N, *, ClassName, *>.guessComponent(): ClassName? {
-    val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
+fun <N, ClassName> Processor<N, *, ClassName, *>.guessComponent(
+    declaration: ClassDeclaration<N, *, ClassName, *>
+): ClassName? {
+    val scope = declaration.annotations.find { it.isAnnotatedWith(Scope::class) }
         ?: return environment.className(SingletonComponent::class)
-    return scope.guessComponent() ?: run {
+    return guessComponent(scope) ?: declaration.run {
         logger?.error(Errors.nonStandardScope(scope.qualifiedName), this)
         null
     }
 }
 
-context(Processor<N, TypeName, ClassName, AnnotationSpec>)
-fun <N, TypeName, ClassName: TypeName, AnnotationSpec> ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.validateComponent(
+fun <N, TypeName, ClassName : TypeName, AnnotationSpec> Processor<N, TypeName, ClassName, AnnotationSpec>.validateComponent(
+    declaration: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
     resolver: AutoDaggerResolver<N, TypeName, ClassName, AnnotationSpec>,
     component: ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>,
 ) {
-    if (!component.validateComponent(this)) {
+    if (!validateComponent(component, declaration)) {
         return
     }
-    val scope = annotations.find { it.isAnnotatedWith(Scope::class) }
+    val scope = declaration.annotations.find { it.isAnnotatedWith(Scope::class) }
         ?: return
-    val inferredComponent = scope.guessComponent() ?: return
-    if (isComponentChildComponent(resolver, component, inferredComponent)) {
+    val inferredComponent = guessComponent(scope) ?: return
+    if (resolver.isComponentChildComponent(component, inferredComponent)) {
         logger?.error(
             message = Errors.parentComponent(
                 inComponent = resolver.environment.simpleName(component.className),
                 inferredComponent = resolver.environment.simpleName(inferredComponent)
             ),
-            node = this
+            node = declaration
         )
     }
 }
 
-context(Processor<*, *, ClassName, *>)
-fun <ClassName> AnnotationModel<*, *>.guessComponent(): ClassName? =
-    when (qualifiedName) {
+fun <ClassName> Processor<*, *, ClassName, *>.guessComponent(annotation: AnnotationModel<*, *>): ClassName? =
+    when (annotation.qualifiedName) {
         Singleton::class.java.canonicalName,
         Reusable::class.java.canonicalName ->
             environment.className(SingletonComponent::class)
@@ -89,15 +82,13 @@ fun <ClassName> AnnotationModel<*, *>.guessComponent(): ClassName? =
         else -> null
     }
 
-context(Processor<*, *, ClassName, *>)
-private fun <ClassName> isComponentChildComponent(
-    resolver: AutoDaggerResolver<*, *, ClassName, *>,
+private fun <ClassName> AutoDaggerResolver<*, *, ClassName, *>.isComponentChildComponent(
     installInComponent: ClassDeclaration<*, *, ClassName, *>,
     inferredComponent: ClassName,
 ): Boolean {
     var c = inferredComponent
     do {
-        c = resolver.lookupType(c)
+        c = lookupType(c)
             .getAnnotation(DefineComponent::class)
             ?.getValue<ClassDeclaration<*, *, ClassName, *>>("parent")
             ?.className
@@ -106,11 +97,13 @@ private fun <ClassName> isComponentChildComponent(
     return true
 }
 
-context(Processor<N, *, *, *>)
-private fun <N> ClassDeclaration<N, *, *, *>.validateComponent(node: Node<N, *, *, *>): Boolean {
-    val defineComponent = getAnnotation(DefineComponent::class)
+private fun <N> Processor<N, *, *, *>.validateComponent(
+    declaration: ClassDeclaration<N, *, *, *>,
+    node: Node<N, *, *, *>
+): Boolean {
+    val defineComponent = declaration.getAnnotation(DefineComponent::class)
     if (defineComponent == null) {
-        logger?.error(Errors.invalidComponent(this.node.toString()), node)
+        logger?.error(Errors.invalidComponent(declaration.node.toString()), node)
         return false
     }
     return true

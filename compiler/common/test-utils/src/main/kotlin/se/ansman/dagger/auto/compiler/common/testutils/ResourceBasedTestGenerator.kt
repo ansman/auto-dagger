@@ -58,7 +58,7 @@ class ResourceBasedTestGenerator(
             ResourceTestCase(
                 testType = type,
                 testName = name,
-                compilation = factory.create(tempDirectory.resolve(name).apply { mkdirs() }),
+                compilation = factory.create(tempDirectory.resolve(name).resolve(factory.expectedFilesDirectoryName).apply { mkdirs() }),
                 sources = Files.list(test)
                     .asSequence()
                     .filter { it.isRegularFile() }

@@ -11,4 +11,5 @@ dependencies {
     implementation(projects.thirdParty.ktorfit)
     implementation(projects.thirdParty.androidx.room)
     testFixturesApi(projects.compiler.common.testUtils)
+    testImplementation(projects.compiler.common.testUtils)
 }

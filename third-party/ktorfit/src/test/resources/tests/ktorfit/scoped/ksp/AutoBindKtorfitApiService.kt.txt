@@ -15,5 +15,5 @@ import javax.inject.Singleton
 public object AutoBindKtorfitApiService {
   @Provides
   @Singleton
-  public fun provideApiService(ktorfit: Ktorfit): ApiService = ktorfit.create()
+  public fun provideApiService(ktorfit: Ktorfit): ApiService = ktorfit.createApiService()
 }
