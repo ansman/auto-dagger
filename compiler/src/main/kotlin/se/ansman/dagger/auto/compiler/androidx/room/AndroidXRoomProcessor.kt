@@ -6,8 +6,18 @@ import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.androidx.room.models.AndroidXRoomDatabaseModule
 import se.ansman.dagger.auto.compiler.androidx.room.renderer.AndroidXRoomDatabaseModuleRenderer
 import se.ansman.dagger.auto.compiler.common.Processor
-import se.ansman.dagger.auto.compiler.common.processing.*
+import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerEnvironment
+import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
+import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration
 import se.ansman.dagger.auto.compiler.common.processing.Function
+import se.ansman.dagger.auto.compiler.common.processing.Property
+import se.ansman.dagger.auto.compiler.common.processing.getAnnotation
+import se.ansman.dagger.auto.compiler.common.processing.getValue
+import se.ansman.dagger.auto.compiler.common.processing.isAnnotatedWith
+import se.ansman.dagger.auto.compiler.common.processing.isFullyPublic
+import se.ansman.dagger.auto.compiler.common.processing.lookupType
+import se.ansman.dagger.auto.compiler.common.processing.nodesAnnotatedWith
+import se.ansman.dagger.auto.compiler.common.processing.rootPeerClass
 import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder
 import se.ansman.dagger.auto.compiler.utils.validateComponent
 
@@ -48,35 +58,40 @@ class AndroidXRoomProcessor<N, TypeName, ClassName : TypeName, AnnotationSpec, F
                     originatingTopLevelClassName = environment.topLevelClassName(database.className),
                     originatingElement = database.node,
                     databaseType = database.className,
-                    daos = database.declaredNodes
-                        .mapNotNull inner@{ dao ->
-                            AndroidXRoomDatabaseModule.Dao(
-                                type = dao.returnType.toTypeName(),
-                                accessor = when (dao) {
-                                    is Property<N, TypeName, ClassName, AnnotationSpec> ->
-                                        AndroidXRoomDatabaseModule.Dao.Accessor.Property(dao.name)
-
-                                    is Function<N, TypeName, ClassName, AnnotationSpec> -> {
-                                        if (dao.isConstructor) {
-                                            return@inner null
-                                        }
-                                        AndroidXRoomDatabaseModule.Dao.Accessor.Function(dao.name)
-                                    }
-
-                                    else -> {
-                                        logger.error("Unknown node type ${dao.javaClass}", dao.node)
-                                        return@inner null
-                                    }
-                                },
-                                isPublic = dao.isFullyPublic,
-                            )
-                        }
-                        .distinctBy { it.type },
+                    daos = database.daos.toList(),
                 )
             }
             .map(renderer::render)
             .forEach(environment::write)
     }
+
+    private val ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.daos: Sequence<AndroidXRoomDatabaseModule.Dao<TypeName>>
+        get() = declaredNodes
+            .asSequence()
+            .filter { it.returnType.declaration?.isAnnotatedWith("androidx.room.Dao") == true }
+            .mapNotNull inner@{ dao ->
+                AndroidXRoomDatabaseModule.Dao(
+                    type = dao.returnType.toTypeName(),
+                    accessor = when (dao) {
+                        is Property<N, TypeName, ClassName, AnnotationSpec> ->
+                            AndroidXRoomDatabaseModule.Dao.Accessor.Property(dao.name)
+
+                        is Function<N, TypeName, ClassName, AnnotationSpec> -> {
+                            if (dao.isConstructor) {
+                                return@inner null
+                            }
+                            AndroidXRoomDatabaseModule.Dao.Accessor.Function(dao.name)
+                        }
+
+                        else -> {
+                            logger.error("Unknown node type ${dao.javaClass}", dao.node)
+                            return@inner null
+                        }
+                    },
+                    isPublic = dao.isFullyPublic,
+                )
+            }
+            .distinctBy { it.type }
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.validateDatabase() {
         if (
