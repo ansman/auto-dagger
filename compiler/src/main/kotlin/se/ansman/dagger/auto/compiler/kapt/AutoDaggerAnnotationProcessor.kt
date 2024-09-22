@@ -11,7 +11,7 @@ import se.ansman.dagger.auto.compiler.autobind.renderer.JavaAutoBindModuleModule
 import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
 import se.ansman.dagger.auto.compiler.autoinitialize.renderer.JavaAutoInitializeModuleRenderer
 import se.ansman.dagger.auto.compiler.common.Options
-import se.ansman.dagger.auto.compiler.common.kapt.processing.KaptEnvironment
+import se.ansman.dagger.auto.compiler.kapt.processing.KaptEnvironment
 import se.ansman.dagger.auto.compiler.ktorfit.KtorfitProcessor
 import se.ansman.dagger.auto.compiler.ktorfit.renderer.JavaKtorfitModuleRenderer
 import se.ansman.dagger.auto.compiler.optionallyprovided.OptionallyProvidedProcessor

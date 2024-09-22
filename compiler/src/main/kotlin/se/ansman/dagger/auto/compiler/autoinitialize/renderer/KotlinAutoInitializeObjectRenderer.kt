@@ -9,8 +9,8 @@ import com.squareup.kotlinpoet.MemberName.Companion.member
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.TypeName
 import se.ansman.dagger.auto.Initializable
-import se.ansman.dagger.auto.compiler.common.ksp.KotlinPoetRenderEngine
-import se.ansman.dagger.auto.compiler.common.rendering.HiltKotlinModuleBuilder
+import se.ansman.dagger.auto.compiler.ksp.KotlinPoetRenderEngine
+import se.ansman.dagger.auto.compiler.ksp.HiltKotlinModuleBuilder
 
 object KotlinAutoInitializeObjectRenderer :
     AutoInitializeModuleRenderer<KSDeclaration, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec>(

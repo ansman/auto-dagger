@@ -14,6 +14,7 @@ room = "2.6.1"
 retrofit = "2.11.0"
 ktorfit = "2.1.0"
 projectAccessors = "1.1.0"
+shadow = "8.3.2"
 
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
@@ -22,6 +23,7 @@ binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-valid
 mkdocs = "ru.vyarus.mkdocs:4.0.1"
 projectAccessors = { id = "co.hinge.gradle.project-accessors", version.ref = "projectAccessors" }
 ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -79,7 +81,7 @@ robolectric = "org.robolectric:robolectric:4.13"
 
 testLogger = "com.adarshr:gradle-test-logger-plugin:4.0.0"
 
-shadow = "com.github.johnrengelman:shadow:8.1.1"
+shadow = { module = "com.gradleup.shadow:shadow-gradle-plugin", version.ref = "shadow" }
 
 room = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }

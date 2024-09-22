@@ -8,8 +8,8 @@ import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.TypeName
-import se.ansman.dagger.auto.compiler.common.ksp.KotlinPoetRenderEngine
-import se.ansman.dagger.auto.compiler.common.rendering.HiltKotlinModuleBuilder
+import se.ansman.dagger.auto.compiler.ksp.HiltKotlinModuleBuilder
+import se.ansman.dagger.auto.compiler.ksp.KotlinPoetRenderEngine
 
 object KotlinRetrofitObjectRenderer :
     RetrofitModuleRenderer<KSDeclaration, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec>(

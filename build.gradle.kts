@@ -12,6 +12,7 @@ plugins {
     id("dokka-common")
     alias(libs.plugins.binaryCompatibilityValidator)
     alias(libs.plugins.mkdocs)
+    alias(libs.plugins.shadow) apply false
 }
 
 buildscript {
@@ -19,7 +20,6 @@ buildscript {
         classpath(libs.android.gradlePlugin)
         classpath(libs.dokka.gradlePlugin)
         classpath(libs.dokka.versioningPlugin)
-        classpath(libs.shadow)
     }
 }
 

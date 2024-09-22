@@ -2,9 +2,8 @@ package se.ansman.dagger.auto.compiler.kapt
 
 import com.google.auto.common.BasicAnnotationProcessor
 import com.google.common.collect.ImmutableSetMultimap
-import se.ansman.dagger.auto.compiler.common.kapt.KaptProcessor
-import se.ansman.dagger.auto.compiler.common.kapt.processing.KaptEnvironment
-import se.ansman.dagger.auto.compiler.common.kapt.processing.KaptResolver
+import se.ansman.dagger.auto.compiler.kapt.processing.KaptEnvironment
+import se.ansman.dagger.auto.compiler.kapt.processing.KaptResolver
 import javax.lang.model.element.Element
 
 class AutoDaggerProcessorStep(
