@@ -1,4 +1,4 @@
-package se.ansman.dagger.auto.compiler.common.testutils
+package se.ansman.dagger.auto.compiler
 
 import org.junit.jupiter.api.DynamicContainer
 import org.junit.jupiter.api.DynamicNode

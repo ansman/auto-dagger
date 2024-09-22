@@ -1,4 +1,4 @@
-package se.ansman.dagger.auto.compiler.common.testutils
+package se.ansman.dagger.auto.compiler
 
 import com.tschuchort.compiletesting.SourceFile
 import org.intellij.lang.annotations.Language

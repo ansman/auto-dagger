@@ -1,4 +1,4 @@
-package se.ansman.dagger.auto.compiler.common.testutils
+package se.ansman.dagger.auto.compiler
 
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import org.junit.jupiter.api.Named
