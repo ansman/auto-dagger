@@ -7,8 +7,8 @@ import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.TypeName
-import se.ansman.dagger.auto.compiler.common.ksp.KotlinPoetRenderEngine
-import se.ansman.dagger.auto.compiler.common.rendering.HiltKotlinModuleBuilder
+import se.ansman.dagger.auto.compiler.ksp.KotlinPoetRenderEngine
+import se.ansman.dagger.auto.compiler.ksp.HiltKotlinModuleBuilder
 
 object KotlinKtorfitObjectRenderer :
     KtorfitModuleRenderer<KSDeclaration, TypeName, ClassName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec>(

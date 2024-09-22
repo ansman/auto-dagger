@@ -10,9 +10,7 @@ import se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor
 import se.ansman.dagger.auto.compiler.autobind.renderer.KotlinAutoBindObjectModuleRenderer
 import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
 import se.ansman.dagger.auto.compiler.autoinitialize.renderer.KotlinAutoInitializeObjectRenderer
-import se.ansman.dagger.auto.compiler.common.ksp.KspProcessor
-import se.ansman.dagger.auto.compiler.common.ksp.processing.KspEnvironment
-import se.ansman.dagger.auto.compiler.common.ksp.processing.KspResolver
+import se.ansman.dagger.auto.compiler.ksp.processing.*
 import se.ansman.dagger.auto.compiler.ktorfit.KtorfitProcessor
 import se.ansman.dagger.auto.compiler.ktorfit.renderer.KotlinKtorfitObjectRenderer
 import se.ansman.dagger.auto.compiler.optionallyprovided.OptionallyProvidedProcessor

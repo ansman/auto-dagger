@@ -1,6 +1,6 @@
 
 import com.android.build.gradle.LibraryExtension
-import com.github.jengelman.gradle.plugins.shadow.ShadowExtension
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
 import se.ansman.dagger.auto.gradle.cachedProvider
@@ -15,11 +15,6 @@ plugins {
 }
 
 val libs = the<LibrariesForLibs>()
-
-//archivesName.set(project.path
-//    .removePrefix(":third-party")
-//    .removePrefix(":")
-//    .replace(':', '-'))
 
 val gitCommit = cachedProvider {
     project.execWithOutput {
@@ -36,7 +31,6 @@ val remoteSource: Provider<String> = providers.gradleProperty("version")
     .map { repo("/blob/$it") }
 
 tasks.withType<AbstractDokkaLeafTask>().configureEach {
-//    moduleName.set(archivesName)
     val projectPath = project.path.removePrefix(":").replace(':', '/')
     dokkaSourceSets.configureEach {
         reportUndocumented.set(false)
@@ -181,22 +175,50 @@ pluginManager.withPlugin("com.android.library") {
     }
 }
 
-afterEvaluate {
-    if (pluginManager.hasPlugin("org.jetbrains.kotlin.jvm")) {
-        publication {
-            if (pluginManager.hasPlugin("com.github.johnrengelman.shadow")) {
-                the<ShadowExtension>().component(this)
+pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+    publication {
+        afterEvaluate {
+            if (pluginManager.hasPlugin("com.gradleup.shadow")) {
+                from(components["shadow"])
             } else {
                 from(components["java"])
             }
         }
+    }
 
-        sourcesJar {
-            dependsOn("classes")
-            from(project.extensions.getByType<SourceSetContainer>().getByName("main").allSource)
-        }
+    sourcesJar {
+        dependsOn("classes")
+        from(project.extensions.getByType<SourceSetContainer>().getByName("main").allSource)
     }
 }
+
+pluginManager.withPlugin("com.gradleup.shadow") {
+    val compileShaded: Configuration by configurations.creating
+    configurations.named("compileOnly") { extendsFrom(compileShaded) }
+    configurations.named("testRuntimeOnly") { extendsFrom(compileShaded) }
+    configurations.named("shadow") { extendsFrom(configurations["implementation"]) }
+
+    // Since we change the classifier of the shadowJar we need to disable the default jar task or we'll get two
+    // artifacts that have the same classifier
+    tasks.named<Jar>("jar") {
+        archiveClassifier.set("ignored")
+    }
+
+    tasks.named<ShadowJar>("shadowJar") {
+        archiveClassifier.set("")
+        configurations = listOf(compileShaded)
+        isEnableRelocation = true
+        relocationPrefix = "se.ansman.dagger.auto${project.path.replace(':', '.').replace('-', '_')}"
+        mergeServiceFiles()
+    }
+
+    pluginManager.withPlugin("org.gradle.java-test-fixtures") {
+        configurations.named("testFixturesImplementation") { extendsFrom(compileShaded) }
+        configurations.named("testFixturesImplementation") { extendsFrom(configurations["implementation"]) }
+        configurations.named("testFixturesApi") { extendsFrom(configurations["api"]) }
+    }
+}
+
 pluginManager.withPlugin("org.gradle.java-test-fixtures") {
     // Disables publishing test fixtures:
     // https://docs.gradle.org/current/userguide/java_testing.html#ex-disable-publishing-of-test-fixtures-variants

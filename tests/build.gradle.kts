@@ -48,8 +48,8 @@ ksp {
 dependencies {
     implementation(libs.retrofit.moshi)
     implementation(libs.dagger.hilt.android)
-    "kaptJava"(projects.compiler)
-    "kspKotlin"(projects.compiler)
+    "kaptJava"(projects.compiler) { targetConfiguration = "shadow" }
+    "kspKotlin"(projects.compiler) { targetConfiguration = "shadow" }
     "kaptJava"(libs.dagger.compiler)
     "kspKotlin"(libs.dagger.compiler)
     "kaptJava"(libs.dagger.hilt.compiler)
@@ -70,8 +70,8 @@ dependencies {
 
     // Unit test
     testImplementation(libs.dagger.hilt.android.testing)
-    "kaptTestJava"(projects.compiler)
-    "kspTestKotlin"(projects.compiler)
+    "kaptTestJava"(projects.compiler) { targetConfiguration = "shadow" }
+    "kspTestKotlin"(projects.compiler) { targetConfiguration = "shadow" }
     // Compile Only is used here to ensure it's included by the android module
     testCompileOnly(libs.androidx.startup)
     "kaptTestJava"(libs.dagger.compiler)
