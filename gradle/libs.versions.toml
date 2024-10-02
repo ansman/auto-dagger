@@ -14,7 +14,7 @@ room = "2.6.1"
 retrofit = "2.11.0"
 ktorfit = "2.1.0"
 projectAccessors = "1.1.0"
-shadow = "8.3.2"
+shadow = "8.3.3"
 
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
