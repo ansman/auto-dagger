@@ -6,10 +6,17 @@ plugins {
     id("library.publishing")
 }
 
+tasks.compileTestKotlin {
+    compilerOptions.freeCompilerArgs.addAll(
+        "-opt-in=org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
+    )
+}
+
 setupResourceTests()
 
 dependencies {
     implementation(libs.dagger.hilt.core)
     testImplementation(testFixtures(projects.compiler))
     testImplementation(libs.ktorfit)
+    testImplementation("de.jensklingenberg.ktorfit:ktorfit-ksp:${libs.versions.ktorfit.get()}-${libs.versions.ksp.get().substringAfter('-')}")
 }

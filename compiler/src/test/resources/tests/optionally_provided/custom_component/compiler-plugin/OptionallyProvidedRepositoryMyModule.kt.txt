@@ -1,0 +1,9 @@
+package tests.optionally_provided.custom_component
+
+@AutoDaggerGenerated
+@InstallIn(value = MyComponent::class)
+@OriginatingElement(topLevelClass = Repository::class)
+abstract class OptionallyProvidedRepositoryMyModule {
+  @BindsOptionalOf
+  abstract fun bindsOptionalRepository(): Repository 
+}

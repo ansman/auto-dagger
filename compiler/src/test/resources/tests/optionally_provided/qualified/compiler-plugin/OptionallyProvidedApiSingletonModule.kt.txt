@@ -1,0 +1,10 @@
+package tests.optionally_provided.qualified
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = Api::class)
+abstract class OptionallyProvidedApiSingletonModule {
+  @BindsOptionalOf
+  @Named(value = "Dev")
+  abstract fun bindsOptionalApi(): Api 
+}

@@ -1,0 +1,6 @@
+package tests.replaces.initializable
+
+@AutoDaggerGenerated
+@TestInstallIn(components = SingletonComponent::class, replaces = AutoInitializeRealRepositoryModule::class)
+@OriginatingElement(topLevelClass = FakeRepository::class)
+object FakeRepositoryAutoInitializeReplacementModule

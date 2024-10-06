@@ -10,8 +10,10 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.StringKey
 import java.lang.Runnable
 import javax.`annotation`.processing.Generated
+import se.ansman.dagger.auto.`internal`.AutoDaggerGenerated
 
-@Generated("se.ansman.dagger.auto.compiler.replaces.ReplacesProcessor")
+@AutoDaggerGenerated
+@Generated("se.ansman.dagger.auto.compiler.common.replaces.ReplacesProcessor")
 @Module
 @TestInstallIn(
   components = [FragmentComponent::class],

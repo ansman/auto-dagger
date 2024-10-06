@@ -1,0 +1,13 @@
+package tests.auto_initialize.companion_object
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = ObjectModule::class)
+object AutoInitializeObjectModule {
+  @Provides
+  @IntoSet
+  fun provideIntAsInitializable(lazyInt: Lazy<Int>): Initializable {
+    Companion.asInitializable(
+    )
+  }
+}

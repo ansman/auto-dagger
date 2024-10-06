@@ -11,8 +11,10 @@ import dagger.multibindings.StringKey
 import java.util.concurrent.Callable
 import javax.`annotation`.processing.Generated
 import kotlin.String
+import se.ansman.dagger.auto.`internal`.AutoDaggerGenerated
 
-@Generated("se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor")
+@AutoDaggerGenerated
+@Generated("se.ansman.dagger.auto.compiler.common.autobind.AutoBindProcessor")
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = RealRepository::class)

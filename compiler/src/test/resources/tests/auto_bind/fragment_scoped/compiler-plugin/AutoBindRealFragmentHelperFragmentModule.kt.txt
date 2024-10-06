@@ -1,0 +1,9 @@
+package tests.auto_bind.fragment_scoped
+
+@AutoDaggerGenerated
+@InstallIn(value = FragmentComponent::class)
+@OriginatingElement(topLevelClass = RealFragmentHelper::class)
+abstract class AutoBindRealFragmentHelperFragmentModule {
+  @Binds
+  abstract fun bindRealFragmentHelperAsFragmentHelper(realFragmentHelper: RealFragmentHelper): FragmentHelper 
+}

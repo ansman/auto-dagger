@@ -1,0 +1,15 @@
+package tests.replaces.auto_bind.with_wildcard
+
+@AutoDaggerGenerated
+@InstallIn(value = FragmentComponent::class)
+@OriginatingElement(topLevelClass = RealRepository::class)
+abstract class AutoBindRealRepositoryFragmentModule {
+  @Binds
+  @IntoMap
+  @StringKey(value = "repository")
+  abstract fun bindRealRepositoryAsCallableIntoMap(realRepository: RealRepository): Callable<String> 
+  @Binds
+  @IntoMap
+  @StringKey(value = "repository")
+  abstract fun bindRealRepositoryAsCallableIntoMap_(realRepository_: RealRepository): Callable<*> 
+}

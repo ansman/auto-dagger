@@ -4,19 +4,21 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.symbol.KSAnnotated
-import se.ansman.dagger.auto.compiler.androidx.room.AndroidXRoomProcessor
 import se.ansman.dagger.auto.compiler.androidx.room.renderer.KotlinAndroidXRoomDatabaseModuleRenderer
-import se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor
 import se.ansman.dagger.auto.compiler.autobind.renderer.KotlinAutoBindObjectModuleRenderer
-import se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor
 import se.ansman.dagger.auto.compiler.autoinitialize.renderer.KotlinAutoInitializeObjectRenderer
-import se.ansman.dagger.auto.compiler.ksp.processing.*
-import se.ansman.dagger.auto.compiler.ktorfit.KtorfitProcessor
+import se.ansman.dagger.auto.compiler.common.androidx.room.AndroidXRoomProcessor
+import se.ansman.dagger.auto.compiler.common.autobind.AutoBindProcessor
+import se.ansman.dagger.auto.compiler.common.autoinitialize.AutoInitializeProcessor
+import se.ansman.dagger.auto.compiler.common.ktorfit.KtorfitProcessor
+import se.ansman.dagger.auto.compiler.common.optionallyprovided.OptionallyProvidedProcessor
+import se.ansman.dagger.auto.compiler.common.replaces.ReplacesProcessor
+import se.ansman.dagger.auto.compiler.common.retrofit.RetrofitProcessor
+import se.ansman.dagger.auto.compiler.ksp.processing.model.KspEnvironment
+import se.ansman.dagger.auto.compiler.ksp.processing.model.KspResolver
+import se.ansman.dagger.auto.compiler.ksp.processing.model.toKspDeclaration
 import se.ansman.dagger.auto.compiler.ktorfit.renderer.KotlinKtorfitObjectRenderer
-import se.ansman.dagger.auto.compiler.optionallyprovided.OptionallyProvidedProcessor
 import se.ansman.dagger.auto.compiler.optionallyprovided.renderer.KotlinOptionallyProvidedObjectModuleRenderer
-import se.ansman.dagger.auto.compiler.replaces.ReplacesProcessor
-import se.ansman.dagger.auto.compiler.retrofit.RetrofitProcessor
 import se.ansman.dagger.auto.compiler.retrofit.renderer.KotlinRetrofitObjectRenderer
 
 class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : SymbolProcessor {
@@ -33,8 +35,28 @@ class AutoDaggerSymbolProcessor(environment: SymbolProcessorEnvironment) : Symbo
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
         val kspResolver = KspResolver(environment, resolver)
+        val elements = processors
+            .asSequence()
+            .flatMap { it.annotations }
+            .distinct()
+            .associateWith {
+                resolver.getSymbolsWithAnnotation(it)
+                    .mapNotNull { node ->
+                        node.toKspDeclaration(kspResolver)
+                            ?: run {
+                                environment.logger.error("Unsupported type ${node.javaClass.name}", node)
+                                null
+                            }
+                    }
+                    .toList()
+            }
+            .toMap()
+            .withDefault { emptyList() }
         for (processor in processors) {
-            processor.process(kspResolver)
+            processor.process(
+                elements = elements,
+                resolver = kspResolver
+            )
         }
         return emptyList()
     }

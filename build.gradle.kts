@@ -23,9 +23,11 @@ buildscript {
     }
 }
 
-group = "se.ansman.dagger.auto"
 val version: String = providers.gradleProperty("version").get()
-    .also(::setVersion)
+allprojects {
+    group = "se.ansman.dagger.auto"
+    this.version = version
+}
 
 val latestRelease: String = providers.gradleProperty("latestRelease").get()
 

@@ -1,0 +1,9 @@
+package tests.auto_bind.component_validation
+
+@AutoDaggerGenerated
+@InstallIn(value = FragmentComponent::class)
+@OriginatingElement(topLevelClass = FragmentRepository::class)
+abstract class AutoBindFragmentRepositoryFragmentModule {
+  @Binds
+  abstract fun bindFragmentRepositoryAsRepository(fragmentRepository: FragmentRepository): Repository 
+}

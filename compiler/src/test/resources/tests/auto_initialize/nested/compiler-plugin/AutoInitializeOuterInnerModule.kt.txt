@@ -1,0 +1,13 @@
+package tests.auto_initialize.nested
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = Outer::class)
+object AutoInitializeOuterInnerModule {
+  @Provides
+  @IntoSet
+  fun provideStringAsInitializable(lazyString: Lazy<String>): Initializable {
+    Companion.asInitializable(
+    )
+  }
+}

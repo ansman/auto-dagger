@@ -7,8 +7,10 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.codegen.OriginatingElement;
 import dagger.hilt.components.SingletonComponent;
 import javax.annotation.processing.Generated;
+import se.ansman.dagger.auto.internal.AutoDaggerGenerated;
 
-@Generated("se.ansman.dagger.auto.compiler.androidx.room.AndroidXRoomProcessor")
+@AutoDaggerGenerated
+@Generated("se.ansman.dagger.auto.compiler.common.androidx.room.AndroidXRoomProcessor")
 @Module
 @InstallIn(SingletonComponent.class)
 @OriginatingElement(

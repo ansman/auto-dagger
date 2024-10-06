@@ -4,18 +4,22 @@ import dagger.Lazy
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import se.ansman.dagger.auto.compiler.common.models.HiltModule
+import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.DaggerType
+import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.Parameter
+import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.ProviderMode
 import javax.inject.Provider
 import kotlin.reflect.KClass
 
-interface HiltModuleBuilder<in Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile> {
+interface HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, Output> {
+
     fun addProvider(
         name: String,
         returnType: DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-        parameters: List<Parameter<TypeName, AnnotationSpec>> = emptyList(),
+        parameters: List<Parameter<TypeName, AnnotationSpec>>,
         mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
-        contents: (List<ParameterSpec>) -> CodeBlock,
-    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
+        contents: ProviderContext.(List<ParameterSpec>) -> CodeBlock,
+    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, Output>
 
     fun addBinding(
         name: String,
@@ -23,20 +27,20 @@ interface HiltModuleBuilder<in Node, TypeName, AnnotationSpec, ParameterSpec, Co
         returnType: DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
         mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
-    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
+    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, Output>
 
     fun addOptionalBinding(
         name: String,
         type: DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean,
-    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
+    ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, Output>
 
-    fun build(): SourceFile
+    fun build(): Output
 
-    fun interface Factory<in Node, TypeName, ClassName : TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile> {
+    fun interface Factory<Node, TypeName, ClassName : TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, SourceFile> {
         fun create(
             info: HiltModule<Node, ClassName>,
-        ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, SourceFile>
+        ): HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, SourceFile>
     }
 
     sealed class Installation<ClassName> {
@@ -90,31 +94,48 @@ interface HiltModuleBuilder<in Node, TypeName, AnnotationSpec, ParameterSpec, Co
     }
 }
 
-fun <AnnotationSpec> HiltModuleBuilder.ProviderMode<AnnotationSpec>.asAnnotations(
-    annotationSpecFromAnnotation: (Annotation) -> AnnotationSpec,
+fun <Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, SourceFile> HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, SourceFile>.addProvider(
+    name: String,
+    returnType: DaggerType<TypeName, AnnotationSpec>,
+    isPublic: Boolean,
+    mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
+    contents: ProviderContext.() -> CodeBlock,
+) = addProvider(name, returnType, isPublic, emptyList(), mode) { contents() }
+
+fun <Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, SourceFile> HiltModuleBuilder<Node, TypeName, AnnotationSpec, ParameterSpec, ProviderContext, CodeBlock, SourceFile>.addProvider(
+    name: String,
+    returnType: DaggerType<TypeName, AnnotationSpec>,
+    isPublic: Boolean,
+    parameter: Parameter<TypeName, AnnotationSpec>,
+    mode: ProviderMode<AnnotationSpec> = ProviderMode.Single,
+    contents: ProviderContext.(parameter: ParameterSpec) -> CodeBlock,
+) = addProvider(name, returnType, isPublic, listOf(parameter), mode) { contents(it.single()) }
+
+fun <AnnotationSpec> ProviderMode<AnnotationSpec>.asAnnotations(
+    annotationSpecFromAnnotation: (KClass<out Annotation>) -> AnnotationSpec,
 ) =
     when (this) {
-        HiltModuleBuilder.ProviderMode.Single -> listOf()
-        HiltModuleBuilder.ProviderMode.IntoSet -> listOf(annotationSpecFromAnnotation(IntoSet()))
-        is HiltModuleBuilder.ProviderMode.IntoMap -> listOf(annotationSpecFromAnnotation(IntoMap()), bindingKey)
+        ProviderMode.Single -> listOf()
+        ProviderMode.IntoSet -> listOf(annotationSpecFromAnnotation(IntoSet::class))
+        is ProviderMode.IntoMap -> listOf(annotationSpecFromAnnotation(IntoMap::class), bindingKey)
     }
 
-fun <TypeName> HiltModuleBuilder.Parameter<TypeName, *>.asParameterName(simpleName: TypeName.() -> String): String =
+fun <TypeName> Parameter<TypeName, *>.asParameterName(simpleName: TypeName.() -> String): String =
     when (this) {
         is HiltModuleBuilder.Lazy -> "lazy${type.asParameterName(simpleName).replaceFirstChar(Char::uppercaseChar)}"
         is HiltModuleBuilder.Provider -> "${
             type.asParameterName(simpleName).replaceFirstChar(Char::lowercaseChar)
         }Provider"
 
-        is HiltModuleBuilder.DaggerType -> type.simpleName().replaceFirstChar(Char::lowercaseChar)
+        is DaggerType -> type.simpleName().replaceFirstChar(Char::lowercaseChar)
     }
 
-fun <TypeName> HiltModuleBuilder.Parameter<TypeName, *>.asTypeName(
+fun <TypeName> Parameter<TypeName, *>.asTypeName(
     parameterizedTypeName: (rawType: KClass<*>, arguments: List<TypeName>) -> TypeName,
 ): TypeName = when (this) {
     is HiltModuleBuilder.Lazy -> parameterizedTypeName(lazy, listOf(type.asTypeName(parameterizedTypeName)))
     is HiltModuleBuilder.Provider -> parameterizedTypeName(provider, listOf(type.asTypeName(parameterizedTypeName)))
-    is HiltModuleBuilder.DaggerType -> type
+    is DaggerType -> type
 }
 
 private val lazy = Lazy::class

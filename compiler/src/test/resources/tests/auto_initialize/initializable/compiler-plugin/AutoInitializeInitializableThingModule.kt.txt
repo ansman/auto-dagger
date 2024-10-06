@@ -1,0 +1,10 @@
+package tests.auto_initialize.initializable
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = InitializableThing::class)
+abstract class AutoInitializeInitializableThingModule {
+  @Binds
+  @IntoSet
+  abstract fun bindInitializableThingAsInitializable(initializableThing: InitializableThing): Initializable 
+}

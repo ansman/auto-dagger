@@ -1,0 +1,11 @@
+package tests.androidx_room.duplicate_accessors
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = AppDatabase::class)
+object AutoDaggerAppDatabaseModule {
+  @Provides
+  fun provideUserDao(appDatabase: AppDatabase): UserDao {
+    appDatabase.users1()
+  }
+}

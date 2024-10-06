@@ -5,6 +5,7 @@ import org.junit.jupiter.api.io.TempDir
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ArgumentsSource
 import se.ansman.dagger.auto.AutoBind
+import se.ansman.dagger.auto.compiler.common.Errors
 import java.io.File
 
 class AutoBindTest {
@@ -21,7 +22,7 @@ class AutoBindTest {
     
                 @se.ansman.dagger.auto.AutoBind
                 class SomeThing<T> : Runnable {
-                  override fun run(){}
+                    override fun run() {}
                 }
                 """
             )
@@ -53,7 +54,9 @@ class AutoBindTest {
 
                 @se.ansman.dagger.auto.AutoBind
                 @se.ansman.dagger.auto.AutoInitialize
-                class SomeThing : se.ansman.dagger.auto.Initializable
+                class SomeThing : se.ansman.dagger.auto.Initializable {
+                    override fun initialize() {}
+                }
                 """
             )
             .assertFailedWithMessage(Errors.AutoBind.noSuperTypes)
@@ -83,7 +86,9 @@ class AutoBindTest {
                 package se.ansman
     
                 @se.ansman.dagger.auto.AutoBind(asTypes = [AutoCloseable::class])
-                class SomeThing : java.io.Closeable
+                class SomeThing : java.io.Closeable { 
+                    override fun close() {}
+                }
                 """
             )
             .assertFailedWithMessage(Errors.AutoBind.missingDirectSuperType("java.lang.AutoCloseable"))
@@ -98,7 +103,9 @@ class AutoBindTest {
                 package se.ansman
     
                 @se.ansman.dagger.auto.AutoBindIntoMap
-                class SomeThing : java.io.Closeable
+                class SomeThing : java.io.Closeable {
+                    override fun close() {}
+                }
                 """
             )
             .assertFailedWithMessage(Errors.AutoBind.missingBindingKey)
@@ -113,7 +120,10 @@ class AutoBindTest {
                 package se.ansman
     
                 @se.ansman.dagger.auto.AutoBindIntoSet
-                class SomeThing : java.io.Closeable, Runnable
+                class SomeThing : java.io.Closeable, Runnable {
+                    override fun run() {}
+                    override fun close() {}
+                }
                 """
             )
             .assertFailedWithMessage(Errors.AutoBind.multipleSuperTypes)

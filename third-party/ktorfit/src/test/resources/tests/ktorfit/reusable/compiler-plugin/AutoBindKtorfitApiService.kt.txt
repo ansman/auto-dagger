@@ -1,0 +1,12 @@
+package tests.ktorfit.reusable
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = ApiService::class)
+object AutoBindKtorfitApiService {
+  @Provides
+  @Reusable
+  fun provideApiService(ktorfit: Ktorfit): ApiService {
+    _ApiServiceImpl(ktorfit)
+  }
+}

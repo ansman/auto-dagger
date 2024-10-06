@@ -1,0 +1,11 @@
+package tests.retrofit.qualifiers
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = ApiService::class)
+object AutoBindRetrofitApiService {
+  @Provides
+  fun provideApiService(@Named(value = "api1") retrofit: Retrofit): ApiService {
+    retrofit.create(ApiService::class)
+  }
+}

@@ -1,0 +1,10 @@
+package tests.auto_bind.into_map_wildcard
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = StringProvider::class)
+abstract class AutoBindStringProviderSingletonModule {
+  @Binds
+  @IntoSet
+  abstract fun bindStringProviderAsCallableIntoSet(stringProvider: StringProvider): Callable<*> 
+}

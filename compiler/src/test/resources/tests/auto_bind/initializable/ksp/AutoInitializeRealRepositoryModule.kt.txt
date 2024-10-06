@@ -9,8 +9,10 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import javax.`annotation`.processing.Generated
 import se.ansman.dagger.auto.Initializable
+import se.ansman.dagger.auto.`internal`.AutoDaggerGenerated
 
-@Generated("se.ansman.dagger.auto.compiler.autoinitialize.AutoInitializeProcessor")
+@AutoDaggerGenerated
+@Generated("se.ansman.dagger.auto.compiler.common.autoinitialize.AutoInitializeProcessor")
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = RealRepository::class)

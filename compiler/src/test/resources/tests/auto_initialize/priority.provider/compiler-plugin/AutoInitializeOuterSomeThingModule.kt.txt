@@ -1,0 +1,12 @@
+package tests.auto_initialize.priority.provider
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = Outer::class)
+object AutoInitializeOuterSomeThingModule {
+  @Provides
+  @IntoSet
+  fun provideSomeThingAsInitializable(lazySomeThing: Lazy<SomeThing>): Initializable {
+    Companion.asInitializable(4711)
+  }
+}

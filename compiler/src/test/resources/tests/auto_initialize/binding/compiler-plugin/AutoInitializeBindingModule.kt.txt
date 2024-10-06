@@ -1,0 +1,13 @@
+package tests.auto_initialize.binding
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = BindingModule::class)
+object AutoInitializeBindingModule {
+  @Provides
+  @IntoSet
+  fun provideThingAsInitializable(lazyThing: Lazy<Thing>): Initializable {
+    Companion.asInitializable(
+    )
+  }
+}

@@ -12,6 +12,18 @@ plugins {
 
 setupResourceTests()
 
+tasks.compileTestKotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-opt-in=org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
+    }
+}
+
+tasks.compileTestFixturesKotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-opt-in=org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
+    }
+}
+
 dependencies {
     implementation(libs.javapoet)
     implementation(libs.bundles.kotlinpoet)
@@ -41,4 +53,6 @@ dependencies {
     testFixturesApi(libs.dagger)
     testFixturesApi(libs.dagger.hilt.core)
     testFixturesApi(libs.bundles.compileTesting)
+    testFixturesApi(projects.compiler.common)
+    testFixturesApi(projects.compiler.plugin)
 }

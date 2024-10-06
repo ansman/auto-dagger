@@ -1,0 +1,6 @@
+package tests.replaces.auto_bind.with_wildcard
+
+@AutoDaggerGenerated
+@TestInstallIn(components = FragmentComponent::class, replaces = AutoBindRealRepositoryFragmentModule::class)
+@OriginatingElement(topLevelClass = FakeRepository::class)
+object AutoBindFakeRepositoryFragmentModule

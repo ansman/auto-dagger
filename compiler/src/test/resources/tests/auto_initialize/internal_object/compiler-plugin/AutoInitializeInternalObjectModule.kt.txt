@@ -1,0 +1,13 @@
+package tests.auto_initialize.internal_object
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = InternalObject::class)
+object AutoInitializeInternalObjectModule {
+  @Provides
+  @IntoSet
+  internal fun provideInternalObjectAsInitializable(lazyInternalObject: Lazy<InternalObject>): Initializable {
+    Companion.asInitializable(
+    )
+  }
+}

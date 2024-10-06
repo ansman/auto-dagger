@@ -1,5 +1,7 @@
 package se.ansman.dagger.auto.compiler.ksp
 
+import com.google.devtools.ksp.symbol.KSAnnotation
+import com.google.devtools.ksp.symbol.KSNode
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.Dynamic
@@ -11,24 +13,15 @@ import com.squareup.kotlinpoet.TypeVariableName
 import com.squareup.kotlinpoet.WildcardTypeName
 import com.squareup.kotlinpoet.asClassName
 import se.ansman.dagger.auto.compiler.common.processing.RenderEngine
+import se.ansman.dagger.auto.compiler.common.processing.model.AnnotationNode
 import kotlin.reflect.KClass
 
-object KotlinPoetRenderEngine : RenderEngine<TypeName, ClassName, AnnotationSpec> {
+object KotlinPoetRenderEngine : RenderEngine<KSNode, TypeName, ClassName, AnnotationSpec> {
     override fun className(packageName: String, simpleName: String): ClassName = ClassName(packageName, simpleName)
     override fun className(qualifiedName: String): ClassName = ClassName.bestGuess(qualifiedName)
     override fun className(type: KClass<*>): ClassName = type.asClassName()
 
-    override fun typeArguments(typeName: TypeName): List<TypeName> =
-        when (typeName) {
-            is ParameterizedTypeName -> typeName.typeArguments
-            is ClassName,
-            Dynamic,
-            is LambdaTypeName,
-            is TypeVariableName,
-            is WildcardTypeName -> emptyList()
-        }
-
-    override fun qualifierName(className: ClassName): String = className.canonicalName
+    override fun qualifiedName(className: ClassName): String = className.canonicalName
 
     override fun simpleName(typeName: TypeName): String =
         when (typeName) {
@@ -71,4 +64,7 @@ object KotlinPoetRenderEngine : RenderEngine<TypeName, ClassName, AnnotationSpec
             is TypeVariableName,
             is WildcardTypeName -> STAR
         }
+
+    override fun AnnotationNode<KSNode, TypeName, ClassName>.toAnnotationSpec(): AnnotationSpec =
+        (node as KSAnnotation).toAnnotationSpecFixed()
 }

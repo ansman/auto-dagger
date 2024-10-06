@@ -1,0 +1,89 @@
+public abstract class tests.auto_bind.into_set.AutoBindRepositorySingletonModule
+  minor version: 0
+  major version: 52
+  flags: (0x0421) ACC_PUBLIC, ACC_SUPER, ACC_ABSTRACT
+  this_class: #2                          // tests/auto_bind/into_set/AutoBindRepositorySingletonModule
+  super_class: #4                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 2, attributes: 3
+Constant pool:
+   #1 = Utf8               tests/auto_bind/into_set/AutoBindRepositorySingletonModule
+   #2 = Class              #1             // tests/auto_bind/into_set/AutoBindRepositorySingletonModule
+   #3 = Utf8               java/lang/Object
+   #4 = Class              #3             // java/lang/Object
+   #5 = Utf8               <init>
+   #6 = Utf8               ()V
+   #7 = Utf8               this
+   #8 = Utf8               Ltests/auto_bind/into_set/AutoBindRepositorySingletonModule;
+   #9 = Utf8               bindRepositoryAsCloseableIntoSet
+  #10 = Utf8               (Ltests/auto_bind/into_set/Repository;)Ljava/io/Closeable;
+  #11 = Utf8               Ldagger/Binds;
+  #12 = Utf8               Ldagger/multibindings/IntoSet;
+  #13 = Utf8               Lorg/jetbrains/annotations/NotNull;
+  #14 = Utf8               Lse/ansman/dagger/auto/internal/AutoDaggerGenerated;
+  #15 = Utf8               Ldagger/hilt/InstallIn;
+  #16 = Utf8               value
+  #17 = Utf8               Ldagger/hilt/components/SingletonComponent;
+  #18 = Utf8               Ldagger/hilt/codegen/OriginatingElement;
+  #19 = Utf8               topLevelClass
+  #20 = Utf8               Ltests/auto_bind/into_set/Repository;
+  #21 = Utf8               Lkotlin/Metadata;
+  #22 = Utf8               mv
+  #23 = Integer            2
+  #24 = Integer            0
+  #25 = Utf8               k
+  #26 = Integer            3
+  #27 = Utf8               xi
+  #28 = Integer            48
+  #29 = Utf8               Repository.kt
+  #30 = Utf8               Code
+  #31 = Utf8               LocalVariableTable
+  #32 = Utf8               RuntimeVisibleAnnotations
+  #33 = Utf8               RuntimeInvisibleAnnotations
+  #34 = Utf8               RuntimeInvisibleParameterAnnotations
+  #35 = Utf8               SourceFile
+{
+  private tests.auto_bind.into_set.AutoBindRepositorySingletonModule();
+    descriptor: ()V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=0, locals=1, args_size=1
+         0: return
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       1     0  this   Ltests/auto_bind/into_set/AutoBindRepositorySingletonModule;
+
+  public abstract java.io.Closeable bindRepositoryAsCloseableIntoSet(tests.auto_bind.into_set.Repository);
+    descriptor: (Ltests/auto_bind/into_set/Repository;)Ljava/io/Closeable;
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    RuntimeVisibleAnnotations:
+      0: #11()
+        dagger.Binds
+      1: #12()
+        dagger.multibindings.IntoSet
+    RuntimeInvisibleAnnotations:
+      0: #13()
+        org.jetbrains.annotations.NotNull
+    RuntimeInvisibleParameterAnnotations:
+      parameter 0:
+        0: #13()
+          org.jetbrains.annotations.NotNull
+}
+SourceFile: "Repository.kt"
+RuntimeVisibleAnnotations:
+  0: #18(#19=c#20)
+    dagger.hilt.codegen.OriginatingElement(
+      topLevelClass=class Ltests/auto_bind/into_set/Repository;
+    )
+  1: #21(#22=[I#23,I#24,I#24],#25=I#26,#27=I#28)
+    kotlin.Metadata(
+      mv=[2,0,0]
+      k=3
+      xi=48
+    )
+RuntimeInvisibleAnnotations:
+  0: #14()
+    se.ansman.dagger.auto.internal.AutoDaggerGenerated
+  1: #15(#16=[c#17])
+    dagger.hilt.InstallIn(
+      value=[class Ldagger/hilt/components/SingletonComponent;]
+    )

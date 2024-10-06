@@ -1,27 +1,30 @@
 package se.ansman.dagger.auto.compiler
 
+import com.tschuchort.compiletesting.KotlinCompilation
 import org.junit.jupiter.api.function.Executable
 import java.io.File
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
 class ResourceTestCase(
-    private val testType: String,
-    private val testName: String,
-    private val compilation: Compilation,
-    private val sources: List<TestSourceFile>,
-    private val writeExpectedFilesTo: File?,
+    val testType: String,
+    val testName: String,
+    val compilation: Compilation,
+    val sources: List<TestSourceFile>,
+    val writeExpectedFilesTo: File?,
     private val expectedFiles: Map<String, String>,
+    private val configure: KotlinCompilation.() -> Unit
 ) : Executable {
     override fun execute() {
-        val result = compilation.compile(sources)
+        val result = compilation.compile(sources, configure)
         result.assertIsSuccessful()
         if (writeExpectedFilesTo != null) {
             result.writeExpectedFiles(writeExpectedFilesTo)
             return
         }
+        val generated = result.filesGeneratedByAnnotationProcessor
         for ((fileName, contents) in expectedFiles) {
-            val actual = result.readGeneratedFile(fileName)
+            val actual = result.getGeneratedFile(fileName)
             assertEquals(contents, actual, "$fileName did not match expected contents.")
             try {
                 result.loadClass(buildString {
@@ -37,13 +40,12 @@ class ResourceTestCase(
                 throw AssertionError("Failed to load class $fileName", e)
             }
         }
-        val generated = result.filesGeneratedByAnnotationProcessor.map { it.name }.toSet()
-        val unexpected = generated - expectedFiles.keys
+        val unexpected = generated.keys - expectedFiles.keys
         if (unexpected.isNotEmpty()) {
             fail(unexpected.joinToString(
                 prefix = "Unexpected files were generated: \n\n",
                 separator = "\n\n",
-                transform = { formatFile(it, result.readGeneratedFile(it), includeLineNumbers = false) }
+                transform = { formatFile(it, generated.getValue(it), includeLineNumbers = false) }
             ))
         }
     }
@@ -51,8 +53,8 @@ class ResourceTestCase(
     private fun Compilation.Result.writeExpectedFiles(writeExpectedFilesTo: File) {
         writeExpectedFilesTo.deleteRecursively()
         writeExpectedFilesTo.mkdirs()
-        filesGeneratedByAnnotationProcessor.forEach { file ->
-            writeExpectedFilesTo.resolve("${file.name}.txt").writeText(file.readText().trim())
+        filesGeneratedByAnnotationProcessor.forEach { (name, contents) ->
+            writeExpectedFilesTo.resolve("$name.txt").writeText(contents.trim())
         }
     }
 

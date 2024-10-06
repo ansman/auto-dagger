@@ -1,0 +1,13 @@
+package tests.auto_bind.into_set_wildcard
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = IntProvider::class)
+abstract class AutoBindIntProviderSingletonModule {
+  @Binds
+  @IntoSet
+  abstract fun bindIntProviderAsCallableIntoSet(intProvider: IntProvider): Callable<Int> 
+  @Binds
+  @IntoSet
+  abstract fun bindIntProviderAsCallableIntoSet_(intProvider_: IntProvider): Callable<*> 
+}

@@ -29,13 +29,14 @@ import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.Provide
 import se.ansman.dagger.auto.compiler.common.rendering.asAnnotations
 import se.ansman.dagger.auto.compiler.common.rendering.asParameterName
 import se.ansman.dagger.auto.compiler.common.rendering.asTypeName
+import se.ansman.dagger.auto.internal.AutoDaggerGenerated
 import javax.annotation.processing.Generated
 import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 
 class HiltJavaModuleBuilder private constructor(
     private val info: HiltModule<Element, ClassName>,
-) : HiltModuleBuilder<Element, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, JavaFile> {
+) : HiltModuleBuilder<Element, TypeName, AnnotationSpec, ParameterSpec, MethodSpec.Builder, CodeBlock, JavaFile> {
     private val nameAllocator = NameAllocator()
     private val typeSpec = TypeSpec.classBuilder(info.moduleName)
         .addOriginatingElement(info.originatingElement)
@@ -45,6 +46,7 @@ class HiltJavaModuleBuilder private constructor(
                 .addModifiers(Modifier.PRIVATE)
                 .build()
         )
+        .addAnnotation(AutoDaggerGenerated::class.java)
         .addAnnotation(
             AnnotationSpec.builder(Generated::class.java)
             .addMember("value", "\$S", info.processor.name)
@@ -76,7 +78,7 @@ class HiltJavaModuleBuilder private constructor(
         isPublic: Boolean,
         parameters: List<Parameter<TypeName, AnnotationSpec>>,
         mode: ProviderMode<AnnotationSpec>,
-        contents: (List<ParameterSpec>) -> CodeBlock,
+        contents: MethodSpec.Builder.(List<ParameterSpec>) -> CodeBlock,
     ) = apply {
         val parameterNameAllocator = NameAllocator()
         val params = parameters.map { it.toParameterSpec(parameterNameAllocator) }
@@ -86,7 +88,7 @@ class HiltJavaModuleBuilder private constructor(
                 .addAnnotation(Provides::class.java)
                 .addAnnotations(mode.asAnnotations())
                 .addParameters(params)
-                .addStatement(contents(params))
+                .apply { addStatement(contents(params)) }
                 .addAnnotations(returnType.qualifiers)
                 .returns(returnType.type)
                 .build()
@@ -161,7 +163,7 @@ private fun Parameter<TypeName, AnnotationSpec>.toParameterSpec(
         .build()
 
 private fun ProviderMode<AnnotationSpec>.asAnnotations() =
-    asAnnotations(AnnotationSpec::get)
+    asAnnotations { AnnotationSpec.builder(it.java).build() }
 
 private fun Parameter<TypeName, AnnotationSpec>.asParameterName(): String =
     asParameterName { rawType().simpleName() }

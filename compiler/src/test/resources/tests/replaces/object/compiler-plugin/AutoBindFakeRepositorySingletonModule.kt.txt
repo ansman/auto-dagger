@@ -1,0 +1,11 @@
+package tests.replaces.object
+
+@AutoDaggerGenerated
+@TestInstallIn(components = SingletonComponent::class, replaces = AutoBindRealRepositorySingletonModule::class)
+@OriginatingElement(topLevelClass = FakeRepository::class)
+object AutoBindFakeRepositorySingletonModule {
+  @Provides
+  fun provideFakeRepositoryAsRepository(): Repository {
+    FakeRepository
+  }
+}

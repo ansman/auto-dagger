@@ -33,9 +33,10 @@ fun Project.setupResourceTests() {
         val writeExpectedFiles = objects.property<Boolean>()
         testTask.configure {
             inputs.property("writeExpectedFiles", writeExpectedFiles)
-            systemProperty("writeExpectedFilesTo", project.file("src/test/resources/tests"))
             doFirst {
-                systemProperty("writeExpectedFiles", writeExpectedFiles.get())
+                if (writeExpectedFiles.get()) {
+                    systemProperty("writeExpectedFilesTo", project.file("src/test/resources/tests"))
+                }
             }
         }
         gradle.taskGraph.whenReady {

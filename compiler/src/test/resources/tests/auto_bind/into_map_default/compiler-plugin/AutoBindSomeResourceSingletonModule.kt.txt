@@ -1,0 +1,11 @@
+package tests.auto_bind.into_map_default
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = SomeResource::class)
+abstract class AutoBindSomeResourceSingletonModule {
+  @Binds
+  @IntoMap
+  @StringKey(value = "test")
+  abstract fun bindSomeResourceAsResourceIntoMap(someResource: SomeResource): Resource<*> 
+}

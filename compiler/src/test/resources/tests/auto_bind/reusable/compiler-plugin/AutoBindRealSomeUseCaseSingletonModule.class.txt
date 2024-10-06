@@ -1,0 +1,86 @@
+public abstract class tests.auto_bind.reusable.AutoBindRealSomeUseCaseSingletonModule
+  minor version: 0
+  major version: 52
+  flags: (0x0421) ACC_PUBLIC, ACC_SUPER, ACC_ABSTRACT
+  this_class: #2                          // tests/auto_bind/reusable/AutoBindRealSomeUseCaseSingletonModule
+  super_class: #4                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 2, attributes: 3
+Constant pool:
+   #1 = Utf8               tests/auto_bind/reusable/AutoBindRealSomeUseCaseSingletonModule
+   #2 = Class              #1             // tests/auto_bind/reusable/AutoBindRealSomeUseCaseSingletonModule
+   #3 = Utf8               java/lang/Object
+   #4 = Class              #3             // java/lang/Object
+   #5 = Utf8               <init>
+   #6 = Utf8               ()V
+   #7 = Utf8               this
+   #8 = Utf8               Ltests/auto_bind/reusable/AutoBindRealSomeUseCaseSingletonModule;
+   #9 = Utf8               bindRealSomeUseCaseAsSomeUseCase
+  #10 = Utf8               (Ltests/auto_bind/reusable/RealSomeUseCase;)Ltests/auto_bind/reusable/SomeUseCase;
+  #11 = Utf8               Ldagger/Binds;
+  #12 = Utf8               Lorg/jetbrains/annotations/NotNull;
+  #13 = Utf8               Lse/ansman/dagger/auto/internal/AutoDaggerGenerated;
+  #14 = Utf8               Ldagger/hilt/InstallIn;
+  #15 = Utf8               value
+  #16 = Utf8               Ldagger/hilt/components/SingletonComponent;
+  #17 = Utf8               Ldagger/hilt/codegen/OriginatingElement;
+  #18 = Utf8               topLevelClass
+  #19 = Utf8               Ltests/auto_bind/reusable/RealSomeUseCase;
+  #20 = Utf8               Lkotlin/Metadata;
+  #21 = Utf8               mv
+  #22 = Integer            2
+  #23 = Integer            0
+  #24 = Utf8               k
+  #25 = Integer            3
+  #26 = Utf8               xi
+  #27 = Integer            48
+  #28 = Utf8               SomeUseCase.kt
+  #29 = Utf8               Code
+  #30 = Utf8               LocalVariableTable
+  #31 = Utf8               RuntimeVisibleAnnotations
+  #32 = Utf8               RuntimeInvisibleAnnotations
+  #33 = Utf8               RuntimeInvisibleParameterAnnotations
+  #34 = Utf8               SourceFile
+{
+  private tests.auto_bind.reusable.AutoBindRealSomeUseCaseSingletonModule();
+    descriptor: ()V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=0, locals=1, args_size=1
+         0: return
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       1     0  this   Ltests/auto_bind/reusable/AutoBindRealSomeUseCaseSingletonModule;
+
+  public abstract tests.auto_bind.reusable.SomeUseCase bindRealSomeUseCaseAsSomeUseCase(tests.auto_bind.reusable.RealSomeUseCase);
+    descriptor: (Ltests/auto_bind/reusable/RealSomeUseCase;)Ltests/auto_bind/reusable/SomeUseCase;
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    RuntimeVisibleAnnotations:
+      0: #11()
+        dagger.Binds
+    RuntimeInvisibleAnnotations:
+      0: #12()
+        org.jetbrains.annotations.NotNull
+    RuntimeInvisibleParameterAnnotations:
+      parameter 0:
+        0: #12()
+          org.jetbrains.annotations.NotNull
+}
+SourceFile: "SomeUseCase.kt"
+RuntimeVisibleAnnotations:
+  0: #17(#18=c#19)
+    dagger.hilt.codegen.OriginatingElement(
+      topLevelClass=class Ltests/auto_bind/reusable/RealSomeUseCase;
+    )
+  1: #20(#21=[I#22,I#23,I#23],#24=I#25,#26=I#27)
+    kotlin.Metadata(
+      mv=[2,0,0]
+      k=3
+      xi=48
+    )
+RuntimeInvisibleAnnotations:
+  0: #13()
+    se.ansman.dagger.auto.internal.AutoDaggerGenerated
+  1: #14(#15=[c#16])
+    dagger.hilt.InstallIn(
+      value=[class Ldagger/hilt/components/SingletonComponent;]
+    )

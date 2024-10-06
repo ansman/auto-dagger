@@ -1,0 +1,9 @@
+package tests.auto_bind.component_validation
+
+@AutoDaggerGenerated
+@InstallIn(value = ActivityComponent::class)
+@OriginatingElement(topLevelClass = ActivityRepository::class)
+abstract class AutoBindActivityRepositoryActivityModule {
+  @Binds
+  abstract fun bindActivityRepositoryAsRepository(activityRepository: ActivityRepository): Repository 
+}

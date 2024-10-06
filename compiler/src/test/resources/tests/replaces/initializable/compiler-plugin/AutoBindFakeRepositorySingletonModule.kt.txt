@@ -1,0 +1,9 @@
+package tests.replaces.initializable
+
+@AutoDaggerGenerated
+@TestInstallIn(components = SingletonComponent::class, replaces = AutoBindRealRepositorySingletonModule::class)
+@OriginatingElement(topLevelClass = FakeRepository::class)
+abstract class AutoBindFakeRepositorySingletonModule {
+  @Binds
+  abstract fun bindFakeRepositoryAsRepository(fakeRepository: FakeRepository): Repository 
+}

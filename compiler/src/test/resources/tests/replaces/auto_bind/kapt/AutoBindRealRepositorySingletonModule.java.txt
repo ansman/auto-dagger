@@ -9,8 +9,10 @@ import dagger.hilt.components.SingletonComponent;
 import dagger.multibindings.IntoSet;
 import java.io.Closeable;
 import javax.annotation.processing.Generated;
+import se.ansman.dagger.auto.internal.AutoDaggerGenerated;
 
-@Generated("se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor")
+@AutoDaggerGenerated
+@Generated("se.ansman.dagger.auto.compiler.common.autobind.AutoBindProcessor")
 @Module
 @InstallIn(SingletonComponent.class)
 @OriginatingElement(

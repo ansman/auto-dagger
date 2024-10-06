@@ -1,0 +1,12 @@
+package tests.replaces.auto_bind.with_wildcard
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = RealRepository::class)
+abstract class AutoBindRealRepositorySingletonModule {
+  @Binds
+  abstract fun bindRealRepositoryAsRepository(realRepository: RealRepository): Repository 
+  @Binds
+  @IntoSet
+  abstract fun bindRealRepositoryAsCallableIntoSet(realRepository_: RealRepository): Callable<*> 
+}

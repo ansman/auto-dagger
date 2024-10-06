@@ -8,21 +8,18 @@ import com.squareup.javapoet.TypeName
 import com.squareup.javapoet.TypeVariableName
 import com.squareup.javapoet.WildcardTypeName
 import se.ansman.dagger.auto.compiler.common.processing.RenderEngine
+import se.ansman.dagger.auto.compiler.common.processing.model.AnnotationNode
 import se.ansman.dagger.auto.compiler.common.rawType
+import se.ansman.dagger.auto.compiler.kapt.processing.model.KaptAnnotationNode
+import javax.lang.model.element.Element
 import kotlin.reflect.KClass
 
-object JavaPoetRenderEngine : RenderEngine<TypeName, ClassName, AnnotationSpec> {
+object JavaPoetRenderEngine : RenderEngine<Element, TypeName, ClassName, AnnotationSpec> {
     override fun className(packageName: String, simpleName: String): ClassName = ClassName.get(packageName, simpleName)
     override fun className(qualifiedName: String): ClassName = ClassName.bestGuess(qualifiedName)
     override fun className(type: KClass<*>): ClassName = ClassName.get(type.java)
 
-    override fun typeArguments(typeName: TypeName): List<TypeName> =
-        when (typeName) {
-            is ParameterizedTypeName -> typeName.typeArguments
-            else -> emptyList()
-        }
-
-    override fun qualifierName(className: ClassName): String = className.canonicalName()
+    override fun qualifiedName(className: ClassName): String = className.canonicalName()
 
     override fun simpleName(typeName: TypeName): String =
         when (typeName) {
@@ -64,4 +61,8 @@ object JavaPoetRenderEngine : RenderEngine<TypeName, ClassName, AnnotationSpec> 
 
             else -> typeName
         }
+
+    override fun AnnotationNode<Element, TypeName, ClassName>.toAnnotationSpec(): AnnotationSpec {
+        return AnnotationSpec.get((this as KaptAnnotationNode).mirror)
+    }
 }

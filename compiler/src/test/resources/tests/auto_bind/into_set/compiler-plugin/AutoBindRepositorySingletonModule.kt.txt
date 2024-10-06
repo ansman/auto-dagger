@@ -1,0 +1,10 @@
+package tests.auto_bind.into_set
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = Repository::class)
+abstract class AutoBindRepositorySingletonModule {
+  @Binds
+  @IntoSet
+  abstract fun bindRepositoryAsCloseableIntoSet(repository: Repository): Closeable 
+}

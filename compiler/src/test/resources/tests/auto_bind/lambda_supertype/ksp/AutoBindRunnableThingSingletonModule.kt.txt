@@ -9,8 +9,10 @@ import dagger.hilt.components.SingletonComponent
 import javax.`annotation`.processing.Generated
 import kotlin.Function0
 import kotlin.String
+import se.ansman.dagger.auto.`internal`.AutoDaggerGenerated
 
-@Generated("se.ansman.dagger.auto.compiler.autobind.AutoBindProcessor")
+@AutoDaggerGenerated
+@Generated("se.ansman.dagger.auto.compiler.common.autobind.AutoBindProcessor")
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = RunnableThing::class)

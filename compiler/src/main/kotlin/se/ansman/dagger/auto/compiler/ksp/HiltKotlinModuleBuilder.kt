@@ -1,10 +1,10 @@
 package se.ansman.dagger.auto.compiler.ksp
 
-import com.google.devtools.ksp.symbol.KSDeclaration
+import com.google.devtools.ksp.containingFile
+import com.google.devtools.ksp.symbol.KSNode
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
-import com.squareup.kotlinpoet.DelicateKotlinPoetApi
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
@@ -35,12 +35,13 @@ import se.ansman.dagger.auto.compiler.common.rendering.HiltModuleBuilder.Provide
 import se.ansman.dagger.auto.compiler.common.rendering.asAnnotations
 import se.ansman.dagger.auto.compiler.common.rendering.asParameterName
 import se.ansman.dagger.auto.compiler.common.rendering.asTypeName
+import se.ansman.dagger.auto.internal.AutoDaggerGenerated
 import javax.annotation.processing.Generated
 import kotlin.reflect.KClass
 
 class HiltKotlinModuleBuilder private constructor(
-    private val info: HiltModule<KSDeclaration, ClassName>,
-) : HiltModuleBuilder<KSDeclaration, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec> {
+    private val info: HiltModule<KSNode, ClassName>,
+) : HiltModuleBuilder<KSNode, TypeName, AnnotationSpec, ParameterSpec, FunSpec.Builder, CodeBlock, FileSpec> {
     private val nameAllocator = NameAllocator()
     private val bindings = mutableListOf<FunSpec>()
     private val providers = mutableListOf<FunSpec>()
@@ -51,7 +52,7 @@ class HiltKotlinModuleBuilder private constructor(
         isPublic: Boolean,
         parameters: List<Parameter<TypeName, AnnotationSpec>>,
         mode: ProviderMode<AnnotationSpec>,
-        contents: (List<ParameterSpec>) -> CodeBlock
+        contents: FunSpec.Builder.(List<ParameterSpec>) -> CodeBlock
     ) = apply {
         val parameterNameAllocator = NameAllocator()
         val params = parameters.map { it.toParameterSpec(parameterNameAllocator) }
@@ -60,7 +61,7 @@ class HiltKotlinModuleBuilder private constructor(
             .addAnnotation(Provides::class)
             .addAnnotations(mode.asAnnotations())
             .addParameters(params)
-            .addCode(contents(params))
+            .apply { addCode(contents(params)) }
             .addAnnotations(returnType.qualifiers)
             .returns(returnType.type)
             .build()
@@ -85,15 +86,14 @@ class HiltKotlinModuleBuilder private constructor(
         name: String,
         type: DaggerType<TypeName, AnnotationSpec>,
         isPublic: Boolean
-    ): HiltModuleBuilder<KSDeclaration, TypeName, AnnotationSpec, ParameterSpec, CodeBlock, FileSpec> =
-        addBinding(
-            bindingAnnotation = BindsOptionalOf::class,
-            name = name,
-            sourceType = null,
-            returnType = type,
-            isPublic = isPublic,
-            mode = ProviderMode.Single
-        )
+    ) = addBinding(
+        bindingAnnotation = BindsOptionalOf::class,
+        name = name,
+        sourceType = null,
+        returnType = type,
+        isPublic = isPublic,
+        mode = ProviderMode.Single
+    )
 
     private fun addBinding(
         bindingAnnotation: KClass<out Annotation>,
@@ -139,10 +139,12 @@ class HiltKotlinModuleBuilder private constructor(
 
         typeSpec
             .apply { info.originatingElement.containingFile?.let(::addOriginatingKSFile) }
+            .addAnnotation(AutoDaggerGenerated::class)
             .addAnnotation(
                 AnnotationSpec.builder(Generated::class)
-                .addMember("%S", info.processor.name)
-                .build())
+                    .addMember("%S", info.processor.name)
+                    .build()
+            )
             .addAnnotation(Module::class)
             .addAnnotation(when (val installation = info.installation) {
                 is Installation.InstallIn ->
@@ -181,9 +183,8 @@ private fun Parameter<TypeName, AnnotationSpec>.toParameterSpec(
         .addAnnotations(qualifiers)
         .build()
 
-@OptIn(DelicateKotlinPoetApi::class)
 private fun ProviderMode<AnnotationSpec>.asAnnotations() =
-    asAnnotations(AnnotationSpec::get)
+    asAnnotations { AnnotationSpec.builder(it).build() }
 
 private fun Parameter<TypeName, AnnotationSpec>.asParameterName(): String =
     asParameterName { rawType().simpleName }

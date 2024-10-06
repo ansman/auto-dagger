@@ -1,0 +1,9 @@
+package tests.auto_bind.custom_component
+
+@AutoDaggerGenerated
+@InstallIn(value = MyComponent::class)
+@OriginatingElement(topLevelClass = RealRepository::class)
+abstract class AutoBindRealRepositoryMyModule {
+  @Binds
+  abstract fun bindRealRepositoryAsRepository(realRepository: RealRepository): Repository 
+}

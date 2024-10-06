@@ -1,0 +1,11 @@
+package tests.auto_bind.object
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = RealProvider::class)
+object AutoBindRealProviderSingletonModule {
+  @Provides
+  fun provideRealProviderAsProvider(): Provider {
+    RealProvider
+  }
+}

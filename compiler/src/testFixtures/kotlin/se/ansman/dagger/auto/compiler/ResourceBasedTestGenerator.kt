@@ -1,5 +1,7 @@
 package se.ansman.dagger.auto.compiler
 
+import com.tschuchort.compiletesting.KotlinCompilation
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.jupiter.api.DynamicContainer
 import org.junit.jupiter.api.DynamicNode
 import org.junit.jupiter.api.DynamicTest
@@ -13,35 +15,34 @@ import kotlin.io.path.readText
 import kotlin.io.path.toPath
 import kotlin.streams.asSequence
 
+@OptIn(ExperimentalCompilerApi::class)
 class ResourceBasedTestGenerator(
-    private val compilationFactoryProvider: CompilationFactoryProvider,
+    private val factories: List<Compilation.Factory>,
 ) {
     private val writeExpectedFilesTo = System.getProperty("writeExpectedFilesTo")
-        ?.takeIf { System.getProperty("writeExpectedFiles")?.toBooleanStrict() ?: false }
         ?.let(::File)
 
-    fun generateTests(tempDirectory: File): Iterable<DynamicNode> =
+    fun generateTests(tempDirectory: File, configure: KotlinCompilation.() -> Unit = {}): Iterable<DynamicNode> =
         Files.list(ClassLoader.getSystemResource("tests").toURI().toPath())
             .asSequence()
             .map { type ->
                 val typeName = type.fileName.toString()
                 DynamicContainer.dynamicContainer(
                     typeName,
-                    testsFromResources(tempDirectory.resolve(typeName), typeName)
+                    testsFromResources(tempDirectory.resolve(typeName), typeName, configure)
                 )
             }
             .ifEmpty { error("No tests found") }
             .asIterable()
 
-    private fun testsFromResources(tempDirectory: File, type: String): Iterable<DynamicNode> =
+    private fun testsFromResources(tempDirectory: File, type: String, configure: KotlinCompilation.() -> Unit): Iterable<DynamicNode> =
         Files.list(ClassLoader.getSystemResource("tests/$type").toURI().toPath())
             .asSequence()
             .map { test ->
                 DynamicContainer.dynamicContainer(
-                    test.name,
-                    compilationFactoryProvider.factories
-                        .mapNotNull { factory -> createTestCase(test, factory, type, tempDirectory) }
-                        .asIterable()
+                    test.name.replace('.', '_'),
+                    factories
+                        .map { factory -> createTestCase(test, factory, type, tempDirectory, configure) }
                 )
             }
             .ifEmpty { error("No tests found") }
@@ -51,8 +52,9 @@ class ResourceBasedTestGenerator(
         test: Path,
         factory: Compilation.Factory,
         type: String,
-        tempDirectory: File
-    ): DynamicTest? {
+        tempDirectory: File,
+        configure: KotlinCompilation.() -> Unit
+    ): DynamicTest {
         val name = test.fileName.toString()
         val expectedDirectory = test.resolve(factory.expectedFilesDirectoryName)
         return DynamicTest.dynamicTest(
@@ -60,7 +62,8 @@ class ResourceBasedTestGenerator(
             ResourceTestCase(
                 testType = type,
                 testName = name,
-                compilation = factory.create(tempDirectory.resolve(name).resolve(factory.expectedFilesDirectoryName).apply { mkdirs() }),
+                compilation = factory.create(
+                    tempDirectory.resolve(name).resolve(factory.expectedFilesDirectoryName).apply { mkdirs() }),
                 sources = Files.list(test)
                     .asSequence()
                     .filter { it.isRegularFile() }
@@ -77,7 +80,8 @@ class ResourceBasedTestGenerator(
                     ?.associateBy(
                         { it.fileName.toString().removeSuffix(".txt") },
                         { it.readText().trim() })
-                    ?: emptyMap()
+                    ?: emptyMap(),
+                configure = configure
             )
         )
     }

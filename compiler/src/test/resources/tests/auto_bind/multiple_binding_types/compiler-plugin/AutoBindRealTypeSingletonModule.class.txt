@@ -1,0 +1,130 @@
+public abstract class tests.auto_bind.multiple_binding_types.AutoBindRealTypeSingletonModule
+  minor version: 0
+  major version: 52
+  flags: (0x0421) ACC_PUBLIC, ACC_SUPER, ACC_ABSTRACT
+  this_class: #2                          // tests/auto_bind/multiple_binding_types/AutoBindRealTypeSingletonModule
+  super_class: #4                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 4, attributes: 3
+Constant pool:
+   #1 = Utf8               tests/auto_bind/multiple_binding_types/AutoBindRealTypeSingletonModule
+   #2 = Class              #1             // tests/auto_bind/multiple_binding_types/AutoBindRealTypeSingletonModule
+   #3 = Utf8               java/lang/Object
+   #4 = Class              #3             // java/lang/Object
+   #5 = Utf8               <init>
+   #6 = Utf8               ()V
+   #7 = Utf8               this
+   #8 = Utf8               Ltests/auto_bind/multiple_binding_types/AutoBindRealTypeSingletonModule;
+   #9 = Utf8               bindRealTypeAsType1
+  #10 = Utf8               (Ltests/auto_bind/multiple_binding_types/RealType;)Ltests/auto_bind/multiple_binding_types/Type1;
+  #11 = Utf8               Ldagger/Binds;
+  #12 = Utf8               Lorg/jetbrains/annotations/NotNull;
+  #13 = Utf8               bindRealTypeAsType2IntoSet
+  #14 = Utf8               (Ltests/auto_bind/multiple_binding_types/RealType;)Ltests/auto_bind/multiple_binding_types/Type2;
+  #15 = Utf8               Ldagger/multibindings/IntoSet;
+  #16 = Utf8               bindRealTypeAsType3IntoMap
+  #17 = Utf8               (Ltests/auto_bind/multiple_binding_types/RealType;)Ltests/auto_bind/multiple_binding_types/Type3;
+  #18 = Utf8               Ldagger/multibindings/IntoMap;
+  #19 = Utf8               Ldagger/multibindings/StringKey;
+  #20 = Utf8               value
+  #21 = Utf8               test
+  #22 = Utf8               Lse/ansman/dagger/auto/internal/AutoDaggerGenerated;
+  #23 = Utf8               Ldagger/hilt/InstallIn;
+  #24 = Utf8               Ldagger/hilt/components/SingletonComponent;
+  #25 = Utf8               Ldagger/hilt/codegen/OriginatingElement;
+  #26 = Utf8               topLevelClass
+  #27 = Utf8               Ltests/auto_bind/multiple_binding_types/RealType;
+  #28 = Utf8               Lkotlin/Metadata;
+  #29 = Utf8               mv
+  #30 = Integer            2
+  #31 = Integer            0
+  #32 = Utf8               k
+  #33 = Integer            3
+  #34 = Utf8               xi
+  #35 = Integer            48
+  #36 = Utf8               Repository.kt
+  #37 = Utf8               Code
+  #38 = Utf8               LocalVariableTable
+  #39 = Utf8               RuntimeVisibleAnnotations
+  #40 = Utf8               RuntimeInvisibleAnnotations
+  #41 = Utf8               RuntimeInvisibleParameterAnnotations
+  #42 = Utf8               SourceFile
+{
+  private tests.auto_bind.multiple_binding_types.AutoBindRealTypeSingletonModule();
+    descriptor: ()V
+    flags: (0x0002) ACC_PRIVATE
+    Code:
+      stack=0, locals=1, args_size=1
+         0: return
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       1     0  this   Ltests/auto_bind/multiple_binding_types/AutoBindRealTypeSingletonModule;
+
+  public abstract tests.auto_bind.multiple_binding_types.Type1 bindRealTypeAsType1(tests.auto_bind.multiple_binding_types.RealType);
+    descriptor: (Ltests/auto_bind/multiple_binding_types/RealType;)Ltests/auto_bind/multiple_binding_types/Type1;
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    RuntimeVisibleAnnotations:
+      0: #11()
+        dagger.Binds
+    RuntimeInvisibleAnnotations:
+      0: #12()
+        org.jetbrains.annotations.NotNull
+    RuntimeInvisibleParameterAnnotations:
+      parameter 0:
+        0: #12()
+          org.jetbrains.annotations.NotNull
+
+  public abstract tests.auto_bind.multiple_binding_types.Type2 bindRealTypeAsType2IntoSet(tests.auto_bind.multiple_binding_types.RealType);
+    descriptor: (Ltests/auto_bind/multiple_binding_types/RealType;)Ltests/auto_bind/multiple_binding_types/Type2;
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    RuntimeVisibleAnnotations:
+      0: #11()
+        dagger.Binds
+      1: #15()
+        dagger.multibindings.IntoSet
+    RuntimeInvisibleAnnotations:
+      0: #12()
+        org.jetbrains.annotations.NotNull
+    RuntimeInvisibleParameterAnnotations:
+      parameter 0:
+        0: #12()
+          org.jetbrains.annotations.NotNull
+
+  public abstract tests.auto_bind.multiple_binding_types.Type3 bindRealTypeAsType3IntoMap(tests.auto_bind.multiple_binding_types.RealType);
+    descriptor: (Ltests/auto_bind/multiple_binding_types/RealType;)Ltests/auto_bind/multiple_binding_types/Type3;
+    flags: (0x0401) ACC_PUBLIC, ACC_ABSTRACT
+    RuntimeVisibleAnnotations:
+      0: #11()
+        dagger.Binds
+      1: #18()
+        dagger.multibindings.IntoMap
+      2: #19(#20=s#21)
+        dagger.multibindings.StringKey(
+          value="test"
+        )
+    RuntimeInvisibleAnnotations:
+      0: #12()
+        org.jetbrains.annotations.NotNull
+    RuntimeInvisibleParameterAnnotations:
+      parameter 0:
+        0: #12()
+          org.jetbrains.annotations.NotNull
+}
+SourceFile: "Repository.kt"
+RuntimeVisibleAnnotations:
+  0: #25(#26=c#27)
+    dagger.hilt.codegen.OriginatingElement(
+      topLevelClass=class Ltests/auto_bind/multiple_binding_types/RealType;
+    )
+  1: #28(#29=[I#30,I#31,I#31],#32=I#33,#34=I#35)
+    kotlin.Metadata(
+      mv=[2,0,0]
+      k=3
+      xi=48
+    )
+RuntimeInvisibleAnnotations:
+  0: #22()
+    se.ansman.dagger.auto.internal.AutoDaggerGenerated
+  1: #23(#20=[c#24])
+    dagger.hilt.InstallIn(
+      value=[class Ldagger/hilt/components/SingletonComponent;]
+    )

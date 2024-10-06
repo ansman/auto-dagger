@@ -1,0 +1,11 @@
+package tests.auto_bind.into_map
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = Repository::class)
+abstract class AutoBindRepositorySingletonModule {
+  @Binds
+  @IntoMap
+  @StringKey(value = "test")
+  abstract fun bindRepositoryAsCloseableIntoMap(repository: Repository): Closeable 
+}

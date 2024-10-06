@@ -1,0 +1,10 @@
+package tests.auto_bind.initializable
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = RealRepository::class)
+abstract class AutoInitializeRealRepositoryModule {
+  @Binds
+  @IntoSet
+  abstract fun bindRealRepositoryAsInitializable(realRepository: RealRepository): Initializable 
+}

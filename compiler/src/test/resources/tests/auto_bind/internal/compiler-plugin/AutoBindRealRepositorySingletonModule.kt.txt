@@ -1,0 +1,9 @@
+package tests.auto_bind.internal
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = RealRepository::class)
+abstract class AutoBindRealRepositorySingletonModule {
+  @Binds
+  internal abstract fun bindRealRepositoryAsRepository(realRepository: RealRepository): Repository 
+}

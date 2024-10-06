@@ -4,8 +4,8 @@ import org.junit.jupiter.api.io.TempDir
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ArgumentsSource
 import se.ansman.dagger.auto.compiler.AutoDaggerCompilationFactoryProvider
-import se.ansman.dagger.auto.compiler.Errors
 import se.ansman.dagger.auto.compiler.Compilation
+import se.ansman.dagger.auto.compiler.common.Errors
 import java.io.File
 
 class RetrofitTest {
@@ -23,7 +23,7 @@ class RetrofitTest {
                 @AutoProvideService
                 abstract class ApiService {
                     @retrofit2.http.GET("users")
-                    suspend fun getUsers(): List<String>
+                    abstract suspend fun getUsers(): List<String>
                 }
                 """
             )

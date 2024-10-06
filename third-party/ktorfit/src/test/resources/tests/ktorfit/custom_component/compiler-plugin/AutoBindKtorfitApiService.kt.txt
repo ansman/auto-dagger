@@ -1,0 +1,11 @@
+package tests.ktorfit.custom_component
+
+@AutoDaggerGenerated
+@InstallIn(value = FragmentComponent::class)
+@OriginatingElement(topLevelClass = ApiService::class)
+object AutoBindKtorfitApiService {
+  @Provides
+  fun provideApiService(ktorfit: Ktorfit): ApiService {
+    _ApiServiceImpl(ktorfit)
+  }
+}

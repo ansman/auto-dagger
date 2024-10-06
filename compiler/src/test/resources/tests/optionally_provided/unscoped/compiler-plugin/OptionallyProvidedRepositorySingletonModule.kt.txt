@@ -1,0 +1,9 @@
+package tests.optionally_provided.unscoped
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = Repository::class)
+abstract class OptionallyProvidedRepositorySingletonModule {
+  @BindsOptionalOf
+  abstract fun bindsOptionalRepository(): Repository 
+}

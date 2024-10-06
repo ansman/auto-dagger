@@ -1,6 +1,6 @@
 package se.ansman.dagger.auto.compiler.common.processing
 
-interface AutoDaggerEnvironment<in N, TypeName, ClassName : TypeName, AnnotationSpec, F> : RenderEngine<TypeName, ClassName, AnnotationSpec> {
+interface AutoDaggerEnvironment<N, TypeName, ClassName : TypeName, AnnotationSpec, Output> : RenderEngine<N, TypeName, ClassName, AnnotationSpec> {
     val logger: AutoDaggerLogger<N>
-    fun write(file: F)
+    fun write(output: Output)
 }

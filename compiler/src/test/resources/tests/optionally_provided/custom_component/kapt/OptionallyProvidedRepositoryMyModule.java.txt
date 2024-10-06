@@ -6,8 +6,10 @@ import dagger.Module;
 import dagger.hilt.InstallIn;
 import dagger.hilt.codegen.OriginatingElement;
 import javax.annotation.processing.Generated;
+import se.ansman.dagger.auto.internal.AutoDaggerGenerated;
 
-@Generated("se.ansman.dagger.auto.compiler.optionallyprovided.OptionallyProvidedProcessor")
+@AutoDaggerGenerated
+@Generated("se.ansman.dagger.auto.compiler.common.optionallyprovided.OptionallyProvidedProcessor")
 @Module
 @InstallIn(MyComponent.class)
 @OriginatingElement(

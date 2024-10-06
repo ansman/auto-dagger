@@ -1,0 +1,13 @@
+package tests.auto_initialize.non_initializable
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = NonInitializableThing::class)
+object AutoInitializeNonInitializableThingModule {
+  @Provides
+  @IntoSet
+  fun provideNonInitializableThingAsInitializable(lazyNonInitializableThing: Lazy<NonInitializableThing>): Initializable {
+    Companion.asInitializable(
+    )
+  }
+}

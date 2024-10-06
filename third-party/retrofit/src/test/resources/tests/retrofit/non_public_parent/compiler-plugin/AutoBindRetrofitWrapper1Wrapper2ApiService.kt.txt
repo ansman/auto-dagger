@@ -1,0 +1,11 @@
+package tests.retrofit.non_public_parent
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = Wrapper1::class)
+object AutoBindRetrofitWrapper1Wrapper2ApiService {
+  @Provides
+  internal fun provideApiService(retrofit: Retrofit): ApiService {
+    retrofit.create(ApiService::class)
+  }
+}

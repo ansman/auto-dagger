@@ -1,0 +1,11 @@
+package tests.auto_bind.into_set_with_qualifier
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = AuthInterceptor::class)
+abstract class AutoBindAuthInterceptorSingletonModule {
+  @Binds
+  @IntoSet
+  @Named(value = "api")
+  abstract fun bindAuthInterceptorAsInterceptorIntoSet(authInterceptor: AuthInterceptor): Interceptor 
+}

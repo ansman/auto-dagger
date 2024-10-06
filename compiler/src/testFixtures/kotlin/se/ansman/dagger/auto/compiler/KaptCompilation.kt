@@ -2,39 +2,35 @@ package se.ansman.dagger.auto.compiler
 
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
-import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import se.ansman.dagger.auto.compiler.common.Options
+import se.ansman.dagger.auto.compiler.kapt.AutoDaggerAnnotationProcessor
 import java.io.File
-import javax.annotation.processing.Processor
 
-@OptIn(ExperimentalCompilerApi::class)
-class KaptCompilation(
-    private val processors: () -> List<Processor>,
-    workingDir: File,
-) : Compilation(workingDir) {
+class KaptCompilation(workingDir: File) : Compilation(workingDir) {
 
-    override fun compile(sources: List<TestSourceFile>, configuration: KotlinCompilation.() -> Unit): Result =
+    override fun doCompile(sources: List<TestSourceFile>, configuration: KotlinCompilation.() -> Unit): Result =
         KotlinCompilation()
             .apply {
                 kaptArgs[Options.enableLogging] = "true"
                 configuration()
-                annotationProcessors = processors()
+                annotationProcessors = listOf(AutoDaggerAnnotationProcessor())
                 this.sources = sources.map { it.toSourceFile() }
                 useKapt4 = true
             }
             .run { synchronized(mutex) { compile() } }
             .let(::Result)
 
-    override val JvmCompilationResult.filesGeneratedByAnnotationProcessor: Sequence<File>
-        get() = sourcesGeneratedByAnnotationProcessor.asSequence()
+    override fun JvmCompilationResult.readFilesGeneratedByAnnotationProcessor(): Map<String, String> =
+        sourcesGeneratedByAnnotationProcessor.associateBy(
+            { it.name },
+            { it.readText().trim() }
+        )
 
-    class Factory(vararg processors: () -> Processor) : Compilation.Factory {
-        private val processors = { processors.map { it() }}
-
+    object Factory : Compilation.Factory {
         override val expectedFilesDirectoryName: String
             get() = "kapt"
 
         override fun create(workingDir: File): KaptCompilation =
-            KaptCompilation(processors, workingDir)
+            KaptCompilation(workingDir)
     }
 }

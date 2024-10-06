@@ -1,0 +1,10 @@
+package tests.auto_bind.into_map_wildcard
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = BooleanProvider::class)
+abstract class AutoBindBooleanProviderSingletonModule {
+  @Binds
+  @IntoSet
+  abstract fun bindBooleanProviderAsCallableIntoSet(booleanProvider: BooleanProvider): Callable<Boolean> 
+}

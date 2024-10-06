@@ -1,0 +1,11 @@
+package tests.ktorfit.non_public
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = ApiService::class)
+object AutoBindKtorfitApiService {
+  @Provides
+  internal fun provideApiService(ktorfit: Ktorfit): ApiService {
+    _ApiServiceImpl(ktorfit)
+  }
+}

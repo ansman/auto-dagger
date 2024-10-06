@@ -1,0 +1,12 @@
+package tests.auto_initialize.priority.binding
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = Outer::class)
+object AutoInitializeOuterSomeThingModule {
+  @Provides
+  @IntoSet
+  fun provideSomeThingAsInitializable(someThing: SomeThing): Initializable {
+    Companion.withPriority(4711)
+  }
+}

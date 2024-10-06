@@ -1,0 +1,11 @@
+package tests.replaces.auto_bind.with_multibinds
+
+@AutoDaggerGenerated
+@TestInstallIn(components = FragmentComponent::class, replaces = AutoBindRealRepositoryFragmentModule::class)
+@OriginatingElement(topLevelClass = FakeRepository::class)
+abstract class AutoBindFakeRepositoryFragmentModule {
+  @Binds
+  @IntoMap
+  @StringKey(value = "repository")
+  abstract fun bindFakeRepositoryAsRunnableIntoMap(fakeRepository: FakeRepository): Runnable 
+}

@@ -6,6 +6,12 @@ plugins {
     id("library.publishing")
 }
 
+tasks.compileTestKotlin {
+    compilerOptions.freeCompilerArgs.addAll(
+        "-opt-in=org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
+    )
+}
+
 setupResourceTests()
 
 dependencies {

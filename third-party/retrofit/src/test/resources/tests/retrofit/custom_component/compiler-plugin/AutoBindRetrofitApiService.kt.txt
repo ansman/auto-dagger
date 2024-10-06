@@ -1,0 +1,11 @@
+package tests.retrofit.custom_component
+
+@AutoDaggerGenerated
+@InstallIn(value = FragmentComponent::class)
+@OriginatingElement(topLevelClass = ApiService::class)
+object AutoBindRetrofitApiService {
+  @Provides
+  fun provideApiService(retrofit: Retrofit): ApiService {
+    retrofit.create(ApiService::class)
+  }
+}

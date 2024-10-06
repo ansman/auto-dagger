@@ -1,0 +1,9 @@
+package tests.auto_bind.multiple_types.filtered
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = RealType::class)
+abstract class AutoBindRealTypeSingletonModule {
+  @Binds
+  abstract fun bindRealTypeAsType2(realType: RealType): Type2<String> 
+}

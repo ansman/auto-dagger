@@ -8,6 +8,8 @@ dependencies {
     compileOnly(libs.kotlinx.metadata)
     compileOnly(libs.javapoet)
     compileOnly(libs.bundles.kotlinpoet)
-    implementation(libs.dagger)
-    implementation(libs.dagger.hilt.core)
+    api(libs.dagger)
+    api(libs.dagger.hilt.core)
+    api(projects.core)
+
 }

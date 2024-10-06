@@ -27,7 +27,7 @@ shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
 
 kotlinx-metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0"
@@ -91,6 +91,9 @@ projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accesso
 ktorfit = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
 
 sonatypePublishFix = "se.ansman.sonatype-publish-fix:gradle-plugin:1.0.0"
+
+asm-bom = "org.ow2.asm:asm-bom:9.7"
+asm-core = { group = "org.ow2.asm", name = "asm" }
 
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]

@@ -1,0 +1,11 @@
+package tests.ktorfit.qualifiers
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = ApiService::class)
+object AutoBindKtorfitApiService {
+  @Provides
+  fun provideApiService(@Named(value = "api1") ktorfit: Ktorfit): ApiService {
+    _ApiServiceImpl(ktorfit)
+  }
+}

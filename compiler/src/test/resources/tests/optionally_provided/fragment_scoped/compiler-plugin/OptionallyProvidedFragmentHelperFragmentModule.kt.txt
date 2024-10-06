@@ -1,0 +1,9 @@
+package tests.optionally_provided.fragment_scoped
+
+@AutoDaggerGenerated
+@InstallIn(value = FragmentComponent::class)
+@OriginatingElement(topLevelClass = FragmentHelper::class)
+abstract class OptionallyProvidedFragmentHelperFragmentModule {
+  @BindsOptionalOf
+  abstract fun bindsOptionalFragmentHelper(): FragmentHelper 
+}

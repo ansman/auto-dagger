@@ -1,0 +1,12 @@
+package tests.retrofit.reusable
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = ApiService::class)
+object AutoBindRetrofitApiService {
+  @Provides
+  @Reusable
+  fun provideApiService(retrofit: Retrofit): ApiService {
+    retrofit.create(ApiService::class)
+  }
+}

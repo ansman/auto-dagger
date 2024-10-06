@@ -1,0 +1,9 @@
+package tests.auto_bind.lambda_supertype
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = RunnableThing::class)
+abstract class AutoBindRunnableThingSingletonModule {
+  @Binds
+  abstract fun bindRunnableThingAsFunction0(runnableThing: RunnableThing): Function0<String> 
+}

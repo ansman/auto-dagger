@@ -1,0 +1,12 @@
+package tests.replaces.auto_bind.with_multibinds
+
+@AutoDaggerGenerated
+@TestInstallIn(components = SingletonComponent::class, replaces = AutoBindRealRepositorySingletonModule::class)
+@OriginatingElement(topLevelClass = FakeRepository::class)
+abstract class AutoBindFakeRepositorySingletonModule {
+  @Binds
+  abstract fun bindFakeRepositoryAsRepository(fakeRepository: FakeRepository): Repository 
+  @Binds
+  @IntoSet
+  abstract fun bindFakeRepositoryAsCloseableIntoSet(fakeRepository_: FakeRepository): Closeable 
+}

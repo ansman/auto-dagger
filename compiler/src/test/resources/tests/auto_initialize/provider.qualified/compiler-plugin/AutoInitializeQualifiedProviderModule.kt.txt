@@ -1,0 +1,13 @@
+package tests.auto_initialize.provider.qualified
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = QualifiedProviderModule::class)
+object AutoInitializeQualifiedProviderModule {
+  @Provides
+  @IntoSet
+  fun provideQualifiedProvidedThingAsInitializable(@Named(value = "someName") lazyQualifiedProvidedThing: Lazy<QualifiedProvidedThing>): Initializable {
+    Companion.asInitializable(
+    )
+  }
+}

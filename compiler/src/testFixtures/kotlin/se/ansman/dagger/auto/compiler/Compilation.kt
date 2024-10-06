@@ -2,40 +2,43 @@ package se.ansman.dagger.auto.compiler
 
 import assertk.assertThat
 import assertk.assertions.contains
-import assertk.assertions.isNotNull
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import org.intellij.lang.annotations.Language
-import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import java.io.File
 import java.io.OutputStream
 import kotlin.test.assertEquals
-import kotlin.test.fail
 
-@OptIn(ExperimentalCompilerApi::class)
 abstract class Compilation(
     protected val workingDir: File
 ) {
-    fun compile(@Language("kotlin") vararg sources: String): Result =
-        compile(sources.mapIndexed { i, contents ->
-            TestSourceFile.Inline.kotlin(contents, "Test$i.kt")
-        })
+    open fun File.readFile(): String = readText()
 
-    fun compile(vararg sources: TestSourceFile): Result = compile(sources.asList())
+    fun compile(@Language("kotlin") vararg sources: String, configuration: KotlinCompilation.() -> Unit = {}): Result =
+        compile(
+            sources = sources.mapIndexed { i, contents ->
+                TestSourceFile.Inline.kotlin(contents, name = if (sources.size == 1) "Test.kt" else "Test$i.kt")
+            },
+            configuration = configuration
+        )
 
-    fun compile(sources: List<TestSourceFile>): Result =
-        compile(sources) {
+    fun compile(vararg sources: TestSourceFile, configuration: KotlinCompilation.() -> Unit = {}): Result =
+        compile(sources.asList(), configuration)
+
+    fun compile(sources: List<TestSourceFile>, configuration: KotlinCompilation.() -> Unit = {}): Result =
+        doCompile(sources) {
             workingDir = this@Compilation.workingDir
             inheritClassPath = true
             messageOutputStream = OutputStream.nullOutputStream()
+            configuration()
         }
 
-    protected abstract fun compile(
+    protected abstract fun doCompile(
         sources: List<TestSourceFile>,
         configuration: KotlinCompilation.() -> Unit
     ): Result
 
-    protected abstract val JvmCompilationResult.filesGeneratedByAnnotationProcessor: Sequence<File>
+    protected abstract fun JvmCompilationResult.readFilesGeneratedByAnnotationProcessor(): Map<String, String>
 
     companion object {
         val mutex = Any()
@@ -43,33 +46,22 @@ abstract class Compilation(
 
     interface Factory {
         val expectedFilesDirectoryName: String
-
         fun create(workingDir: File): Compilation
     }
 
     inner class Result(private val result: JvmCompilationResult) {
         val exitCode: KotlinCompilation.ExitCode get() = result.exitCode
         val messages: String get() = result.messages
-        private val errorMessage = filesGeneratedByAnnotationProcessor.joinToString(
+        val filesGeneratedByAnnotationProcessor: Map<String, String> = result.readFilesGeneratedByAnnotationProcessor()
+
+        private val errorMessage = filesGeneratedByAnnotationProcessor.entries.joinToString(
             prefix = "$messages\n\n",
             separator = "\n\n",
-            transform = ::formatFile
+            transform = { formatFile(it.key, it.value.trim()) }
         )
-
-        val filesGeneratedByAnnotationProcessor: Sequence<File> get() = result.filesGeneratedByAnnotationProcessor
 
         fun assertIsSuccessful(): Result = apply {
             assertEquals(KotlinCompilation.ExitCode.OK, exitCode, errorMessage)
-        }
-
-        fun assertGeneratedFileNamed(name: String): Result = apply {
-            if (findGeneratedFile(name) == null) {
-                fail(filesGeneratedByAnnotationProcessor.joinToString(
-                    separator = "\n",
-                    prefix = "Expected a file named $name to be generated. Generated files:\n"
-                ))
-            }
-            assertThat(findGeneratedFile(name), name = "file named $name").isNotNull()
         }
 
         fun assertFailedWithMessage(message: String): Result = apply {
@@ -77,15 +69,12 @@ abstract class Compilation(
             assertThat(messages).contains(message)
         }
 
-        fun findGeneratedFile(name: String): File? =
-            filesGeneratedByAnnotationProcessor.find {
-                name == if ('.' in name) it.name else it.nameWithoutExtension
-            }
+        fun findGeneratedFile(name: String): String? = filesGeneratedByAnnotationProcessor[name]
 
-        fun readGeneratedFile(name: String): String =
+        fun getGeneratedFile(name: String): String =
             requireNotNull(findGeneratedFile(name)) {
-                "No file was generated with name $name. Generated files: ${filesGeneratedByAnnotationProcessor.joinToString { it.name }}\n$errorMessage".trim()
-            }.readText().trim()
+                "No file was generated with name $name. Generated files: ${filesGeneratedByAnnotationProcessor.keys}\n$errorMessage".trim()
+            }
 
         fun loadClass(className: String): Class<*> = result.classLoader.loadClass(className)
     }

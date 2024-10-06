@@ -83,3 +83,6 @@ public abstract interface annotation class se/ansman/dagger/auto/OptionallyProvi
 	public abstract fun inComponent ()Ljava/lang/Class;
 }
 
+public abstract interface annotation class se/ansman/dagger/auto/internal/AutoDaggerGenerated : java/lang/annotation/Annotation {
+}
+

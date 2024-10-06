@@ -9,8 +9,10 @@ import dagger.hilt.components.SingletonComponent
 import javax.`annotation`.processing.Generated
 import retrofit2.Retrofit
 import retrofit2.create
+import se.ansman.dagger.auto.`internal`.AutoDaggerGenerated
 
-@Generated("se.ansman.dagger.auto.compiler.retrofit.RetrofitProcessor")
+@AutoDaggerGenerated
+@Generated("se.ansman.dagger.auto.compiler.common.retrofit.RetrofitProcessor")
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = ApiService::class)

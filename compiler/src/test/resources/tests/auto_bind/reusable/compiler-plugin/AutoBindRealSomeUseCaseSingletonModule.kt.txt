@@ -1,0 +1,9 @@
+package tests.auto_bind.reusable
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = RealSomeUseCase::class)
+abstract class AutoBindRealSomeUseCaseSingletonModule {
+  @Binds
+  abstract fun bindRealSomeUseCaseAsSomeUseCase(realSomeUseCase: RealSomeUseCase): SomeUseCase 
+}

@@ -1,0 +1,13 @@
+package tests.replaces.object
+
+@AutoDaggerGenerated
+@InstallIn(value = SingletonComponent::class)
+@OriginatingElement(topLevelClass = RealRepository::class)
+object AutoInitializeRealRepositoryModule {
+  @Provides
+  @IntoSet
+  fun provideRealRepositoryAsInitializable(lazyRealRepository: Lazy<RealRepository>): Initializable {
+    Companion.asInitializable(
+    )
+  }
+}
