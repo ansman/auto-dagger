@@ -1,4 +1,4 @@
-package se.ansman.dagger.auto.compiler.common.testutils
+package se.ansman.dagger.auto.compiler
 
 import assertk.assertThat
 import assertk.assertions.contains

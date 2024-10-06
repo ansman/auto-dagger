@@ -5,7 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ArgumentsSource
 import se.ansman.dagger.auto.compiler.AutoDaggerCompilationFactoryProvider
 import se.ansman.dagger.auto.compiler.Errors
-import se.ansman.dagger.auto.compiler.common.testutils.Compilation
+import se.ansman.dagger.auto.compiler.Compilation
 import java.io.File
 
 class RetrofitTest {
