@@ -41,7 +41,7 @@ okio = "com.squareup.okio:okio:3.9.1"
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
-android-gradlePlugin = "com.android.tools.build:gradle:8.7.0"
+android-gradlePlugin = "com.android.tools.build:gradle:8.7.1"
 androidx-startup = "androidx.startup:startup-runtime:1.2.0"
 androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel:2.8.6"
 androidx-test = { module = "androidx.test:core-ktx", version.ref = "androidx-test" }
