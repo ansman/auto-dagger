@@ -107,3 +107,5 @@ fabric.properties
 .idea/deploymentTargetDropDown.xml
 
 .kotlin
+
+local.properties
