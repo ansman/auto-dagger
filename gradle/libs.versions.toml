@@ -12,7 +12,7 @@ androidx-test = "1.6.1"
 kotlinpoet = "1.18.1"
 room = "2.6.1"
 retrofit = "2.11.0"
-ktorfit = "2.1.0"
+ktorfit = "2.2.0"
 projectAccessors = "1.2.0"
 shadow = "8.3.5"
 
