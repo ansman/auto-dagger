@@ -15,7 +15,7 @@ sealed class TestSourceFile {
         override val language: SourceLanguage = SourceLanguage.fromExtension(file.extension)
     ) : TestSourceFile() {
         override val name: String get() = file.name
-        override fun toSourceFile(): SourceFile = SourceFile.fromPath(file)
+        override fun toSourceFile(): SourceFile = SourceFile.new(file.name, file.readText())
         override fun asString(): String = file.readText()
     }
 
