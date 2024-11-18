@@ -4,13 +4,14 @@ import com.google.devtools.ksp.isDefault
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSType
+import com.google.devtools.ksp.symbol.KSTypeAlias
 import com.google.devtools.ksp.symbol.KSValueArgument
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.asClassName
 import com.squareup.kotlinpoet.ksp.toClassName
-import se.ansman.dagger.auto.compiler.ksp.toAnnotationSpecFixed
 import se.ansman.dagger.auto.compiler.common.processing.AnnotationModel
+import se.ansman.dagger.auto.compiler.ksp.toAnnotationSpecFixed
 import kotlin.reflect.KClass
 
 class KspAnnotationModel(
@@ -74,7 +75,8 @@ class KspAnnotationModel(
                 is String -> this
 
                 is List<*> -> map { it!!.convert() }
-                is KSType -> KspClassDeclaration(declaration as KSClassDeclaration, resolver)
+                is KSType -> (unwrapTypeAlias().declaration as KSClassDeclaration).convert()
+                is KSTypeAlias -> type.resolve().convert()
                 is KSClassDeclaration -> KspClassDeclaration(this, resolver)
                 else -> throw UnsupportedOperationException("Annotation value of type $javaClass isn't supported")
             }
