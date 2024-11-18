@@ -20,6 +20,5 @@ import se.ansman.dagger.auto.Initializable.Companion.asInitializable
 public object AutoInitializeOuterInnerModule {
   @Provides
   @IntoSet
-  public fun provideStringAsInitializable(lazyString: Lazy<String>): Initializable =
-      lazyString.asInitializable()
+  public fun provideStringAsInitializable(lazyString: Lazy<String>): Initializable = lazyString.asInitializable()
 }

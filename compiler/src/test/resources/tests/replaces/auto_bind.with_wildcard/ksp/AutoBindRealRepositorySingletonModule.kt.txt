@@ -20,6 +20,5 @@ public abstract class AutoBindRealRepositorySingletonModule private constructor(
 
   @Binds
   @IntoSet
-  public abstract fun bindRealRepositoryAsCallableOfStarIntoSet(realRepository_: RealRepository):
-      Callable<*>
+  public abstract fun bindRealRepositoryAsCallableOfStarIntoSet(realRepository_: RealRepository): Callable<*>
 }

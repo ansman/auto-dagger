@@ -14,6 +14,5 @@ import javax.`annotation`.processing.Generated
 @OriginatingElement(topLevelClass = RealSomeUseCase::class)
 public abstract class AutoBindRealSomeUseCaseSingletonModule private constructor() {
   @Binds
-  public abstract fun bindRealSomeUseCaseAsSomeUseCase(realSomeUseCase: RealSomeUseCase):
-      SomeUseCase
+  public abstract fun bindRealSomeUseCaseAsSomeUseCase(realSomeUseCase: RealSomeUseCase): SomeUseCase
 }

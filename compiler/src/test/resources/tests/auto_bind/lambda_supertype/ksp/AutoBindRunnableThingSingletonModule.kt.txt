@@ -16,6 +16,5 @@ import kotlin.String
 @OriginatingElement(topLevelClass = RunnableThing::class)
 public abstract class AutoBindRunnableThingSingletonModule private constructor() {
   @Binds
-  public abstract fun bindRunnableThingAsFunction0OfString(runnableThing: RunnableThing):
-      Function0<String>
+  public abstract fun bindRunnableThingAsFunction0OfString(runnableThing: RunnableThing): Function0<String>
 }

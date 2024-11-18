@@ -17,6 +17,5 @@ import se.ansman.dagger.auto.Initializable
 public abstract class AutoInitializeInitializableThingModule private constructor() {
   @Binds
   @IntoSet
-  public abstract fun bindInitializableThingAsInitializable(initializableThing: InitializableThing):
-      Initializable
+  public abstract fun bindInitializableThingAsInitializable(initializableThing: InitializableThing): Initializable
 }

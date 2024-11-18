@@ -20,6 +20,5 @@ import se.ansman.dagger.auto.Initializable.Companion.asInitializable
 public object AutoInitializeObjectModule {
   @Provides
   @IntoSet
-  public fun provideIntAsInitializable(lazyInt: Lazy<Int>): Initializable =
-      lazyInt.asInitializable()
+  public fun provideIntAsInitializable(lazyInt: Lazy<Int>): Initializable = lazyInt.asInitializable()
 }

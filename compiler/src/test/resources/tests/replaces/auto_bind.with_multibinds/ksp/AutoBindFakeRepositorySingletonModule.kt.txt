@@ -23,6 +23,5 @@ public abstract class AutoBindFakeRepositorySingletonModule private constructor(
 
   @Binds
   @IntoSet
-  public abstract fun bindFakeRepositoryAsCloseableIntoSet(fakeRepository_: FakeRepository):
-      Closeable
+  public abstract fun bindFakeRepositoryAsCloseableIntoSet(fakeRepository_: FakeRepository): Closeable
 }

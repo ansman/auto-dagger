@@ -20,6 +20,5 @@ public abstract class AutoBindRealRepositorySingletonModule private constructor(
 
   @Binds
   @IntoSet
-  public abstract fun bindRealRepositoryAsCloseableIntoSet(realRepository_: RealRepository):
-      Closeable
+  public abstract fun bindRealRepositoryAsCloseableIntoSet(realRepository_: RealRepository): Closeable
 }

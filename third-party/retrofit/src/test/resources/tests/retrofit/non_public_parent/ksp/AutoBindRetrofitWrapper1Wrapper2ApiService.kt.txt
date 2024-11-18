@@ -16,6 +16,5 @@ import retrofit2.create
 @OriginatingElement(topLevelClass = Wrapper1::class)
 public object AutoBindRetrofitWrapper1Wrapper2ApiService {
   @Provides
-  internal fun provideApiService(retrofit: Retrofit): Wrapper1.Wrapper2.ApiService =
-      retrofit.create()
+  internal fun provideApiService(retrofit: Retrofit): Wrapper1.Wrapper2.ApiService = retrofit.create()
 }

@@ -14,6 +14,5 @@ import javax.`annotation`.processing.Generated
 @OriginatingElement(topLevelClass = FragmentRepository::class)
 public abstract class AutoBindFragmentRepositoryFragmentModule private constructor() {
   @Binds
-  public abstract fun bindFragmentRepositoryAsRepository(fragmentRepository: FragmentRepository):
-      Repository
+  public abstract fun bindFragmentRepositoryAsRepository(fragmentRepository: FragmentRepository): Repository
 }

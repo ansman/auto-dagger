@@ -19,6 +19,5 @@ import se.ansman.dagger.auto.Initializable.Companion.asInitializable
 public object AutoInitializeRealRepositoryModule {
   @Provides
   @IntoSet
-  public fun provideRealRepositoryAsInitializable(lazyRealRepository: Lazy<RealRepository>):
-      Initializable = lazyRealRepository.asInitializable()
+  public fun provideRealRepositoryAsInitializable(lazyRealRepository: Lazy<RealRepository>): Initializable = lazyRealRepository.asInitializable()
 }
