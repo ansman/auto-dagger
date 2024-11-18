@@ -15,6 +15,5 @@ import kotlin.String
 @OriginatingElement(topLevelClass = RealRepository::class)
 public abstract class AutoBindRealRepositorySingletonModule private constructor() {
   @Binds
-  public abstract fun bindRealRepositoryAsRepositoryOfString(realRepository: RealRepository):
-      Repository<String>
+  public abstract fun bindRealRepositoryAsRepositoryOfString(realRepository: RealRepository): Repository<String>
 }

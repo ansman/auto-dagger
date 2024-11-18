@@ -18,6 +18,5 @@ public abstract class AutoBindSomeResourceSingletonModule private constructor() 
   @Binds
   @IntoMap
   @StringKey("test")
-  public abstract fun bindSomeResourceAsResourceOfStarIntoMap(someResource: SomeResource):
-      Resource<*>
+  public abstract fun bindSomeResourceAsResourceOfStarIntoMap(someResource: SomeResource): Resource<*>
 }

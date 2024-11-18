@@ -19,6 +19,5 @@ import se.ansman.dagger.auto.Initializable.Companion.asInitializable
 public object AutoInitializeInternalObjectModule {
   @Provides
   @IntoSet
-  internal fun provideInternalObjectAsInitializable(lazyInternalObject: Lazy<InternalObject>):
-      Initializable = lazyInternalObject.asInitializable()
+  internal fun provideInternalObjectAsInitializable(lazyInternalObject: Lazy<InternalObject>): Initializable = lazyInternalObject.asInitializable()
 }

@@ -15,6 +15,5 @@ import javax.`annotation`.processing.Generated
 @OriginatingElement(topLevelClass = Wrapper1::class)
 public object AutoBindKtorfitWrapper1Wrapper2ApiService {
   @Provides
-  internal fun provideApiService(ktorfit: Ktorfit): Wrapper1.Wrapper2.ApiService =
-      ktorfit.createApiService()
+  internal fun provideApiService(ktorfit: Ktorfit): Wrapper1.Wrapper2.ApiService = ktorfit.createApiService()
 }

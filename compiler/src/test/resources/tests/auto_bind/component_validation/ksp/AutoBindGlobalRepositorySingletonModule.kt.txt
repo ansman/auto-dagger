@@ -14,6 +14,5 @@ import javax.`annotation`.processing.Generated
 @OriginatingElement(topLevelClass = GlobalRepository::class)
 public abstract class AutoBindGlobalRepositorySingletonModule private constructor() {
   @Binds
-  public abstract fun bindGlobalRepositoryAsRepository(globalRepository: GlobalRepository):
-      Repository
+  public abstract fun bindGlobalRepositoryAsRepository(globalRepository: GlobalRepository): Repository
 }

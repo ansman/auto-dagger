@@ -16,6 +16,5 @@ import javax.`annotation`.processing.Generated
 public abstract class AutoBindSomeResourceSingletonModule private constructor() {
   @Binds
   @IntoSet
-  public abstract fun bindSomeResourceAsResourceOfStarIntoSet(someResource: SomeResource):
-      Resource<*>
+  public abstract fun bindSomeResourceAsResourceOfStarIntoSet(someResource: SomeResource): Resource<*>
 }

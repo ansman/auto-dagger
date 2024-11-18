@@ -18,6 +18,5 @@ import se.ansman.dagger.auto.Initializable.Companion.withPriority
 public object AutoInitializeOuterSomeThingModule {
   @Provides
   @IntoSet
-  public fun provideSomeThingAsInitializable(someThing: Outer.SomeThing): Initializable =
-      someThing.withPriority(4_711)
+  public fun provideSomeThingAsInitializable(someThing: Outer.SomeThing): Initializable = someThing.withPriority(4_711)
 }

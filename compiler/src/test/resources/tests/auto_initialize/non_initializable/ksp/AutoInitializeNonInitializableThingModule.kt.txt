@@ -19,7 +19,5 @@ import se.ansman.dagger.auto.Initializable.Companion.asInitializable
 public object AutoInitializeNonInitializableThingModule {
   @Provides
   @IntoSet
-  public
-      fun provideNonInitializableThingAsInitializable(lazyNonInitializableThing: Lazy<NonInitializableThing>):
-      Initializable = lazyNonInitializableThing.asInitializable()
+  public fun provideNonInitializableThingAsInitializable(lazyNonInitializableThing: Lazy<NonInitializableThing>): Initializable = lazyNonInitializableThing.asInitializable()
 }
