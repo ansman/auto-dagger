@@ -12,7 +12,6 @@ androidx-test = "1.6.1"
 kotlinpoet = "2.0.0"
 room = "2.6.1"
 retrofit = "2.11.0"
-ktorfit = "2.1.0"
 projectAccessors = "1.2.0"
 shadow = "8.3.5"
 
@@ -22,7 +21,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.16.3"
 mkdocs = "ru.vyarus.mkdocs:4.0.1"
 projectAccessors = { id = "co.hinge.gradle.project-accessors", version.ref = "projectAccessors" }
-ktorfit = { id = "de.jensklingenberg.ktorfit", version.ref = "ktorfit" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [libraries]
@@ -88,7 +86,8 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accessors", version.ref = "projectAccessors" }
 
-ktorfit = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
+ktorfit = "de.jensklingenberg.ktorfit:ktorfit-lib:2.2.0"
+ktorfit-ksp = "de.jensklingenberg.ktorfit:ktorfit-ksp:2.2.0-1.0.27"
 
 sonatypePublishFix = "se.ansman.sonatype-publish-fix:gradle-plugin:1.0.0"
 

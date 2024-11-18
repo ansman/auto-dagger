@@ -13,7 +13,6 @@ plugins {
     alias(libs.plugins.ksp)
     id("library")
     id("com.google.dagger.hilt.android")
-    alias(libs.plugins.ktorfit)
 }
 
 android {
@@ -64,6 +63,7 @@ dependencies {
     implementation(projects.thirdParty.ktorfit)
     implementation(libs.retrofit)
     implementation(libs.ktorfit)
+    ksp(libs.ktorfit.ksp)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.room)
     ksp(libs.room.compiler)
