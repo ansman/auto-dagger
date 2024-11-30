@@ -6,7 +6,6 @@ plugins {
     kotlin("kapt")
     id("library")
     id("library.publishing")
-    id("com.gradleup.shadow")
     `java-test-fixtures`
 }
 
@@ -18,18 +17,15 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.dagger.hilt.core)
     implementation(libs.ksp.api)
-    implementation(libs.auto.common)
+    api(libs.auto.common)
+    implementation(libs.kotlin.metadata)
 
     implementation(projects.core)
     implementation(projects.android.testing)
     implementation(projects.thirdParty.androidx.room)
     implementation(projects.thirdParty.ktorfit)
     implementation(projects.thirdParty.retrofit)
-
     implementation(projects.compiler.common)
-    compileShaded(libs.kotlinx.metadata) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-    }
 
     implementation(libs.auto.service.annotations)
     kapt(libs.auto.service)
@@ -41,4 +37,5 @@ dependencies {
     testFixturesApi(libs.dagger)
     testFixturesApi(libs.dagger.hilt.core)
     testFixturesApi(libs.bundles.compileTesting)
+    testFixturesApi(projects.compiler.common)
 }

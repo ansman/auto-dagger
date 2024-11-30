@@ -1,11 +1,11 @@
 [versions]
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 dokka = "1.9.20"
-compileTesting = "0.6.0"
+compileTesting = "0.7.0"
 autoService = "1.1.1"
 incap = "1.0.0"
 dagger = "2.52"
-ksp = "2.0.21-1.0.28"
+ksp = "2.1.0-1.0.29"
 android-minSdk = "21"
 android-compileSdk = "35"
 androidx-test = "1.6.1"
@@ -28,7 +28,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
 
-kotlinx-metadata = "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.9.0"
+kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
 
 dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }

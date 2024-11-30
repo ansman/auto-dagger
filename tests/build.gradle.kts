@@ -5,6 +5,7 @@ import com.android.build.api.variant.HasTestFixturesBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
 import com.android.build.gradle.internal.lint.AndroidLintAnalysisTask
 import com.google.devtools.ksp.gradle.KspTask
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     id("com.android.application")
@@ -32,6 +33,14 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        // Needed until Hilt supports Kotlin 2.1:
+        // https://github.com/google/dagger/issues/4451
+        languageVersion = KotlinVersion.KOTLIN_2_0
+    }
+}
+
 androidComponents {
     beforeVariants { variant ->
         (variant as? HasAndroidTestBuilder)?.androidTest?.enable = variant.buildType == "debug"
@@ -47,8 +56,8 @@ ksp {
 dependencies {
     implementation(libs.retrofit.moshi)
     implementation(libs.dagger.hilt.android)
-    "kaptJava"(projects.compiler) { targetConfiguration = "shadow" }
-    "kspKotlin"(projects.compiler) { targetConfiguration = "shadow" }
+    "kaptJava"(projects.compiler)
+    "kspKotlin"(projects.compiler)
     "kaptJava"(libs.dagger.compiler)
     "kspKotlin"(libs.dagger.compiler)
     "kaptJava"(libs.dagger.hilt.compiler)
@@ -70,8 +79,8 @@ dependencies {
 
     // Unit test
     testImplementation(libs.dagger.hilt.android.testing)
-    "kaptTestJava"(projects.compiler) { targetConfiguration = "shadow" }
-    "kspTestKotlin"(projects.compiler) { targetConfiguration = "shadow" }
+    "kaptTestJava"(projects.compiler)
+    "kspTestKotlin"(projects.compiler)
     // Compile Only is used here to ensure it's included by the android module
     testCompileOnly(libs.androidx.startup)
     "kaptTestJava"(libs.dagger.compiler)
