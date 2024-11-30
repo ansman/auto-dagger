@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableSetMultimap
 import com.squareup.javapoet.AnnotationSpec
 import com.squareup.javapoet.ClassName
 import com.squareup.javapoet.TypeName
-import kotlinx.metadata.jvm.KotlinClassMetadata
+import kotlin.metadata.jvm.KotlinClassMetadata
 import se.ansman.dagger.auto.compiler.common.TypeLookup
 import se.ansman.dagger.auto.compiler.common.processing.AutoDaggerResolver
 import se.ansman.dagger.auto.compiler.common.processing.ClassDeclaration

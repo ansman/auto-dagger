@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    compileOnly(libs.kotlinx.metadata)
+    compileOnly(libs.kotlin.metadata)
     compileOnly(libs.javapoet)
     compileOnly(libs.bundles.kotlinpoet)
     implementation(libs.dagger)

@@ -28,21 +28,8 @@ class KspCompilation(
                     symbolProcessorProviders.addAll(processorProviders())
                 }
             }
-            .compileFixed()
+            .compile()
             .let(::Result)
-
-    private fun KotlinCompilation.compileFixed(): JvmCompilationResult {
-        return compile()
-//        val result = synchronized(mutex) { compile() }
-//        // This works around a bug where compile-testing-kotlin returns OK even though KSP failed.
-//        if (
-//            result.exitCode == KotlinCompilation.ExitCode.OK &&
-//            "e: Error occurred in KSP, check log for detail" in result.messages
-//        ) {
-//            return JvmCompilationResult(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.messages, this, )
-//        }
-//        return result
-    }
 
     private fun File.listSourceFiles(): Sequence<File> =
         walkTopDown().filter { it.isFile && (it.extension == "java" || it.extension == "kt") }
@@ -51,7 +38,7 @@ class KspCompilation(
         get() = workingDir.resolve("ksp/sources").listSourceFiles()
 
     class Factory(vararg processorProviders: () -> SymbolProcessorProvider) : Compilation.Factory {
-        private val processorProviders = { processorProviders.map { it() }}
+        private val processorProviders = { processorProviders.map { it() } }
 
         override val expectedFilesDirectoryName: String
             get() = "ksp"
