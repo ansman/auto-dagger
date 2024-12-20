@@ -17,6 +17,10 @@ jobs:
           distribution: 'zulu'
           java-version: '21'
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
       - name: Update Gradle Wrapper
         uses: gradle-update/update-gradle-wrapper-action@v1
         with:
