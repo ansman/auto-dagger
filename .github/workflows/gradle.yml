@@ -22,11 +22,9 @@ jobs:
         distribution: 'zulu'
         java-version: '21'
 
-    - name: Cache Python
-      uses: actions/cache@v3
+    - uses: actions/setup-python@v5
       with:
-        key: ${{ runner.os }}-python-${{ env.cache-name }}-${{ hashFiles('libs.versions.toml', 'build.gradle.kts') }}
-        path: .gradle/python
+        python-version: '3.13'
 
     - name: Run Checks
       uses: gradle/gradle-build-action@v2
