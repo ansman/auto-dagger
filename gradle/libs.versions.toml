@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.1.0"
-dokka = "1.9.20"
+dokka = "2.0.0"
 compileTesting = "0.7.0"
 autoService = "1.1.1"
 incap = "1.0.0"
