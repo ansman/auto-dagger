@@ -18,7 +18,7 @@ shadow = "8.3.5"
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.16.3"
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.17.0"
 mkdocs = "ru.vyarus.mkdocs:4.0.1"
 projectAccessors = { id = "co.hinge.gradle.project-accessors", version.ref = "projectAccessors" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
