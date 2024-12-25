@@ -22,7 +22,8 @@ public final class se/ansman/dagger/auto/AutoDaggerInitializer : se/ansman/dagge
 }
 
 public final class se/ansman/dagger/auto/AutoDaggerInitializer_Factory : dagger/internal/Factory {
-	public fun <init> (Ljavax/inject/Provider;)V
+	public fun <init> (Ldagger/internal/Provider;)V
+	public static fun create (Ldagger/internal/Provider;)Lse/ansman/dagger/auto/AutoDaggerInitializer_Factory;
 	public static fun create (Ljavax/inject/Provider;)Lse/ansman/dagger/auto/AutoDaggerInitializer_Factory;
 	public synthetic fun get ()Ljava/lang/Object;
 	public fun get ()Lse/ansman/dagger/auto/AutoDaggerInitializer;

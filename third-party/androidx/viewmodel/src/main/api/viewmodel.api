@@ -4,7 +4,8 @@ public final class se/ansman/dagger/auto/androidx/viewmodel/AutoDaggerViewModelC
 }
 
 public final class se/ansman/dagger/auto/androidx/viewmodel/AutoDaggerViewModelCoroutineScopeComponent_ProvideViewModelScopeFactory : dagger/internal/Factory {
-	public fun <init> (Ljavax/inject/Provider;)V
+	public fun <init> (Ldagger/internal/Provider;)V
+	public static fun create (Ldagger/internal/Provider;)Lse/ansman/dagger/auto/androidx/viewmodel/AutoDaggerViewModelCoroutineScopeComponent_ProvideViewModelScopeFactory;
 	public static fun create (Ljavax/inject/Provider;)Lse/ansman/dagger/auto/androidx/viewmodel/AutoDaggerViewModelCoroutineScopeComponent_ProvideViewModelScopeFactory;
 	public synthetic fun get ()Ljava/lang/Object;
 	public fun get ()Lkotlinx/coroutines/CoroutineScope;
