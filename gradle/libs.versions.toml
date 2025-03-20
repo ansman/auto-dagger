@@ -13,7 +13,7 @@ kotlinpoet = "2.0.0"
 room = "2.6.1"
 retrofit = "2.11.0"
 projectAccessors = "1.2.0"
-shadow = "8.3.5"
+shadow = "8.3.6"
 
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
