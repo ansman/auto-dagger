@@ -31,6 +31,9 @@ android {
             dimension = "type"
         }
     }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
 kotlin {
@@ -56,6 +59,7 @@ ksp {
 dependencies {
     implementation(libs.retrofit.moshi)
     implementation(libs.dagger.hilt.android)
+    coreLibraryDesugaring(libs.android.desugar)
     "kaptJava"(projects.compiler)
     "kspKotlin"(projects.compiler)
     "kaptJava"(libs.dagger.compiler)
@@ -63,7 +67,6 @@ dependencies {
     "kaptJava"(libs.dagger.hilt.compiler)
     "kspKotlin"(libs.dagger.hilt.compiler)
 
-    // Third party
     implementation(projects.android.testing)
     implementation(projects.android)
     implementation(projects.thirdParty.androidx.viewmodel)
