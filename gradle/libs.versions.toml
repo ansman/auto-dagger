@@ -88,7 +88,7 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accessors", version.ref = "projectAccessors" }
 
 ktorfit = "de.jensklingenberg.ktorfit:ktorfit-lib:2.5.0"
-ktorfit-ksp = "de.jensklingenberg.ktorfit:ktorfit-ksp:2.5.0"
+ktorfit-ksp = "de.jensklingenberg.ktorfit:ktorfit-ksp:2.5.1"
 
 sonatypePublishFix = "se.ansman.sonatype-publish-fix:gradle-plugin:1.0.0"
 
