@@ -39,7 +39,7 @@ okio = "com.squareup.okio:okio:3.11.0"
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
-android-gradlePlugin = "com.android.tools.build:gradle:8.9.1"
+android-gradlePlugin = "com.android.tools.build:gradle:8.9.2"
 android-desugar = "com.android.tools:desugar_jdk_libs:2.1.5"
 androidx-startup = "androidx.startup:startup-runtime:1.2.0"
 androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel:2.8.7"
