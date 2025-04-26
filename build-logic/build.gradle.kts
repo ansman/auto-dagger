@@ -5,6 +5,20 @@ plugins {
     alias(libs.plugins.projectAccessors)
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(libs.versions.java.get())
+        vendor.set(JvmVendorSpec.AZUL)
+    }
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get()))
+        vendor.set(JvmVendorSpec.AZUL)
+    }
+}
+
 dependencies {
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
     implementation(libs.projectAccessors)
@@ -14,4 +28,5 @@ dependencies {
     api(libs.testLogger)
     api(libs.kotlin.jvm.gradle)
     api(libs.sonatypePublishFix)
+    api(libs.ksp.gradlePlugin)
 }

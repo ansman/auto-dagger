@@ -2,8 +2,6 @@
 import com.android.build.gradle.LibraryExtension
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.accessors.dm.LibrariesForLibs
-import org.jetbrains.dokka.gradle.AbstractDokkaLeafTask
-import se.ansman.dagger.auto.gradle.cachedProvider
 import se.ansman.dagger.auto.gradle.execWithOutput
 import se.ansman.dagger.auto.gradle.mapNullable
 
@@ -16,12 +14,13 @@ plugins {
 
 val libs = the<LibrariesForLibs>()
 
-val gitCommit = cachedProvider {
-    project.execWithOutput {
+val gitCommit = project
+    .execWithOutput {
         commandLine("git", "rev-parse", "HEAD")
         workingDir = project.rootDir
-    }.trim()
-}
+    }
+    .map { it.trim() }
+
 
 fun repo(path: String = "") = "https://github.com/ansman/auto-dagger$path"
 
@@ -30,20 +29,17 @@ val remoteSource: Provider<String> = providers.gradleProperty("version")
     .orElse(gitCommit)
     .map { repo("/blob/$it") }
 
-tasks.withType<AbstractDokkaLeafTask>().configureEach {
+dokka {
     val projectPath = project.path.removePrefix(":").replace(':', '/')
     dokkaSourceSets.configureEach {
         reportUndocumented.set(false)
         sourceLink {
             localDirectory.set(project.file("src/main/kotlin"))
             remoteUrl.set(remoteSource.map { remoteSource ->
-                uri("$remoteSource/$projectPath/src/main/kotlin").toURL()
+                uri("$remoteSource/$projectPath/src/main/kotlin")
             })
             remoteLineSuffix.set("#L")
         }
-        externalDocumentationLink(
-            url = "https://javadoc.io/doc/com.google.dagger/dagger/${libs.versions.dagger}/",
-        )
     }
 }
 
@@ -92,7 +88,7 @@ tasks.register("publishSnapshot") {
 }
 
 val javadocJar by tasks.registering(Jar::class) {
-    from(tasks.dokkaJavadoc)
+    from(tasks.dokkaGeneratePublicationJavadoc)
     archiveClassifier.set("javadoc")
 }
 

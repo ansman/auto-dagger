@@ -10,6 +10,7 @@ import com.android.build.api.variant.HasTestFixturesBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val libs = the<LibrariesForLibs>()
@@ -121,6 +122,12 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
     tasks.withType<Test>().configureEach {
         useJUnitPlatform()
     }
+    configure<KotlinJvmProjectExtension> {
+        jvmToolchain {
+            languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get()))
+            vendor.set(JvmVendorSpec.AZUL)
+        }
+    }
     dependencies {
         "testImplementation"(libs.bundles.jvmTesting)
     }
@@ -130,7 +137,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
 plugins.withType<JavaBasePlugin>().configureEach {
     extensions.configure<JavaPluginExtension> {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
+            languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get()))
             vendor.set(JvmVendorSpec.AZUL)
         }
     }
