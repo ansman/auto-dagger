@@ -1,16 +1,16 @@
 [versions]
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 dokka = "2.0.0"
 compileTesting = "0.7.0"
 autoService = "1.1.1"
 incap = "1.0.0"
 dagger = "2.56.2"
-ksp = "2.1.10-1.0.31"
+ksp = "2.1.20-2.0.0"
 android-minSdk = "21"
 android-compileSdk = "35"
 androidx-test = "1.6.1"
 kotlinpoet = "2.1.0"
-room = "2.6.1"
+room = "2.7.1"
 retrofit = "2.11.0"
 projectAccessors = "1.2.0"
 shadow = "8.3.6"
@@ -34,12 +34,12 @@ dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", versi
 dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
 dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 
-okio = "com.squareup.okio:okio:3.10.2"
+okio = "com.squareup.okio:okio:3.11.0"
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
-android-gradlePlugin = "com.android.tools.build:gradle:8.9.1"
+android-gradlePlugin = "com.android.tools.build:gradle:8.9.2"
 android-desugar = "com.android.tools:desugar_jdk_libs:2.1.5"
 androidx-startup = "androidx.startup:startup-runtime:1.2.0"
 androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel:2.8.7"
@@ -72,7 +72,7 @@ compileTesting = { module = "dev.zacsweers.kctfork:core", version.ref = "compile
 compileTesting-ksp = { module = "dev.zacsweers.kctfork:ksp", version.ref = "compileTesting" }
 
 junit = "junit:junit:4.13.2"
-junit-jupiter = "org.junit.jupiter:junit-jupiter:5.12.1"
+junit-jupiter = "org.junit.jupiter:junit-jupiter:5.12.2"
 
 assertk = "com.willowtreeapps.assertk:assertk-jvm:0.28.1"
 
@@ -87,8 +87,8 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accessors", version.ref = "projectAccessors" }
 
-ktorfit = "de.jensklingenberg.ktorfit:ktorfit-lib:2.5.0"
-ktorfit-ksp = "de.jensklingenberg.ktorfit:ktorfit-ksp:2.5.0"
+ktorfit = "de.jensklingenberg.ktorfit:ktorfit-lib:2.5.1"
+ktorfit-ksp = "de.jensklingenberg.ktorfit:ktorfit-ksp:2.5.1"
 
 sonatypePublishFix = "se.ansman.sonatype-publish-fix:gradle-plugin:1.0.0"
 

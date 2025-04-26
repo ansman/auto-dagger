@@ -24,6 +24,7 @@ class KspCompilation(
                 kspProcessorOptions[Options.enableLogging] = "true"
                 configuration()
                 this.sources = sources.map { it.toSourceFile() }
+                supportsK2 = true
                 configureKsp(useKsp2 = true) {
                     symbolProcessorProviders.addAll(processorProviders())
                 }
