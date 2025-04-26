@@ -12,15 +12,16 @@ dependencies {
     dokkaPlugin(libs.dokka.versioningPlugin)
 }
 
-pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
-    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-        tasks.withType<AbstractDokkaTask>().configureEach {
-            dependsOn("kaptKotlin")
-        }
-    }
-    pluginManager.withPlugin("com.android.library") {
-        tasks.withType<AbstractDokkaTask>().configureEach {
-            dependsOn("kaptReleaseKotlin", "kaptDebugKotlin")
-        }
-    }
-}
+// TODO: Check if needed
+//pluginManager.withPlugin("org.jetbrains.kotlin.kapt") {
+//    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+//        tasks.withType<AbstractDokkaTask>().configureEach {
+//            dependsOn("kaptKotlin")
+//        }
+//    }
+//    pluginManager.withPlugin("com.android.library") {
+//        tasks.withType<AbstractDokkaTask>().configureEach {
+//            dependsOn("kaptReleaseKotlin", "kaptDebugKotlin")
+//        }
+//    }
+//}

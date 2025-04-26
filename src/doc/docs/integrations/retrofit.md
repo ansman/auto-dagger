@@ -6,8 +6,6 @@ Firstly add the required dependency:
 ```kotlin
 dependencies {
     implementation("se.ansman.dagger.auto:retrofit:{{gradle.version}}")
-    kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
-    // or if you use KSP
     ksp("se.ansman.dagger.auto:compiler:{{gradle.version}}")
 }
 ```

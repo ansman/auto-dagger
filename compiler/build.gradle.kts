@@ -3,7 +3,7 @@ import se.ansman.dagger.auto.gradle.setupResourceTests
 
 plugins {
     kotlin("jvm")
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
     id("library")
     id("library.publishing")
     `java-test-fixtures`
@@ -28,10 +28,7 @@ dependencies {
     implementation(projects.compiler.common)
 
     implementation(libs.auto.service.annotations)
-    kapt(libs.auto.service)
-
-    implementation(libs.incap)
-    kapt(libs.incap.compiler)
+    ksp(libs.auto.service)
 
     testFixturesApi(libs.bundles.jvmTesting)
     testFixturesApi(libs.dagger)
