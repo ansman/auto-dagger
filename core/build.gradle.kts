@@ -1,13 +1,13 @@
 plugins {
     kotlin("jvm")
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
     id("library.api")
     id("library.publishing")
 }
 
 dependencies {
     implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
+    ksp(libs.dagger.compiler)
     implementation(libs.dagger.hilt.core)
-    kapt(libs.dagger.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 }

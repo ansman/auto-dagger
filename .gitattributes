@@ -1,6 +1,5 @@
 src/doc/dokka/** linguist-generated
 src/doc/** linguist-documentation
-compiler/src/test/resources/tests/**/kapt linguist-generated
 compiler/src/test/resources/tests/**/ksp linguist-generated
 gradlew linguist-vendored
 gradlew.bat linguist-vendored

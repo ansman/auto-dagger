@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
     id("library.api")
     id("library.publishing")
 }
@@ -17,6 +17,6 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.dagger.hilt.android)
     compileOnly(libs.androidx.startup)
-    kapt(libs.dagger.compiler)
-    kapt(libs.dagger.hilt.compiler)
+    ksp(libs.dagger.compiler)
+    ksp(libs.dagger.hilt.compiler)
 }

@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 plugins {
     id("com.android.application")
     kotlin("android")
-    kotlin("kapt")
     alias(libs.plugins.ksp)
     id("library")
     id("com.google.dagger.hilt.android")
@@ -20,16 +19,6 @@ android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         minSdk = 21
-    }
-    flavorDimensions += "type"
-    productFlavors {
-        create("java") {
-            dimension = "type"
-        }
-
-        create("kotlin") {
-            dimension = "type"
-        }
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -60,12 +49,9 @@ dependencies {
     implementation(libs.retrofit.moshi)
     implementation(libs.dagger.hilt.android)
     coreLibraryDesugaring(libs.android.desugar)
-    "kaptJava"(projects.compiler)
-    "kspKotlin"(projects.compiler)
-    "kaptJava"(libs.dagger.compiler)
-    "kspKotlin"(libs.dagger.compiler)
-    "kaptJava"(libs.dagger.hilt.compiler)
-    "kspKotlin"(libs.dagger.hilt.compiler)
+    ksp(projects.compiler)
+    ksp(libs.dagger.compiler)
+    ksp(libs.dagger.hilt.compiler)
 
     implementation(projects.android.testing)
     implementation(projects.android)
@@ -82,14 +68,11 @@ dependencies {
 
     // Unit test
     testImplementation(libs.dagger.hilt.android.testing)
-    "kaptTestJava"(projects.compiler)
-    "kspTestKotlin"(projects.compiler)
+    kspTest(projects.compiler)
     // Compile Only is used here to ensure it's included by the android module
     testCompileOnly(libs.androidx.startup)
-    "kaptTestJava"(libs.dagger.compiler)
-    "kspTestKotlin"(libs.dagger.compiler)
-    "kaptTestJava"(libs.dagger.hilt.compiler)
-    "kspTestKotlin"(libs.dagger.hilt.compiler)
+    kspTest(libs.dagger.compiler)
+    kspTest(libs.dagger.hilt.compiler)
 }
 
 tasks.withType<AndroidLintAnalysisTask>().configureEach {

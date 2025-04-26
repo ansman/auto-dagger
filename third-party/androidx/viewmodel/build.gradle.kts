@@ -3,7 +3,7 @@ import se.ansman.dagger.auto.gradle.setupResourceTests
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
     id("library.api")
     id("library.publishing")
 }
@@ -14,5 +14,5 @@ dependencies {
     api(projects.core)
     implementation(libs.dagger.hilt.android)
     implementation(libs.androidx.lifecycle.viewmodel)
-    kapt(libs.dagger.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 }

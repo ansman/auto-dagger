@@ -6,8 +6,6 @@ To get started, add the dependency:
 ```kotlin
 dependencies {
     implementation("se.ansman.dagger.auto:androidx-room:{{gradle.version}}")
-    kapt("se.ansman.dagger.auto:compiler:{{gradle.version}}")
-    // or if you use KSP
     ksp("se.ansman.dagger.auto:compiler:{{gradle.version}}")
 }
 ```

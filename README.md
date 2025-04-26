@@ -46,8 +46,6 @@ dependencies {
 
     // Include this in kotlin or android modules
     implementation("se.ansman.dagger.auto:core:1.5.0")
-    kapt("se.ansman.dagger.auto:compiler:1.5.0")
-    // If you're using KSP
     ksp("se.ansman.dagger.auto:compiler:1.5.0")
 
 
@@ -58,8 +56,6 @@ dependencies {
 
     // Add these if you want to replace objects during tests
     testImplementation("se.ansman.dagger.auto:android-testing:1.5.0")
-    kaptTest("se.ansman.dagger.auto:compiler:1.5.0")
-    // If you're using KSP
     kspTest("se.ansman.dagger.auto:compiler:1.5.0")
 
     // If you want to provide Retrofit services add the Retrofit dependency

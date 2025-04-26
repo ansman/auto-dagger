@@ -20,9 +20,8 @@ assignees: ''
 <!-- A clear and concise description of what actually happens. -->
 
 **Environment**
-- Kotlin Version  [1.9.10 for example]:
-- KSP or KAPT: 
-- KSP version (if using KSP): 
+- Kotlin Version  [2.1.20 for example]:
+- KSP version [2.1.20-2.0.0 for example]: 
 - Dagger Version: 
 - Hilt Version: 
 
