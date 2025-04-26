@@ -41,10 +41,11 @@ apiValidation {
             "dagger.hilt"
         )
     )
-    ignoredClasses.addAll(
+    nonPublicMarkers.addAll(
         setOf(
-            "se.ansman.dagger.auto.HiltWrapper_AutoDaggerInitializeModule",
-            "se.ansman.dagger.auto.android.HiltWrapper_AutoDaggerInitializerEntryPoint",
+            "javax.annotation.processing.Generated",
+            "dagger.hilt.codegen.OriginatingElement",
+            "dagger.internal.DaggerGenerated",
         )
     )
     ignoredProjects.addAll(
