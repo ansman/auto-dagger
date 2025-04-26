@@ -14,7 +14,7 @@ abstract class CompilationFactoryProvider(
     kspSymbolProcessorProvider: () -> SymbolProcessorProvider,
 ) : ArgumentsProvider {
     private val namedFactories = sequenceOf(
-        Named.of("KAPT", KaptCompilation.Factory(kaptProcessor)),
+//        Named.of("KAPT", KaptCompilation.Factory(kaptProcessor)),
         Named.of("KSP", KspCompilation.Factory(kspSymbolProcessorProvider)),
     )
 

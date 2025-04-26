@@ -2,6 +2,7 @@ package se.ansman.dagger.auto.compiler
 
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
+import com.tschuchort.compiletesting.useKsp2
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import se.ansman.dagger.auto.compiler.common.Options
 import java.io.File
@@ -21,6 +22,7 @@ class KaptCompilation(
                 annotationProcessors = processors()
                 this.sources = sources.map { it.toSourceFile() }
                 useKapt4 = true
+                useKsp2()
             }
             .run { synchronized(mutex) { compile() } }
             .let(::Result)
