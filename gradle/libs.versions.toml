@@ -34,6 +34,7 @@ kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version
 dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", version.ref = "dokka" }
 dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
+dokka-androidDocumentationPlugin= { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
 
 okio = "com.squareup.okio:okio:3.11.0"
 
@@ -89,7 +90,7 @@ projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accesso
 ktorfit = "de.jensklingenberg.ktorfit:ktorfit-lib:2.5.1"
 ktorfit-ksp = "de.jensklingenberg.ktorfit:ktorfit-ksp:2.5.1"
 
-sonatypePublishFix = "se.ansman.sonatype-publish-fix:gradle-plugin:1.0.0"
+gradleMavenPublish = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin:0.31.0"
 
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]
