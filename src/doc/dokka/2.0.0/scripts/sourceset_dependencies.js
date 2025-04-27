@@ -1,0 +1,1 @@
+sourceset_dependencies = '{":core/main":[],":third-party:androidx:viewmodel/debug":[],":third-party:androidx:viewmodel/main":[],":third-party:androidx:viewmodel/release":[],":third-party:retrofit/main":[],":android:testing/main":[],":android:api/debug":[],":android:api/main":[],":android:api/release":[],":third-party:ktorfit/main":[],":third-party:androidx:room/main":[]}'
