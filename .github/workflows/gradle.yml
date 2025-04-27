@@ -46,7 +46,7 @@ jobs:
     - name: Deploy Snapshot
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: publishSnapshot --stacktrace
+        arguments: publishSnapshot --no-configuration-cache --stacktrace
       env:
-        SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-        SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+        ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
