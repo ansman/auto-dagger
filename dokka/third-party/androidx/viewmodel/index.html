@@ -19,63 +19,106 @@
     }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<link href="../../../styles/multimodule.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
 <link href="../../../styles/style.css" rel="Stylesheet">
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
 <link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
 <script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script>
-<link href="../../../styles/multimodule.css" rel="Stylesheet"></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../../index.html">
-                            auto-dagger
-                    </a>            </div>
-            <div class="library-version">
-<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;index.html&quot;}"><div class="versions-dropdown">
-  <div class="versions-dropdown-button">1.5.0</div>
-  <div class="versions-dropdown-data"><a href="index.html">1.5.0</a><a href="../../../older/1.4.0/third-party/androidx/viewmodel/index.html">1.4.0</a><a href="../../../older/1.3.0/third-party/androidx/viewmodel/index.html">1.3.0</a><a href="../../../older/1.2.1/third-party/androidx/viewmodel/index.html">1.2.1</a><a href="../../../older/1.2.0/third-party/androidx/viewmodel/index.html">1.2.0</a><a href="../../../older/1.1.0/third-party/androidx/viewmodel/index.html">1.1.0</a><a href="../../../not-found-version.html?v=1.0.0">1.0.0</a></div>
+                    auto-dagger
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+<dokka-template-command data="{&quot;@class&quot;:&quot;org.jetbrains.dokka.base.templating.ReplaceVersionsCommand&quot;,&quot;location&quot;:&quot;index.html&quot;}"><div class="dropdown versions-dropdown" data-role="dropdown">
+  <div class="button button_dropdown versions-dropdown-button" role="combobox" data-role="dropdown-toggle" aria-controls="versions-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Select version" tabindex="0">2.0.0</div>
+  <div class="dropdown--list dropdown--list_positioned_left versions-dropdown-data" role="listbox" data-role="dropdown-listbox" aria-label="Versions" id="versions-listbox">
+    <div class="dropdown--header" data-remove-style="true" style="display: none"><span>Select version</span><button class="button" data-role="dropdown-toggle" aria-label="Close versions selection"><i class="ui-kit-icon ui-kit-icon_cross"></i></button></div>
+    <div><a href="index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option">2.0.0</a></div>
+    <div><a href="../../../older/1.5.0/third-party/androidx/viewmodel/index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option">1.5.0</a></div>
+    <div><a href="../../../older/1.4.0/third-party/androidx/viewmodel/index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option">1.4.0</a></div>
+    <div><a href="../../../older/1.3.0/third-party/androidx/viewmodel/index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option">1.3.0</a></div>
+    <div><a href="../../../older/1.2.1/third-party/androidx/viewmodel/index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option">1.2.1</a></div>
+    <div><a href="../../../older/1.2.0/third-party/androidx/viewmodel/index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option">1.2.0</a></div>
+    <div><a href="../../../older/1.1.0/third-party/androidx/viewmodel/index.html" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option">1.1.0</a></div>
+    <div><a href="../../../not-found-version.html?v=1.0.0" class="dropdown--option dropdown--option-link" style="display: block; padding: 5px; color: #fff" data-remove-style="true" role="option">1.0.0</a></div>
+  </div>
+  <div class="dropdown--overlay"></div>
 </div>
-</dokka-template-command>            </div>
+</dokka-template-command>        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":third-party:androidx:viewmodel/release">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":third-party:androidx:viewmodel/release" data-filter=":third-party:androidx:viewmodel/release">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":third-party:androidx:viewmodel:dokkaHtmlPartial/release">androidJvm</button>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    auto-dagger
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
-<div class="main-content" id="content" pageids="viewmodel::////PointingToDeclaration//2006459494">
+<div class="main-content" id="content" pageids="viewmodel::////PointingToDeclaration//643055320">
   <div class="breadcrumbs"></div>
   <div class="cover ">
     <h1 class="cover"><span><span>viewmodel</span></span></h1>
   </div>
   <h2 class="">Packages</h2>
-  <div class="table"><a data-name="1934300122%2FPackages%2F2006459494" anchor-label="se.ansman.dagger.auto.androidx.viewmodel" id="1934300122%2FPackages%2F2006459494" data-filterable-set=":third-party:androidx:viewmodel:dokkaHtmlPartial/release"></a>
-    <div class="table-row" data-filterable-current=":third-party:androidx:viewmodel:dokkaHtmlPartial/release" data-filterable-set=":third-party:androidx:viewmodel:dokkaHtmlPartial/release">
+  <div class="table"><a data-name="1934300122%2FPackages%2F643055320" anchor-label="se.ansman.dagger.auto.androidx.viewmodel" id="1934300122%2FPackages%2F643055320" data-filterable-set=":third-party:androidx:viewmodel/release"></a>
+    <div class="table-row" data-filterable-current=":third-party:androidx:viewmodel/release" data-filterable-set=":third-party:androidx:viewmodel/release">
       <div>
         <div class="main-subrow ">
           <div class=""><span class="inline-flex">
               <div><a href="se.ansman.dagger.auto.androidx.viewmodel/index.html">se.ansman.dagger.auto.androidx.viewmodel</a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1934300122%2FPackages%2F2006459494"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1934300122%2FPackages%2F643055320"></span>
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
           <div class="pull-right">
@@ -89,12 +132,18 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>© 2025 Copyright</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
             </div>
         </div>
     </div>
 </body>
 </html>
-
