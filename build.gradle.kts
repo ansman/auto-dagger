@@ -1,6 +1,5 @@
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-import org.jetbrains.dokka.versioning.VersioningConfiguration
-import org.jetbrains.dokka.versioning.VersioningPlugin
+@file:Suppress("UnstableApiUsage")
+
 import ru.vyarus.gradle.plugin.python.task.BasePythonTask
 
 plugins {
@@ -31,6 +30,7 @@ val latestRelease: String = providers.gradleProperty("latestRelease").get()
 
 val isSnapshotVersion = version.endsWith("-SNAPSHOT")
 val dokkaProjects = subprojects
+    .map { it.isolated }
     .filter { ":compiler" !in it.path && ":tests" !in it.path }
     .toSet()
 
@@ -49,7 +49,9 @@ apiValidation {
         )
     )
     ignoredProjects.addAll(
-        subprojects.asSequence()
+        subprojects
+            .map { it.isolated }
+            .asSequence()
             .minus(dokkaProjects)
             .map { it.name }
     )
@@ -92,7 +94,7 @@ mkdocs {
 
 gitPublish {
     contents {
-        from(tasks.dokkaHtmlMultiModule.map { it.outputDirectory }) {
+        from(tasks.dokkaGeneratePublicationHtml.map { it.outputDirectory }) {
             into(dokkaDocsPath)
         }
     }
@@ -117,41 +119,45 @@ tasks.mkdocsBuild {
 }
 
 tasks.gitPublishReset {
-    dependsOn(tasks.dokkaHtmlMultiModule)
+    dependsOn(tasks.dokkaGeneratePublicationHtml)
 }
 
 python {
     virtualenvVersion = "20.16.7"
 }
 
-tasks.register("check") {
+tasks.check {
     dependsOn(*gradle.includedBuilds.map { it.task(":check") }.toTypedArray())
     dependsOn(tasks.mkdocsBuild)
 }
 
-tasks.register<Delete>("clean") {
-    delete(layout.buildDirectory)
-}
-
 val olderVersionsFolder = file("src/doc/dokka/")
-val versionCurrentDocs by tasks.registering(DokkaMultiModuleTask::class) {
+tasks.register<Copy>("versionCurrentDocs") {
     enabled = !isSnapshotVersion
-    outputDirectory.set(olderVersionsFolder.resolve(version))
-    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-        version = providers.gradleProperty("version").get()
-    }
-    addChildTasks(dokkaProjects, "dokkaHtmlPartial")
+    from(tasks.dokkaGeneratePublicationHtml)
+    into(olderVersionsFolder.resolve(version))
+    exclude("older")
 }
 
 dependencies {
     dokkaPlugin(libs.dokka.allModulesPagePlugin)
+    dokkaPlugin(libs.dokka.versioningPlugin)
+    dokka(projects.android)
+    dokka(projects.android.api)
+    dokka(projects.android.testing)
+    dokka(projects.core)
+    dokka(projects.thirdParty.androidx.room)
+    dokka(projects.thirdParty.androidx.viewmodel)
+    dokka(projects.thirdParty.ktorfit)
+    dokka(projects.thirdParty.retrofit)
 }
 
-tasks.dokkaHtmlMultiModule {
-    removeChildTasks(subprojects - dokkaProjects)
-    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-        version = providers.gradleProperty("version").get()
-        olderVersionsDir = olderVersionsFolder
+dokka {
+    pluginsConfiguration {
+        versioning {
+            version = providers.gradleProperty("version").get()
+            olderVersionsDir = olderVersionsFolder
+        }
     }
 }
 

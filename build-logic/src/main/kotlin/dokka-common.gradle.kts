@@ -1,12 +1,19 @@
-
-import org.gradle.accessors.dm.LibrariesForLibs
+import com.google.devtools.ksp.gradle.KspAATask
 
 plugins {
     id("org.jetbrains.dokka")
+    id("org.jetbrains.dokka-javadoc")
 }
 
-val libs = the<LibrariesForLibs>()
-
-dependencies {
-    dokkaPlugin(libs.dokka.versioningPlugin)
+dokka {
+    dokkaSourceSets.configureEach {
+        suppressGeneratedFiles = true
+        tasks.withType<KspAATask>().configureEach {
+            suppressedFiles.from(fileTree(kspConfig.outputBaseDir))
+        }
+        perPackageOption {
+            matchingRegex = "hilt_aggregated_deps*"
+            suppress = true
+        }
+    }
 }
