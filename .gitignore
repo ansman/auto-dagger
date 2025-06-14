@@ -110,3 +110,5 @@ fabric.properties
 .kotlin
 
 local.properties
+
+.idea/studiobot.xml
