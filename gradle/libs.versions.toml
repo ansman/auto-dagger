@@ -19,7 +19,7 @@ java = "23"
 [plugins]
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.18.0"
+binaryCompatibilityValidator = "org.jetbrains.kotlinx.binary-compatibility-validator:0.18.1"
 mkdocs = "ru.vyarus.mkdocs:4.0.1"
 projectAccessors = { id = "co.hinge.gradle.project-accessors", version.ref = "projectAccessors" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
