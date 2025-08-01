@@ -3,7 +3,6 @@ import com.google.devtools.ksp.gradle.KspAATask
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.dokka.gradle.tasks.DokkaGenerateTask
 import se.ansman.dagger.auto.gradle.execWithOutput
-import se.ansman.dagger.auto.gradle.mapNullable
 
 plugins {
     id("org.jetbrains.dokka")
@@ -22,7 +21,7 @@ val gitCommit = project
     .map { it.trim() }
 
 val remoteSource: Provider<String> = providers.gradleProperty("version")
-    .mapNullable { version -> version.takeUnless { it.endsWith("-SNAPSHOT") } }
+    .map { version -> version.takeUnless { it.endsWith("-SNAPSHOT") } }
     .orElse(gitCommit)
     .map { repo("/blob/$it") }
 

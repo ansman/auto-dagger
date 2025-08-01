@@ -23,7 +23,7 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 val signArtifacts = providers.gradleProperty("signArtifacts").orNull?.toBooleanStrict() ?: false
 mavenPublishing {
     val version = providers.gradleProperty("version").get()
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral()
 
     if (signArtifacts) {
         signAllPublications()
