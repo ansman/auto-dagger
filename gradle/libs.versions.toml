@@ -90,7 +90,7 @@ projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accesso
 ktorfit = "de.jensklingenberg.ktorfit:ktorfit-lib:2.6.4"
 ktorfit-ksp = "de.jensklingenberg.ktorfit:ktorfit-ksp:2.6.4"
 
-gradleMavenPublish = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin:0.33.0"
+gradleMavenPublish = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin:0.34.0"
 
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]
