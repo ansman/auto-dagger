@@ -1,5 +1,6 @@
 package se.ansman.dagger.auto.android
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.startup.AppInitializer
 import androidx.startup.Initializer
@@ -13,6 +14,7 @@ import javax.inject.Singleton
  *
  * @since 1.0.0
  */
+@SuppressLint("EnsureInitializerMetadata")
 class AutoDaggerStartupInitializer : Initializer<Unit> {
     override fun create(context: Context) {
         check(AppInitializer.getInstance(context).isEagerlyInitialized(javaClass)) {
