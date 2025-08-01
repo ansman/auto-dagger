@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Named
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.ArgumentsProvider
+import org.junit.jupiter.params.support.ParameterDeclarations
 import java.util.stream.Stream
 import kotlin.streams.asStream
 
@@ -17,7 +18,7 @@ abstract class CompilationFactoryProvider(
 
     val factories: Sequence<Compilation.Factory> = namedFactories.map { it.payload }
 
-    override fun provideArguments(context: ExtensionContext): Stream<out Arguments> =
+    override fun provideArguments(parameters: ParameterDeclarations, context: ExtensionContext): Stream<out Arguments> =
         namedFactories
             .asStream()
             .map(Arguments::of)
