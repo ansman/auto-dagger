@@ -18,7 +18,7 @@ plugins {
 android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        minSdk = 21
+        minSdk = libs.versions.android.minSdk.get().toInt()
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
