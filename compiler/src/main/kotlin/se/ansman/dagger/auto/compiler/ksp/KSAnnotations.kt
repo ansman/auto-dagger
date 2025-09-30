@@ -1,44 +1,16 @@
 package se.ansman.dagger.auto.compiler.ksp
 
-import com.google.devtools.ksp.isDefault
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSName
 import com.google.devtools.ksp.symbol.KSType
-import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
+import com.squareup.kotlinpoet.ksp.toAnnotationSpec
 import com.squareup.kotlinpoet.ksp.toClassName
-import se.ansman.dagger.auto.compiler.common.applyEachIndexed
 import se.ansman.dagger.auto.compiler.ksp.processing.unwrapTypeAlias
 import java.util.Locale
-
-/**
- * A version of `toAnnotationSpec` that fixes char arguments.
- *
- * Can be removed in favor for `toAnnotationSpec` after 1.12
- */
-fun KSAnnotation.toAnnotationSpecFixed(): AnnotationSpec =
-    AnnotationSpec
-        .builder(annotationType.resolve().unwrapTypeAlias().toClassName())
-        .applyEachIndexed(arguments) { i, argument ->
-            if (argument.isDefault()) {
-                return@applyEachIndexed
-            }
-            addMember(
-                CodeBlock.builder()
-                    .apply {
-                        val name = argument.name!!.getShortName()
-                        if (i > 0 || name != "value") {
-                            add("%N = ", name)
-                        }
-                    }
-                    .addAnnotationValue(argument.value!!)
-                    .build()
-            )
-        }
-        .build()
 
 private fun CodeBlock.Builder.addAnnotationValue(value: Any): CodeBlock.Builder =
     when (value) {
@@ -63,7 +35,7 @@ private fun CodeBlock.Builder.addAnnotationValue(value: Any): CodeBlock.Builder 
         }
 
         is KSName -> add("%T.%L", ClassName.bestGuess(value.getQualifier()), value.getShortName())
-        is KSAnnotation -> add("%L", value.toAnnotationSpecFixed())
+        is KSAnnotation -> add("%L", value.toAnnotationSpec())
         else -> add(memberForValue(value))
     }
 
