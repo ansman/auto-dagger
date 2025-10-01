@@ -15,6 +15,6 @@ import javax.inject.Named
 @OriginatingElement(topLevelClass = Api::class)
 public abstract class OptionallyProvidedApiSingletonModule private constructor() {
   @BindsOptionalOf
-  @Named("Dev")
+  @Named(`value` = "Dev")
   public abstract fun bindsOptionalApi(): Api
 }

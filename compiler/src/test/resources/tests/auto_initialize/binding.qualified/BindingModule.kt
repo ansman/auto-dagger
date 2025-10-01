@@ -12,7 +12,7 @@ class RealThing : Thing
 interface BindingModule {
     @get:Binds
     @get:AutoInitialize
-    @get:Named("someName")
+    @Named("someName")
     @get:Singleton
     val RealThing.thing: Thing
 }

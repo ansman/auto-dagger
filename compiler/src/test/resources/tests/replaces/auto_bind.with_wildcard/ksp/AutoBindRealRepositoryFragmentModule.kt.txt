@@ -19,11 +19,11 @@ import kotlin.String
 public abstract class AutoBindRealRepositoryFragmentModule private constructor() {
   @Binds
   @IntoMap
-  @StringKey("repository")
+  @StringKey(`value` = "repository")
   public abstract fun bindRealRepositoryAsCallableOfStringIntoMap(realRepository: RealRepository): Callable<String>
 
   @Binds
   @IntoMap
-  @StringKey("repository")
+  @StringKey(`value` = "repository")
   public abstract fun bindRealRepositoryAsCallableOfStarIntoMap(realRepository_: RealRepository): Callable<*>
 }

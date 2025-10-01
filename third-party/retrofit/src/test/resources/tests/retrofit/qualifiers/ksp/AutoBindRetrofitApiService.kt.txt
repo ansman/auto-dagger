@@ -17,5 +17,5 @@ import retrofit2.create
 @OriginatingElement(topLevelClass = ApiService::class)
 public object AutoBindRetrofitApiService {
   @Provides
-  public fun provideApiService(@Named("api1") retrofit: Retrofit): ApiService = retrofit.create()
+  public fun provideApiService(@Named(`value` = "api1") retrofit: Retrofit): ApiService = retrofit.create()
 }

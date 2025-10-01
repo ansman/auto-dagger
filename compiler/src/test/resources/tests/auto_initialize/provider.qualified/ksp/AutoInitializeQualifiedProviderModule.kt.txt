@@ -20,5 +20,5 @@ import se.ansman.dagger.auto.Initializable.Companion.asInitializable
 public object AutoInitializeQualifiedProviderModule {
   @Provides
   @IntoSet
-  public fun provideQualifiedProvidedThingAsInitializable(@Named("someName") lazyQualifiedProvidedThing: Lazy<QualifiedProvidedThing>): Initializable = lazyQualifiedProvidedThing.asInitializable()
+  public fun provideQualifiedProvidedThingAsInitializable(@Named(`value` = "someName") lazyQualifiedProvidedThing: Lazy<QualifiedProvidedThing>): Initializable = lazyQualifiedProvidedThing.asInitializable()
 }
