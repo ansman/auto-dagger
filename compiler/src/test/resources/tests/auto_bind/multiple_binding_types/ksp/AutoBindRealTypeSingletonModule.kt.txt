@@ -25,6 +25,6 @@ public abstract class AutoBindRealTypeSingletonModule private constructor() {
 
   @Binds
   @IntoMap
-  @StringKey("test")
+  @StringKey(`value` = "test")
   public abstract fun bindRealTypeAsType3IntoMap(realType__: RealType): Type3
 }

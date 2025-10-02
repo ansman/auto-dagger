@@ -18,6 +18,6 @@ import javax.`annotation`.processing.Generated
 public abstract class AutoBindRealRepositoryFragmentModule private constructor() {
   @Binds
   @IntoMap
-  @StringKey("repository")
+  @StringKey(`value` = "repository")
   public abstract fun bindRealRepositoryAsRunnableIntoMap(realRepository: RealRepository): Runnable
 }

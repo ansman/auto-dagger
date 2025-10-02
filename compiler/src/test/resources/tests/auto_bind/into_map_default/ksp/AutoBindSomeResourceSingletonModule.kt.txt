@@ -17,6 +17,6 @@ import javax.`annotation`.processing.Generated
 public abstract class AutoBindSomeResourceSingletonModule private constructor() {
   @Binds
   @IntoMap
-  @StringKey("test")
+  @StringKey(`value` = "test")
   public abstract fun bindSomeResourceAsResourceOfStarIntoMap(someResource: SomeResource): Resource<*>
 }

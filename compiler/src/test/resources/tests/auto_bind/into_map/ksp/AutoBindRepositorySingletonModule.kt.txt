@@ -18,6 +18,6 @@ import javax.`annotation`.processing.Generated
 public abstract class AutoBindRepositorySingletonModule private constructor() {
   @Binds
   @IntoMap
-  @StringKey("test")
+  @StringKey(`value` = "test")
   public abstract fun bindRepositoryAsCloseableIntoMap(repository: Repository): Closeable
 }

@@ -9,9 +9,9 @@ import com.google.devtools.ksp.symbol.KSValueArgument
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.asClassName
+import com.squareup.kotlinpoet.ksp.toAnnotationSpec
 import com.squareup.kotlinpoet.ksp.toClassName
 import se.ansman.dagger.auto.compiler.common.processing.AnnotationModel
-import se.ansman.dagger.auto.compiler.ksp.toAnnotationSpecFixed
 import kotlin.reflect.KClass
 
 class KspAnnotationModel(
@@ -59,7 +59,7 @@ class KspAnnotationModel(
                 }
             }
 
-    override fun toAnnotationSpec(): AnnotationSpec = annotation.toAnnotationSpecFixed()
+    override fun toAnnotationSpec(): AnnotationSpec = annotation.toAnnotationSpec()
 
     private val KSValueArgument.convertedValue: Any?
         get() {

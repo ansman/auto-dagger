@@ -17,6 +17,6 @@ import javax.inject.Named
 public abstract class AutoBindAuthInterceptorSingletonModule private constructor() {
   @Binds
   @IntoSet
-  @Named("api")
+  @Named(`value` = "api")
   public abstract fun bindAuthInterceptorAsInterceptorIntoSet(authInterceptor: AuthInterceptor): Interceptor
 }
