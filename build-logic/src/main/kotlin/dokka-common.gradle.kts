@@ -1,6 +1,8 @@
 
 import com.google.devtools.ksp.gradle.KspAATask
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.jetbrains.dokka.DokkaDefaults.reportUndocumented
+import org.jetbrains.dokka.DokkaDefaults.suppressGeneratedFiles
 import org.jetbrains.dokka.gradle.tasks.DokkaGenerateTask
 import se.ansman.dagger.auto.gradle.execWithOutput
 

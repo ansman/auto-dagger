@@ -1,0 +1,92 @@
+{
+  "moduleName": "auto-dagger",
+  "moduleVersion": "2.1.0",
+  "outputDir": "/Users/nicklas/Repositories/personal/auto-dagger/build/dokka/html",
+  "cacheRoot": null,
+  "offlineMode": false,
+  "sourceSets": [
+  ],
+  "pluginsClasspath": [
+    "/Users/nicklas/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/templating-plugin/2.0.0/2c817817579cd8c92ded6f33fd9e6b746ecf01c7/templating-plugin-2.0.0.jar",
+    "/Users/nicklas/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/dokka-base/2.0.0/dcce26b10e9af3b3f2eba0403d6a9561e6da9098/dokka-base-2.0.0.jar",
+    "/Users/nicklas/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/all-modules-page-plugin/2.0.0/f00f3af81550dbbb769c159c70ab4cadab8fb2c/all-modules-page-plugin-2.0.0.jar",
+    "/Users/nicklas/.gradle/caches/modules-2/files-2.1/org.jetbrains.dokka/versioning-plugin/2.0.0/7f5bb6094406f4cb83693b9511e05e6c2457ed58/versioning-plugin-2.0.0.jar"
+  ],
+  "pluginsConfiguration": [
+    {
+      "fqPluginName": "org.jetbrains.dokka.base.DokkaBase",
+      "serializationFormat": "JSON",
+      "values": "{\"customAssets\":[],\"customStyleSheets\":[],\"separateInheritedMembers\":false,\"mergeImplicitExpectActualDeclarations\":false}"
+    },
+    {
+      "fqPluginName": "org.jetbrains.dokka.versioning.VersioningPlugin",
+      "serializationFormat": "JSON",
+      "values": "{\"version\":\"2.1.0\",\"olderVersionsDir\":\"/Users/nicklas/Repositories/personal/auto-dagger/src/doc/dokka\",\"olderVersions\":[],\"renderVersionsNavigationOnAllPages\":true}"
+    }
+  ],
+  "modules": [
+    {
+      "name": "android",
+      "relativePathToOutputDirectory": "android",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/Users/nicklas/Repositories/personal/auto-dagger/android/build/dokka-module/html/module"
+    },
+    {
+      "name": "api",
+      "relativePathToOutputDirectory": "android/api",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/Users/nicklas/Repositories/personal/auto-dagger/android/api/build/dokka-module/html/module"
+    },
+    {
+      "name": "testing",
+      "relativePathToOutputDirectory": "android/testing",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/Users/nicklas/Repositories/personal/auto-dagger/android/testing/build/dokka-module/html/module"
+    },
+    {
+      "name": "core",
+      "relativePathToOutputDirectory": "core",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/Users/nicklas/Repositories/personal/auto-dagger/core/build/dokka-module/html/module"
+    },
+    {
+      "name": "room",
+      "relativePathToOutputDirectory": "third-party/androidx/room",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/Users/nicklas/Repositories/personal/auto-dagger/third-party/androidx/room/build/dokka-module/html/module"
+    },
+    {
+      "name": "viewmodel",
+      "relativePathToOutputDirectory": "third-party/androidx/viewmodel",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/Users/nicklas/Repositories/personal/auto-dagger/third-party/androidx/viewmodel/build/dokka-module/html/module"
+    },
+    {
+      "name": "ktorfit",
+      "relativePathToOutputDirectory": "third-party/ktorfit",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/Users/nicklas/Repositories/personal/auto-dagger/third-party/ktorfit/build/dokka-module/html/module"
+    },
+    {
+      "name": "retrofit",
+      "relativePathToOutputDirectory": "third-party/retrofit",
+      "includes": [
+      ],
+      "sourceOutputDirectory": "/Users/nicklas/Repositories/personal/auto-dagger/third-party/retrofit/build/dokka-module/html/module"
+    }
+  ],
+  "failOnWarning": false,
+  "delayTemplateSubstitution": false,
+  "suppressObviousFunctions": true,
+  "includes": [
+  ],
+  "suppressInheritedMembers": false,
+  "finalizeCoroutines": false
+}

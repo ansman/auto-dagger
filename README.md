@@ -45,30 +45,30 @@ dependencies {
     // Set up your dagger dependencies and compiler
 
     // Include this in kotlin or android modules
-    implementation("se.ansman.dagger.auto:core:2.0.0")
-    ksp("se.ansman.dagger.auto:compiler:2.0.0")
+    implementation("se.ansman.dagger.auto:core:2.1.0")
+    ksp("se.ansman.dagger.auto:compiler:2.1.0")
 
 
     // Include this in your app module
-    implementation("se.ansman.dagger.auto:android:2.0.0")
+    implementation("se.ansman.dagger.auto:android:2.1.0")
     // Or this in your library module
-    implementation("se.ansman.dagger.auto:android-api:2.0.0")
+    implementation("se.ansman.dagger.auto:android-api:2.1.0")
 
     // Add these if you want to replace objects during tests
-    testImplementation("se.ansman.dagger.auto:android-testing:2.0.0")
-    kspTest("se.ansman.dagger.auto:compiler:2.0.0")
+    testImplementation("se.ansman.dagger.auto:android-testing:2.1.0")
+    kspTest("se.ansman.dagger.auto:compiler:2.1.0")
 
     // If you want to provide Retrofit services add the Retrofit dependency
-    implementation("se.ansman.dagger.auto:retrofit:2.0.0")
+    implementation("se.ansman.dagger.auto:retrofit:2.1.0")
 
     // If you want to provide Ktorfit services add the Retrofit dependency
-    implementation("se.ansman.dagger.auto:ktorfit:2.0.0")
+    implementation("se.ansman.dagger.auto:ktorfit:2.1.0")
 
     // If you want to inject a CoroutineScope into ViewModels add the ViewModel dependency
-    implementation("se.ansman.dagger.auto:androidx-viewmodel:2.0.0")
+    implementation("se.ansman.dagger.auto:androidx-viewmodel:2.1.0")
 
     // If you want to automatically provide your Room DAOs add the Room dependency
-    implementation("se.ansman.dagger.auto:androidx-room:2.0.0")
+    implementation("se.ansman.dagger.auto:androidx-room:2.1.0")
 }
 ```
 
@@ -77,7 +77,7 @@ License
 This project is licensed under the Apache-2.0 license. See [LICENSE.txt](LICENSE.txt) for the full license.
 ```plain
 
-Copyright 2022-2025 Nicklas Ansman Giertz
+Copyright 2022-2025 Nicklas Ansman
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
