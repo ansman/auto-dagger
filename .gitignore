@@ -112,3 +112,5 @@ fabric.properties
 local.properties
 
 .idea/studiobot.xml
+.idea/copilot.*
+
