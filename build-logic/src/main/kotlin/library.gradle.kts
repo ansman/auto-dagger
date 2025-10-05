@@ -61,7 +61,7 @@ tasks.withType<Test>().configureEach {
     if (providers.gradleProperty("updateExpectedTestFiles").orNull?.toBoolean() == true) {
         systemProperty("writeExpectedFilesTo", file("src/test/resources/tests"))
     }
-//    failOnNoDiscoveredTests = false
+    failOnNoDiscoveredTests = false
 }
 
 fun Lint.configure() {
