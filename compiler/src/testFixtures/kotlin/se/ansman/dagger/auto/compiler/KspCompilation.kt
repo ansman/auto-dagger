@@ -4,7 +4,6 @@ import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.configureKsp
-import com.tschuchort.compiletesting.kspProcessorOptions
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import se.ansman.dagger.auto.compiler.common.Options
 import java.io.File
@@ -21,12 +20,11 @@ class KspCompilation(
     ): Result =
         KotlinCompilation()
             .apply {
-                kspProcessorOptions[Options.enableLogging] = "true"
                 configuration()
                 this.sources = sources.map { it.toSourceFile() }
-                supportsK2 = true
-                configureKsp(useKsp2 = true) {
+                configureKsp {
                     symbolProcessorProviders.addAll(processorProviders())
+                    processorOptions[Options.enableLogging] = "true"
                 }
             }
             .compile()
