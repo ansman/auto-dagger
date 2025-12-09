@@ -36,7 +36,7 @@ dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", ver
 dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 dokka-androidDocumentationPlugin= { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
 
-okio = "com.squareup.okio:okio:3.16.2"
+okio = "com.squareup.okio:okio:3.16.4"
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
