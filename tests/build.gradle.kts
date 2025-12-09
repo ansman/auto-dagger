@@ -3,8 +3,6 @@
 import com.android.build.api.variant.HasAndroidTestBuilder
 import com.android.build.api.variant.HasTestFixturesBuilder
 import com.android.build.api.variant.HasUnitTestBuilder
-import com.android.build.gradle.internal.lint.AndroidLintAnalysisTask
-import com.google.devtools.ksp.gradle.KspTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
@@ -73,8 +71,4 @@ dependencies {
     testCompileOnly(libs.androidx.startup)
     kspTest(libs.dagger.compiler)
     kspTest(libs.dagger.hilt.compiler)
-}
-
-tasks.withType<AndroidLintAnalysisTask>().configureEach {
-    dependsOn(tasks.withType<KspTask>())
 }
