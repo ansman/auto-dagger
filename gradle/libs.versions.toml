@@ -1,10 +1,10 @@
 [versions]
 kotlin = "2.3.10"
-dokka = "2.1.0"
+dokka = "2.2.0-Beta"
 compileTesting = "0.12.1"
 autoService = "1.1.1"
 autoServiceKsp = "1.2.0"
-dagger = "2.57.2"
+dagger = "2.59.2"
 ksp = "2.3.6"
 android-minSdk = "23"
 android-compileSdk = "35"
@@ -26,9 +26,8 @@ shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
-
 kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
 
 dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
@@ -41,7 +40,7 @@ okio = "com.squareup.okio:okio:3.16.4"
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
-android-gradlePlugin = "com.android.tools.build:gradle:8.13.2"
+android-gradlePlugin = "com.android.tools.build:gradle:9.1.0"
 android-desugar = "com.android.tools:desugar_jdk_libs:2.1.5"
 androidx-startup = "androidx.startup:startup-runtime:1.2.0"
 androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel:2.10.0"

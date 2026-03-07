@@ -5,17 +5,13 @@ import androidx.startup.InitializationProvider
 import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import dagger.hilt.android.testing.HiltAndroidRule
-import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
 import org.junit.After
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import kotlin.test.BeforeTest
 
 
 @RunWith(RobolectricTestRunner::class)

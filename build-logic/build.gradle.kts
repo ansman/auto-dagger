@@ -33,7 +33,7 @@ dependencies {
     api(libs.android.gradlePlugin)
     api(libs.dokka.gradlePlugin)
     api(libs.testLogger)
-    api(libs.kotlin.jvm.gradle)
+    api(libs.kotlin.gradlePlugin)
     api(libs.ksp.gradlePlugin)
     api(libs.gradleMavenPublish)
 }
