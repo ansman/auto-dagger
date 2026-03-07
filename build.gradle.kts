@@ -17,6 +17,7 @@ plugins {
 buildscript {
     dependencies {
         classpath(libs.android.gradlePlugin)
+        classpath(libs.kotlin.gradlePlugin)
         classpath(libs.dokka.gradlePlugin)
         classpath(libs.dokka.versioningPlugin)
     }
