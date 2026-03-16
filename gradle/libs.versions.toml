@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.3.10"
+kotlin = "2.3.20"
 dokka = "2.2.0-Beta"
 compileTesting = "0.12.1"
 autoService = "1.1.1"
