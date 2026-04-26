@@ -1,19 +1,19 @@
 [versions]
-kotlin = "2.3.0"
-dokka = "2.1.0"
-compileTesting = "0.12.0"
+kotlin = "2.3.21"
+dokka = "2.2.0-Beta"
+compileTesting = "0.12.1"
 autoService = "1.1.1"
 autoServiceKsp = "1.2.0"
-dagger = "2.57.2"
-ksp = "2.3.4"
+dagger = "2.59.2"
+ksp = "2.3.7"
 android-minSdk = "23"
 android-compileSdk = "35"
 androidx-test = "1.7.0"
-kotlinpoet = "2.2.0"
+kotlinpoet = "2.3.0"
 room = "2.8.4"
 retrofit = "3.0.0"
 projectAccessors = "1.2.0"
-shadow = "9.3.0"
+shadow = "9.4.1"
 java = "23"
 
 [plugins]
@@ -26,9 +26,8 @@ shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kotlin-jvm-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable", version.ref = "kotlin" }
-
 kotlin-metadata = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm", version.ref = "kotlin" }
 
 dokka-gradlePlugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
@@ -36,12 +35,12 @@ dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", ver
 dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 dokka-androidDocumentationPlugin= { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
 
-okio = "com.squareup.okio:okio:3.16.4"
+okio = "com.squareup.okio:okio:3.17.0"
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
-android-gradlePlugin = "com.android.tools.build:gradle:8.13.2"
+android-gradlePlugin = "com.android.tools.build:gradle:9.1.0"
 android-desugar = "com.android.tools:desugar_jdk_libs:2.1.5"
 androidx-startup = "androidx.startup:startup-runtime:1.2.0"
 androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel:2.10.0"
@@ -72,11 +71,11 @@ compileTesting = { module = "dev.zacsweers.kctfork:core", version.ref = "compile
 compileTesting-ksp = { module = "dev.zacsweers.kctfork:ksp", version.ref = "compileTesting" }
 
 junit = "junit:junit:4.13.2"
-junit-jupiter = "org.junit.jupiter:junit-jupiter:5.14.1"
+junit-jupiter = "org.junit.jupiter:junit-jupiter:5.14.3"
 
 assertk = "com.willowtreeapps.assertk:assertk-jvm:0.28.1"
 
-robolectric = "org.robolectric:robolectric:4.16"
+robolectric = "org.robolectric:robolectric:4.16.1"
 
 testLogger = "com.adarshr:gradle-test-logger-plugin:4.0.0"
 
@@ -90,7 +89,7 @@ projectAccessors = { module = "co.hinge.gradle.project-accessors:project-accesso
 ktorfit = "de.jensklingenberg.ktorfit:ktorfit-lib:2.7.2"
 ktorfit-ksp = "de.jensklingenberg.ktorfit:ktorfit-ksp:2.7.2"
 
-gradleMavenPublish = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin:0.35.0"
+gradleMavenPublish = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin:0.36.0"
 
 [bundles]
 compileTesting = ["compileTesting", "compileTesting-ksp"]

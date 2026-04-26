@@ -2,6 +2,7 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinJvm
+import com.vanniktech.maven.publish.SourcesJar
 
 plugins {
     id("dokka-common")
@@ -82,7 +83,7 @@ tasks.register("publishSnapshot") {
 
 pluginManager.withPlugin("com.android.library") {
     mavenPublishing {
-        configure(AndroidSingleVariantLibrary(sourcesJar = true, publishJavadocJar = false))
+        configure(AndroidSingleVariantLibrary(sourcesJar = SourcesJar.Sources(), javadocJar = JavadocJar.None()))
     }
 
     val javadocJar by tasks.registering(Jar::class) {
