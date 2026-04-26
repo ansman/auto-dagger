@@ -1,6 +1,5 @@
 plugins {
     id("com.android.library")
-    kotlin("android")
     id("library.api")
     id("library.publishing")
 }

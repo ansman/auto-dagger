@@ -80,23 +80,23 @@ fun Lint.configure() {
 pluginManager.withPlugin("com.android.base") {
     extensions.getByType(CommonExtension::class).apply {
         compileSdk = libs.versions.android.compileSdk.get().toInt()
-        defaultConfig {
+        defaultConfig.apply {
             minSdk = libs.versions.android.minSdk.get().toInt()
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
         namespace = (rootProject.group as String) + project.path
             .removePrefix(":third-party")
             .replace(':', '.')
-        buildFeatures {
+        buildFeatures.apply {
             buildConfig = false
             resValues = false
         }
-        testOptions {
+        testOptions.apply {
             unitTests {
                 isIncludeAndroidResources = true
             }
         }
-        compileOptions {
+        compileOptions.apply {
             sourceCompatibility = JavaVersion.VERSION_11
             targetCompatibility = JavaVersion.VERSION_11
         }

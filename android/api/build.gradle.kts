@@ -1,6 +1,5 @@
 plugins {
     id("com.android.library")
-    kotlin("android")
     alias(libs.plugins.ksp)
     id("library.api")
     id("library.publishing")
