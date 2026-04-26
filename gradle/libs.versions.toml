@@ -1,19 +1,19 @@
 [versions]
-kotlin = "2.3.10"
+kotlin = "2.3.21"
 dokka = "2.2.0-Beta"
 compileTesting = "0.12.1"
 autoService = "1.1.1"
 autoServiceKsp = "1.2.0"
 dagger = "2.59.2"
-ksp = "2.3.6"
+ksp = "2.3.7"
 android-minSdk = "23"
 android-compileSdk = "35"
 androidx-test = "1.7.0"
-kotlinpoet = "2.2.0"
+kotlinpoet = "2.3.0"
 room = "2.8.4"
 retrofit = "3.0.0"
 projectAccessors = "1.2.0"
-shadow = "9.3.2"
+shadow = "9.4.1"
 java = "23"
 
 [plugins]
@@ -35,7 +35,7 @@ dokka-versioningPlugin = { module = "org.jetbrains.dokka:versioning-plugin", ver
 dokka-allModulesPagePlugin = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 dokka-androidDocumentationPlugin= { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
 
-okio = "com.squareup.okio:okio:3.16.4"
+okio = "com.squareup.okio:okio:3.17.0"
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
