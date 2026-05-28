@@ -13,7 +13,7 @@ kotlinpoet = "2.3.0"
 room = "2.8.4"
 retrofit = "3.0.0"
 projectAccessors = "1.2.0"
-shadow = "9.4.1"
+shadow = "9.4.2"
 java = "23"
 
 [plugins]
