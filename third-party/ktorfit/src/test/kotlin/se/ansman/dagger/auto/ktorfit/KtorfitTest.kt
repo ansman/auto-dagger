@@ -32,6 +32,34 @@ class KtorfitTest {
 
     @ParameterizedTest
     @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
+    fun `annotation copied to implementation is ignored`(compilationFactory: Compilation.Factory) {
+        compilationFactory.create(tempDirectory)
+            .compile(
+                """
+                package se.ansman.dagger.auto.ktorfit
+
+                @AutoProvideService
+                interface ApiService {
+                    @de.jensklingenberg.ktorfit.http.GET("users")
+                    suspend fun getUsers(): List<String>
+                }
+
+                @AutoProvideService
+                class _ApiServiceImpl(
+                    private val baseUrl: String,
+                ) : ApiService {
+                    override suspend fun getUsers(): List<String> = emptyList()
+                }
+
+                fun de.jensklingenberg.ktorfit.Ktorfit.createApiService(): ApiService = TODO()
+                """
+            )
+            .assertIsSuccessful()
+            .assertGeneratedFileNamed("AutoBindKtorfitApiService")
+    }
+
+    @ParameterizedTest
+    @ArgumentsSource(AutoDaggerCompilationFactoryProvider::class)
     fun `type must not be generic`(compilationFactory: Compilation.Factory) {
         compilationFactory.create(tempDirectory)
             .compile(

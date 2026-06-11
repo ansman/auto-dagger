@@ -33,8 +33,13 @@ abstract class BaseApiServiceProcessor<N, TypeName, ClassName : TypeName, Annota
         logger.info("@AutoProvideService processing started")
         resolver.nodesAnnotatedWith(annotation)
             .map { it as ClassDeclaration<N, TypeName, ClassName, AnnotationSpec> }
-            .map { service ->
+            .mapNotNull { service ->
                 logger.info("Processing ${service.className}")
+                if (service.hasCopiedServiceAnnotation()) {
+                    logger.info("Skipping ${service.className} because @AutoProvideService was copied from an annotated supertype")
+                    return@mapNotNull null
+                }
+
                 val targetComponent = service
                     .getAnnotation(annotation)!!
                     .getValue<ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>>("inComponent")
@@ -64,6 +69,9 @@ abstract class BaseApiServiceProcessor<N, TypeName, ClassName : TypeName, Annota
             .map(renderer::render)
             .forEach(environment::write)
     }
+
+    private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.hasCopiedServiceAnnotation(): Boolean =
+        kind != Kind.Interface && supertypes.any { it.declaration?.isAnnotatedWith(annotation) == true }
 
     private fun ClassDeclaration<N, TypeName, ClassName, AnnotationSpec>.validateService() {
         if (kind != Kind.Interface) logger.error(errors.nonInterface, node)
