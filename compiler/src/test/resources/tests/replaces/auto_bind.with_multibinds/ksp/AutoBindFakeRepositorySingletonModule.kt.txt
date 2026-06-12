@@ -17,7 +17,7 @@ import javax.`annotation`.processing.Generated
   replaces = [AutoBindRealRepositorySingletonModule::class],
 )
 @OriginatingElement(topLevelClass = FakeRepository::class)
-public abstract class AutoBindFakeRepositorySingletonModule private constructor() {
+public abstract class AutoBindFakeRepositorySingletonModule {
   @Binds
   public abstract fun bindFakeRepositoryAsRepository(fakeRepository: FakeRepository): Repository
 

@@ -122,7 +122,6 @@ class HiltKotlinModuleBuilder private constructor(
             bindings.isNotEmpty() ->
                 TypeSpec.classBuilder(info.moduleName)
                     .addModifiers(KModifier.ABSTRACT)
-                    .primaryConstructor(FunSpec.constructorBuilder().addModifiers(KModifier.PRIVATE).build())
                     .addFunctions(bindings)
                     .applyIf(providers.isNotEmpty()) {
                         addType(

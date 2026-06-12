@@ -13,7 +13,7 @@ import javax.inject.Named
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = Api::class)
-public abstract class OptionallyProvidedApiSingletonModule private constructor() {
+public abstract class OptionallyProvidedApiSingletonModule {
   @BindsOptionalOf
   @Named(`value` = "Dev")
   public abstract fun bindsOptionalApi(): Api

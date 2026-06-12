@@ -15,7 +15,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = Repository::class)
-public abstract class AutoBindRepositorySingletonModule private constructor() {
+public abstract class AutoBindRepositorySingletonModule {
   @Binds
   @IntoMap
   @StringKey(`value` = "test")

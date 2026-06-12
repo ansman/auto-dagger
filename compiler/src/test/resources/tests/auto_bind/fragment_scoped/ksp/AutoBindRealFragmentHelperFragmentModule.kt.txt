@@ -12,7 +12,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = RealFragmentHelper::class)
-public abstract class AutoBindRealFragmentHelperFragmentModule private constructor() {
+public abstract class AutoBindRealFragmentHelperFragmentModule {
   @Binds
   public abstract fun bindRealFragmentHelperAsFragmentHelper(realFragmentHelper: RealFragmentHelper): FragmentHelper
 }

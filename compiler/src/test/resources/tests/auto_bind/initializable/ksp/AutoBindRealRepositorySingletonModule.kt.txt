@@ -12,7 +12,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = RealRepository::class)
-public abstract class AutoBindRealRepositorySingletonModule private constructor() {
+public abstract class AutoBindRealRepositorySingletonModule {
   @Binds
   public abstract fun bindRealRepositoryAsRepository(realRepository: RealRepository): Repository
 }

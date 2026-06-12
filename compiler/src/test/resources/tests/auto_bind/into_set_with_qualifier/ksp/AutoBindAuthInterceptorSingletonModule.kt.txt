@@ -14,7 +14,7 @@ import javax.inject.Named
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = AuthInterceptor::class)
-public abstract class AutoBindAuthInterceptorSingletonModule private constructor() {
+public abstract class AutoBindAuthInterceptorSingletonModule {
   @Binds
   @IntoSet
   @Named(`value` = "api")

@@ -18,7 +18,7 @@ import javax.`annotation`.processing.Generated
   replaces = [AutoBindRealRepositoryFragmentModule::class],
 )
 @OriginatingElement(topLevelClass = FakeRepository::class)
-public abstract class AutoBindFakeRepositoryFragmentModule private constructor() {
+public abstract class AutoBindFakeRepositoryFragmentModule {
   @Binds
   @IntoMap
   @StringKey(`value` = "repository")

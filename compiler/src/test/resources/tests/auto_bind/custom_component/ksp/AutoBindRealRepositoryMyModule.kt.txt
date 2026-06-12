@@ -11,7 +11,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(MyComponent::class)
 @OriginatingElement(topLevelClass = RealRepository::class)
-public abstract class AutoBindRealRepositoryMyModule private constructor() {
+public abstract class AutoBindRealRepositoryMyModule {
   @Binds
   public abstract fun bindRealRepositoryAsRepository(realRepository: RealRepository): Repository
 }

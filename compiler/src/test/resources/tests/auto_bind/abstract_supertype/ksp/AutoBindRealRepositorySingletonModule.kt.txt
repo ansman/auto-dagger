@@ -13,7 +13,7 @@ import kotlin.String
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = RealRepository::class)
-public abstract class AutoBindRealRepositorySingletonModule private constructor() {
+public abstract class AutoBindRealRepositorySingletonModule {
   @Binds
   public abstract fun bindRealRepositoryAsRepositoryOfString(realRepository: RealRepository): Repository<String>
 }

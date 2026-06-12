@@ -14,7 +14,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = StringProvider::class)
-public abstract class AutoBindStringProviderSingletonModule private constructor() {
+public abstract class AutoBindStringProviderSingletonModule {
   @Binds
   @IntoSet
   public abstract fun bindStringProviderAsCallableOfStarIntoSet(stringProvider: StringProvider): Callable<*>

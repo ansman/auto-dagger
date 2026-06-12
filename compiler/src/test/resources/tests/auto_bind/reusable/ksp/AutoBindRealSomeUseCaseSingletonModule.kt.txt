@@ -12,7 +12,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = RealSomeUseCase::class)
-public abstract class AutoBindRealSomeUseCaseSingletonModule private constructor() {
+public abstract class AutoBindRealSomeUseCaseSingletonModule {
   @Binds
   public abstract fun bindRealSomeUseCaseAsSomeUseCase(realSomeUseCase: RealSomeUseCase): SomeUseCase
 }

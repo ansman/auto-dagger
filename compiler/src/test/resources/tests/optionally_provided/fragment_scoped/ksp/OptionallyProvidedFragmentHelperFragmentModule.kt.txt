@@ -12,7 +12,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = FragmentHelper::class)
-public abstract class OptionallyProvidedFragmentHelperFragmentModule private constructor() {
+public abstract class OptionallyProvidedFragmentHelperFragmentModule {
   @BindsOptionalOf
   public abstract fun bindsOptionalFragmentHelper(): FragmentHelper
 }
