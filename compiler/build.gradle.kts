@@ -32,7 +32,9 @@ dependencies {
 
     testFixturesApi(libs.bundles.jvmTesting)
     testFixturesApi(libs.dagger)
+    testFixturesApi(libs.dagger.compiler)
     testFixturesApi(libs.dagger.hilt.core)
+    testFixturesApi(libs.dagger.hilt.compiler)
     testFixturesApi(libs.bundles.compileTesting)
     testFixturesApi(projects.compiler.common)
 }

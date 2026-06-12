@@ -12,7 +12,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = Repository::class)
-public abstract class OptionallyProvidedRepositorySingletonModule private constructor() {
+public abstract class OptionallyProvidedRepositorySingletonModule {
   @BindsOptionalOf
   public abstract fun bindsOptionalRepository(): Repository
 }

@@ -14,7 +14,7 @@ import se.ansman.dagger.auto.Initializable
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = RealRepository::class)
-public abstract class AutoInitializeRealRepositoryModule private constructor() {
+public abstract class AutoInitializeRealRepositoryModule {
   @Binds
   @IntoSet
   public abstract fun bindRealRepositoryAsInitializable(realRepository: RealRepository): Initializable

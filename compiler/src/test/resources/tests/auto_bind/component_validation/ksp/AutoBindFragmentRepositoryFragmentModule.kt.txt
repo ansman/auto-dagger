@@ -12,7 +12,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = FragmentRepository::class)
-public abstract class AutoBindFragmentRepositoryFragmentModule private constructor() {
+public abstract class AutoBindFragmentRepositoryFragmentModule {
   @Binds
   public abstract fun bindFragmentRepositoryAsRepository(fragmentRepository: FragmentRepository): Repository
 }

@@ -12,7 +12,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(ActivityComponent::class)
 @OriginatingElement(topLevelClass = ActivityRepository::class)
-public abstract class AutoBindActivityRepositoryActivityModule private constructor() {
+public abstract class AutoBindActivityRepositoryActivityModule {
   @Binds
   public abstract fun bindActivityRepositoryAsRepository(activityRepository: ActivityRepository): Repository
 }

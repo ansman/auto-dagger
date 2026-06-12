@@ -13,7 +13,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(SingletonComponent::class)
 @OriginatingElement(topLevelClass = SomeResource::class)
-public abstract class AutoBindSomeResourceSingletonModule private constructor() {
+public abstract class AutoBindSomeResourceSingletonModule {
   @Binds
   @IntoSet
   public abstract fun bindSomeResourceAsResourceOfStarIntoSet(someResource: SomeResource): Resource<*>

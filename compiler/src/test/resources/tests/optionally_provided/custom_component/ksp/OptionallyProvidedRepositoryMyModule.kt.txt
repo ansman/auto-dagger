@@ -11,7 +11,7 @@ import javax.`annotation`.processing.Generated
 @Module
 @InstallIn(MyComponent::class)
 @OriginatingElement(topLevelClass = Repository::class)
-public abstract class OptionallyProvidedRepositoryMyModule private constructor() {
+public abstract class OptionallyProvidedRepositoryMyModule {
   @BindsOptionalOf
   public abstract fun bindsOptionalRepository(): Repository
 }

@@ -16,7 +16,7 @@ import kotlin.String
 @Module
 @InstallIn(FragmentComponent::class)
 @OriginatingElement(topLevelClass = RealRepository::class)
-public abstract class AutoBindRealRepositoryFragmentModule private constructor() {
+public abstract class AutoBindRealRepositoryFragmentModule {
   @Binds
   @IntoMap
   @StringKey(`value` = "repository")
