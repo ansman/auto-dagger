@@ -103,7 +103,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
         configure(
             KotlinJvm(
                 javadocJar = JavadocJar.Dokka(tasks.dokkaGeneratePublicationJavadoc.name),
-                sourcesJar = true
+                sourcesJar = SourcesJar.Sources()
             )
         )
     }
