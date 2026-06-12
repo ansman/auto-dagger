@@ -29,6 +29,11 @@ val version: String = providers.gradleProperty("version").get()
 
 val latestRelease: String = providers.gradleProperty("latestRelease").get()
 
+tasks.named<UpdateDaemonJvm>("updateDaemonJvm") {
+    languageVersion = JavaLanguageVersion.of(libs.versions.java.get())
+    vendor = JvmVendorSpec.AZUL
+}
+
 val isSnapshotVersion = version.endsWith("-SNAPSHOT")
 val dokkaProjects = subprojects
     .map { it.isolated }
