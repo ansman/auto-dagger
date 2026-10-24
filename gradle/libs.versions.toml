@@ -1,7 +1,7 @@
 [versions]
-kotlin = "2.4.0"
+kotlin = "2.4.20"
 dokka = "2.2.0"
-compileTesting = "0.13.0"
+compileTesting = "0.14.0"
 autoService = "1.1.1"
 autoServiceKsp = "1.2.0"
 dagger = "2.60.1"
