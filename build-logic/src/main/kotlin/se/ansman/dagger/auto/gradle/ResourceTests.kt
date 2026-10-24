@@ -2,14 +2,11 @@ package se.ansman.dagger.auto.gradle
 
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
-import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.property
-import org.gradle.kotlin.dsl.provideDelegate
-import org.gradle.kotlin.dsl.registering
 
 fun Project.setupResourceTests() {
-    val updateExpectedTestFiles by tasks.registering
+    val updateExpectedTestFiles = tasks.register("updateExpectedTestFiles")
     pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
         updateExpectedTestFiles.configure {
             dependsOn("cleanProcessTestResources")

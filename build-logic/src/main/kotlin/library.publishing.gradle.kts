@@ -86,7 +86,7 @@ pluginManager.withPlugin("com.android.library") {
         configure(AndroidSingleVariantLibrary(sourcesJar = SourcesJar.Sources(), javadocJar = JavadocJar.None()))
     }
 
-    val javadocJar by tasks.registering(Jar::class) {
+    val javadocJar = tasks.register<Jar>("javadocJar") {
         from(tasks.dokkaGeneratePublicationJavadoc)
         archiveClassifier.set("javadoc")
     }

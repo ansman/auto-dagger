@@ -108,11 +108,11 @@ gitPublish {
 
 python {
     pip(
-        "pip:23.2.1",
+        "pip:26.2.2",
         "mkdocs:1.5.3",
         "mkdocs-material:9.1.1",
         "mkdocs-minify-plugin:0.7.1",
-        "Pygments:2.16.1",
+        "pygments:2.16.1",
         "pymdown-extensions:10.3",
         "mkdocs-markdownextradata-plugin:0.2.5"
     )
@@ -146,8 +146,8 @@ tasks.register<Copy>("versionCurrentDocs") {
 }
 
 dependencies {
-    dokkaPlugin(libs.dokka.allModulesPagePlugin)
-    dokkaPlugin(libs.dokka.versioningPlugin)
+    dokkaHtmlPlugin(libs.dokka.allModulesPagePlugin)
+    dokkaHtmlPlugin(libs.dokka.versioningPlugin)
     dokka(projects.android)
     dokka(projects.android.api)
     dokka(projects.android.testing)
@@ -169,9 +169,4 @@ dokka {
 
 tasks.withType<BasePythonTask>().configureEach {
     notCompatibleWithConfigurationCache("mkdocs isn't compatible with the config cache")
-}
-
-extensions.findByName("buildScan")?.withGroovyBuilder {
-    setProperty("termsOfServiceUrl", "https://gradle.com/terms-of-service")
-    setProperty("termsOfServiceAgree", "yes")
 }

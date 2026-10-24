@@ -10,6 +10,10 @@ registries:
     type: maven-repository
     url: "https://repo.maven.apache.org/maven2/"
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "gradle"
     directory: "/"
     open-pull-requests-limit: 25
