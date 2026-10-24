@@ -25,7 +25,7 @@ if (!isRunningInIDE) {
     }
 }
 
-version = properties.getValue("version") as String
+version = providers.gradleProperty("version").get()
 
 tasks.withType<JavaCompile>().configureEach {
     sourceCompatibility = "11"
