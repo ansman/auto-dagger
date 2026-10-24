@@ -61,7 +61,7 @@ dependencies {
     // If you want to provide Retrofit services add the Retrofit dependency
     implementation("se.ansman.dagger.auto:retrofit:2.2.0")
 
-    // If you want to provide Ktorfit services add the Retrofit dependency
+    // If you want to provide Ktorfit services add the Ktrofit dependency
     implementation("se.ansman.dagger.auto:ktorfit:2.2.0")
 
     // If you want to inject a CoroutineScope into ViewModels add the ViewModel dependency
