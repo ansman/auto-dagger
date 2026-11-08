@@ -38,7 +38,9 @@ jobs:
         build-scan-terms-of-use-agree: 'yes'
 
     - name: Run Checks
-      run: ./gradlew check --continue --stacktrace --warning-mode fail
+      # Gradle 9.8 deprecates Configuration.setVisible, still used by Dokka, BCV, AGP, and KSP.
+      # Keep warnings visible until these plugins support running with --warning-mode fail.
+      run: ./gradlew check --continue --stacktrace --warning-mode all
 
   deploy-snapshot:
     runs-on: ubuntu-24.04
@@ -58,7 +60,8 @@ jobs:
         cache-provider: basic
 
     - name: Deploy Snapshot
-      run: ./gradlew publishSnapshot --no-configuration-cache --stacktrace --warning-mode fail
+      # Keep plugin deprecations nonfatal, as in the checks job above.
+      run: ./gradlew publishSnapshot --no-configuration-cache --stacktrace --warning-mode all
       env:
         ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
         ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}

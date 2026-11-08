@@ -34,7 +34,8 @@ jobs:
           cache-provider: basic
 
       - name: Publish Docs
-        run: ./gradlew mkdocsPublish --warning-mode fail
+        # Keep plugin deprecations nonfatal, as in the Build Gradle workflow.
+        run: ./gradlew mkdocsPublish --warning-mode all
         env:
           GRGIT_USER: x-access-token
           GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
